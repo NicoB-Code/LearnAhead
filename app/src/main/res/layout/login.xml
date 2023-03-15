@@ -1,0 +1,235 @@
+<!-- Android Large - Login -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/android_lar"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true"
+    >
+
+
+    <!-- RegisterGroup -->
+    <View
+        android:id="@+id/registerGroup"
+        android:layout_width="175dp"
+        android:layout_height="39dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="464dp"
+        android:background="#00000000" />
+
+    <!-- Kein Konto -->
+    <TextView
+        android:id="@+id/kein_konto"
+        android:layout_width="175dp"
+        android:layout_height="21dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="464dp"
+        android:text="@string/kein_konto"
+        android:textAppearance="@style/kein_konto"
+        android:gravity="center"/>
+    <!-- Register -->
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="81dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="485dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/register"
+        android:textAppearance="@style/register" />
+
+    <!-- Login Bottom Group -->
+    <View
+        android:id="@+id/login_botto"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="398dp"
+        android:background="#00000000" />
+    <!-- Rectangle 1 -->
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="398dp"
+        android:background="@drawable/rectangle_1" />
+    <!-- Anmelden -->
+    <TextView
+        android:id="@+id/anmelden"
+        android:layout_width="136dp"
+        android:layout_height="29dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="407dp"
+        android:text="@string/anmelden"
+        android:textAppearance="@style/anmelden"
+        android:gravity="center"
+        android:elevation="2dp"/>
+    <!-- Forgot Password Group -->
+    <View
+        android:id="@+id/forgot_pass"
+        android:layout_width="156dp"
+        android:layout_height="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="341dp"
+        android:background="#00000000" />
+    <!-- Passwort vergessen? -->
+    <TextView
+        android:id="@+id/passwort_ve"
+        android:layout_width="156dp"
+        android:layout_height="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="338dp"
+        android:text="@string/passwort_ve"
+        android:textAppearance="@style/passwort_ve"
+        android:gravity="center"/>
+
+    <!-- password group -->
+    <View
+        android:id="@+id/password"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="286dp"
+        android:background="#00000000" />
+    <!-- Passwort -->
+    <TextView
+        android:id="@+id/passwort"
+        android:layout_width="144dp"
+        android:layout_height="27dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="301dp"
+        android:text="@string/passwort"
+        android:textAppearance="@style/passwort"
+        android:elevation="2dp"/>
+    <!-- Rectangle 14 -->
+    <View
+        android:id="@+id/rectangle_14"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="286dp"
+        android:background="@drawable/rectangle_14" />
+    <!-- Username/Email Group -->
+    <View
+        android:id="@+id/username_em"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:background="#00000000" />
+    <!-- Benutzer / E-Mail -->
+    <TextView
+        android:id="@+id/benutzer_e_"
+        android:layout_width="144dp"
+        android:layout_height="27dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="235dp"
+        android:text="@string/benutzer_e_"
+        android:textAppearance="@style/benutzer_e_"
+        android:elevation="2dp"/>
+    <!-- Rectangle 2 -->
+    <View
+        android:id="@+id/rectangle_2"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/rectangle_2" />
+    <!-- Login Top Group -->
+    <View
+        android:id="@+id/login_top_group"
+        android:layout_width="293dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="112dp"
+        android:background="#00000000" />
+    <!-- Login Top -->
+    <TextView
+        android:id="@+id/login_top"
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/login_top_group"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="112dp"
+        android:layout_marginBottom="-4dp"
+        android:gravity="center"
+        android:text="@string/login_top"
+        android:textAppearance="@style/login_top" />
+    <!-- Databox Group-->
+    <View
+        android:id="@+id/databox_group"
+        android:layout_width="266dp"
+        android:layout_height="444dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="186dp"
+        android:background="#00000000" />
+    <!-- Data Box -->
+    <View
+        android:id="@+id/data_box_register"
+        android:layout_width="266dp"
+        android:layout_height="444dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="186dp"
+        android:background="@drawable/data_box_register"
+        android:elevation="-3dp" />
+
+    <!-- Logo Group -->
+    <View
+        android:id="@+id/logo_group"
+        android:layout_width="126dp"
+        android:layout_height="108dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-3dp"
+        android:background="#00000000" />
+    <!-- Logo -->
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34.57dp"
+        android:elevation="4dp"
+        android:text="@string/logo"
+        android:textAppearance="@style/logo" />
+
+    <!-- Base Layout Group -->
+    <View
+        android:id="@+id/ellipse_1"
+        android:layout_width="126dp"
+        android:layout_height="108dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-4dp"
+        android:background="@drawable/ellipse_1" />
+
+    <View
+        android:id="@+id/base_layout"
+        android:layout_width="355dp"
+        android:layout_height="800dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="-24dp"
+        android:background="#00000000" />
+    <!-- Rectangle 3 -->
+    <View
+        android:id="@+id/rectangle_3"
+        android:layout_width="wrap_content"
+        android:layout_height="418dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="-24dp"
+        android:background="@drawable/rectangle_3"
+        android:elevation="-4dp" />
+    <!-- Rectangle 4 -->
+    <View
+        android:id="@+id/rectangle_4"
+        android:layout_width="match_parent"
+        android:layout_height="419dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="357dp"
+        android:background="@drawable/rectangle_4"
+        android:elevation="-4dp" />
+
+
+</RelativeLayout>

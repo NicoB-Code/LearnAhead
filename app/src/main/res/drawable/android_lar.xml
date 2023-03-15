@@ -1,0 +1,38 @@
+<!-- drawable/android_lar.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="359dp"
+    android:height="804dp"
+    android:viewportWidth="359"
+    android:viewportHeight="804"
+    >
+
+    <group>
+
+        <clip-path
+            android:pathData="M2 2H357V802H2V2Z"
+            />
+
+        <path
+            android:pathData="M2 2V802H357V2"
+            android:fillColor="#FFFFFF"
+            />
+
+    </group>
+
+    <group>
+
+        <clip-path
+            android:pathData="M0 0V804H359V0M2 2H357V802H2V2Z"
+            />
+
+        <path
+            android:pathData="M2 2H357V802H2V2Z"
+            android:strokeWidth="4"
+            android:strokeColor="#000000"
+            />
+
+    </group>
+
+</vector>

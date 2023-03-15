@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">LearnAhead_Prototyp</string>
+    <string name="kein_konto">
+    Du hast noch kein Konto?
+    </string>
+
+    <string name="register">
+    Registrieren
+    </string>
+
+    <string name="anmelden">
+    Anmelden
+    </string>
+
+    <string name="passwort_ve">
+    Passwort vergessen?
+    </string>
+
+    <string name="passwort">
+    Passwort
+    </string>
+
+    <string name="benutzer_e_">
+    Benutzer / E-Mail
+    </string>
+
+    <string name="login_top">
+    Anmeldung
+    </string>
+
+    <string name="logo">
+    Logo
+    </string>
+</resources>
