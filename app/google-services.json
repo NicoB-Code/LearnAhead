@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "116541166595",
+    "project_id": "learnahead-57d15",
+    "storage_bucket": "learnahead-57d15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116541166595:android:61e36b287802b3e56e6a36",
+        "android_client_info": {
+          "package_name": "com.example.learnahead_prototyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116541166595-4urc7lmlfbkm1judqd6fdbjq9pp82v92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXvHOYFXBSDUA8rCm-CMVSPKLkYgymMkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116541166595-4urc7lmlfbkm1judqd6fdbjq9pp82v92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
