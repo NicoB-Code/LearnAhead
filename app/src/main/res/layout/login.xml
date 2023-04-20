@@ -29,7 +29,7 @@
         android:textAppearance="@style/register" />
 
     <!-- Anmelden -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/anmeldenButton"
         android:layout_width="213dp"
         android:layout_height="48dp"
@@ -39,18 +39,22 @@
         android:gravity="center"
         android:elevation="2dp"
         android:textAppearance="@style/anmelden"
-        android:onClick="onAnmeldeButtonClick" />
+        android:onClick="onAnmeldeButtonClick"
+        android:background="@drawable/rectangle_login_register"
+        />
+
     <!-- Passwort vergessen? -->
     <TextView
         android:id="@+id/passwort_ve"
         android:layout_width="156dp"
         android:layout_height="18dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="338dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/passwort"
+        android:layout_alignStart="@+id/passwort"
         android:text="@string/passwort_ve"
         android:textAppearance="@style/passwort_ve"
         android:gravity="center"/>
-
     <!-- Passwort -->
     <!-- consider using layout_height="wrap_content" (icon size too small though) -->
     <EditText
@@ -60,9 +64,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="290dp"
         android:elevation="2dp"
+        android:drawableLeft="@drawable/ic_android_black_24dp"
+        android:drawablePadding="10dp"
         android:hint="Passwort"
         android:textAppearance="@style/passwort"
-        android:gravity="center"/>
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:background="@drawable/rectangle_password" />
+
+
 
     <!-- Benutzer / E-Mail -->
     <EditText
@@ -71,10 +81,15 @@
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="225dp"
+        android:drawableLeft="@drawable/ic_android_black_24dp"
+        android:drawablePadding="10dp"
         android:elevation="2dp"
         android:hint="Benutzer / E-Mail"
         android:textAppearance="@style/benutzer_e_"
-        android:gravity="center"/>
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:background="@drawable/rectangle_user_email"/>
+
 
     <!-- Login Top Group -->
     <!-- Login Top -->
@@ -126,18 +141,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="-24dp"
         android:background="#00000000" />
-    <!-- Rectangle 3 -->
+
     <!-- Rectangle 4 -->
-    <View
-        android:id="@+id/rectangle_3"
-        android:layout_width="wrap_content"
-        android:layout_height="418dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="-25dp"
-        android:background="@drawable/rectangle_3"
-        android:elevation="-4dp" />
+
+
 
     <View
         android:id="@+id/rectangle_4"
@@ -150,5 +157,16 @@
         android:background="@drawable/rectangle_4"
         android:elevation="-4dp" />
 
-
+    <!-- Rectangle 3 -->
+    <View
+        android:id="@+id/rectangle_3"
+        android:layout_width="wrap_content"
+        android:layout_height="418dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/rectangle_top_green"
+        android:elevation="-4dp"
+        />
 </RelativeLayout>

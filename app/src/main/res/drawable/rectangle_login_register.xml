@@ -1,0 +1,75 @@
+<!-- drawable/rectangle_1.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="214dp"
+    android:height="49dp"
+    android:viewportWidth="214"
+    android:viewportHeight="49"
+    >
+
+    <group>
+
+        <clip-path
+            android:pathData="M24.5 0.5H189.5C202.755 0.5 213.5 11.2452 213.5 24.5C213.5 37.7548 202.755 48.5 189.5 48.5H24.5C11.2452 48.5 0.5 37.7548 0.5 24.5C0.5 11.2452 11.2452 0.5 24.5 0.5Z"
+            />
+
+        <group
+            android:translateX="0.901"
+            android:translateY="9.075"
+            android:pivotX="107"
+            android:pivotY="24.5"
+            android:scaleX="1.742"
+            android:scaleY="34.298"
+            android:rotation="-180"
+            >
+
+            <path
+                android:pathData="M0.5 0.5V48.5H213.5V0.5"
+                >
+
+                <aapt:attr name="android:fillColor">
+
+                    <gradient
+                        android:type="linear"
+                        android:startX="53.75"
+                        android:startY="24.5"
+                        android:endX="160.25"
+                        android:endY="24.5"
+                        >
+
+                        <item
+                            android:color="#8AE231"
+                            android:offset="0"
+                            />
+
+                        <item
+                            android:color="#4B890C"
+                            android:offset="1"
+                            />
+
+                    </gradient>
+
+                </aapt:attr>
+
+            </path>
+
+        </group>
+
+    </group>
+
+    <group>
+
+        <clip-path
+            android:pathData="M0 0V49H214V0M24.5 0.5H189.5C202.755 0.5 213.5 11.2452 213.5 24.5C213.5 37.7548 202.755 48.5 189.5 48.5H24.5C11.2452 48.5 0.5 37.7548 0.5 24.5C0.5 11.2452 11.2452 0.5 24.5 0.5Z"
+            />
+
+        <path
+            android:pathData="M24.5 0.5H189.5C202.755 0.5 213.5 11.2452 213.5 24.5C213.5 37.7548 202.755 48.5 189.5 48.5H24.5C11.2452 48.5 0.5 37.7548 0.5 24.5C0.5 11.2452 11.2452 0.5 24.5 0.5Z"
+            android:strokeWidth="1"
+            android:strokeColor="#B9BFC8"
+            />
+
+    </group>
+
+</vector>
