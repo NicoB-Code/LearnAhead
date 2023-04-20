@@ -1,5 +1,6 @@
 <!-- Android Large - Login -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/android_lar"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -15,9 +16,10 @@
         android:layout_height="21dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="464dp"
+        android:gravity="center"
         android:text="@string/kein_konto"
         android:textAppearance="@style/kein_konto"
-        android:gravity="center"/>
+        app:fontFamily="@font/hanuman_regular" />
     <!-- Register -->
     <TextView
         android:id="@+id/register"
@@ -33,28 +35,29 @@
         android:id="@+id/anmeldenButton"
         android:layout_width="213dp"
         android:layout_height="48dp"
-        android:layout_marginTop="407dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/anmelden"
-        android:gravity="center"
-        android:elevation="2dp"
-        android:textAppearance="@style/anmelden"
-        android:onClick="onAnmeldeButtonClick"
+        android:layout_marginTop="407dp"
         android:background="@drawable/rectangle_login_register"
-        />
+        android:elevation="2dp"
+        android:fontFamily="@font/hanuman"
+        android:gravity="center"
+        android:onClick="onAnmeldeButtonClick"
+        android:text="@string/anmelden"
+        android:textAppearance="@style/anmelden" />
 
     <!-- Passwort vergessen? -->
     <TextView
         android:id="@+id/passwort_ve"
         android:layout_width="156dp"
         android:layout_height="18dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/passwort"
         android:layout_alignStart="@+id/passwort"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
         android:text="@string/passwort_ve"
         android:textAppearance="@style/passwort_ve"
-        android:gravity="center"/>
+        app:fontFamily="@font/hanuman_regular" />
     <!-- Passwort -->
     <!-- consider using layout_height="wrap_content" (icon size too small though) -->
     <EditText
@@ -81,14 +84,15 @@
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="225dp"
+        android:background="@drawable/rectangle_user_email"
         android:drawableLeft="@drawable/ic_android_black_24dp"
         android:drawablePadding="10dp"
         android:elevation="2dp"
-        android:hint="Benutzer / E-Mail"
-        android:textAppearance="@style/benutzer_e_"
+        android:fontFamily="@font/hanuman_regular"
         android:gravity="left|center_vertical"
+        android:hint="Benutzer / E-Mail"
         android:paddingLeft="10dp"
-        android:background="@drawable/rectangle_user_email"/>
+        android:textAppearance="@style/benutzer_e_" />
 
 
     <!-- Login Top Group -->
