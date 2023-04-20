@@ -8,4 +8,7 @@ class MyViewModel : ViewModel() {
     fun updateMyData(newData: String) {
         myModel.myData = newData
     }
+    fun validateUserCredentials(username: String, password: String, onComplete: (Boolean) -> Unit) {
+        myModel.checkUserCredentials(username, password, onComplete)
+    }
 }
