@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
+        setContentView(R.layout.activity_main)
 
-        myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        /*myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
 
         val anmeldeButton: Button = findViewById(R.id.anmeldenButton)
         anmeldeButton.setOnClickListener{
@@ -38,6 +38,6 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MainActivity","Authentification failed")
                 }
             }
-        }
+        }*/
     }
 }
