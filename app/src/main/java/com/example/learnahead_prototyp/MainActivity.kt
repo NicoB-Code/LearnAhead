@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import org.w3c.dom.Text
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var myViewModel: MyViewModel
     private val TAG = "DocSnippets"

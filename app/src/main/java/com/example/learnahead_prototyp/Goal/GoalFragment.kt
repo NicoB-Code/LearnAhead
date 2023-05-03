@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.databinding.FragmentGoalBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GoalFragment : Fragment() {
 
     val TAG: String = "FragmentGoalBinding"
