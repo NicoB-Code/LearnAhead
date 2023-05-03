@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.databinding.FragmentGoalListingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +30,19 @@ class GoalListingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getGoals()
-        viewModel.goal.observe(viewLifecycleOwner) {
-            it.forEach{
-                Log.e(TAG, it.toString())
+        viewModel.goal.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is UiState.Loading -> {
+                    Log.e(TAG, "Loading")
+                }
+                is UiState.Failure -> {
+                    Log.e(TAG, state.error.toString())
+                }
+                is UiState.Success -> {
+                    state.data.forEach {
+                        Log.e(TAG, it.toString())
+                    }
+                }
             }
         }
     }

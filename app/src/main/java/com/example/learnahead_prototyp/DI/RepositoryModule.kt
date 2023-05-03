@@ -1,7 +1,7 @@
 package com.example.learnahead_prototyp.DI
 
 import com.example.learnahead_prototyp.Data.Repository.GoalRepository
-import com.example.learnahead_prototyp.Data.Repository.IGoalsRepository
+import com.example.learnahead_prototyp.Data.Repository.IGoalRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
@@ -17,7 +17,7 @@ object RepositoryModule {
     @Singleton
     fun provideGoalRepository(
         database: FirebaseFirestore
-    ): IGoalsRepository{
+    ): IGoalRepository{
         return GoalRepository(database)
     }
 }

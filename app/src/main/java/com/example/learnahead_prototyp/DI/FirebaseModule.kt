@@ -1,12 +1,8 @@
 package com.example.learnahead_prototyp.DI
 
-import com.example.learnahead_prototyp.Data.Repository.GoalRepository
-import com.example.learnahead_prototyp.Data.Repository.IGoalsRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
