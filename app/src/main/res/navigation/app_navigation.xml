@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/goalTestFragment">
+    app:startDestination="@id/goalListingFragment">
 
     <fragment
-        android:id="@+id/goalFragment"
-        android:name="com.example.learnahead_prototyp.Goal.GoalFragment"
-        android:label="fragment_goal"
-        tools:layout="@layout/fragment_goal" >
+        android:id="@+id/goalListingFragment"
+        android:name="com.example.learnahead_prototyp.Goal.GoalListingFragment"
+        android:label="fragment_goal_listing"
+        tools:layout="@layout/fragment_goal_listing">
         <action
             android:id="@+id/action_goalFragment_to_goalTestFragment"
-            app:destination="@id/goalTestFragment" />
+            app:destination="@id/goalDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/goalTestFragment"
-        android:name="com.example.learnahead_prototyp.Goal.GoalTestFragment"
-        android:label="fragment_goal_test"
-        tools:layout="@layout/fragment_goal_test" />
+        android:id="@+id/goalDetailFragment"
+        android:name="com.example.learnahead_prototyp.Goal.GoalDetailFragment"
+        android:label="fragment_goal_detail"
+        tools:layout="@layout/fragment_goal_detail" />
 </navigation>

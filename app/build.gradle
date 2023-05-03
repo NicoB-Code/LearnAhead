@@ -62,8 +62,6 @@ dependencies {
 
     //Dagger Hilt
     implementation 'com.google.dagger:hilt-android:2.46'
-    implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
-    implementation 'com.google.firebase:firebase-storage-ktx:20.2.0'
     kapt 'com.google.dagger:hilt-android-compiler:2.46'
 
     //Testing
@@ -76,5 +74,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.6.0'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.2'
+    implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.2.0'
 
 }
