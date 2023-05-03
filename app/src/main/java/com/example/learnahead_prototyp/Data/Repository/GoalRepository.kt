@@ -1,39 +1,51 @@
 package com.example.learnahead_prototyp.Data.Repository
 
 import com.example.learnahead_prototyp.Data.Model.Goal
+import com.example.learnahead_prototyp.Util.FireStoreTables
 import com.example.learnahead_prototyp.Util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Date
 
 class GoalRepository (
     val database: FirebaseFirestore): IGoalRepository {
-    override fun getGoals(): UiState<List<Goal>> {
-        val data = arrayListOf(
-            Goal(
-                id="fdasf",
-                description =  "Goal 1",
-                beginDate =  Date(),
-                endDate = Date()
-            ),
-            Goal(
-                id="fdasf",
-                description =  "Goal 2",
-                beginDate =  Date(),
-                endDate = Date()
-            ),
-            Goal(
-                id="fdasf",
-                description =  "Goal 3",
-                beginDate =  Date(),
-                endDate = Date()
-            )
-        )
+    override fun getGoals(result: (UiState<List<Goal>>) -> Unit) {
+        database.collection(FireStoreTables.GOAL)
+            .get()
+            .addOnSuccessListener {
+                val goals = arrayListOf<Goal>()
+                for (document in it) {
+                    val goal = document.toObject(Goal::class.java)
+                    goals.add(goal)
+                }
+                result.invoke(
+                    UiState.Success(goals)
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(
+                        it.localizedMessage
+                    )
+                )
+            }
 
-        if(data.isNullOrEmpty()){
-            return UiState.Failure("Data is empty")
-        } else {
-            return UiState.Success(data)
-        }
+    }
 
+    override fun addGoal(goal: Goal, result: (UiState<String>) -> Unit) {
+        val document = database.collection(FireStoreTables.GOAL).document()
+        goal.id = document.id
+        document
+            .set(goal)
+            .addOnSuccessListener {
+                result.invoke(
+                    UiState.Success("Goal has been created succesfully")
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(
+                        it.localizedMessage
+                    )
+                )
+            }
     }
 }

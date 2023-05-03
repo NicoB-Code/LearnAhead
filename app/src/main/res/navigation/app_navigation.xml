@@ -11,7 +11,7 @@
         android:label="fragment_goal_listing"
         tools:layout="@layout/fragment_goal_listing">
         <action
-            android:id="@+id/action_goalFragment_to_goalTestFragment"
+            android:id="@+id/action_goalListingFragment_to_goalDetailFragment"
             app:destination="@id/goalDetailFragment" />
     </fragment>
     <fragment

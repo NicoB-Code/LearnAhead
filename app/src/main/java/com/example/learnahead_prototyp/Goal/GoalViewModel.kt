@@ -1,6 +1,5 @@
 package com.example.learnahead_prototyp.Goal
 
-import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,10 +18,17 @@ class GoalViewModel @Inject constructor(
     val goal: LiveData<UiState<List<Goal>>>
         get() = _goals
 
+    private val _addGoal = MutableLiveData<UiState<String>>()
+    val addGoal: LiveData<UiState<String>>
+        get() = _addGoal
+
     fun getGoals() {
         _goals.value = UiState.Loading
-        android.os.Handler(Looper.getMainLooper()).postDelayed({
-            _goals.value = repository.getGoals()
-        }, 2000)
+        repository.getGoals { _goals.value = it }
+    }
+
+    fun addGoal(goal: Goal) {
+        _addGoal.value = UiState.Loading
+        repository.addGoal(goal) { _addGoal.value = it }
     }
 }
