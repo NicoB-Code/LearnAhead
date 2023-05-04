@@ -22,6 +22,14 @@ class GoalViewModel @Inject constructor(
     val addGoal: LiveData<UiState<String>>
         get() = _addGoal
 
+    private val _updateGoal = MutableLiveData<UiState<String>>()
+    val updateGoal: LiveData<UiState<String>>
+        get() = _updateGoal
+
+    private val _deleteGoal = MutableLiveData<UiState<String>>()
+    val deleteGoal: LiveData<UiState<String>>
+        get() = _deleteGoal
+
     fun getGoals() {
         _goals.value = UiState.Loading
         repository.getGoals { _goals.value = it }
@@ -30,5 +38,15 @@ class GoalViewModel @Inject constructor(
     fun addGoal(goal: Goal) {
         _addGoal.value = UiState.Loading
         repository.addGoal(goal) { _addGoal.value = it }
+    }
+
+    fun updateGoal(goal: Goal) {
+        _updateGoal.value = UiState.Loading
+        repository.updateGoal(goal) { _updateGoal.value = it }
+    }
+
+    fun deleteGoal(goal: Goal) {
+        _deleteGoal.value = UiState.Loading
+        repository.deleteGoal(goal) { _deleteGoal.value = it }
     }
 }

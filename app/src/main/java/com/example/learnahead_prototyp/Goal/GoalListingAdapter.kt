@@ -42,9 +42,9 @@ class GoalListingAdapter(
         fun bind(item: Goal){
             binding.goalIdValue.setText(item.id)
             binding.msg.setText(item.description)
-            binding.edit.setOnClickListener { onEditClicked.invoke(adapterPosition,item) }
-            binding.delete.setOnClickListener { onDeleteClicked.invoke(adapterPosition,item) }
-            binding.itemLayout.setOnClickListener { onItemClicked.invoke(adapterPosition,item) }
+            binding.edit.setOnClickListener { onEditClicked.invoke(bindingAdapterPosition,item) }
+            binding.delete.setOnClickListener { onDeleteClicked.invoke(bindingAdapterPosition,item) }
+            binding.itemLayout.setOnClickListener { onItemClicked.invoke(bindingAdapterPosition,item) }
         }
     }
 }

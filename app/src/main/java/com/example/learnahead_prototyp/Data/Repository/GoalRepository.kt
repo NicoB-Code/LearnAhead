@@ -37,7 +37,43 @@ class GoalRepository (
             .set(goal)
             .addOnSuccessListener {
                 result.invoke(
-                    UiState.Success("Goal has been created succesfully")
+                    UiState.Success("Goal has been created successfully")
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(
+                        it.localizedMessage
+                    )
+                )
+            }
+    }
+
+    override fun updateGoal(goal: Goal, result: (UiState<String>) -> Unit) {
+        val document = database.collection(FireStoreTables.GOAL).document(goal.id)
+        document
+            .set(goal)
+            .addOnSuccessListener {
+                result.invoke(
+                    UiState.Success("Goal has been update successfully")
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(
+                        it.localizedMessage
+                    )
+                )
+            }
+    }
+
+    override fun deleteGoal(goal: Goal, result: (UiState<String>) -> Unit) {
+        val document = database.collection(FireStoreTables.GOAL).document(goal.id)
+        document
+            .delete()
+            .addOnSuccessListener {
+                result.invoke(
+                    UiState.Success("Goal has been deleted successfully")
                 )
             }
             .addOnFailureListener {
