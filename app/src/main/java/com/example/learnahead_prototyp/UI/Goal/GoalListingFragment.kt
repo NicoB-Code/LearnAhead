@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.Goal
 import com.example.learnahead_prototyp.R
+import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -22,6 +23,7 @@ class GoalListingFragment : Fragment() {
     val TAG: String = "GoalListingFragment"
     lateinit var binding: FragmentGoalListingBinding
     val viewModel: GoalViewModel by viewModels()
+    val authViewModel: AuthViewModel by viewModels()
     var deletePosition: Int = -1
     var list: MutableList<Goal> = arrayListOf()
     val adapter by lazy {
@@ -55,7 +57,7 @@ class GoalListingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Observer()
         binding.recyclerView.adapter = adapter
         binding.button.setOnClickListener {
             findNavController().navigate(R.id.action_goalListingFragment_to_goalDetailFragment, Bundle().apply {
@@ -63,6 +65,15 @@ class GoalListingFragment : Fragment() {
             })
         }
         viewModel.getGoals()
+
+        binding.logout.setOnClickListener {
+            authViewModel.logout {
+                findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)
+            }
+        }
+    }
+
+    private fun Observer() {
         viewModel.goal.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is UiState.Loading -> {

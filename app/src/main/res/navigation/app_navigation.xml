@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_goalListingFragment_to_goalDetailFragment"
             app:destination="@id/goalDetailFragment" />
+        <action
+            android:id="@+id/action_goalListingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalDetailFragment"
@@ -38,5 +41,13 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.learnahead_prototyp.UI.Auth.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 </navigation>
