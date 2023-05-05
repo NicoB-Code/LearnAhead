@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.learnahead_prototyp.Data.Model.Goal
+import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -21,6 +22,7 @@ class GoalDetailFragment : Fragment() {
     val TAG: String = "GoalDetailFragment"
     lateinit var binding: FragmentGoalDetailBinding
     val viewModel: GoalViewModel by viewModels()
+    val authViewModel: AuthViewModel by viewModels()
     var isEdit = false
     var objGoal: Goal? = null
     override fun onCreateView(
@@ -44,15 +46,6 @@ class GoalDetailFragment : Fragment() {
     }
 
     private fun createGoal() {
-        if (validation()) {
-            viewModel.addGoal(
-                Goal(
-                    id = "",
-                    description = binding.goalDescription.text.toString(),
-                    endDate = Date()
-                )
-            )
-        }
         viewModel.addGoal.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is UiState.Loading -> {
@@ -71,17 +64,15 @@ class GoalDetailFragment : Fragment() {
                 }
             }
         }
+        if (validation()) {
+            viewModel.addGoal(getGoal())
+        }
+
     }
 
     private fun updateGoal() {
         if (validation()) {
-            viewModel.updateGoal(
-                Goal(
-                    id = objGoal?.id ?: "",
-                    description = binding.goalDescription.text.toString(),
-                    endDate = Date()
-                )
-            )
+            viewModel.updateGoal(getGoal())
         }
         viewModel.updateGoal.observe(viewLifecycleOwner) { state ->
             when(state) {
@@ -135,5 +126,13 @@ class GoalDetailFragment : Fragment() {
         }
 
         return  isValid
+    }
+
+    private fun getGoal(): Goal {
+        return Goal(
+            id = objGoal?.id ?: "",
+            description = binding.goalDescription.text.toString(),
+            date = Date()
+        ).apply { authViewModel.getSession { this.user_id = it?.id ?: "" } }
     }
 }

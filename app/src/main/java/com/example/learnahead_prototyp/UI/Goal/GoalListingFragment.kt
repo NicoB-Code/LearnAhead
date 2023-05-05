@@ -64,12 +64,15 @@ class GoalListingFragment : Fragment() {
                 putString("type", "create")
             })
         }
-        viewModel.getGoals()
 
         binding.logout.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)
             }
+        }
+
+        authViewModel.getSession {
+            viewModel.getGoals(it)
         }
     }
 

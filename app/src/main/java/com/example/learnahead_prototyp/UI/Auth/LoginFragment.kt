@@ -1,16 +1,19 @@
 package com.example.learnahead_prototyp.UI.Auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.R
+import com.example.learnahead_prototyp.Util.UiState
+import com.example.learnahead_prototyp.Util.hide
+import com.example.learnahead_prototyp.Util.isValidEmail
+import com.example.learnahead_prototyp.Util.show
+import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLoginBinding
-import com.example.learnahead_prototyp.databinding.FragmentRegisterBinding
-import com.example.learnahead_prototyp.Util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -93,6 +96,15 @@ class LoginFragment : Fragment() {
             }
         }
         return isValid
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getSession { user ->
+            if(user != null) {
+                findNavController().navigate(R.id.action_loginFragment_to_goalListingFragment)
+            }
+        }
     }
 
 }

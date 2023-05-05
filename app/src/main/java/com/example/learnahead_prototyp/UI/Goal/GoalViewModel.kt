@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.learnahead_prototyp.Data.Model.Goal
+import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Data.Repository.IGoalRepository
 import com.example.learnahead_prototyp.Util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,9 +31,9 @@ class GoalViewModel @Inject constructor(
     val deleteGoal: LiveData<UiState<String>>
         get() = _deleteGoal
 
-    fun getGoals() {
+    fun getGoals(user: User?) {
         _goals.value = UiState.Loading
-        repository.getGoals { _goals.value = it }
+        repository.getGoals(user) { _goals.value = it }
     }
 
     fun addGoal(goal: Goal) {

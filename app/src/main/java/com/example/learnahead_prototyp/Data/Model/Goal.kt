@@ -8,7 +8,9 @@ import java.util.Date
 @Parcelize
 data class Goal(
     var id: String = "",
+    var user_id: String = "",
     val description: String = "",
     @ServerTimestamp
-    val endDate: Date = Date()
+    // WICHTIG DATE WIRD NOCH GEÄNDERT WEGEN INDEX
+    val date: Date = Date()
 ): Parcelable

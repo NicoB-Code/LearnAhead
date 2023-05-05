@@ -9,5 +9,7 @@ interface IAuthRepository {
     fun loginUser(email: String, password: String, result: (UiState<String>) -> Unit)
     fun forgotPassword(email: String, result: (UiState<String>) -> Unit)
     fun logout(result: () -> Unit)
+    fun storeSession(it: String, result: (User?) -> Unit)
+    fun getSession(result: (User?) -> Unit)
 
 }
