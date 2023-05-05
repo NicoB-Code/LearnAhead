@@ -1,4 +1,4 @@
-package com.example.learnahead_prototyp.Goal
+package com.example.learnahead_prototyp.UI.Goal
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

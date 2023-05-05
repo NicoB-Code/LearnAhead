@@ -1,14 +1,14 @@
 package com.example.learnahead_prototyp.Data.Repository
 
 import com.example.learnahead_prototyp.Data.Model.Goal
-import com.example.learnahead_prototyp.Util.FireStoreTables
+import com.example.learnahead_prototyp.Util.FireStoreCollection
 import com.example.learnahead_prototyp.Util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
 
 class GoalRepository (
     val database: FirebaseFirestore): IGoalRepository {
     override fun getGoals(result: (UiState<List<Goal>>) -> Unit) {
-        database.collection(FireStoreTables.GOAL)
+        database.collection(FireStoreCollection.GOAL)
             .get()
             .addOnSuccessListener {
                 val goals = arrayListOf<Goal>()
@@ -31,7 +31,7 @@ class GoalRepository (
     }
 
     override fun addGoal(goal: Goal, result: (UiState<String>) -> Unit) {
-        val document = database.collection(FireStoreTables.GOAL).document()
+        val document = database.collection(FireStoreCollection.GOAL).document()
         goal.id = document.id
         document
             .set(goal)
@@ -50,7 +50,7 @@ class GoalRepository (
     }
 
     override fun updateGoal(goal: Goal, result: (UiState<String>) -> Unit) {
-        val document = database.collection(FireStoreTables.GOAL).document(goal.id)
+        val document = database.collection(FireStoreCollection.GOAL).document(goal.id)
         document
             .set(goal)
             .addOnSuccessListener {
@@ -68,7 +68,7 @@ class GoalRepository (
     }
 
     override fun deleteGoal(goal: Goal, result: (UiState<String>) -> Unit) {
-        val document = database.collection(FireStoreTables.GOAL).document(goal.id)
+        val document = database.collection(FireStoreCollection.GOAL).document(goal.id)
         document
             .delete()
             .addOnSuccessListener {

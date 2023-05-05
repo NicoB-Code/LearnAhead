@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/goalListingFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/goalListingFragment"
-        android:name="com.example.learnahead_prototyp.Goal.GoalListingFragment"
+        android:name="com.example.learnahead_prototyp.UI.Goal.GoalListingFragment"
         android:label="fragment_goal_listing"
         tools:layout="@layout/fragment_goal_listing">
         <action
@@ -16,7 +16,27 @@
     </fragment>
     <fragment
         android:id="@+id/goalDetailFragment"
-        android:name="com.example.learnahead_prototyp.Goal.GoalDetailFragment"
+        android:name="com.example.learnahead_prototyp.UI.Goal.GoalDetailFragment"
         android:label="fragment_goal_detail"
         tools:layout="@layout/fragment_goal_detail" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.learnahead_prototyp.UI.Auth.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.learnahead_prototyp.UI.Auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
 </navigation>
