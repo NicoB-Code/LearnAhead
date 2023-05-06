@@ -149,7 +149,6 @@ class GoalDetailFragment : Fragment() {
 
     /**
      * Methode zum Aktualisieren der Benutzeroberfläche basierend auf dem Typ des übergebenen Arguments.
-     *
      * @return Nothing
      */
     private fun UpdateUI() {
@@ -188,19 +187,17 @@ class GoalDetailFragment : Fragment() {
 
     /**
      * Methode zur Überprüfung, ob das Ziel korrekt eingegeben wurde oder nicht.
-     *
      * @return Boolean
      */
     private fun validation(): Boolean {
-        var isValid = true
-
-        // wenn die Zielbeschreibung leer oder null ist, wird isValid auf false gesetzt und eine Toast-Meldung ausgegeben
-        if (binding.goalDescription.text.toString().isNullOrEmpty()) {
-            isValid = false
+        // Überprüfen, ob die Beschreibung leer oder null ist
+        if (binding.goalDescription.text.isNullOrEmpty()) {
+            // Wenn ja, eine Toast-Meldung ausgeben und false zurückgeben
             toast("Enter description")
+            return false
         }
-
-        return isValid
+        // Andernfalls true zurückgeben
+        return true
     }
 
     /**
@@ -221,5 +218,4 @@ class GoalDetailFragment : Fragment() {
             }
         }
     }
-
 }
