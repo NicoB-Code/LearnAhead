@@ -147,26 +147,38 @@ class GoalDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Methode zum Aktualisieren der Benutzeroberfläche basierend auf dem Typ des übergebenen Arguments.
+     *
+     * @return Nothing
+     */
     private fun UpdateUI() {
+        // das type-Argument wird aus den Fragment-Argumenten extrahiert
         val type = arguments?.getString("type", null)
+
         type?.let {
             when (it) {
+                // falls "view" übergeben wurde
                 "view" -> {
                     isEdit = false
+                    // das Ziel-Textfeld wird aktiviert und der Zielbeschreibungstext wird gesetzt
                     binding.goalDescription.isEnabled = true
                     objGoal = arguments?.getParcelable("goal")
                     binding.goalDescription.setText(objGoal?.description)
+                    // der "button" wird ausgeblendet
                     binding.button.hide()
                 }
-
+                // falls "create" übergeben wurde
                 "create" -> {
                     isEdit = false
+                    // der Button-Text wird auf "Create" gesetzt
                     binding.button.setText("Create")
                 }
-
+                // falls "edit" übergeben wurde
                 "edit" -> {
                     isEdit = true
                     objGoal = arguments?.getParcelable("goal")
+                    // der Zielbeschreibungstext wird gesetzt und der Button-Text wird auf "Update" gesetzt
                     binding.goalDescription.setText(objGoal?.description)
                     binding.button.setText("Update")
                 }
@@ -174,9 +186,15 @@ class GoalDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Methode zur Überprüfung, ob das Ziel korrekt eingegeben wurde oder nicht.
+     *
+     * @return Boolean
+     */
     private fun validation(): Boolean {
         var isValid = true
 
+        // wenn die Zielbeschreibung leer oder null ist, wird isValid auf false gesetzt und eine Toast-Meldung ausgegeben
         if (binding.goalDescription.text.toString().isNullOrEmpty()) {
             isValid = false
             toast("Enter description")
@@ -185,11 +203,23 @@ class GoalDetailFragment : Fragment() {
         return isValid
     }
 
+    /**
+     * Methode zum Erstellen eines neuen Ziels oder Aktualisieren eines vorhandenen Ziels.
+     *
+     * @return Nothing
+     */
     private fun getGoal(): Goal {
+        // Ziel-Objekt wird erstellt
         return Goal(
             id = objGoal?.id ?: "",
             description = binding.goalDescription.text.toString(),
             date = Date()
-        ).apply { authViewModel.getSession { this.user_id = it?.id ?: "" } }
+        ).apply {
+            // Session-Daten werden aktualisiert
+            authViewModel.getSession {
+                this.user_id = it?.id ?: ""
+            }
+        }
     }
+
 }

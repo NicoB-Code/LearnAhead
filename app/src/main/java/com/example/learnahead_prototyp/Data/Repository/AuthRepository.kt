@@ -34,80 +34,49 @@ class AuthRepository(
     override fun registerUser(
         email: String,
         password: String,
-        user: User, // Benutzerdaten
-        result: (UiState<String>) -> Unit // Funktion zur Rückgabe des Ergebnisses an den Aufrufer
+        user: User,
+        // Funktion zur Rückgabe des Ergebnisses an den
+        result: (UiState<String>) -> Unit
     ) {
         // Neuen Benutzer mit Email und Passwort erstellen
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                // Registrierung erfolgreich?
-                if (it.isSuccessful) {
-
-                    // ID des Benutzers setzen
-                    user.id = it.result.user?.uid ?: ""
-
-                    // Benutzerdaten aktualisieren
-                    updateUserInfo(user) { state ->
-
-                        // Ergebnis auswerten
-                        when (state) {
-
-                            // Benutzerdaten wurden erfolgreich aktualisiert
-                            is UiState.Success -> {
-
-                                // Session speichern
-                                storeSession(id = it.result.user?.uid ?: "") { sessionResult ->
-
-                                    if (sessionResult == null) {
-                                        // Fehler: Session konnte nicht gespeichert werden
-                                        result.invoke(UiState.Failure("User register successfully but session failed to store!"))
-                                    } else {
-                                        // Erfolg: Benutzer wurde erfolgreich registriert und Session wurde gespeichert
-                                        result.invoke(UiState.Success("User register successfully!"))
-                                    }
+            .addOnSuccessListener { authResult ->
+                // ID des Benutzers setzen
+                user.id = authResult.user?.uid ?: ""
+                // Benutzerdaten aktualisieren
+                updateUserInfo(user) { state ->
+                    when (state) {
+                        is UiState.Success -> {
+                            // Session speichern
+                            storeSession(id = authResult.user?.uid ?: "") { sessionResult ->
+                                if (sessionResult == null) {
+                                    result.invoke(UiState.Failure("User register successfully but session failed to store!"))
+                                } else {
+                                    result.invoke(UiState.Success("User register successfully!"))
                                 }
                             }
-
-                            // Fehler: Benutzerdaten konnten nicht aktualisiert werden
-                            is UiState.Failure -> {
-                                result.invoke(UiState.Failure(state.error))
-                            }
-
-                            else -> {} // Kein Ergebnis
                         }
-                    }
-                } else {
-                    // Fehler: Benutzer konnte nicht registriert werden
-                    try {
-                        // Fehler behandeln
-                        throw it.exception ?: java.lang.Exception("Invalid authentication")
-                    } catch (e: FirebaseAuthWeakPasswordException) {
-                        // Fehler: Schwaches Passwort
-                        result.invoke(UiState.Failure("Authentication failed, Password should be at least 6 characters"))
-                    } catch (e: FirebaseAuthInvalidCredentialsException) {
-                        // Fehler: Ungültige E-Mail-Adresse
-                        result.invoke(UiState.Failure("Authentication failed, Invalid email entered"))
-                    } catch (e: FirebaseAuthUserCollisionException) {
-                        // Fehler: E-Mail-Adresse bereits registriert
-                        result.invoke(UiState.Failure("Authentication failed, Email already registered."))
-                    } catch (e: Exception) {
-                        // Allgemeiner Fehler
-                        result.invoke(UiState.Failure(e.message))
+
+                        is UiState.Failure -> result.invoke(UiState.Failure(state.error))
+                        else -> {}
                     }
                 }
             }
-            .addOnFailureListener {
-                // Fehler: Registrierung fehlgeschlagen
-                result.invoke(UiState.Failure(it.localizedMessage))
+            .addOnFailureListener { exception ->
+                when (exception) {
+                    is FirebaseAuthWeakPasswordException -> result.invoke(UiState.Failure("Authentication failed, Password should be at least 6 characters"))
+                    is FirebaseAuthInvalidCredentialsException -> result.invoke(UiState.Failure("Authentication failed, Invalid email entered"))
+                    is FirebaseAuthUserCollisionException -> result.invoke(UiState.Failure("Authentication failed, Email already registered."))
+                    else -> result.invoke(UiState.Failure(exception.message))
+                }
             }
     }
 
     /**
      * Die Funktion updateUserInfo aktualisiert die Benutzerinformationen in der Firebase Firestore-Datenbank.
-     *
      * @param user Die Benutzerdaten, die aktualisiert werden sollen.
-     * @param result Eine Lambda-Funktion, die ein UiState-Objekt als Parameter akzeptiert und keine Rückgabe hat.
-     *               Das UiState-Objekt enthält den Status der Benutzeroberfläche (UI) nach dem Aktualisierungsvorgang.
+     * @param result Eine Lambda-Funktion, die aufgerufen wird, wenn die Aktualisierung in der Datenbank abgeschlossen ist.
+     *               Der Parameter der Funktion gibt an, ob die Aktualisierung erfolgreich war oder nicht.
      * @return Es wird kein Wert zurückgegeben.
      */
     override fun updateUserInfo(user: User, result: (UiState<String>) -> Unit) {
@@ -176,11 +145,19 @@ class AuthRepository(
      * @param result Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Nachricht, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob das Zurücksetzen des Passworts erfolgreich war oder nicht.
+     *
+     * Vor dem Zurücksetzen des Passworts wird die E-Mail-Adresse des Benutzers validiert, um sicherzustellen,
+     * dass sie eine gültige Syntax hat. Wenn die E-Mail-Adresse ungültig ist, wird ein Fehler zurückgegeben.
      */
     override fun forgotPassword(email: String, result: (UiState<String>) -> Unit) {
+        // Überprüft, ob die E-Mail-Adresse eine gültige Syntax hat
+        if (!isValidEmail(email)) {
+            // Gibt ein fehlgeschlagenes Ergebnis mit einer Fehlermeldung für ungültige E-Mail-Adressen an den Aufrufer zurück
+            result.invoke(UiState.Failure("Invalid email address"))
+            return
+        }
         // Sendet eine E-Mail zum Zurücksetzen des Passworts an die angegebene E-Mail-Adresse
         auth.sendPasswordResetEmail(email)
-            // Wird aufgerufen, wenn die Aufgabe abgeschlossen ist (unabhängig davon, ob sie erfolgreich war oder nicht)
             .addOnCompleteListener { task ->
                 // Erfolgreich?
                 if (task.isSuccessful) {
@@ -190,11 +167,18 @@ class AuthRepository(
                     // Gibt ein fehlgeschlagenes Ergebnis mit der Fehlermeldung an den Aufrufer zurück
                     result.invoke(UiState.Failure(task.exception?.message))
                 }
-                // Wird aufgerufen, wenn die Aufgabe aufgrund einer Ausnahme fehlgeschlagen ist
             }.addOnFailureListener {
-                // Gibt ein fehlgeschlagenes Ergebnis mit einer allgemeinen Fehlermeldung an den Aufrufer zurück
                 result.invoke(UiState.Failure("Authentication failed, Check email"))
             }
+    }
+
+    /**
+     * Funktion zur Überprüfung, ob eine E-Mail-Adresse eine gültige Syntax hat.
+     * @param email E-Mail-Adresse, die überprüft werden soll.
+     * @return true, wenn die E-Mail-Adresse eine gültige Syntax hat, andernfalls false.
+     */
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
 
@@ -221,28 +205,17 @@ class AuthRepository(
     override fun storeSession(id: String, result: (User?) -> Unit) {
         // Zugriff auf die Firestore-Sammlung "USER"
         database.collection(FireStoreCollection.USER).document(id)
-            // Holt das Dokument für den angegebenen Benutzer
             .get()
-            // Wird aufgerufen, wenn die Aufgabe abgeschlossen ist (unabhängig davon, ob sie erfolgreich war oder nicht)
-            .addOnCompleteListener {
-                // Erfolgreich?
-                if (it.isSuccessful) {
-                    // Holt das User-Objekt aus dem Firestore-Dokument
-                    val user = it.result.toObject(User::class.java)
+            .addOnSuccessListener { document ->
+                // Holt das User-Objekt aus dem Firestore-Dokument
+                val user = document.toObject(User::class.java)
+                if (user != null) {
                     // Fügt die Sitzungsdetails des Benutzers im lokalen Speicher hinzu
                     appPreferences.edit()
                         .putString(SharedPrefConstants.USER_SESSION, gson.toJson(user)).apply()
-                    // Gibt das User-Objekt an den Aufrufer zurück
-                    result.invoke(user)
-                } else {
-                    // Gibt null an den Aufrufer zurück, wenn das Speichern der Sitzung fehlgeschlagen ist
-                    result.invoke(null)
                 }
-            }
-            // Wird aufgerufen, wenn die Aufgabe aufgrund einer Ausnahme fehlgeschlagen ist
-            .addOnFailureListener {
-                // Gibt null an den Aufrufer zurück, wenn das Speichern der Sitzung fehlgeschlagen ist
-                result.invoke(null)
+                // Gibt das User-Objekt an den Aufrufer zurück
+                result.invoke(user)
             }
     }
 
