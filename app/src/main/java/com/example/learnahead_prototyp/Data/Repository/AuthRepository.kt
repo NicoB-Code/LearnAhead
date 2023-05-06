@@ -14,7 +14,7 @@ import com.google.gson.Gson
 
 // Die Klasse AuthRepository implementiert das Interface IAuthRepository.
 class AuthRepository(
-    val auth: FirebaseAuth, // FirebaseAuth-Objekt
+    val auth: FirebaseAuth, // Objekt für Firebase Authentifizierung
     val database: FirebaseFirestore, // FirebaseFirestore-Objekt
     val appPreferences: SharedPreferences, // SharedPreferences-Objekt
     val gson: Gson // Gson-Objekt

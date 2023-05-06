@@ -113,16 +113,27 @@ class GoalRepository(
             }
     }
 
+    /**
+     * Funktion, um ein Ziel aus der Datenbank zu löschen.
+     * @param goal Das Ziel, das gelöscht werden soll.
+     * @param result Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
+     * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
+     * Der Status kann entweder Success oder Failure sein, abhängig davon, ob das Ziel erfolgreich gelöscht wurde oder nicht.
+     */
     override fun deleteGoal(goal: Goal, result: (UiState<String>) -> Unit) {
+        // Zugriff auf das Ziel-Dokument in der Datenbank basierend auf der Ziel-ID
         val document = database.collection(FireStoreCollection.GOAL).document(goal.id)
+        // Löschen des Ziel-Dokuments aus der Datenbank
         document
             .delete()
             .addOnSuccessListener {
+                // Rückgabe einer Erfolgsmeldung an den Aufrufer
                 result.invoke(
                     UiState.Success("Goal has been deleted successfully")
                 )
             }
             .addOnFailureListener {
+                // Rückgabe einer Fehlermeldung an den Aufrufer
                 result.invoke(
                     UiState.Failure(
                         it.localizedMessage
