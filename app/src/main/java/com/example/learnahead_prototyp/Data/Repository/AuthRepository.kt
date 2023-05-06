@@ -38,10 +38,10 @@ class AuthRepository(
         result: (UiState<String>) -> Unit // Funktion zur Rückgabe des Ergebnisses an den Aufrufer
     ) {
         // Neuen Benutzer mit Email und Passwort erstellen
-        auth.createUserWithEmailAndPassword(email,password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 // Registrierung erfolgreich?
-                if (it.isSuccessful){
+                if (it.isSuccessful) {
 
                     // ID des Benutzers setzen
                     user.id = it.result.user?.uid ?: ""
@@ -50,7 +50,7 @@ class AuthRepository(
                     updateUserInfo(user) { state ->
 
                         // Ergebnis auswerten
-                        when(state){
+                        when (state) {
 
                             // Benutzerdaten wurden erfolgreich aktualisiert
                             is UiState.Success -> {
@@ -76,7 +76,7 @@ class AuthRepository(
                             else -> {} // Kein Ergebnis
                         }
                     }
-                }else{
+                } else {
                     // Fehler: Benutzer konnte nicht registriert werden
                     try {
                         // Fehler behandeln
@@ -147,10 +147,9 @@ class AuthRepository(
         email: String,
         password: String,
         result: (UiState<String>) -> Unit
-    )
-    {
+    ) {
         // Benutzer mit Email und Passwort anmelden
-        auth.signInWithEmailAndPassword(email,password)
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 // Anmeldung erfolgreich?
                 if (task.isSuccessful) {
@@ -191,13 +190,12 @@ class AuthRepository(
                     // Gibt ein fehlgeschlagenes Ergebnis mit der Fehlermeldung an den Aufrufer zurück
                     result.invoke(UiState.Failure(task.exception?.message))
                 }
-            // Wird aufgerufen, wenn die Aufgabe aufgrund einer Ausnahme fehlgeschlagen ist
+                // Wird aufgerufen, wenn die Aufgabe aufgrund einer Ausnahme fehlgeschlagen ist
             }.addOnFailureListener {
                 // Gibt ein fehlgeschlagenes Ergebnis mit einer allgemeinen Fehlermeldung an den Aufrufer zurück
                 result.invoke(UiState.Failure("Authentication failed, Check email"))
             }
     }
-
 
 
     /**
@@ -232,7 +230,8 @@ class AuthRepository(
                     // Holt das User-Objekt aus dem Firestore-Dokument
                     val user = it.result.toObject(User::class.java)
                     // Fügt die Sitzungsdetails des Benutzers im lokalen Speicher hinzu
-                    appPreferences.edit().putString(SharedPrefConstants.USER_SESSION, gson.toJson(user)).apply()
+                    appPreferences.edit()
+                        .putString(SharedPrefConstants.USER_SESSION, gson.toJson(user)).apply()
                     // Gibt das User-Objekt an den Aufrufer zurück
                     result.invoke(user)
                 } else {
@@ -257,7 +256,7 @@ class AuthRepository(
         // Holt die gespeicherten Sitzungsdaten des Benutzers aus dem lokalen Speicher
         val user_str = appPreferences.getString(SharedPrefConstants.USER_SESSION, null)
         // Wenn keine gespeicherten Sitzungsdaten vorhanden sind, gib null zurück
-        if(user_str == null) {
+        if (user_str == null) {
             result.invoke(null)
         } else {
             // Konvertiert die JSON-Zeichenfolge in ein Benutzerobjekt

@@ -2,7 +2,6 @@ package com.example.learnahead_prototyp.Data.Model
 
 /**
  * Eine Datenklasse, die einen Benutzer in der App darstellt.
- *
  * @property id Die eindeutige ID des Benutzers.
  * @property first_name Der Vorname des Benutzers.
  * @property last_name Der Nachname des Benutzers.

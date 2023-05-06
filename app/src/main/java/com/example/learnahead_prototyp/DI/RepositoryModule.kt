@@ -34,7 +34,7 @@ object RepositoryModule {
     @Singleton
     fun provideGoalRepository(
         database: FirebaseFirestore
-    ): IGoalRepository{
+    ): IGoalRepository {
         return GoalRepository(database)
     }
 
@@ -55,6 +55,6 @@ object RepositoryModule {
         appPreferences: SharedPreferences,
         gson: Gson
     ): IAuthRepository {
-        return AuthRepository(auth,database, appPreferences, gson)
+        return AuthRepository(auth, database, appPreferences, gson)
     }
 }

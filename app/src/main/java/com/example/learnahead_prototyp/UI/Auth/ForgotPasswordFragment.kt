@@ -62,7 +62,7 @@ class ForgotPasswordFragment : Fragment() {
         // Fügt einen Klicklistener zum Zurücksetzen-Button hinzu
         binding.forgotPassBtn.setOnClickListener {
             // Überprüft die Eingabevalidierung des Benutzers
-            if (validation()){
+            if (validation()) {
                 // Ruft die "forgotPassword" -Funktion des ViewModels auf, um das Passwort zurückzusetzen
                 viewModel.forgotPassword(binding.emailEt.text.toString())
             }
@@ -74,20 +74,22 @@ class ForgotPasswordFragment : Fragment() {
      * Sobald sich der Zustand des LiveData ändert, wird diese Funktion aufgerufen und reagiert entsprechend.
      * @param viewLifecycleOwner LifecycleOwner des Views, der den Observer besitzt.
      */
-    private fun observer(){
+    private fun observer() {
         viewModel.forgotPassword.observe(viewLifecycleOwner) { state ->
-            when(state){
+            when (state) {
                 is UiState.Loading -> {
                     // Wenn der Zustand "Loading" ist, ändert die Funktion die Textanzeige und zeigt den Fortschrittsbalken an
                     binding.forgotPassBtn.setText("")
                     binding.forgotPassProgress.show()
                 }
+
                 is UiState.Failure -> {
                     // Wenn der Zustand "Failure" ist, ändert die Funktion die Textanzeige, versteckt den Fortschrittsbalken und zeigt eine Fehlermeldung an.
                     binding.forgotPassBtn.setText("Send")
                     binding.forgotPassProgress.hide()
                     toast(state.error)
                 }
+
                 is UiState.Success -> {
                     // Wenn der Zustand "Success" ist, ändert die Funktion die Textanzeige, versteckt den Fortschrittsbalken und zeigt eine Erfolgsmeldung an.
                     binding.forgotPassBtn.setText("Send")
@@ -107,12 +109,12 @@ class ForgotPasswordFragment : Fragment() {
     fun validation(): Boolean {
         var isValid = true
 
-        if (binding.emailEt.text.isNullOrEmpty()){
+        if (binding.emailEt.text.isNullOrEmpty()) {
             // Wenn das E-Mail-Feld leer ist oder null, ist die E-Mail-Adresse ungültig. Die Funktion zeigt eine Fehlermeldung an und gibt "false" zurück.
             isValid = false
             toast(getString(R.string.enter_email))
-        }else{
-            if (!binding.emailEt.text.toString().isValidEmail()){
+        } else {
+            if (!binding.emailEt.text.toString().isValidEmail()) {
                 // Wenn die E-Mail-Adresse ungültig ist, zeigt die Funktion eine Fehlermeldung an und gibt "false" zurück.
                 isValid = false
                 toast(getString(R.string.invalid_email))

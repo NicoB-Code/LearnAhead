@@ -29,16 +29,20 @@ class GoalListingFragment : Fragment() {
     val adapter by lazy {
         GoalListingAdapter(
             onItemClicked = { pos, item ->
-                findNavController().navigate(R.id.action_goalListingFragment_to_goalDetailFragment, Bundle().apply {
-                    putString("type", "view")
-                    putParcelable("goal", item)
-                })
+                findNavController().navigate(
+                    R.id.action_goalListingFragment_to_goalDetailFragment,
+                    Bundle().apply {
+                        putString("type", "view")
+                        putParcelable("goal", item)
+                    })
             },
             onEditClicked = { pos, item ->
-                findNavController().navigate(R.id.action_goalListingFragment_to_goalDetailFragment, Bundle().apply {
-                    putString("type", "edit")
-                    putParcelable("goal", item)
-                })
+                findNavController().navigate(
+                    R.id.action_goalListingFragment_to_goalDetailFragment,
+                    Bundle().apply {
+                        putString("type", "edit")
+                        putParcelable("goal", item)
+                    })
             },
             onDeleteClicked = { pos, item ->
                 deletePosition = pos
@@ -60,9 +64,11 @@ class GoalListingFragment : Fragment() {
         Observer()
         binding.recyclerView.adapter = adapter
         binding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_goalListingFragment_to_goalDetailFragment, Bundle().apply {
-                putString("type", "create")
-            })
+            findNavController().navigate(
+                R.id.action_goalListingFragment_to_goalDetailFragment,
+                Bundle().apply {
+                    putString("type", "create")
+                })
         }
 
         binding.logout.setOnClickListener {
@@ -78,14 +84,16 @@ class GoalListingFragment : Fragment() {
 
     private fun Observer() {
         viewModel.goal.observe(viewLifecycleOwner) { state ->
-            when(state) {
+            when (state) {
                 is UiState.Loading -> {
                     binding.progressBar.show()
                 }
+
                 is UiState.Failure -> {
                     binding.progressBar.hide()
                     toast(state.error)
                 }
+
                 is UiState.Success -> {
                     binding.progressBar.hide()
                     list = state.data.toMutableList()
@@ -94,18 +102,20 @@ class GoalListingFragment : Fragment() {
             }
         }
         viewModel.deleteGoal.observe(viewLifecycleOwner) { state ->
-            when(state) {
+            when (state) {
                 is UiState.Loading -> {
                     binding.progressBar.show()
                 }
+
                 is UiState.Failure -> {
                     binding.progressBar.hide()
                     toast(state.error)
                 }
+
                 is UiState.Success -> {
                     binding.progressBar.hide()
                     toast(state.data)
-                    if(deletePosition != -1) {
+                    if (deletePosition != -1) {
                         list.removeAt(deletePosition)
                         adapter.updateList(list)
                     }

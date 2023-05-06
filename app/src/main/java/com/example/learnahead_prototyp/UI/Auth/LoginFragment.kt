@@ -85,21 +85,23 @@ class LoginFragment : Fragment() {
      * Die Methode "observer" wird genutzt, um auf Änderungen im "login" LiveData-Objekt des ViewModels zu reagieren.
      * Je nach Zustand des LiveData-Objekts wird die UI entsprechend aktualisiert.
      */
-    fun observer(){
+    fun observer() {
         viewModel.login.observe(viewLifecycleOwner) { state ->
             // Überprüft den Status des UI-States und aktualisiert die UI entsprechend
-            when(state){
+            when (state) {
                 is UiState.Loading -> {
                     // Zeigt den Fortschrittsbalken an und deaktiviert den Login-Button
                     binding.loginBtn.setText("")
                     binding.loginProgress.show()
                 }
+
                 is UiState.Failure -> {
                     // Aktiviert den Login-Button, versteckt den Fortschrittsbalken und zeigt eine Toast-Nachricht mit der Fehlermeldung an
                     binding.loginBtn.setText("Login")
                     binding.loginProgress.hide()
                     toast(state.error)
                 }
+
                 is UiState.Success -> {
                     // Aktiviert den Login-Button, versteckt den Fortschrittsbalken und zeigt eine Toast-Nachricht mit der Erfolgsmeldung an
                     // Navigiert zum "GoalListingFragment"
@@ -120,23 +122,23 @@ class LoginFragment : Fragment() {
     fun validation(): Boolean {
         var isValid = true
 
-        if (binding.emailEt.text.isNullOrEmpty()){
+        if (binding.emailEt.text.isNullOrEmpty()) {
             // Wenn das E-Mail-Feld leer ist, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
             isValid = false
             toast(getString(R.string.enter_email))
-        }else{
-            if (!binding.emailEt.text.toString().isValidEmail()){
+        } else {
+            if (!binding.emailEt.text.toString().isValidEmail()) {
                 // Wenn die E-Mail-Adresse ungültig ist, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
                 isValid = false
                 toast(getString(R.string.invalid_email))
             }
         }
-        if (binding.passEt.text.isNullOrEmpty()){
+        if (binding.passEt.text.isNullOrEmpty()) {
             // Wenn das Passwort-Feld leer ist, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
             isValid = false
             toast(getString(R.string.enter_password))
-        }else{
-            if (binding.passEt.text.toString().length < 8){
+        } else {
+            if (binding.passEt.text.toString().length < 8) {
                 // Wenn das Passwort weniger als 8 Zeichen enthält, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
                 isValid = false
                 toast(getString(R.string.invalid_password))
@@ -153,7 +155,7 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.getSession { user ->
-            if(user != null) {
+            if (user != null) {
                 // Wenn ein Benutzer angemeldet ist, navigiert es zum "GoalListingFragment"
                 findNavController().navigate(R.id.action_loginFragment_to_goalListingFragment)
             }

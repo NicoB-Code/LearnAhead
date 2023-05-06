@@ -7,7 +7,6 @@ import java.util.Date
 
 /**
  * Eine Datenklasse, die ein Lernziel in der App darstellt.
- *
  * @property id Die eindeutige ID des Lernziels.
  * @property user_id Die ID des Benutzers, dem das Lernziel gehört.
  * @property description Die Beschreibung des Lernziels.
@@ -28,4 +27,4 @@ data class Goal(
     @ServerTimestamp
     // WICHTIG DATE WIRD NOCH GEÄNDERT WEGEN INDEX
     val date: Date = Date()
-): Parcelable
+) : Parcelable

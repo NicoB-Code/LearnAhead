@@ -26,7 +26,7 @@ object FirebaseModule {
      */
     @Provides
     @Singleton
-    fun provideFirebaseDatabaseInstance(): FirebaseDatabase{
+    fun provideFirebaseDatabaseInstance(): FirebaseDatabase {
         return FirebaseDatabase.getInstance()
     }
 
@@ -37,7 +37,7 @@ object FirebaseModule {
      */
     @Provides
     @Singleton
-    fun provideFireStoreInstance(): FirebaseFirestore{
+    fun provideFireStoreInstance(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
     }
 
@@ -48,7 +48,7 @@ object FirebaseModule {
      */
     @Provides
     @Singleton
-    fun provideFirebaseAuthInstance(): FirebaseAuth{
+    fun provideFirebaseAuthInstance(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }
 }

@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GoalViewModel @Inject constructor(
     val repository: IGoalRepository
-): ViewModel()  {
+) : ViewModel() {
 
     private val _goals = MutableLiveData<UiState<List<Goal>>>()
     val goal: LiveData<UiState<List<Goal>>>

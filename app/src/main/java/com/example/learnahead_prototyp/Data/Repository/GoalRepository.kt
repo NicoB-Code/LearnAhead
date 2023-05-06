@@ -14,7 +14,7 @@ import com.google.firebase.firestore.Query
  */
 class GoalRepository(
     val database: FirebaseFirestore
-): IGoalRepository {
+) : IGoalRepository {
 
     /**
      * Funktion, um Ziele aus der Datenbank zu holen.
@@ -48,7 +48,7 @@ class GoalRepository(
                 result.invoke(UiState.Success(goals))
             }
             .addOnFailureListener {
-            // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
+                // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
                 result.invoke(UiState.Failure(it.localizedMessage))
             }
     }

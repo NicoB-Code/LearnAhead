@@ -6,8 +6,7 @@
     android:layout_height="fill_parent"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/android_lar"
-    android:clipToOutline="true"
-    >
+    android:clipToOutline="true">
 
     <!-- Kein Konto -->
     <TextView
@@ -25,8 +24,8 @@
         android:id="@+id/register"
         android:layout_width="81dp"
         android:layout_height="21dp"
-        android:layout_marginTop="485dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="485dp"
         android:text="@string/register"
         android:textAppearance="@style/register" />
 
@@ -66,15 +65,14 @@
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="290dp"
-        android:elevation="2dp"
+        android:background="@drawable/rectangle_password"
         android:drawableLeft="@drawable/ic_android_black_24dp"
         android:drawablePadding="10dp"
-        android:hint="Passwort"
-        android:textAppearance="@style/passwort"
+        android:elevation="2dp"
         android:gravity="left|center_vertical"
+        android:hint="Passwort"
         android:paddingLeft="10dp"
-        android:background="@drawable/rectangle_password" />
-
+        android:textAppearance="@style/passwort" />
 
 
     <!-- Benutzer / E-Mail -->
@@ -149,7 +147,6 @@
     <!-- Rectangle 4 -->
 
 
-
     <View
         android:id="@+id/rectangle_4"
         android:layout_width="match_parent"
@@ -171,6 +168,5 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="-25dp"
         android:background="@drawable/rectangle_top_green"
-        android:elevation="-4dp"
-        />
+        android:elevation="-4dp" />
 </RelativeLayout>

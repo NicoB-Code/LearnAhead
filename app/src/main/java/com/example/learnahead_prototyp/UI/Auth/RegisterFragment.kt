@@ -58,7 +58,7 @@ class RegisterFragment : Fragment() {
         // Setzt den Click-Listener für die Registrieren-Button
         binding.registerBtn.setOnClickListener {
             // Überprüft, ob die Eingaben des Benutzers gültig sind
-            if (validation()){
+            if (validation()) {
                 // Ruft die "register"-Funktion des ViewModels auf, um einen neuen Benutzer zu registrieren
                 viewModel.register(
                     email = binding.emailEt.text.toString(),
@@ -77,7 +77,7 @@ class RegisterFragment : Fragment() {
     fun observer() {
         // Beobachtet den ViewModel-Status auf Änderungen
         viewModel.register.observe(viewLifecycleOwner) { state ->
-            when(state){
+            when (state) {
                 // Zeigt Fortschrittsanzeige während des Ladevorgangs an
                 is UiState.Loading -> {
                     binding.registerBtn.setText("")
@@ -123,35 +123,35 @@ class RegisterFragment : Fragment() {
     fun validation(): Boolean {
         var isValid = true
 
-        if (binding.firstNameEt.text.isNullOrEmpty()){
+        if (binding.firstNameEt.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_first_name))
         }
 
-        if (binding.lastNameEt.text.isNullOrEmpty()){
+        if (binding.lastNameEt.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_last_name))
         }
 
-        if (binding.jobTitleEt.text.isNullOrEmpty()){
+        if (binding.jobTitleEt.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_job_title))
         }
 
-        if (binding.emailEt.text.isNullOrEmpty()){
+        if (binding.emailEt.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_email))
-        }else{
-            if (!binding.emailEt.text.toString().isValidEmail()){
+        } else {
+            if (!binding.emailEt.text.toString().isValidEmail()) {
                 isValid = false
                 toast(getString(R.string.invalid_email))
             }
         }
-        if (binding.passEt.text.isNullOrEmpty()){
+        if (binding.passEt.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_password))
-        }else{
-            if (binding.passEt.text.toString().length < 8){
+        } else {
+            if (binding.passEt.text.toString().length < 8) {
                 isValid = false
                 toast(getString(R.string.invalid_password))
             }

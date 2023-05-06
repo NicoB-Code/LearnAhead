@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     val repository: IAuthRepository
-): ViewModel() {
+) : ViewModel() {
 
     /**
      * Diese Eigenschaft ist eine LiveData-Instanz, die den aktuellen Status des Registrierungsprozesses
@@ -80,7 +80,7 @@ class AuthViewModel @Inject constructor(
         repository.loginUser(
             email,
             password
-        ){
+        ) {
             _login.value = it
         }
     }
@@ -91,7 +91,7 @@ class AuthViewModel @Inject constructor(
      */
     fun forgotPassword(email: String) {
         _forgotPassword.value = UiState.Loading
-        repository.forgotPassword(email){
+        repository.forgotPassword(email) {
             _forgotPassword.value = it
         }
     }
@@ -100,7 +100,7 @@ class AuthViewModel @Inject constructor(
      * Diese Funktion meldet den aktuellen Benutzer ab.
      * @param result Callback-Funktion, die aufgerufen wird, wenn der Logout-Prozess abgeschlossen ist.
      */
-    fun logout(result: () -> Unit){
+    fun logout(result: () -> Unit) {
         repository.logout(result)
     }
 

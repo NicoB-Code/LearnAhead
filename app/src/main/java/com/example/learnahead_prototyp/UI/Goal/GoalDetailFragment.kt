@@ -71,7 +71,7 @@ class GoalDetailFragment : Fragment() {
         // Updaten der UI
         UpdateUI()
         binding.button.setOnClickListener {
-            if(isEdit) {
+            if (isEdit) {
                 updateGoal()
             } else {
                 createGoal()
@@ -88,7 +88,7 @@ class GoalDetailFragment : Fragment() {
         // Eine Beobachtung auf viewModel.addGoal ausführen
         viewModel.addGoal.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen und Button-Text löschen
-            when(state) {
+            when (state) {
                 is UiState.Loading -> {
                     binding.btnProgressAr.show()
                     binding.button.text = ""
@@ -126,7 +126,7 @@ class GoalDetailFragment : Fragment() {
         // Eine Beobachtung auf viewModel.updateGoal ausführen
         viewModel.updateGoal.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen und Button-Text löschen
-            when(state) {
+            when (state) {
                 is UiState.Loading -> {
                     binding.btnProgressAr.show()
                     binding.button.text = ""
@@ -150,7 +150,7 @@ class GoalDetailFragment : Fragment() {
     private fun UpdateUI() {
         val type = arguments?.getString("type", null)
         type?.let {
-            when(it) {
+            when (it) {
                 "view" -> {
                     isEdit = false
                     binding.goalDescription.isEnabled = true
@@ -158,10 +158,12 @@ class GoalDetailFragment : Fragment() {
                     binding.goalDescription.setText(objGoal?.description)
                     binding.button.hide()
                 }
+
                 "create" -> {
                     isEdit = false
                     binding.button.setText("Create")
                 }
+
                 "edit" -> {
                     isEdit = true
                     objGoal = arguments?.getParcelable("goal")
@@ -171,15 +173,16 @@ class GoalDetailFragment : Fragment() {
             }
         }
     }
+
     private fun validation(): Boolean {
         var isValid = true
 
-        if(binding.goalDescription.text.toString().isNullOrEmpty()) {
+        if (binding.goalDescription.text.toString().isNullOrEmpty()) {
             isValid = false
             toast("Enter description")
         }
 
-        return  isValid
+        return isValid
     }
 
     private fun getGoal(): Goal {
