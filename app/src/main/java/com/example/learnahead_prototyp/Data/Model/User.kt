@@ -1,5 +1,8 @@
 package com.example.learnahead_prototyp.Data.Model
 
+import com.google.firebase.firestore.ServerTimestamp
+import java.util.Date
+
 /**
  * Eine Datenklasse, die einen Benutzer in der App darstellt.
  * @property id Die eindeutige ID des Benutzers.
@@ -10,8 +13,10 @@ package com.example.learnahead_prototyp.Data.Model
  */
 data class User(
     var id: String = "",
-    val first_name: String = "",
-    val last_name: String = "",
-    val job_title: String = "",
+    val username: String = "",
+    val currentPoints: Int = 0,
+    val learningStreak: Int = 0,
     val email: String = "",
+    @ServerTimestamp
+    val registerDate: Date = Date()
 )
