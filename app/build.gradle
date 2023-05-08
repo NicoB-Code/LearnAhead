@@ -63,6 +63,8 @@ dependencies {
 
     //Dagger Hilt
     implementation 'com.google.dagger:hilt-android:2.46'
+    implementation 'com.google.ar.sceneform:filament-android:1.17.1'
+    implementation 'com.google.firebase:firebase-database:20.2.1'
     kapt 'com.google.dagger:hilt-android-compiler:2.46'
 
     //Testing

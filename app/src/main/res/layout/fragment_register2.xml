@@ -1,0 +1,38 @@
+<!-- Android Large - Login -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/android_lar"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
+
+    <!-- Green Background -->
+
+    <!-- Black Background -->
+
+    <!-- Green Background -->
+
+    <View
+        android:id="@+id/green_backg"
+        android:layout_width="355dp"
+        android:layout_height="420dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/rectangle_green_background" />
+
+    <View
+        android:id="@+id/black_backg"
+        android:layout_width="355dp"
+        android:layout_height="419dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="492dp"
+        android:layout_marginEnd="53dp"
+        android:background="@drawable/rectangle_black_background" />
+
+
+</RelativeLayout>
