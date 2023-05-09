@@ -1,0 +1,264 @@
+<!-- Android Large - Login -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
+
+    <!-- Black Background -->
+    <!-- Align Top ist erforderlich, um sicherzustellen, dass die Ansicht oben mit
+    der grünen Ansicht ausgerichtet ist, um die Überlappung zu erzielen -->
+    <View
+        android:id="@+id/register_black_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/register_green_background"
+        android:layout_alignTop="@id/register_green_background"
+        android:background="@drawable/rectangle_black_background" />
+
+    <!-- Green Background -->
+    <View
+        android:id="@+id/register_green_background"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_green_background" />
+
+    <!-- Placeholder Logo -->
+    <View
+        android:id="@+id/placeholder_logo"
+        android:layout_width="126dp"
+        android:layout_height="108dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5pt"
+        android:background="@drawable/logo_prototype"
+        />
+
+    <!-- Label Register Header -->
+    <TextView
+        android:id="@+id/register_label_header"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/placeholder_logo"
+        android:text="@string/register_subject"
+        android:textAppearance="@style/register_label_header"
+        android:gravity="center_horizontal|center_vertical"
+        />
+
+    <!-- Registrierungs Box -->
+    <View
+        android:id="@+id/rectangle_register_box"
+        android:layout_width="266dp"
+        android:layout_height="444dp"
+        android:layout_marginLeft="47dp"
+        android:background="@drawable/rectangle_register_box"
+        android:elevation="4dp"
+        android:layout_below="@id/register_label_header"
+        android:layout_centerHorizontal="true"
+        />
+
+    <!-- Rectangle für den Username -->
+    <View
+        android:id="@+id/rectangle_username"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/rectangle_register_or_login_content"
+        android:elevation="5dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <!-- Username -->
+    <TextView
+        android:id="@+id/editText_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_alignLeft="@id/rectangle_username"
+        android:layout_marginTop="11dp"
+        android:layout_alignTop="@id/rectangle_username"
+        android:layout_alignBottom="@id/rectangle_username"
+        android:layout_marginBottom="11dp"
+        android:elevation="6dp"
+        android:text="@string/username"
+        android:textAppearance="@style/register_content_text"
+        android:textSize="16sp" />
+
+    <!-- Profile Icon -->
+    <View
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/user_icon"
+        android:layout_marginLeft="11dp"
+        android:layout_alignLeft="@id/rectangle_username"
+        android:layout_marginTop="11dp"
+        android:layout_alignTop="@id/rectangle_username"
+        android:layout_marginBottom="11dp"
+        android:layout_alignBottom="@id/rectangle_username"
+        android:elevation="7dp"
+        >
+    </View>
+
+    <!-- Rectangle für die E-Mail Adresse -->
+    <View
+        android:id="@+id/rectangle_email"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:background="@drawable/rectangle_register_or_login_content"
+        android:layout_marginTop="11dp"
+        android:elevation="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rectangle_username"
+        />
+
+    <!-- E-Mail -->
+    <TextView
+        android:id="@+id/editText_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_alignLeft="@id/rectangle_email"
+        android:layout_marginTop="11dp"
+        android:layout_alignTop="@id/rectangle_email"
+        android:layout_alignBottom="@id/rectangle_email"
+        android:layout_marginBottom="11dp"
+        android:elevation="6dp"
+        android:text="@string/e_mail_address"
+        android:textAppearance="@style/register_content_text"
+        android:textSize="16sp" />
+
+    <!-- Email Icon -->
+    <View
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/email_icon"
+        android:layout_marginLeft="11dp"
+        android:layout_alignLeft="@id/rectangle_email"
+        android:layout_marginTop="11dp"
+        android:layout_alignTop="@id/rectangle_email"
+        android:layout_marginBottom="11dp"
+        android:layout_alignBottom="@id/rectangle_email"
+        android:elevation="7dp"
+        >
+    </View>
+
+    <!-- Rectangle für das Passwort -->
+    <View
+        android:id="@+id/rectangle_password"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:background="@drawable/rectangle_register_or_login_content"
+        android:layout_marginTop="11dp"
+        android:elevation="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rectangle_email"
+        />
+
+    <!-- Password -->
+    <TextView
+        android:id="@+id/editText_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_alignLeft="@id/rectangle_password"
+        android:layout_marginTop="11dp"
+        android:layout_alignTop="@id/rectangle_password"
+        android:layout_alignBottom="@id/rectangle_password"
+        android:layout_marginBottom="11dp"
+        android:elevation="6dp"
+        android:text="@string/password"
+        android:textAppearance="@style/register_content_text"
+        android:textSize="16sp" />
+
+    <!-- Password Icon -->
+    <View
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/password_icon"
+        android:layout_marginLeft="11dp"
+        android:layout_alignLeft="@id/rectangle_password"
+        android:layout_marginTop="11dp"
+        android:layout_alignTop="@id/rectangle_password"
+        android:layout_marginBottom="11dp"
+        android:layout_alignBottom="@id/rectangle_password"
+        android:elevation="7dp"
+        >
+    </View>
+
+    <!-- Show Password Icon -->
+    <View
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/show_password_icon"
+        android:layout_marginRight="11dp"
+        android:layout_alignRight="@id/rectangle_password"
+        android:layout_marginTop="11dp"
+        android:layout_alignTop="@id/rectangle_password"
+        android:layout_marginBottom="11dp"
+        android:layout_alignBottom="@id/rectangle_password"
+        android:elevation="7dp"
+        >
+    </View>
+
+    <!-- Rectangle für das Registrieren -->
+    <View
+        android:id="@+id/rectangle_register"
+        android:layout_width="213dp"
+        android:layout_height="48dp"
+        android:background="@drawable/rectangle_login_register"
+        android:layout_marginTop="11dp"
+        android:elevation="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rectangle_password"
+        />
+
+    <!-- Registrieren -->
+    <TextView
+        android:id="@+id/text_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_alignTop="@id/rectangle_register"
+        android:layout_alignBottom="@id/rectangle_register"
+        android:layout_marginBottom="6dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="8dp"
+        android:text="@string/register_verb"
+        android:textAppearance="@style/register_login_button_text"
+        />
+
+    <!-- Du hast schon ein Konto -->
+    <TextView
+        android:id="@+id/got_already_an_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rectangle_register"
+        android:layout_marginTop="18dp"
+        android:layout_alignLeft="@id/rectangle_register"
+        android:layout_centerHorizontal="true"
+        android:elevation="8dp"
+        android:text="@string/got_already_an_account"
+        android:textAppearance="@style/register_got_already_an_account"
+        />
+
+    <!-- Login -->
+    <TextView
+        android:id="@+id/text_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rectangle_register"
+        android:layout_marginTop="18dp"
+        android:layout_alignRight="@id/rectangle_register"
+        android:layout_marginRight="7dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="8dp"
+        android:text="@string/login"
+        android:textAppearance="@style/register_login_instead"
+        />
+</RelativeLayout>

@@ -7,32 +7,23 @@
     android:viewportWidth="267"
     android:viewportHeight="445"
     >
-
     <group>
-
         <clip-path
             android:pathData="M49.5 0.5H217.5C244.562 0.5 266.5 22.438 266.5 49.5V395.5C266.5 422.562 244.562 444.5 217.5 444.5H49.5C22.438 444.5 0.5 422.562 0.5 395.5V49.5C0.5 22.438 22.438 0.5 49.5 0.5Z"
             />
-
         <path
             android:pathData="M0.5 0.5V444.5H266.5V0.5"
             android:fillColor="#FFFFFF"
             />
-
     </group>
-
     <group>
-
         <clip-path
             android:pathData="M0 0V445H267V0M49.5 0.5H217.5C244.562 0.5 266.5 22.438 266.5 49.5V395.5C266.5 422.562 244.562 444.5 217.5 444.5H49.5C22.438 444.5 0.5 422.562 0.5 395.5V49.5C0.5 22.438 22.438 0.5 49.5 0.5Z"
             />
-
         <path
             android:pathData="M49.5 0.5H217.5C244.562 0.5 266.5 22.438 266.5 49.5V395.5C266.5 422.562 244.562 444.5 217.5 444.5H49.5C22.438 444.5 0.5 422.562 0.5 395.5V49.5C0.5 22.438 22.438 0.5 49.5 0.5Z"
             android:strokeWidth="1"
             android:strokeColor="#6C6B6B"
             />
-
     </group>
-
 </vector>
