@@ -45,7 +45,7 @@
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/placeholder_logo"
-        android:text="@string/register_label_header"
+        android:text="@string/register_subject"
         android:textAppearance="@style/register_label_header"
         android:gravity="center_horizontal|center_vertical"
         />
@@ -86,7 +86,7 @@
         android:layout_alignBottom="@id/rectangle_username"
         android:layout_marginBottom="11dp"
         android:elevation="6dp"
-        android:text="@string/register_default_username_text"
+        android:text="@string/username"
         android:textAppearance="@style/register_content_text"
         android:textSize="16sp" />
 
@@ -129,7 +129,7 @@
         android:layout_alignBottom="@id/rectangle_email"
         android:layout_marginBottom="11dp"
         android:elevation="6dp"
-        android:text="@string/register_default_email_adress_text"
+        android:text="@string/e_mail_address"
         android:textAppearance="@style/register_content_text"
         android:textSize="16sp" />
 
@@ -172,7 +172,7 @@
         android:layout_alignBottom="@id/rectangle_password"
         android:layout_marginBottom="11dp"
         android:elevation="6dp"
-        android:text="@string/register_default_password_text"
+        android:text="@string/password"
         android:textAppearance="@style/register_content_text"
         android:textSize="16sp" />
 
@@ -229,7 +229,7 @@
         android:layout_marginBottom="6dp"
         android:layout_centerHorizontal="true"
         android:elevation="8dp"
-        android:text="@string/register_sign_up"
+        android:text="@string/register_verb"
         android:textAppearance="@style/register_login_button_text"
         />
 
@@ -243,7 +243,7 @@
         android:layout_alignLeft="@id/rectangle_register"
         android:layout_centerHorizontal="true"
         android:elevation="8dp"
-        android:text="@string/register_got_already_an_account"
+        android:text="@string/got_already_an_account"
         android:textAppearance="@style/register_got_already_an_account"
         />
 
