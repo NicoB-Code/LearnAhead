@@ -1,7 +1,10 @@
 package com.example.learnahead_prototyp.UI.Auth
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -16,6 +19,7 @@ import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 /**
  * Dies ist das Fragment für die Registrierung eines neuen Benutzers.
@@ -41,7 +45,43 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRegisterBinding.inflate(layoutInflater)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+
+        // Bezugnahme auf die Ansichten
+        val passwordEditText = binding.editTextPassword
+
+        // Klicklistener auf dem Passwort-Icon setzen
+        passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            R.drawable.password_icon, 0, R.drawable.show_password_icon, 0
+        )
+        passwordEditText.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                // Das drawable-Objekt abrufen, das das Passwort-Icon auf der rechten Seite des EditText repräsentiert
+                val drawable = passwordEditText.compoundDrawablesRelative[2]
+
+                // Überprüfen, ob das Touch-Event innerhalb der Grenzen des Passwort-Icons aufgetreten ist
+                if (event.rawX >= passwordEditText.right - drawable.bounds.width()) {
+                    // Passwort-Sichtbarkeit umschalten
+                    if (passwordEditText.transformationMethod == PasswordTransformationMethod.getInstance()) {
+                        // Passwort anzeigen
+                        passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    } else {
+                        // Passwort verstecken
+                        passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                    }
+                    true // Das Touch-Event verbrauchen
+                } else {
+                    false // Das Touch-Event nicht verbrauchen
+                }
+            } else {
+                false // Andere Touch-Events nicht verbrauchen
+            }
+        }
+
+        // Set click listener on the register button
+        binding.buttonSignUp.setOnClickListener {
+            // Perform registration logic here
+        }
         return binding.root
     }
 
@@ -56,13 +96,13 @@ class RegisterFragment : Fragment() {
         observer()
 
         // Setzt den Click-Listener für die Registrieren-Button
-        binding.registerBtn.setOnClickListener {
+        binding.buttonSignUp.setOnClickListener {
             // Überprüft, ob die Eingaben des Benutzers gültig sind
             if (validation()) {
                 // Ruft die "register"-Funktion des ViewModels auf, um einen neuen Benutzer zu registrieren
                 viewModel.register(
-                    email = binding.emailEt.text.toString(),
-                    password = binding.passEt.text.toString(),
+                    email = binding.editTextEmail.text.toString(),
+                    password = binding.editTextPassword.text.toString(),
                     user = getUserObj()
                 )
             }
@@ -80,22 +120,24 @@ class RegisterFragment : Fragment() {
             when (state) {
                 // Zeigt Fortschrittsanzeige während des Ladevorgangs an
                 is UiState.Loading -> {
-                    binding.registerBtn.setText("")
+                    binding.buttonSignUp.setText("")
                     binding.registerProgress.show()
                 }
                 // Zeigt Toast-Nachricht bei Fehlern an
                 is UiState.Failure -> {
-                    binding.registerBtn.setText("Register")
+                    binding.buttonSignUp.setText(getString(R.string.register_verb))
                     binding.registerProgress.hide()
                     toast(state.error)
                 }
                 // Navigiert zur Hauptbildschirm-Fragment, wenn Registrierung erfolgreich abgeschlossen wurde
                 is UiState.Success -> {
-                    binding.registerBtn.setText("Register")
+                    binding.buttonSignUp.setText(getString(R.string.register_verb))
                     binding.registerProgress.hide()
                     toast(state.data)
                     findNavController().navigate(R.id.action_registerFragment_to_goalListingFragment)
                 }
+
+                else -> {}
             }
         }
     }
@@ -107,8 +149,8 @@ class RegisterFragment : Fragment() {
     fun getUserObj(): User {
         return User(
             id = "",
-            username = binding.userNameEt.text.toString(),
-            email = binding.emailEt.text.toString(),
+            username = binding.editTextUsername.text.toString(),
+            email = binding.editTextEmail.text.toString(),
         )
     }
 
@@ -121,25 +163,25 @@ class RegisterFragment : Fragment() {
     fun validation(): Boolean {
         var isValid = true
 
-        if (binding.userNameEt.text.isNullOrEmpty()) {
+        if (binding.editTextUsername.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_first_name))
         }
 
-        if (binding.emailEt.text.isNullOrEmpty()) {
+        if (binding.editTextEmail.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_email))
         } else {
-            if (!binding.emailEt.text.toString().isValidEmail()) {
+            if (!binding.editTextEmail.text.toString().isValidEmail()) {
                 isValid = false
                 toast(getString(R.string.invalid_email))
             }
         }
-        if (binding.passEt.text.isNullOrEmpty()) {
+        if (binding.editTextPassword.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_password))
         } else {
-            if (binding.passEt.text.toString().length < 8) {
+            if (binding.editTextPassword.text.toString().length < 8) {
                 isValid = false
                 toast(getString(R.string.invalid_password))
             }
