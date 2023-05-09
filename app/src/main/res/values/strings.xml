@@ -48,4 +48,31 @@
     <string name="invalid_email">Invalid email entered</string>
     <string name="enter_password">Enter password</string>
     <string name="invalid_password">Your password must be at least 8 characters</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Register Fragment Strings begin here -->
+    <string name="register_label_header"> Registrierung </string>
+    <string name="register_default_username_text"> Benutzername </string>
+    <string name="register_default_email_adress_text"> E-Mail-Adresse </string>
+    <string name="register_default_password_text"> Passwort </string>
+    <string name="register_sign_up"> Registrieren </string>
+    <string name="register_got_already_an_account"> Du hast schon ein Konto? </string>
+    <string name="login"> Login </string>
+
+
 </resources>
