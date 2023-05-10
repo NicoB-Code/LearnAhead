@@ -58,8 +58,9 @@
     <string name="login"> Login </string>
     <string name="login_subject"> Anmeldung </string>
     <string name="login_verb"> Anmelden </string>
-    <string name="forgot_password"> Passwort vergessen ? </string>
-
+    <string name="forgot_password"> Passwort vergessen </string>
+    <string name="forgot_password_question"> Passwort vergessen ? </string>
+    <string name="send"> Senden </string>
 
 
 </resources>

@@ -138,6 +138,14 @@
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
+    <!-- ForgotPasswordLabelTop -->
+    <style name="forgot_password_label_header">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+
     <!-- Register Username -->
     <style name="register_content_text">
         <item name="android:textSize">48sp</item>
