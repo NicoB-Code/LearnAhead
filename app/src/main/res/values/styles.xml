@@ -145,6 +145,13 @@
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
+    <!-- LearningGoalsForTodayLabelTop -->
+    <style name="learning_goals_for_today_label_header">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
 
     <!-- Register Username -->
     <style name="register_content_text">
@@ -164,11 +171,26 @@
     <style name="register_got_already_an_account">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
     </style>
 
     <!-- Hyperlink Login -->
     <style name="register_login_instead">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#106BD5</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <!-- Button Design für Lernkategorie/Lernziel erstellen -->
+    <style name="button_add_learning_category_or_goal">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="menu_button_text">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 </resources>
