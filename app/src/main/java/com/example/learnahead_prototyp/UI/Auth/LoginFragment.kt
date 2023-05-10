@@ -138,11 +138,11 @@ class LoginFragment : Fragment() {
 
                 is UiState.Success -> {
                     // Aktiviert den Login-Button, versteckt den Fortschrittsbalken und zeigt eine Toast-Nachricht mit der Erfolgsmeldung an
-                    // Navigiert zum "GoalListingFragment"
+                    // Navigiert zum "HomeFragment"
                     binding.buttonLogin.setText("Login")
                     binding.loginProgress.hide()
                     toast(state.data)
-                    findNavController().navigate(R.id.action_loginFragment_to_goalListingFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
             }
         }
@@ -190,8 +190,8 @@ class LoginFragment : Fragment() {
         super.onStart()
         viewModel.getSession { user ->
             if (user != null) {
-                // Wenn ein Benutzer angemeldet ist, navigiert es zum "GoalListingFragment"
-                findNavController().navigate(R.id.action_loginFragment_to_goalListingFragment)
+                // Wenn ein Benutzer angemeldet ist, navigiert es zum "HomeFragment"
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
     }

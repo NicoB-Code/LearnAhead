@@ -61,6 +61,13 @@
     <string name="forgot_password"> Passwort vergessen </string>
     <string name="forgot_password_question"> Passwort vergessen ? </string>
     <string name="send"> Senden </string>
+    <string name="learning_goal_for_today"> Heutige Lernziele </string>
+    <string name="add_learning_goal"> Lernziel erstellen </string>
+    <string name="home"> Home </string>
+    <string name="learning_categories"> Lernkategorien </string>
+    <string name="learning_goals"> Lernziele </string>
+
+
 
 
 </resources>
