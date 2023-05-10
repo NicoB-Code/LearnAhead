@@ -107,6 +107,12 @@ class RegisterFragment : Fragment() {
                 )
             }
         }
+
+        // Setzt den Click-Listener für die Registrieren-Label
+        binding.textLogin.setOnClickListener {
+            // Navigiert zum RegisterFragment
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
     }
 
     /**

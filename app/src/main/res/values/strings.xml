@@ -5,7 +5,6 @@
     </string>
 
 
-
     <string name="anmelden">
     Anmelden
     </string>
@@ -48,29 +47,20 @@
     <string name="invalid_password">Your password must be at least 8 characters</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Register Fragment Strings begin here -->
+    <!-- Produktiv Strings -->
     <string name="register_subject"> Registrierung </string>
     <string name="username"> Benutzername </string>
     <string name="e_mail_address"> E-Mail-Adresse </string>
     <string name="password"> Passwort </string>
     <string name="register_verb"> Registrieren </string>
     <string name="got_already_an_account"> Du hast schon ein Konto? </string>
+    <string name="not_have_an_account"> Du hast noch kein Konto? </string>
     <string name="login"> Login </string>
+    <string name="login_subject"> Anmeldung </string>
+    <string name="login_verb"> Anmelden </string>
+    <string name="forgot_password"> Passwort vergessen </string>
+    <string name="forgot_password_question"> Passwort vergessen ? </string>
+    <string name="send"> Senden </string>
 
 
 </resources>
