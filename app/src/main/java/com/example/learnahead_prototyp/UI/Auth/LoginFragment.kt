@@ -1,7 +1,10 @@
 package com.example.learnahead_prototyp.UI.Auth
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -42,6 +45,37 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
+
+        // Bezugnahme auf die Ansichten
+        val passwordEditText = binding.editTextPassword
+
+        // Klicklistener auf dem Passwort-Icon setzen
+        passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            R.drawable.password_icon, 0, R.drawable.show_password_icon, 0
+        )
+        passwordEditText.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                // Das drawable-Objekt abrufen, das das Passwort-Icon auf der rechten Seite des EditText repräsentiert
+                val drawable = passwordEditText.compoundDrawablesRelative[2]
+
+                // Überprüfen, ob das Touch-Event innerhalb der Grenzen des Passwort-Icons aufgetreten ist
+                if (event.rawX >= passwordEditText.right - drawable.bounds.width()) {
+                    // Passwort-Sichtbarkeit umschalten
+                    if (passwordEditText.transformationMethod == PasswordTransformationMethod.getInstance()) {
+                        // Passwort anzeigen
+                        passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    } else {
+                        // Passwort verstecken
+                        passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                    }
+                    true // Das Touch-Event verbrauchen
+                } else {
+                    false // Das Touch-Event nicht verbrauchen
+                }
+            } else {
+                false // Andere Touch-Events nicht verbrauchen
+            }
+        }
         return binding.root
     }
 
@@ -57,25 +91,25 @@ class LoginFragment : Fragment() {
         observer()
 
         // Setzt den Click-Listener für die Login-Button
-        binding.loginBtn.setOnClickListener {
+        binding.buttonLogin.setOnClickListener {
             // Überprüft, ob die Eingaben des Benutzers gültig sind
             if (validation()) {
                 // Ruft die "login"-Funktion des ViewModels auf, um den Benutzer anzumelden
                 viewModel.login(
-                    email = binding.emailEt.text.toString(),
-                    password = binding.passEt.text.toString()
+                    email = binding.editTextEmail.text.toString(),
+                    password = binding.editTextPassword.text.toString()
                 )
             }
         }
 
         // Setzt den Click-Listener für die Passwort vergessen-Label
-        binding.forgotPassLabel.setOnClickListener {
+        binding.textForgotPassword.setOnClickListener {
             // Navigiert zum ForgotPasswordFragment
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
 
         // Setzt den Click-Listener für die Registrieren-Label
-        binding.registerLabel.setOnClickListener {
+        binding.textRegistrieren.setOnClickListener {
             // Navigiert zum RegisterFragment
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -91,13 +125,13 @@ class LoginFragment : Fragment() {
             when (state) {
                 is UiState.Loading -> {
                     // Zeigt den Fortschrittsbalken an und deaktiviert den Login-Button
-                    binding.loginBtn.setText("")
+                    binding.buttonLogin.setText("")
                     binding.loginProgress.show()
                 }
 
                 is UiState.Failure -> {
                     // Aktiviert den Login-Button, versteckt den Fortschrittsbalken und zeigt eine Toast-Nachricht mit der Fehlermeldung an
-                    binding.loginBtn.setText("Login")
+                    binding.buttonLogin.setText("Login")
                     binding.loginProgress.hide()
                     toast(state.error)
                 }
@@ -105,7 +139,7 @@ class LoginFragment : Fragment() {
                 is UiState.Success -> {
                     // Aktiviert den Login-Button, versteckt den Fortschrittsbalken und zeigt eine Toast-Nachricht mit der Erfolgsmeldung an
                     // Navigiert zum "GoalListingFragment"
-                    binding.loginBtn.setText("Login")
+                    binding.buttonLogin.setText("Login")
                     binding.loginProgress.hide()
                     toast(state.data)
                     findNavController().navigate(R.id.action_loginFragment_to_goalListingFragment)
@@ -122,23 +156,23 @@ class LoginFragment : Fragment() {
     fun validation(): Boolean {
         var isValid = true
 
-        if (binding.emailEt.text.isNullOrEmpty()) {
+        if (binding.editTextEmail.text.isNullOrEmpty()) {
             // Wenn das E-Mail-Feld leer ist, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
             isValid = false
             toast(getString(R.string.enter_email))
         } else {
-            if (!binding.emailEt.text.toString().isValidEmail()) {
+            if (!binding.editTextEmail.text.toString().isValidEmail()) {
                 // Wenn die E-Mail-Adresse ungültig ist, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
                 isValid = false
                 toast(getString(R.string.invalid_email))
             }
         }
-        if (binding.passEt.text.isNullOrEmpty()) {
+        if (binding.editTextPassword.text.isNullOrEmpty()) {
             // Wenn das Passwort-Feld leer ist, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
             isValid = false
             toast(getString(R.string.enter_password))
         } else {
-            if (binding.passEt.text.toString().length < 8) {
+            if (binding.editTextPassword.text.toString().length < 8) {
                 // Wenn das Passwort weniger als 8 Zeichen enthält, ist die Eingabe ungültig und eine Toast-Nachricht wird angezeigt
                 isValid = false
                 toast(getString(R.string.invalid_password))
