@@ -36,54 +36,25 @@
         />
 
     <!-- Profile Icon -->
-    <View
+    <ImageView
+        android:id="@+id/profile"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/user_icon"
-        android:elevation="7dp"></View>
+        android:elevation="7dp"></ImageView>
 
     <!-- Add Icon -->
-    <View
+    <ImageView
+        android:id="@+id/logout"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignRight="@id/dark_background"
         android:layout_marginRight="5dp"
         android:layout_marginTop="1dp"
-        android:background="@drawable/add_circle_blue"
-        android:elevation="7dp"></View>
-
-    <!-- Label Learning Goals for Today Header -->
-    <TextView
-        android:id="@+id/learning_goals_for_today_label_header"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:layout_below="@id/header_line"
-        android:text="@string/learning_goal_for_today"
-        android:textAppearance="@style/learning_goals_for_today_label_header"
-        android:gravity="center_horizontal|center_vertical"
-        />
-
-    <!-- Lernziel oder Lernkategorie erstellen -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/learning_goals_for_today_label_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/add_button"
-        android:drawableLeft="@drawable/add_circle_black"
-        app:iconPadding="-30dp"
-        android:elevation="8dp"
-        android:paddingLeft="35dp"
-        android:text="@string/add_learning_goal"
-        android:textAppearance="@style/button_add_learning_category_or_goal"
-        android:textColor="@null"
-        app:backgroundTint="@null" />
+        android:background="@drawable/logout"
+        android:elevation="7dp"></ImageView>
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
@@ -95,15 +66,15 @@
         android:drawableTop="@drawable/home_button"
         android:layout_marginLeft="4dp"
         app:iconPadding="-15dp"
-        android:elevation="8dp"
         android:text="@string/home"
         android:textAppearance="@style/menu_button_text"
         android:textColor="@null"
-        app:backgroundTint="@null" />
+        android:background="@android:color/transparent"
+        />
 
-    <!-- Learning Category Button -->
+    <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_category"
+        android:id="@+id/button_learning_categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/background_bottom_menu"
@@ -111,11 +82,11 @@
         android:layout_centerHorizontal="true"
         android:drawableTop="@drawable/learning_category_button"
         app:iconPadding="-15dp"
-        android:elevation="8dp"
         android:text="@string/learning_categories"
         android:textAppearance="@style/menu_button_text"
         android:textColor="@null"
-        app:backgroundTint="@null" />
+        android:background="@android:color/transparent"
+        />
 
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
@@ -128,9 +99,9 @@
         android:layout_marginRight="4dp"
         android:drawableTop="@drawable/learning_goal_button"
         app:iconPadding="-15dp"
-        android:elevation="8dp"
         android:text="@string/learning_goals"
         android:textAppearance="@style/menu_button_text"
         android:textColor="@null"
-        app:backgroundTint="@null" />
+        android:background="@android:color/transparent"
+        />
 </RelativeLayout>
