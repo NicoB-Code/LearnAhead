@@ -14,7 +14,8 @@ import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
-import com.example.learnahead_prototyp.databinding.FragmentGoalListingBinding
+import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryListBinding
+
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -23,13 +24,13 @@ import dagger.hilt.android.AndroidEntryPoint
  * [AndroidEntryPoint] annotiert, um die Injection von [ViewModel]s zu ermöglichen.
  */
 @AndroidEntryPoint
-class GoalListingFragment : Fragment() {
+class LearningCategoryListFragment : Fragment() {
 
     // Konstante für das Logging-Tag
     val TAG: String = "GoalListingFragment"
 
     // Deklaration der benötigten Variablen
-    lateinit var binding: FragmentGoalListingBinding
+    lateinit var binding: FragmentLearningCategoryListBinding
     val viewModel: GoalViewModel by viewModels()
     val authViewModel: AuthViewModel by viewModels()
     var deletePosition: Int = -1
@@ -78,7 +79,7 @@ class GoalListingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Das Binding-Objekt für das Fragment-Layout wird initialisiert.
-        binding = FragmentGoalListingBinding.inflate(layoutInflater)
+        binding = FragmentLearningCategoryListBinding.inflate(layoutInflater)
         // Die erzeugte View-Instanz wird zurückgegeben.
         return binding.root
     }
@@ -99,7 +100,7 @@ class GoalListingFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         // Klick-Listener für den "Create"-Button, welcher zur "GoalDetailFragment" navigiert.
-        binding.buttonAddLearningGoal.setOnClickListener {
+        binding.buttonAdd.setOnClickListener {
             findNavController().navigate(
                 R.id.action_goalListingFragment_to_goalDetailFragment,
                 Bundle().apply {
@@ -107,27 +108,28 @@ class GoalListingFragment : Fragment() {
                 })
         }
 
-        // Klick Listener zum Weiterleiten auf den Home Screen
+        // Klick-Listener für den "LearningCategory"-Button, welcher den Benutzer zum "HomeFragment" navigiert.
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(
-                R.id.action_goalListingFragment_to_homeFragment,
+                R.id.action_learningCategoryListFragment_to_homeFragment,
                 Bundle().apply {
                     putString("type", "create")
                 })
         }
 
-        // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener {
+        // Klick-Listener für den "LearningCategory"-Button, welcher den Benutzer zur "GoalListingFragment" navigiert.
+        binding.buttonLearningGoals.setOnClickListener {
             findNavController().navigate(
-                R.id.action_goalListingFragment_to_learningCategoryListFragment,
+                R.id.action_learningCategoryListFragment_to_goalListingFragment,
                 Bundle().apply {
                     putString("type", "create")
                 })
         }
+
         // Klick-Listener für den "Logout"-Button, welcher den Benutzer ausloggt und zur "LoginFragment" navigiert.
         binding.logout.setOnClickListener {
             authViewModel.logout {
-                findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_learningCategoryListFragment_to_loginFragment)
             }
         }
 
