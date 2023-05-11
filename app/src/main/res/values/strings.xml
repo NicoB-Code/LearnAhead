@@ -65,9 +65,8 @@
     <string name="add_learning_goal"> Lernziel erstellen </string>
     <string name="home"> Home </string>
     <string name="learning_categories"> Lernkategorien </string>
+    <string name="add_learning_category"> Lernkategorie erstellen </string>
     <string name="learning_goals"> Lernziele </string>
-
-
 
 
 </resources>

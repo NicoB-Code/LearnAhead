@@ -140,7 +140,7 @@ class RegisterFragment : Fragment() {
                     binding.buttonSignUp.setText(getString(R.string.register_verb))
                     binding.registerProgress.hide()
                     toast(state.data)
-                    findNavController().navigate(R.id.action_registerFragment_to_goalListingFragment)
+                    findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                 }
 
                 else -> {}

@@ -56,37 +56,6 @@
         android:background="@drawable/logout"
         android:elevation="7dp"></ImageView>
 
-    <!-- Label Learning Goals for Today Header -->
-    <TextView
-        android:id="@+id/learning_goals_label_header"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/header_line"
-        android:layout_marginTop="26dp"
-        android:text="@string/learning_goals"
-        android:textAppearance="@style/learning_goals_for_today_label_header"
-        android:gravity="center_horizontal"
-        />
-
-    <!-- Lernziel erstellen -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_add_learning_goal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/learning_goals_label_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/add_button"
-        android:drawableLeft="@drawable/add_circle_black"
-        app:iconPadding="-30dp"
-        android:elevation="8dp"
-        android:paddingLeft="35dp"
-        android:text="@string/add_learning_goal"
-        android:textAppearance="@style/button_add_learning_category_or_goal"
-        android:textColor="@null"
-        app:backgroundTint="@null" />
-
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_home"
@@ -99,6 +68,7 @@
         app:iconPadding="-15dp"
         android:text="@string/home"
         android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
@@ -114,6 +84,7 @@
         app:iconPadding="-15dp"
         android:text="@string/learning_categories"
         android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
@@ -130,17 +101,48 @@
         app:iconPadding="-15dp"
         android:text="@string/learning_goals"
         android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
-    <!-- ItemLayout for Learning Goals -->
+    <!-- Label Learning Goals for Today Header -->
+    <TextView
+        android:id="@+id/learning_category_label_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/header_line"
+        android:layout_marginTop="26dp"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/learning_goals_for_today_label_header"
+        android:gravity="center_horizontal|center_vertical"
+        />
+
+    <!-- Lernziel oder Lernkategorie erstellen -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/learning_category_label_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/add_button"
+        android:drawableLeft="@drawable/add_circle_black"
+        app:iconPadding="5dp"
+        android:paddingLeft="10dp"
+        android:text="@string/add_learning_category"
+        android:textAppearance="@style/button_add_learning_category_or_goal"
+        android:textColor="@null"
+        app:backgroundTint="@null" />
+
+    <!-- Item Layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@id/button_add_learning_goal"
+        android:layout_below="@id/button_add"
         android:layout_above="@id/background_bottom_menu"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
