@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Goal
 import com.example.learnahead_prototyp.databinding.ItemGoalLayoutBinding
+import java.text.SimpleDateFormat
 
 /**
  * Ein Adapter zur Darstellung von Zielen in einer RecyclerView.
@@ -15,7 +16,6 @@ import com.example.learnahead_prototyp.databinding.ItemGoalLayoutBinding
  */
 class LearningCategoryListingAdapter(
     val onItemClicked: (Int, Goal) -> Unit,
-    val onEditClicked: (Int, Goal) -> Unit,
     val onDeleteClicked: (Int, Goal) -> Unit
 ) : RecyclerView.Adapter<LearningCategoryListingAdapter.MyViewHolder>() {
 
@@ -84,9 +84,14 @@ class LearningCategoryListingAdapter(
          * @param item Das Goal-Objekt, das an die Ansichtselemente gebunden werden soll.
          */
         fun bind(item: Goal) {
-            binding.goalIdValue.setText(item.id)
-            binding.msg.setText(item.description)
-            binding.edit.setOnClickListener { onEditClicked.invoke(bindingAdapterPosition, item) }
+            binding.cardViewTextGoalTitle.text = item.title
+
+            val dateFormat = SimpleDateFormat("dd MM yyyy")
+            binding.cardViewGoalDate.text = dateFormat.format(item.startDate) + " - " + dateFormat.format(item.endDate)
+
+            // calculate the number of days between the two dates
+            //val daysBetweenDates = getDaysBetweenDates(item.startDate, item.endDate)
+            //binding.cardViewDateDaysCalculated.setText(daysBetweenDates)
             binding.delete.setOnClickListener {
                 onDeleteClicked.invoke(
                     bindingAdapterPosition,
@@ -100,5 +105,22 @@ class LearningCategoryListingAdapter(
                 )
             }
         }
+
+        /*
+        fun getDaysBetweenDates(startDate: Date, endDate: Date): Int {
+            val startCalendar = Calendar.getInstance().apply { time = startDate }
+            val endCalendar = Calendar.getInstance().apply { time = endDate }
+            startCalendar.set(Calendar.HOUR_OF_DAY, 0)
+            startCalendar.set(Calendar.MINUTE, 0)
+            startCalendar.set(Calendar.SECOND, 0)
+            startCalendar.set(Calendar.MILLISECOND, 0)
+            endCalendar.set(Calendar.HOUR_OF_DAY, 0)
+            endCalendar.set(Calendar.MINUTE, 0)
+            endCalendar.set(Calendar.SECOND, 0)
+            endCalendar.set(Calendar.MILLISECOND, 0)
+            val diff = endCalendar.timeInMillis - startCalendar.timeInMillis
+            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
+        }
+         */
     }
 }

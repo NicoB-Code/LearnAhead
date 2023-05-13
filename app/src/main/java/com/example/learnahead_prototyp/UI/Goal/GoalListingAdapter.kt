@@ -5,6 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Goal
 import com.example.learnahead_prototyp.databinding.ItemGoalLayoutBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Ein Adapter zur Darstellung von Zielen in einer RecyclerView.
@@ -81,24 +86,44 @@ class GoalListingAdapter(
 
         /**
          * Bindet die Daten des übergebenen Goal-Objekts an die Ansichtselemente des ViewHolders.
-         * @param item Das Goal-Objekt, das an die Ansichtselemente gebunden werden soll.
+         * @param goal Das Goal-Objekt, das an die Ansichtselemente gebunden werden soll.
          */
-        fun bind(item: Goal) {
-            binding.goalIdValue.setText(item.id)
-            binding.msg.setText(item.description)
-            binding.edit.setOnClickListener { onEditClicked.invoke(bindingAdapterPosition, item) }
+        fun bind(goal: Goal) {
+            binding.cardViewTextGoalTitle.text = goal.title
+
+            val dateFormat = SimpleDateFormat("dd.MM.yyyy")
+            binding.cardViewGoalDate.text = dateFormat.format(goal.startDate) + " - " + dateFormat.format(goal.endDate)
+
+            // calculate the number of days between the two dates
+            val daysBetweenDates = getDaysBetweenDates(goal.startDate, goal.endDate)
+            binding.cardViewDateDaysCalculated.text = "$daysBetweenDates Tage"
             binding.delete.setOnClickListener {
                 onDeleteClicked.invoke(
                     bindingAdapterPosition,
-                    item
+                    goal
                 )
             }
             binding.itemLayout.setOnClickListener {
                 onItemClicked.invoke(
                     bindingAdapterPosition,
-                    item
+                    goal
                 )
             }
+        }
+
+        private fun getDaysBetweenDates(startDate: Date, endDate: Date): Int {
+            val startCalendar = Calendar.getInstance().apply { time = startDate }
+            val endCalendar = Calendar.getInstance().apply { time = endDate }
+            startCalendar.set(Calendar.HOUR_OF_DAY, 0)
+            startCalendar.set(Calendar.MINUTE, 0)
+            startCalendar.set(Calendar.SECOND, 0)
+            startCalendar.set(Calendar.MILLISECOND, 0)
+            endCalendar.set(Calendar.HOUR_OF_DAY, 0)
+            endCalendar.set(Calendar.MINUTE, 0)
+            endCalendar.set(Calendar.SECOND, 0)
+            endCalendar.set(Calendar.MILLISECOND, 0)
+            val diff = endCalendar.timeInMillis - startCalendar.timeInMillis
+            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
         }
     }
 }

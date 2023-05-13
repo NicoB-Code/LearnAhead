@@ -75,14 +75,29 @@ class GoalDetailFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Updaten der UI
-        UpdateUI()
-        binding.buttonLearningGoalCreate.setOnClickListener {
+        observer()
+        updateUI()
+        setEventListener()
+
+    }
+
+    /**
+     * Erstellt alle notwendigen EventListener für das Fragment
+     */
+    private fun setEventListener() {
+        binding.saveButton.setOnClickListener {
             if (isEdit) {
                 updateGoal()
             } else {
                 createGoal()
             }
+        }
+
+        binding.editButton.setOnClickListener {
+            isMakeEnableUI(true)
+            isEdit = true
+            binding.editButton.hide()
+            binding.textLearningGoalTitle.requestFocus()
         }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
@@ -114,11 +129,7 @@ class GoalDetailFragment : Fragment() {
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.backIcon.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_goalDetailFragment_to_goalListingFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
+            findNavController().navigateUp()
         }
 
         // Event Listener wenn sich der Titel verändert
@@ -139,6 +150,68 @@ class GoalDetailFragment : Fragment() {
         // Event Listener wenn sich der Beschreibung verändert
         binding.textGoalDescription.doAfterTextChanged {
             updateButtonVisibility()
+        }    }
+
+
+    /**
+     * Aktiviert oder deaktiviert die Benutzeroberfläche der Lernziele, indem die `isEnabled`-Eigenschaften
+     * der betreffenden Ansichtselemente auf den übergebenen Wert festgelegt werden. Wenn `isDisable` auf
+     * `true` gesetzt ist, wird die Benutzeroberfläche deaktiviert, andernfalls wird sie aktiviert.
+     * @param isDisable Ein boolescher Wert, der angibt, ob die Benutzeroberfläche deaktiviert werden soll
+     *                  (`true`) oder nicht (`false`). Der Standardwert ist `false`.
+     */
+    private fun isMakeEnableUI(isDisable: Boolean = false) {
+        binding.textLearningGoalTitle.isEnabled = isDisable
+        binding.textLearningGoalStartDate.isEnabled = isDisable
+        binding.textLearningGoalEndDate.isEnabled = isDisable
+        binding.textGoalDescription.isEnabled = isDisable
+    }
+
+    /**
+     * Beobachtet die LiveData-Variablen `addGoal` und `updateGoal` des [ViewModel]-Objekts und reagiert
+     * entsprechend, wenn sich der Wert der Variablen ändert. Zeigt eine Fortschrittsanzeige an, zeigt
+     * Fehlermeldungen an oder zeigt Erfolgsmeldungen an.
+     */
+    private fun observer() {
+        // Eine Beobachtung auf viewModel.addGoal ausführen
+        viewModel.addGoal.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.btnProgressAr.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.btnProgressAr.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.btnProgressAr.hide()
+                    binding.editButton.show()
+                    toast(state.data)
+                }
+            }
+        }
+
+        // Eine Beobachtung auf viewModel.updateGoal ausführen
+        viewModel.updateGoal.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.btnProgressAr.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.btnProgressAr.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.btnProgressAr.hide()
+                    toast(state.data)
+                }
+            }
         }
     }
 
@@ -147,16 +220,16 @@ class GoalDetailFragment : Fragment() {
      * Wenn alle Felder ausgefüllt, dann soll der Button zum Speichern sichtbar sein.
      * Ist eines der Felder nicht ausgefüllt, dann soll der Speichern Button nicht sichtbar sein.
      */
-    fun updateButtonVisibility() {
+    private fun updateButtonVisibility() {
         val title = binding.textLearningGoalTitle.text.toString().trim()
         val startDate = binding.textLearningGoalStartDate.text.toString().trim()
         val endDate = binding.textLearningGoalEndDate.text.toString().trim()
         val description = binding.textGoalDescription.text.toString().trim()
 
         if (title.isNotEmpty() && startDate.isNotEmpty() && endDate.isNotEmpty() && description.isNotEmpty()) {
-            binding.buttonLearningGoalCreate.show()
+            binding.saveButton.show()
         } else {
-            binding.buttonLearningGoalCreate.hide()
+            binding.saveButton.hide()
         }
     }
 
@@ -166,28 +239,6 @@ class GoalDetailFragment : Fragment() {
      * in Abhängigkeit vom Zustand. Wenn die Eingabevalidierung erfolgreich ist, wird das Ziel an viewModel.addGoal übergeben.
      */
     private fun createGoal() {
-        // Eine Beobachtung auf viewModel.addGoal ausführen
-        viewModel.addGoal.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen und Button-Text löschen
-            when (state) {
-                is UiState.Loading -> {
-                    binding.btnProgressAr.show()
-                    binding.buttonLearningGoalCreate.text = ""
-                }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden, Button-Text auf "Create" setzen und Fehlermeldung anzeigen
-                is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
-                    binding.buttonLearningGoalCreate.text = "Create"
-                    toast(state.error)
-                }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden, Button-Text auf "Create" setzen und Erfolgsmeldung anzeigen
-                is UiState.Success -> {
-                    binding.btnProgressAr.hide()
-                    binding.buttonLearningGoalCreate.text = "Create"
-                    toast(state.data)
-                }
-            }
-        }
         // Wenn die Eingabevalidierung erfolgreich ist, das Ziel an viewModel.addGoal übergeben
         if (validation()) {
             viewModel.addGoal(getGoal())
@@ -204,65 +255,36 @@ class GoalDetailFragment : Fragment() {
         if (validation()) {
             viewModel.updateGoal(getGoal())
         }
-        // Eine Beobachtung auf viewModel.updateGoal ausführen
-        viewModel.updateGoal.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen und Button-Text löschen
-            when (state) {
-                is UiState.Loading -> {
-                    binding.btnProgressAr.show()
-                    binding.buttonLearningGoalCreate.text = ""
-                }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden, Button-Text auf "Update" setzen und Fehlermeldung anzeigen
-                is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
-                    binding.buttonLearningGoalCreate.text = "Update"
-                    toast(state.error)
-                }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden, Button-Text auf "Update" setzen und Erfolgsmeldung anzeigen
-                is UiState.Success -> {
-                    binding.btnProgressAr.hide()
-                    binding.buttonLearningGoalCreate.text = "Update"
-                    toast(state.data)
-                }
-            }
-        }
     }
 
     /**
      * Methode zum Aktualisieren der Benutzeroberfläche basierend auf dem Typ des übergebenen Arguments.
      * @return Nothing
      */
-    private fun UpdateUI() {
-        // das type-Argument wird aus den Fragment-Argumenten extrahiert
-        val type = arguments?.getString("type", null)
-
-        type?.let {
-            when (it) {
-                // falls "view" übergeben wurde
-                "view" -> {
-                    isEdit = false
-                    // das Ziel-Textfeld wird aktiviert und der Zielbeschreibungstext wird gesetzt
-                    binding.textGoalDescription.isEnabled = true
-                    objGoal = arguments?.getParcelable("goal")
-                    binding.textGoalDescription.setText(objGoal?.description)
-                    // der "button" wird ausgeblendet
-                    binding.buttonLearningGoalCreate.hide()
-                }
-                // falls "create" übergeben wurde
-                "create" -> {
-                    isEdit = false
-                    // der Button-Text wird auf "Create" gesetzt
-                    binding.buttonLearningGoalCreate.setText("Create")
-                }
-                // falls "edit" übergeben wurde
-                "edit" -> {
-                    isEdit = true
-                    objGoal = arguments?.getParcelable("goal")
-                    // der Zielbeschreibungstext wird gesetzt und der Button-Text wird auf "Update" gesetzt
-                    binding.textGoalDescription.setText(objGoal?.description)
-                    binding.buttonLearningGoalCreate.setText("Update")
-                }
-            }
+    private fun updateUI() {
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy")
+        objGoal = arguments?.getParcelable("goal")
+        // Wenn ein Lernziel existiert z.B. wenn es editiert wird, dann werden die Daten des Lernziels geladen
+        objGoal?.let { goal ->
+            binding.textLearningGoalTitle.setText(goal.title)
+            binding.textLearningGoalStartDate.setText(dateFormat.format(goal.startDate))
+            binding.textLearningGoalEndDate.setText(dateFormat.format(goal.endDate))
+            binding.textGoalDescription.setText(goal.description)
+            binding.saveButton.hide()
+            binding.editButton.show()
+            //binding.delete.show()
+            isMakeEnableUI()
+        } ?: run {
+            // Standardmaske für Lernziel erstellen
+            binding.textLearningGoalTitle.setText("")
+            binding.textLearningGoalStartDate.setText(dateFormat.format(Date()))
+            binding.textLearningGoalEndDate.setText(dateFormat.format(Date()))
+            binding.textGoalDescription.setText("")
+            binding.saveButton.hide()
+            binding.editButton.hide()
+            //binding.delete.hide()
+            isMakeEnableUI(true)
+            binding.textLearningGoalTitle.requestFocus()
         }
     }
 

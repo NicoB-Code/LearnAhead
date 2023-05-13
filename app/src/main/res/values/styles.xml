@@ -194,9 +194,9 @@
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
-    <!-- styles.xml -->
+
     <style name="top_menu_header">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
@@ -205,5 +205,23 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="card_view_title">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="card_view_date_interval">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="card_view_calculated_days">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
     </style>
 </resources>
