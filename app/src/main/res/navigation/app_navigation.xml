@@ -9,7 +9,17 @@
         android:id="@+id/goalDetailFragment"
         android:name="com.example.learnahead_prototyp.UI.Goal.GoalDetailFragment"
         android:label="fragment_goal_detail"
-        tools:layout="@layout/fragment_goal_detail" />
+        tools:layout="@layout/fragment_goal_detail" >
+        <action
+            android:id="@+id/action_goalDetailFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_goalDetailFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_goalDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.learnahead_prototyp.UI.Auth.RegisterFragment"

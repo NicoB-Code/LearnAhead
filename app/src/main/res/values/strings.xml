@@ -67,6 +67,11 @@
     <string name="learning_categories"> Lernkategorien </string>
     <string name="add_learning_category"> Lernkategorie erstellen </string>
     <string name="learning_goals"> Lernziele </string>
+    <string name="learning_goal_title"> Lernzielname: </string>
+    <string name="learning_goal_start_date"> Start Datum: </string>
+    <string name="learning_goal_end_date"> Ziel Datum: </string>
+    <string name="learning_goal_description">Beschreibung: </string>
+
 
 
 </resources>

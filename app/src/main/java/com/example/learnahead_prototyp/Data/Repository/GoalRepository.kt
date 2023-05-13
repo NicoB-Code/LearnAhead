@@ -30,7 +30,7 @@ class GoalRepository(
             // Filtern der Dokumente auf die, die zum übergebenen Benutzer gehören
             .whereEqualTo(FireStoreDocumentField.USER_ID, user?.id)
             // Sortieren der Dokumente nach dem Datum, absteigend
-            .orderBy(FireStoreDocumentField.DATE, Query.Direction.DESCENDING)
+            .orderBy(FireStoreDocumentField.END_DATE, Query.Direction.DESCENDING)
             // Abfrage der ausgewählten Dokumente
             .get()
             // Falls die Abfrage erfolgreich war

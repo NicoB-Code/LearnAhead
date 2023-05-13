@@ -13,7 +13,7 @@ object FireStoreCollection {
  */
 object FireStoreDocumentField {
     // WICHTIG DATE WIRD NOCH ABGEÄNDERT WEGEN INDEX
-    val DATE = "date"
+    val END_DATE = "endDate"
     val USER_ID = "user_id"
 }
 

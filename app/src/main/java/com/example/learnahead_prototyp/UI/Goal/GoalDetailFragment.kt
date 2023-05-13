@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.Goal
+import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
@@ -14,7 +18,10 @@ import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentGoalDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 /**
  * Dies ist die Detailansicht einer Ziels auf der App. Es zeigt Informationen wie Zielname, Beschreibung,
@@ -70,12 +77,86 @@ class GoalDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // Updaten der UI
         UpdateUI()
-        binding.button.setOnClickListener {
+        binding.buttonLearningGoalCreate.setOnClickListener {
             if (isEdit) {
                 updateGoal()
             } else {
                 createGoal()
             }
+        }
+
+        // Klick Listener zum Weiterleiten auf den Home Screen
+        binding.buttonHome.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_goalDetailFragment_to_homeFragment,
+                Bundle().apply {
+                    putString("type", "create")
+                })
+        }
+
+        // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
+        binding.buttonLearningCategories.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_goalDetailFragment_to_learningCategoryListFragment,
+                Bundle().apply {
+                    putString("type", "create")
+                })
+        }
+
+        // Klick Listener zum Weiterleiten auf den Lernzielen Screen
+        binding.buttonLearningGoals.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_goalDetailFragment_to_goalListingFragment,
+                Bundle().apply {
+                    putString("type", "create")
+                })
+        }
+
+        // Klick Listener zum Weiterleiten auf den Lernzielen Screen
+        binding.backIcon.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_goalDetailFragment_to_goalListingFragment,
+                Bundle().apply {
+                    putString("type", "create")
+                })
+        }
+
+        // Event Listener wenn sich der Titel verändert
+        binding.textLearningGoalTitle.doAfterTextChanged {
+            updateButtonVisibility()
+        }
+
+        // Event Listener wenn sich der Start Datum verändert
+        binding.textLearningGoalStartDate.doAfterTextChanged {
+            updateButtonVisibility()
+        }
+
+        // Event Listener wenn sich der End Datum verändert
+        binding.textLearningGoalEndDate.doAfterTextChanged {
+            updateButtonVisibility()
+        }
+
+        // Event Listener wenn sich der Beschreibung verändert
+        binding.textGoalDescription.doAfterTextChanged {
+            updateButtonVisibility()
+        }
+    }
+
+    /**
+     * Überprüft ob der Titel, Start, End Datum und Beschreibung ausgefüllt sind.
+     * Wenn alle Felder ausgefüllt, dann soll der Button zum Speichern sichtbar sein.
+     * Ist eines der Felder nicht ausgefüllt, dann soll der Speichern Button nicht sichtbar sein.
+     */
+    fun updateButtonVisibility() {
+        val title = binding.textLearningGoalTitle.text.toString().trim()
+        val startDate = binding.textLearningGoalStartDate.text.toString().trim()
+        val endDate = binding.textLearningGoalEndDate.text.toString().trim()
+        val description = binding.textGoalDescription.text.toString().trim()
+
+        if (title.isNotEmpty() && startDate.isNotEmpty() && endDate.isNotEmpty() && description.isNotEmpty()) {
+            binding.buttonLearningGoalCreate.show()
+        } else {
+            binding.buttonLearningGoalCreate.hide()
         }
     }
 
@@ -91,18 +172,18 @@ class GoalDetailFragment : Fragment() {
             when (state) {
                 is UiState.Loading -> {
                     binding.btnProgressAr.show()
-                    binding.button.text = ""
+                    binding.buttonLearningGoalCreate.text = ""
                 }
                 // Fehlerzustand - Fortschrittsanzeige ausblenden, Button-Text auf "Create" setzen und Fehlermeldung anzeigen
                 is UiState.Failure -> {
                     binding.btnProgressAr.hide()
-                    binding.button.text = "Create"
+                    binding.buttonLearningGoalCreate.text = "Create"
                     toast(state.error)
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden, Button-Text auf "Create" setzen und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    binding.button.text = "Create"
+                    binding.buttonLearningGoalCreate.text = "Create"
                     toast(state.data)
                 }
             }
@@ -129,18 +210,18 @@ class GoalDetailFragment : Fragment() {
             when (state) {
                 is UiState.Loading -> {
                     binding.btnProgressAr.show()
-                    binding.button.text = ""
+                    binding.buttonLearningGoalCreate.text = ""
                 }
                 // Fehlerzustand - Fortschrittsanzeige ausblenden, Button-Text auf "Update" setzen und Fehlermeldung anzeigen
                 is UiState.Failure -> {
                     binding.btnProgressAr.hide()
-                    binding.button.text = "Update"
+                    binding.buttonLearningGoalCreate.text = "Update"
                     toast(state.error)
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden, Button-Text auf "Update" setzen und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    binding.button.text = "Update"
+                    binding.buttonLearningGoalCreate.text = "Update"
                     toast(state.data)
                 }
             }
@@ -161,25 +242,25 @@ class GoalDetailFragment : Fragment() {
                 "view" -> {
                     isEdit = false
                     // das Ziel-Textfeld wird aktiviert und der Zielbeschreibungstext wird gesetzt
-                    binding.goalDescription.isEnabled = true
+                    binding.textGoalDescription.isEnabled = true
                     objGoal = arguments?.getParcelable("goal")
-                    binding.goalDescription.setText(objGoal?.description)
+                    binding.textGoalDescription.setText(objGoal?.description)
                     // der "button" wird ausgeblendet
-                    binding.button.hide()
+                    binding.buttonLearningGoalCreate.hide()
                 }
                 // falls "create" übergeben wurde
                 "create" -> {
                     isEdit = false
                     // der Button-Text wird auf "Create" gesetzt
-                    binding.button.setText("Create")
+                    binding.buttonLearningGoalCreate.setText("Create")
                 }
                 // falls "edit" übergeben wurde
                 "edit" -> {
                     isEdit = true
                     objGoal = arguments?.getParcelable("goal")
                     // der Zielbeschreibungstext wird gesetzt und der Button-Text wird auf "Update" gesetzt
-                    binding.goalDescription.setText(objGoal?.description)
-                    binding.button.setText("Update")
+                    binding.textGoalDescription.setText(objGoal?.description)
+                    binding.buttonLearningGoalCreate.setText("Update")
                 }
             }
         }
@@ -190,14 +271,57 @@ class GoalDetailFragment : Fragment() {
      * @return Boolean
      */
     private fun validation(): Boolean {
+        // Überprüfen, ob der Lernzielname leer oder null ist
+        if (binding.textLearningGoalTitle.text.isNullOrEmpty()) {
+            // Wenn ja, eine Toast-Meldung ausgeben und false zurückgeben
+            toast("Enter title")
+            return false
+        }
+
+        // halbfunktionsfähige Datumsvalidierung
+        dateValidation(binding.textLearningGoalStartDate)
+        dateValidation(binding.textLearningGoalEndDate)
+
         // Überprüfen, ob die Beschreibung leer oder null ist
-        if (binding.goalDescription.text.isNullOrEmpty()) {
+        if (binding.textGoalDescription.text.isNullOrEmpty()) {
             // Wenn ja, eine Toast-Meldung ausgeben und false zurückgeben
             toast("Enter description")
             return false
         }
         // Andernfalls true zurückgeben
         return true
+    }
+
+    private fun dateValidation(textLearningGoalStartDate: EditText): Date {
+        // Holen Sie die Benutzereingabe aus dem EditText
+        val userInput = textLearningGoalStartDate.text.toString()
+
+        // Definieren Sie das erwartete Datumsformat (dd.MM.yyyy)
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN)
+
+        // Setzen Sie isLenient auf false, um sicherzustellen, dass das Format streng ist
+        dateFormat.isLenient = false
+
+        try {
+            // Versuchen Sie, die Benutzereingabe als Datum zu parsen
+            val date = dateFormat.parse(userInput)
+
+            // Überprüfen Sie, ob das geparste Datum der Benutzereingabe entspricht
+            if (date != null && dateFormat.format(date) == userInput) {
+                // Die Benutzereingabe ist ein gültiges Datum
+                return date
+            } else {
+                // Die Benutzereingabe ist kein gültiges Datum
+                val errorMessage = "Das eingegebene Datum ist ungültig."
+                textLearningGoalStartDate.error = errorMessage
+                return Date()
+            }
+        } catch (e: ParseException) {
+            // Die Benutzereingabe ist kein gültiges Datum
+            val errorMessage = "Das eingegebene Datum ist ungültig."
+            textLearningGoalStartDate.error = errorMessage
+        }
+        return Date()
     }
 
     /**
@@ -209,8 +333,10 @@ class GoalDetailFragment : Fragment() {
         // Ziel-Objekt wird erstellt
         return Goal(
             id = objGoal?.id ?: "",
-            description = binding.goalDescription.text.toString(),
-            date = Date()
+            title = binding.textLearningGoalTitle.text.toString(),
+            description = binding.textGoalDescription.text.toString(),
+            startDate = dateValidation(binding.textLearningGoalStartDate),
+            endDate = dateValidation(binding.textLearningGoalEndDate)
         ).apply {
             // Session-Daten werden aktualisiert
             authViewModel.getSession {

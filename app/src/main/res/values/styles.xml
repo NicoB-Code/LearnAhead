@@ -193,4 +193,17 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
+
+    <!-- styles.xml -->
+    <style name="top_menu_header">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="learning_category_or_goal_label">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
 </resources>
