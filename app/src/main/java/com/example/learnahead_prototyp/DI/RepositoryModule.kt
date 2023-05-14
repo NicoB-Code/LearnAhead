@@ -5,6 +5,8 @@ import com.example.learnahead_prototyp.Data.Repository.AuthRepository
 import com.example.learnahead_prototyp.Data.Repository.GoalRepository
 import com.example.learnahead_prototyp.Data.Repository.IAuthRepository
 import com.example.learnahead_prototyp.Data.Repository.IGoalRepository
+import com.example.learnahead_prototyp.Data.Repository.ILearnCategoryRepository
+import com.example.learnahead_prototyp.Data.Repository.LearningCategoryRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
@@ -36,6 +38,20 @@ object RepositoryModule {
         database: FirebaseFirestore
     ): IGoalRepository {
         return GoalRepository(database)
+    }
+
+    /**
+     * Funktion zur Bereitstellung eines ILearningCategoryRepository-Objekts, das Zugriff auf die Lernkategorien in der Firebase-Datenbank bietet.
+     * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
+     * @return Das ILearningCategoryRepository-Objekt, das für den Zugriff auf die Lernkategorien in der Datenbank verwendet werden soll.
+     * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
+     */
+    @Provides
+    @Singleton
+    fun provideLearningCategoryRepository(
+        database: FirebaseFirestore
+    ): ILearnCategoryRepository {
+        return LearningCategoryRepository(database)
     }
 
     /**

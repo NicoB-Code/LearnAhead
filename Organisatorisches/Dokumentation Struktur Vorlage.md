@@ -1,26 +1,27 @@
 # Glossar
 # Abstract
-# Einleitung
+# Einleitung  
+- 90% Done
 
 ## Planung
-- Lastenheft
-- Arbeitspaketplan
-- Zeitplan
-- Qualitätsmanagement Maßnahmen
-- Konfigurationsmanagement Maßnahmen
-- Auswahl kritischer Technologien
+- Lastenheft (Nico)
+- Arbeitspaketplan (Nico)
+- Zeitplan (Phillipp)
+- Qualitätsmanagement Maßnahmen (Phillipp)
+- Konfigurationsmanagement Maßnahmen (Nico)
+- Auswahl kritischer Technologien (Phillipp)
 
 ## Definition
-- Definition Begriffe (Lernkonzepte etc.) 
+- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp)
 - Pflichtenheft
-- Use-Case-Diagramme
-- Use-Case-Beschreibungen
-- Datenbankmodell
-- Data Dictionary
+- Use-Case-Diagramme (Nico)
+- Use-Case-Beschreibungen (Nico)
+- Datenbankmodell (Phillipp)
+- Data Dictionary (Phillipp)
 - HMI
-  - Seitenhierarchie
-  - UI-Mockups
-- Datenflussdiagramm
+  - Seitenhierarchie (Nico)
+  - UI-Mockups (Nico)
+- Datenflussdiagramm (Phillipp)
 - Benutzerhandbuch (optional)
 
 ## Entwurf

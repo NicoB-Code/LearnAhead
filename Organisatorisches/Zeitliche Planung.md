@@ -8,9 +8,12 @@
 - Tests-Phase bis zum 09.07
 
 ## Code
-- Feature: Benutzer bis zum 14.05 (Einfach)
+- Feature: Benutzer bis zum 14.05 (Einfach) 
+  - Profil wird heute am 14.05 erledigt
 - Feature: Lernziele bis zum 20.05 (Einfach)
+  - Validierung wird noch benötigt
 - Feature: Lernkategorien bis zum 26.05 (Einfach)
+  - Validierung wird noch benötigt
 - Feature: Zusammenfassungen bis zum 02.06 (Komplex)
 - Feature: Tests bis zum 08.06 (Mittel)
 - Feature: Pausenregelung bis zum 14.06 (Mittel-Komplex)

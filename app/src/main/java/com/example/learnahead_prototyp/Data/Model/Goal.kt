@@ -23,8 +23,11 @@ import java.util.Date
 data class Goal(
     var id: String = "",
     var user_id: String = "",
+    val title: String = "",
     val description: String = "",
     @ServerTimestamp
     // WICHTIG DATE WIRD NOCH GEÄNDERT WEGEN INDEX
-    val date: Date = Date()
+    val startDate: Date = Date(),
+    @ServerTimestamp
+    val endDate: Date = Date()
 ) : Parcelable
