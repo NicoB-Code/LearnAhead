@@ -5,6 +5,7 @@ package com.example.learnahead_prototyp.Util
  */
 object FireStoreCollection {
     val GOAL = "goal"
+    val LEARNING_CATEGORY = "learning_category"
     val USER = "user"
 }
 
@@ -14,6 +15,7 @@ object FireStoreCollection {
 object FireStoreDocumentField {
     // WICHTIG DATE WIRD NOCH ABGEÄNDERT WEGEN INDEX
     val END_DATE = "endDate"
+    val NAME = "name"
     val USER_ID = "user_id"
 }
 

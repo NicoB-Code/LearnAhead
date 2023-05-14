@@ -96,7 +96,13 @@ class GoalListingAdapter(
 
             // calculate the number of days between the two dates
             val daysBetweenDates = getDaysBetweenDates(goal.startDate, goal.endDate)
-            binding.cardViewDateDaysCalculated.text = "$daysBetweenDates Tage"
+            if(daysBetweenDates == 1)
+                binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates Tage"
+            else if (daysBetweenDates > 1)
+                binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates Tagen"
+            else
+                binding.cardViewDateDaysCalculated.text = "Lernziel abgelaufen"
+
             binding.delete.setOnClickListener {
                 onDeleteClicked.invoke(
                     bindingAdapterPosition,
