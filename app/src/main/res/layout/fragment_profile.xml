@@ -27,149 +27,209 @@
         android:backgroundTint="@null"
         />
 
+    <!-- Back Icon -->
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/back_button"
+        android:elevation="7dp"
+        android:rotation="-90" />
+
+    <!-- Lernziel erstellen Header Label -->
+    <TextView
+        android:id="@+id/create_learning_goal_menu_header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/profile"
+        android:textAppearance="@style/top_menu_header"
+        android:layout_toRightOf="@id/back_icon"
+        android:layout_alignTop="@id/back_icon"/>
+
     <!-- Header Line -->
     <View
         android:id="@+id/header_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/back_icon"
         android:background="@drawable/header_line"
         />
 
-    <TextView
-        android:id="@+id/username_display"
-        android:layout_width="200dp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="190dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        tools:src="@tools:sample/avatars" />
+
+    <!-- Profile Icon -->
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="97dp"
+        android:background="@drawable/user_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/username_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/username"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/username_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/username_profile"
+        android:layout_marginStart="33dp"
         android:text="hier steht der Benutzername"
         android:textAppearance="@style/menu_button_text" />
 
-    <TextView
-        android:id="@+id/learning_goals_display"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="398dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="die Anzahl der erreichten Lernziele"
-        android:textAppearance="@style/menu_button_text" />
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/email_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/profile"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/email_icon"
+        android:elevation="7dp"
+        />
 
     <TextView
-        android:id="@+id/learning_goals_profile"
-        android:layout_width="200dp"
+        android:id="@+id/email_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="379dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="@string/learning_goals_reached"
-        android:textAppearance="@style/menu_button_text" />
-
-    <TextView
-        android:id="@+id/learning_streak_display"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="347dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="die höchste Lernstreak"
-        android:textAppearance="@style/menu_button_text" />
-
-    <TextView
-        android:id="@+id/password_profile"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="277dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="@string/password"
-        android:textAppearance="@style/menu_button_text" />
-
-    <TextView
-        android:id="@+id/learning_streak_profile"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="328dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="@string/biggest_learnstreak"
-        android:textAppearance="@style/menu_button_text" />
-
-    <TextView
-        android:id="@+id/password_display"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="296dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="hier steht das Passwort"
-        android:textAppearance="@style/menu_button_text" />
-
-    <TextView
-        android:id="@+id/e_mail_display"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="243dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="hier steht die E-Mail"
-        android:textAppearance="@style/menu_button_text" />
-
-    <TextView
-        android:id="@+id/e_mail_profile"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="223dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/username_display"
+        android:layout_marginTop="55dp"
+        android:layout_marginStart="33dp"
         android:text="@string/e_mail_address"
         android:textAppearance="@style/menu_button_text" />
 
     <TextView
-        android:id="@+id/username_profile"
-        android:layout_width="200dp"
+        android:id="@+id/email_display"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="106dp"
-        android:gravity="center_horizontal"
-        android:text="@string/username"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/email_title"
+        android:layout_marginStart="33dp"
+        android:text="hier steht der E-Mail_adresse"
         android:textAppearance="@style/menu_button_text" />
 
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/password_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/email_icon"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/password_icon"
+        android:elevation="7dp"
+        />
 
     <TextView
-        android:id="@+id/profile_header_text"
-        android:layout_width="200dp"
+        android:id="@+id/password_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="-47dp"
-        android:layout_marginEnd="54dp"
-        android:gravity="center_horizontal"
-        android:text="@string/profile"
-        android:textAppearance="@style/learning_goals_for_today_label_header" />
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/email_display"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/e_mail_address"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/password_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/password_title"
+        android:layout_marginStart="33dp"
+        android:text="hier steht der E-Mail_adresse"
+        android:textAppearance="@style/menu_button_text" />
+
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/learnstreak"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/password_icon"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/email_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/learnstreak_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/password_display"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/e_mail_address"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/learnstreak_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/learnstreak_title"
+        android:layout_marginStart="33dp"
+        android:text="hier steht der E-Mail_adresse"
+        android:textAppearance="@style/menu_button_text" />
+
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/achieved_goals"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/learnstreak"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/email_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/achieved_goals_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/learnstreak_display"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/e_mail_address"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/achieved_goals_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/achieved_goals_title"
+        android:layout_marginStart="33dp"
+        android:text="hier steht der E-Mail_adresse"
+        android:textAppearance="@style/menu_button_text" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_home"
@@ -219,16 +279,6 @@
         android:background="@android:color/transparent"
         />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="141dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="142dp"
-        tools:src="@tools:sample/avatars" />
+
 
 </RelativeLayout>
