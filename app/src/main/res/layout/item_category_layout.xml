@@ -16,42 +16,16 @@
         android:paddingBottom="8dp">
 
         <TextView
-            android:id="@+id/card_view_text_goal_title"
+            android:id="@+id/card_view_text_learning_category_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:textAppearance="@style/card_view_title"
-            android:hint="@string/card_view_hint_goal_title"
+            android:hint="@string/card_view_hint_learning_category_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center_horizontal"/>
-
-
-        <TextView
-            android:id="@+id/card_view_goal_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="@string/card_view_hint_date_interval"
-            android:textAppearance="@style/card_view_date_interval"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_text_goal_title"
-            android:gravity="center_horizontal"/>
-
-        <TextView
-            android:id="@+id/card_view_date_days_calculated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/card_view_hint_calculated_left_days"
-            android:textAppearance="@style/card_view_calculated_days"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_goal_date"
-            android:gravity="center_horizontal"
-            />
 
         <View
             android:id="@+id/divider"
@@ -61,7 +35,7 @@
             android:background="#26000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_date_days_calculated" />
+            app:layout_constraintTop_toBottomOf="@+id/card_view_text_learning_category_name" />
 
         <ImageView
             android:id="@+id/delete"

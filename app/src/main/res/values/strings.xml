@@ -67,6 +67,16 @@
     <string name="learning_categories"> Lernkategorien </string>
     <string name="add_learning_category"> Lernkategorie erstellen </string>
     <string name="learning_goals"> Lernziele </string>
+    <string name="learning_goal_title"> Lernziel Name: </string>
+    <string name="learning_goal_start_date"> Start Datum: </string>
+    <string name="learning_goal_end_date"> Ziel Datum: </string>
+    <string name="learning_goal_description">Beschreibung: </string>
+    <string name="card_view_hint_goal_title">Goal Title</string>
+    <string name="card_view_hint_date_interval">Date Interval</string>
+    <string name="card_view_hint_calculated_left_days">Calculated left Days</string>
+    <string name="learning_category_name"> Lernkategorie Name: </string>
+    <string name="hint_learning_category_name">Lernkategorie Name eingeben</string>
+    <string name="card_view_hint_learning_category_name">Lernkategorie Name</string>
     <!-- Section Profile -->
     <string name="profile"> Profil</string>
     <string name="biggest_learnstreak"> Höchste Lernstreak</string>

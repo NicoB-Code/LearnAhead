@@ -43,7 +43,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/user_icon"
-        android:elevation="7dp"></ImageView>
+        android:elevation="7dp" />
 
     <!-- Add Icon -->
     <ImageView
@@ -54,7 +54,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/logout"
-        android:elevation="7dp"></ImageView>
+        android:elevation="7dp" />
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
@@ -105,7 +105,7 @@
         android:background="@android:color/transparent"
         />
 
-    <!-- Label Learning Goals for Today Header -->
+    <!-- Label Learning Category for Today Header -->
     <TextView
         android:id="@+id/learning_category_label_header"
         android:layout_width="match_parent"
@@ -118,7 +118,7 @@
         android:gravity="center_horizontal|center_vertical"
         />
 
-    <!-- Lernziel oder Lernkategorie erstellen -->
+    <!-- Lernkategorie erstellen -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_add"
         android:layout_width="wrap_content"
