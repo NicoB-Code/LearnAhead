@@ -64,6 +64,4 @@ interface IAuthRepository {
      * @param result The callback function to handle the result.
      */
     fun getSession(result: (User?) -> Unit)
-
-    suspend fun singleImageUpload(fileUri: Uri, onResult: (UiState<Uri>) -> Unit)
 }

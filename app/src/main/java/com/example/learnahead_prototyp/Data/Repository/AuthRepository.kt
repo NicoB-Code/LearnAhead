@@ -240,7 +240,4 @@ class AuthRepository(
         }
     }
 
-    override suspend fun singleImageUpload(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
-
-    }
 }

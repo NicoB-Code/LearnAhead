@@ -3,6 +3,8 @@ package com.example.learnahead_prototyp.DI
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.learnahead_prototyp.Util.SharedPrefConstants
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -34,6 +36,12 @@ object AppModule {
             SharedPrefConstants.LOCAL_SHARED_PREF,
             Context.MODE_PRIVATE
         )
+    }
+
+    @Provides
+    fun provideStorageReference(): StorageReference {
+        // Return an instance of the StorageReference
+        return FirebaseStorage.getInstance().reference
     }
 
     /**

@@ -10,14 +10,14 @@
     android:clipToOutline="true">
 
     <!-- Dark Background Full Screen -->
+
+    <!-- Black Background for Bottom Menu -->
     <View
         android:id="@+id/dark_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/dark_full_screen"
-        />
+        android:background="@drawable/dark_full_screen" />
 
-    <!-- Black Background for Bottom Menu -->
     <View
         android:id="@+id/background_bottom_menu"
         android:layout_width="match_parent"
@@ -57,23 +57,27 @@
         android:background="@drawable/header_line"
         />
 
+    <!-- Profile Icon -->
+
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profile_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/header_line"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="229dp"
         tools:src="@tools:sample/avatars" />
 
-    <!-- Profile Icon -->
     <ImageView
         android:id="@+id/profile"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_below="@id/imageView"
-        android:layout_marginTop="97dp"
+        android:layout_below="@id/profile_pic"
+        android:layout_marginTop="30dp"
         android:background="@drawable/user_icon"
         android:elevation="7dp"
         />
@@ -83,8 +87,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/profile"
-        android:layout_below="@id/imageView"
-        android:layout_marginTop="100dp"
+        android:layout_below="@id/profile_pic"
+        android:layout_marginTop="33dp"
         android:layout_marginStart="33dp"
         android:text="@string/username"
         android:textAppearance="@style/menu_button_text" />
@@ -279,6 +283,18 @@
         android:background="@android:color/transparent"
         />
 
+    <Button
+        android:id="@+id/button_profile_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_line"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="203dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@+id/profile_pic"
+        android:text="Profilbild ändern" />
 
 
 </RelativeLayout>
