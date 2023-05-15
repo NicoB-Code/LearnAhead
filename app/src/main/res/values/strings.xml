@@ -67,6 +67,10 @@
     <string name="learning_categories"> Lernkategorien </string>
     <string name="add_learning_category"> Lernkategorie erstellen </string>
     <string name="learning_goals"> Lernziele </string>
+    <!-- Section Profile -->
+    <string name="profile"> Profil</string>
+    <string name="biggest_learnstreak"> Höchste Lernstreak</string>
+    <string name="learning_goals_reached"> Lernziele erreicht</string>
 
 
 </resources>

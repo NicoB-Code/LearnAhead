@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_homeFragment_to_goalListingFragment"
             app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/learningCategoryListFragment"
@@ -86,4 +89,8 @@
             android:id="@+id/action_goalListingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.learnahead_prototyp.UI.Profile.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

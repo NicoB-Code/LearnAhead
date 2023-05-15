@@ -1,0 +1,234 @@
+<!-- Android Large - Login -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
+
+    <!-- Dark Background Full Screen -->
+    <View
+        android:id="@+id/dark_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dark_full_screen"
+        />
+
+    <!-- Black Background for Bottom Menu -->
+    <View
+        android:id="@+id/background_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@id/dark_background"
+        android:background="@drawable/black_bottom_menu"
+        android:backgroundTint="@null"
+        />
+
+    <!-- Header Line -->
+    <View
+        android:id="@+id/header_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/header_line"
+        />
+
+    <TextView
+        android:id="@+id/username_display"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="hier steht der Benutzername"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/learning_goals_display"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="398dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="die Anzahl der erreichten Lernziele"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/learning_goals_profile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="379dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="@string/learning_goals_reached"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/learning_streak_display"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="347dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="die höchste Lernstreak"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/password_profile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="277dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="@string/password"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/learning_streak_profile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="328dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="@string/biggest_learnstreak"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/password_display"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="296dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="hier steht das Passwort"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/e_mail_display"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="hier steht die E-Mail"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/e_mail_profile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="223dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="@string/e_mail_address"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/username_profile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="106dp"
+        android:gravity="center_horizontal"
+        android:text="@string/username"
+        android:textAppearance="@style/menu_button_text" />
+
+
+    <TextView
+        android:id="@+id/profile_header_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="-47dp"
+        android:layout_marginEnd="54dp"
+        android:gravity="center_horizontal"
+        android:text="@string/profile"
+        android:textAppearance="@style/learning_goals_for_today_label_header" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:drawableTop="@drawable/home_button"
+        android:layout_marginLeft="4dp"
+        app:iconPadding="-15dp"
+        android:text="@string/home"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Categories Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/learning_category_button"
+        app:iconPadding="-15dp"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Goals Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignRight="@id/background_bottom_menu"
+        android:layout_marginRight="4dp"
+        android:drawableTop="@drawable/learning_goal_button"
+        app:iconPadding="-15dp"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="142dp"
+        tools:src="@tools:sample/avatars" />
+
+</RelativeLayout>

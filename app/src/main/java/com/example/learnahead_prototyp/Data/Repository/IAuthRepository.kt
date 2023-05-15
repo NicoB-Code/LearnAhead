@@ -1,5 +1,6 @@
 package com.example.learnahead_prototyp.Data.Repository
 
+import android.net.Uri
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Util.UiState
 
@@ -63,4 +64,6 @@ interface IAuthRepository {
      * @param result The callback function to handle the result.
      */
     fun getSession(result: (User?) -> Unit)
+
+    suspend fun singleImageUpload(fileUri: Uri, onResult: (UiState<Uri>) -> Unit)
 }
