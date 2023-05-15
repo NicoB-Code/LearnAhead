@@ -36,17 +36,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(layoutInflater)
 
-        val usernameTextView = binding.usernameDisplay
-        val emailTextView = binding.emailDisplay
-        val passwordTextview = binding.passwordDisplay
-        val learnstreakTextView = binding.learnstreakDisplay
-        val learngoalsTextView = binding.achievedGoalsDisplay
-
         viewModel.getSession { user ->
             if (user != null) {
-                usernameTextView.text = user.username
-                emailTextView.text = user.email
-                learnstreakTextView.text = user.learningStreak.toString()
+                binding.usernameDisplay.text = user.username
+                binding.emailDisplay.text = user.email
+                binding.learnstreakDisplay.text = user.learningStreak.toString()
             }
         }
         return binding.root
