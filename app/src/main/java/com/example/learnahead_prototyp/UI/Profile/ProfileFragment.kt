@@ -82,7 +82,7 @@ class ProfileFragment : Fragment() {
                 binding.learnstreakDisplay.text = user.learningStreak.toString()
             }
         }
-        binding.buttonProfilePic.setOnClickListener {
+        binding.profilePic.setOnClickListener {
             galleryLauncher.launch("image/*")
             viewModelAuth.getSession { user ->
                 if (user != null) {
