@@ -80,6 +80,7 @@ class ProfileFragment : Fragment() {
                 binding.usernameDisplay.text = user.username
                 binding.emailDisplay.text = user.email
                 binding.learnstreakDisplay.text = user.learningStreak.toString()
+                loadImageFromUrl(user.profileImageUrl)
             }
         }
         binding.profilePic.setOnClickListener {

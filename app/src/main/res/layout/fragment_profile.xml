@@ -66,7 +66,7 @@
         android:layout_below="@id/header_line"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
-        android:background="@drawable/back_button"
+        android:background="@drawable/profile_image_placeholder"
         android:visibility="visible" />
 
     <ImageView
@@ -76,7 +76,7 @@
         android:layout_marginStart="16dp"
         android:layout_below="@id/profile_pic"
         android:layout_marginTop="30dp"
-        android:background="@drawable/user_icon"
+        android:background="@drawable/profile_icon"
         android:elevation="7dp"
         />
 
@@ -98,7 +98,7 @@
         android:layout_toRightOf="@id/profile"
         android:layout_below="@id/username_profile"
         android:layout_marginStart="33dp"
-        android:text="hier steht der Benutzername"
+        android:text="Der Benutzername"
         android:textAppearance="@style/menu_button_text" />
 
     <!-- E-Mail Icon -->
@@ -109,7 +109,7 @@
         android:layout_marginStart="16dp"
         android:layout_below="@id/profile"
         android:layout_marginTop="45dp"
-        android:background="@drawable/email_icon"
+        android:background="@drawable/email_profile_icon"
         android:elevation="7dp"
         />
 
@@ -131,7 +131,7 @@
         android:layout_toRightOf="@id/profile"
         android:layout_below="@id/email_title"
         android:layout_marginStart="33dp"
-        android:text="hier steht der E-Mail_adresse"
+        android:text="Die E-Mail"
         android:textAppearance="@style/menu_button_text" />
 
     <!-- E-Mail Icon -->
@@ -142,7 +142,7 @@
         android:layout_marginStart="16dp"
         android:layout_below="@id/email_icon"
         android:layout_marginTop="45dp"
-        android:background="@drawable/password_icon"
+        android:background="@drawable/profile_lock_icon"
         android:elevation="7dp"
         />
 
@@ -154,7 +154,7 @@
         android:layout_below="@id/email_display"
         android:layout_marginTop="50dp"
         android:layout_marginStart="33dp"
-        android:text="@string/e_mail_address"
+        android:text="@string/password"
         android:textAppearance="@style/menu_button_text" />
 
     <TextView
@@ -164,7 +164,7 @@
         android:layout_toRightOf="@id/profile"
         android:layout_below="@id/password_title"
         android:layout_marginStart="33dp"
-        android:text="hier steht der E-Mail_adresse"
+        android:text="-"
         android:textAppearance="@style/menu_button_text" />
 
     <!-- E-Mail Icon -->
@@ -175,7 +175,7 @@
         android:layout_marginStart="16dp"
         android:layout_below="@id/password_icon"
         android:layout_marginTop="45dp"
-        android:background="@drawable/email_icon"
+        android:background="@drawable/profile_streak_icon"
         android:elevation="7dp"
         />
 
@@ -187,7 +187,7 @@
         android:layout_below="@id/password_display"
         android:layout_marginTop="50dp"
         android:layout_marginStart="33dp"
-        android:text="@string/e_mail_address"
+        android:text="@string/biggest_learnstreak"
         android:textAppearance="@style/menu_button_text" />
 
     <TextView
@@ -197,7 +197,7 @@
         android:layout_toRightOf="@id/profile"
         android:layout_below="@id/learnstreak_title"
         android:layout_marginStart="33dp"
-        android:text="hier steht der E-Mail_adresse"
+        android:text="0"
         android:textAppearance="@style/menu_button_text" />
 
     <!-- E-Mail Icon -->
@@ -208,7 +208,7 @@
         android:layout_marginStart="16dp"
         android:layout_below="@id/learnstreak"
         android:layout_marginTop="45dp"
-        android:background="@drawable/email_icon"
+        android:background="@drawable/goals_profile_icon"
         android:elevation="7dp"
         />
 
@@ -220,7 +220,7 @@
         android:layout_below="@id/learnstreak_display"
         android:layout_marginTop="50dp"
         android:layout_marginStart="33dp"
-        android:text="@string/e_mail_address"
+        android:text="@string/learning_goals"
         android:textAppearance="@style/menu_button_text" />
 
     <TextView
@@ -230,7 +230,7 @@
         android:layout_toRightOf="@id/profile"
         android:layout_below="@id/achieved_goals_title"
         android:layout_marginStart="33dp"
-        android:text="hier steht der E-Mail_adresse"
+        android:text="0"
         android:textAppearance="@style/menu_button_text" />
 
     <com.google.android.material.button.MaterialButton
