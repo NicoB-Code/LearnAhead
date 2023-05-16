@@ -91,10 +91,23 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+        binding.buttonHome.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+        }
+        binding.buttonLearningCategories.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_learningCategoryListFragment)
+        }
+        binding.buttonLearningGoals.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_goalListingFragment)
+        }
+        binding.backIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+        }
         return binding.root
     }
 
     fun loadImageFromUrl(imageUrl: String) {
+        Log.d(TAG, "imageURL - $imageUrl")
         context?.let {
             Glide.with(it)
                 .load(imageUrl)

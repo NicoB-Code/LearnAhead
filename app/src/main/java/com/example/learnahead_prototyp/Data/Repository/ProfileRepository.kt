@@ -18,8 +18,8 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.UUID
 import com.example.learnahead_prototyp.Util.toast
-
-
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 class ProfileRepository (
@@ -28,6 +28,8 @@ class ProfileRepository (
 ) : IProfileRepository{
 
     val TAG: String = "ProfileRepository"
+    private val storage = Firebase.storage
+
 
     override suspend fun uploadImage(imageUri: Uri, user: User, onResult: (UiState<Uri>) -> Unit) {
 
@@ -36,16 +38,25 @@ class ProfileRepository (
         val filename = UUID.randomUUID().toString()
 
 
-        val storageRefImage = storageReference.child("images/$filename.jpg")
-        storageRefImage.putFile(imageUri)
-            .addOnSuccessListener { taskSnapshot ->
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener { downloadUri ->
-                    saveImageUrlToFirestore(downloadUri.toString(), user)
-                }
+// Lösche das alte Bild, bevor das neue hochgeladen wird
+        deletePreviousImage(user) { success ->
+            if (success) {
+                // Das alte Bild wurde erfolgreich gelöscht, lade das neue Bild hoch
+                val storageRefImage = storage.reference.child("images/$filename.jpg")
+                storageRefImage.putFile(imageUri)
+                    .addOnSuccessListener { taskSnapshot ->
+                        taskSnapshot.storage.downloadUrl.addOnSuccessListener { downloadUri ->
+                            saveImageUrlToFirestore(downloadUri.toString(), user)
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.d(TAG, "Failure while uploading Image ${exception.message}")
+                    }
+            } else {
+                // Fehler beim Löschen des alten Bildes
+                Log.d(TAG, "Failed to delete previous image.")
             }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Failure while uploading Image ${exception.message}")
-            }
+        }
     }
 
     private fun saveImageUrlToFirestore(imageUrl:String, user: User) {
@@ -60,4 +71,33 @@ class ProfileRepository (
                 Log.e(TAG,"Image URL could not be added to DB")
             }
     }
+    private fun deletePreviousImage(user: User, onComplete: (Boolean) -> Unit) {
+        val oldImageUrl = user.profileImageUrl
+        Log.d(TAG, "Deleting old Image -> $oldImageUrl")
+
+        if (oldImageUrl != null && oldImageUrl.isNotEmpty()) {
+            val storageRefOldImage = storage.getReferenceFromUrl(oldImageUrl)
+            storageRefOldImage.delete()
+                .addOnSuccessListener {
+                    // Das Bild wurde erfolgreich gelöscht. Setze den profileImageUrl im Firebase-Dokument zurück.
+                    val userDocumentRef = database.collection("users").document(user.id)
+                    userDocumentRef.update("profileImageUrl", "")
+                        .addOnSuccessListener {
+                            onComplete(true) // Erfolgreich gelöscht und Dokument aktualisiert
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.d(TAG, "Failed to update user document: ${exception.message}")
+                            onComplete(false) // Fehler beim Aktualisieren des Dokuments
+                        }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Failed to delete previous image: ${exception.message}")
+                    onComplete(false) // Fehler beim Löschen
+                }
+        } else {
+            onComplete(true) // Kein vorheriges Bild vorhanden
+        }
+    }
+
+
 }

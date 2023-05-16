@@ -119,5 +119,15 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.learnahead_prototyp.UI.Profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+    </fragment>
 </navigation>
