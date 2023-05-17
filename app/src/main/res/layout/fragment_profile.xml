@@ -1,0 +1,285 @@
+<!-- Android Large - Login -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
+
+    <!-- Dark Background Full Screen -->
+
+    <!-- Black Background for Bottom Menu -->
+    <View
+        android:id="@+id/dark_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dark_full_screen" />
+
+    <View
+        android:id="@+id/background_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@id/dark_background"
+        android:background="@drawable/black_bottom_menu"
+        android:backgroundTint="@null"
+        />
+
+    <!-- Back Icon -->
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/back_button"
+        android:elevation="7dp"
+        android:rotation="-90" />
+
+    <!-- Lernziel erstellen Header Label -->
+    <TextView
+        android:id="@+id/create_learning_goal_menu_header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/profile"
+        android:textAppearance="@style/top_menu_header"
+        android:layout_toRightOf="@id/back_icon"
+        android:layout_alignTop="@id/back_icon"/>
+
+    <!-- Header Line -->
+    <View
+        android:id="@+id/header_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/back_icon"
+        android:background="@drawable/header_line"
+        />
+
+    <!-- Profile Icon -->
+
+    <ImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="122dp"
+        android:layout_height="107dp"
+        android:layout_below="@id/header_line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/profile_image_placeholder"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/profile_pic"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/profile_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/username_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/profile_pic"
+        android:layout_marginTop="33dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/username"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/username_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/username_profile"
+        android:layout_marginStart="33dp"
+        android:text="Der Benutzername"
+        android:textAppearance="@style/menu_button_text" />
+
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/email_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/profile"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/email_profile_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/email_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/username_display"
+        android:layout_marginTop="55dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/e_mail_address"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/email_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/email_title"
+        android:layout_marginStart="33dp"
+        android:text="Die E-Mail"
+        android:textAppearance="@style/menu_button_text" />
+
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/password_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/email_icon"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/profile_lock_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/password_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/email_display"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/password"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/password_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/password_title"
+        android:layout_marginStart="33dp"
+        android:text="-"
+        android:textAppearance="@style/menu_button_text" />
+
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/learnstreak"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/password_icon"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/profile_streak_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/learnstreak_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/password_display"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/biggest_learnstreak"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/learnstreak_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/learnstreak_title"
+        android:layout_marginStart="33dp"
+        android:text="0"
+        android:textAppearance="@style/menu_button_text" />
+
+    <!-- E-Mail Icon -->
+    <ImageView
+        android:id="@+id/achieved_goals"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/learnstreak"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/goals_profile_icon"
+        android:elevation="7dp"
+        />
+
+    <TextView
+        android:id="@+id/achieved_goals_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/learnstreak_display"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="33dp"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/menu_button_text" />
+
+    <TextView
+        android:id="@+id/achieved_goals_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile"
+        android:layout_below="@id/achieved_goals_title"
+        android:layout_marginStart="33dp"
+        android:text="0"
+        android:textAppearance="@style/menu_button_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:drawableTop="@drawable/home_button"
+        android:layout_marginLeft="4dp"
+        app:iconPadding="-15dp"
+        android:text="@string/home"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Categories Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/learning_category_button"
+        app:iconPadding="-15dp"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Goals Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignRight="@id/background_bottom_menu"
+        android:layout_marginRight="4dp"
+        android:drawableTop="@drawable/learning_goal_button"
+        app:iconPadding="-15dp"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+
+</RelativeLayout>

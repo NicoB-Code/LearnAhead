@@ -1,6 +1,7 @@
 package com.example.learnahead_prototyp.Data.Repository
 
 import android.content.SharedPreferences
+import android.net.Uri
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Util.FireStoreCollection
 import com.example.learnahead_prototyp.Util.SharedPrefConstants
@@ -238,4 +239,5 @@ class AuthRepository(
             result.invoke(user)
         }
     }
+
 }

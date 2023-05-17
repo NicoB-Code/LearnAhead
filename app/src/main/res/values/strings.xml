@@ -77,6 +77,10 @@
     <string name="learning_category_name"> Lernkategorie Name: </string>
     <string name="hint_learning_category_name">Lernkategorie Name eingeben</string>
     <string name="card_view_hint_learning_category_name">Lernkategorie Name</string>
+    <!-- Section Profile -->
+    <string name="profile"> Profil</string>
+    <string name="biggest_learnstreak"> Höchste Lernstreak</string>
+    <string name="learning_goals_reached"> Lernziele erreicht</string>
 
 
 </resources>
