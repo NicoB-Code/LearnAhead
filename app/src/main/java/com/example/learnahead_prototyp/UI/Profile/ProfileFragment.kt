@@ -20,6 +20,8 @@ import com.example.learnahead_prototyp.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 // Constant for Android Systems Intent mechanism to launch the gallery app
 private const val PICK_IMAGE_REQUEST = 123
@@ -46,18 +48,20 @@ class ProfileFragment : Fragment() {
         viewModelAuth.getSession { user ->
             if(result != null) {
                 if (user != null) {
-                    viewModelProfile.onUploadSingleFile(result, user) { state ->
-                        when (state) {
-                            is UiState.Loading -> {
-                                Log.d(TAG, "Loading...")
-                            }
-
-                            is UiState.Failure -> {
-                                Log.e(TAG, "Error while trying to upload image")
-                            }
-
-                            is UiState.Success -> {
-                                Log.d(TAG, "Success!")
+                    viewModelAuth.storeSession(user){userNew ->
+                        if(userNew != null){
+                            viewModelProfile.onUploadSingleFile(result, userNew) { state ->
+                                when (state) {
+                                    is UiState.Loading -> {
+                                        Log.d(TAG, "Loading...")
+                                    }
+                                    is UiState.Failure -> {
+                                        Log.e(TAG, "Error while trying to upload image")
+                                    }
+                                    is UiState.Success -> {
+                                        Log.d(TAG, "Success!")
+                                    }
+                                }
                             }
                         }
                     }
@@ -68,6 +72,9 @@ class ProfileFragment : Fragment() {
 
 
 
+    suspend fun wait(timeMillis: Long) {
+        delay(timeMillis)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,10 +84,14 @@ class ProfileFragment : Fragment() {
 
         viewModelAuth.getSession { user ->
             if (user != null) {
-                binding.usernameDisplay.text = user.username
-                binding.emailDisplay.text = user.email
-                binding.learnstreakDisplay.text = user.learningStreak.toString()
-                loadImageFromUrl(user.profileImageUrl)
+                viewModelAuth.storeSession(user) { userNew ->
+                    if (userNew != null) {
+                        binding.usernameDisplay.text = userNew.username
+                        binding.emailDisplay.text = userNew.email
+                        binding.learnstreakDisplay.text = userNew.learningStreak.toString()
+                        loadImageFromUrl(userNew.profileImageUrl)
+                    }
+                }
             }
         }
         binding.profilePic.setOnClickListener {
@@ -114,5 +125,6 @@ class ProfileFragment : Fragment() {
                 .load(imageUrl)
                 .into(binding.profilePic)
         }
+
     }
 }
