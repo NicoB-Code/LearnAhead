@@ -33,6 +33,12 @@ class ProfileRepository (
     private val storage = Firebase.storage
 
 
+    /**
+     * Diese Funktion managed den Vorgang der Aktualisierung des Profilbilds
+     * @param imageUri Uri zum Bild, welches hochgeladen werden soll
+     * @param user Der User der von der Aktualisierung betroffen ist.
+     * @param onResult Wird für die Auswertung, ob die Funktion erfolgreich ist, verwendet
+     */
     override suspend fun uploadImage(imageUri: Uri, user: User, onResult: (UiState<Uri>) -> Unit) {
 
         Log.d(TAG, "Starting uploadImage function - URI: $imageUri")
@@ -61,9 +67,13 @@ class ProfileRepository (
     }
 
 
+    /**
+     * Diese Funktion speichert die Addresse des Bilds in Firestore im Dokument des dementsprechenden Users
+     * @param imageUrl String der in der DB gespeichert wird
+     * @param user Der User der von der Aktualisierung betroffen ist.
+     */
     private fun saveImageUrlToFirestore(imageUrl: String, user: User) {
-
-        Log.d(TAG, "User Obejct: $user")
+        // Baue Verbindung zu DB auf und ändere URL zum Profilbild ab
         val userDocumentRef = database.collection("user").document(user.id)
         userDocumentRef.update("profileImageUrl", imageUrl)
             .addOnSuccessListener {
@@ -74,30 +84,37 @@ class ProfileRepository (
             }
     }
 
+    /**
+     * Diese Funktion löscht das vorherige Profilbild nach der Aktualisierung
+     * @param user Der User der von der Aktualisierung betroffen ist.
+     */
     private suspend fun deletePreviousImage(user: User): Boolean =
         suspendCancellableCoroutine { continuation ->
             val oldImageUrl = user.profileImageUrl
             var isResumed = false
 
-            Log.d(TAG, "Trying to delete image $oldImageUrl")
+
             if (oldImageUrl == null || oldImageUrl.isEmpty()) {
+                // Es muss kein Bild gelöscht werden, das nicht existiert.
                 isResumed = true
                 continuation.resume(true) {}
             } else {
+                // Hole Referenz zum alten Bild und lösche es
                 val storageReferenceUrl = storageReference.storage.getReferenceFromUrl(oldImageUrl)
-                Log.d(TAG, "Path-$storageReferenceUrl.path")
                 val imageStorageReference = storageReferenceUrl.storage.getReference(storageReferenceUrl.path)
                 try {
+                    // Lösche altes Bild
                     imageStorageReference.delete()
                         .addOnSuccessListener {
                             Log.d(TAG, "Successfully deleted image")
                             val userDocumentRef = database.collection("user").document(user.id)
+                            // update Profil-Dokument des betroffenen Users
                             userDocumentRef.update("profileImageUrl", "")
                                 .addOnSuccessListener {
                                     if (!isResumed) {
                                         isResumed = true
                                         continuation.resume(true) {}
-                                    } // Successfully deleted and updated document
+                                    } // User Dokument erfolgreich geupdated
                                 }
                                 .addOnFailureListener { exception ->
                                     Log.d(
@@ -107,7 +124,7 @@ class ProfileRepository (
                                     if (!isResumed) {
                                         isResumed = true
                                         continuation.resume(false) {}
-                                    } // Error updating document
+                                    } // Fehler beim Updaten des User Dokuments
                                 }
                         }
                         .addOnFailureListener { exception ->
@@ -115,11 +132,11 @@ class ProfileRepository (
                             if (!isResumed) {
                                 isResumed = true
                                 continuation.resume(false) {}
-                            } // Error deleting image
+                            } // Fehler beim Löschen des Bilds
                         }
                 }catch (e: Exception) {
-                    // Exception occurred while checking if image exists
-                    Log.e(TAG, "Exception occurred while checking if image exists: ${e.message}", e)
+                    // Exception beim Löschen des Bilds
+                    Log.e(TAG, "Exception occurred while trying to delete the image: ${e.message}", e)
                 }
             }
         }

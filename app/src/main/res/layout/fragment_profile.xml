@@ -37,7 +37,7 @@
         android:elevation="7dp"
         android:rotation="-90" />
 
-    <!-- Lernziel erstellen Header Label -->
+    <!-- Profil Header Label -->
     <TextView
         android:id="@+id/create_learning_goal_menu_header_label"
         android:layout_width="wrap_content"
@@ -57,18 +57,19 @@
         android:background="@drawable/header_line"
         />
 
-    <!-- Profile Icon -->
 
+    <!-- Profilbild -->
     <ImageView
         android:id="@+id/profile_pic"
-        android:layout_width="122dp"
-        android:layout_height="107dp"
+        android:layout_width="108dp"
+        android:layout_height="94dp"
         android:layout_below="@id/header_line"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:background="@drawable/profile_image_placeholder"
         android:visibility="visible" />
 
+    <!-- Benutzer in Lila -->
     <ImageView
         android:id="@+id/profile"
         android:layout_width="45dp"
@@ -80,6 +81,7 @@
         android:elevation="7dp"
         />
 
+    <!-- Text für Benutzer -->
     <TextView
         android:id="@+id/username_profile"
         android:layout_width="wrap_content"
@@ -91,6 +93,7 @@
         android:text="@string/username"
         android:textAppearance="@style/menu_button_text" />
 
+    <!-- Text wo Username steht -->
     <TextView
         android:id="@+id/username_display"
         android:layout_width="wrap_content"
@@ -113,6 +116,8 @@
         android:elevation="7dp"
         />
 
+    <!-- Text für E-Mail -->
+
     <TextView
         android:id="@+id/email_title"
         android:layout_width="wrap_content"
@@ -124,6 +129,7 @@
         android:text="@string/e_mail_address"
         android:textAppearance="@style/menu_button_text" />
 
+    <!-- Text wo E-Mail steht -->
     <TextView
         android:id="@+id/email_display"
         android:layout_width="wrap_content"
@@ -134,7 +140,7 @@
         android:text="Die E-Mail"
         android:textAppearance="@style/menu_button_text" />
 
-    <!-- E-Mail Icon -->
+    <!-- Passwort Icon -->
     <ImageView
         android:id="@+id/password_icon"
         android:layout_width="45dp"
@@ -146,6 +152,7 @@
         android:elevation="7dp"
         />
 
+    <!-- Text für Passwort -->
     <TextView
         android:id="@+id/password_title"
         android:layout_width="wrap_content"
@@ -157,6 +164,7 @@
         android:text="@string/password"
         android:textAppearance="@style/menu_button_text" />
 
+    <!-- Text wo Passwort steht -->
     <TextView
         android:id="@+id/password_display"
         android:layout_width="wrap_content"
@@ -167,7 +175,7 @@
         android:text="-"
         android:textAppearance="@style/menu_button_text" />
 
-    <!-- E-Mail Icon -->
+    <!-- Lernstreak Icon -->
     <ImageView
         android:id="@+id/learnstreak"
         android:layout_width="45dp"
@@ -179,6 +187,7 @@
         android:elevation="7dp"
         />
 
+    <!-- Text für Lernstreak -->
     <TextView
         android:id="@+id/learnstreak_title"
         android:layout_width="wrap_content"
@@ -190,6 +199,7 @@
         android:text="@string/biggest_learnstreak"
         android:textAppearance="@style/menu_button_text" />
 
+    <!-- Text wo Lernstreak steht -->
     <TextView
         android:id="@+id/learnstreak_display"
         android:layout_width="wrap_content"
@@ -200,7 +210,7 @@
         android:text="0"
         android:textAppearance="@style/menu_button_text" />
 
-    <!-- E-Mail Icon -->
+    <!-- Lernziele Icon -->
     <ImageView
         android:id="@+id/achieved_goals"
         android:layout_width="45dp"
@@ -212,6 +222,7 @@
         android:elevation="7dp"
         />
 
+    <!-- Text für Lernziele -->
     <TextView
         android:id="@+id/achieved_goals_title"
         android:layout_width="wrap_content"
@@ -223,6 +234,7 @@
         android:text="@string/learning_goals"
         android:textAppearance="@style/menu_button_text" />
 
+    <!-- Text wo Lernziele stehen -->
     <TextView
         android:id="@+id/achieved_goals_display"
         android:layout_width="wrap_content"
@@ -233,6 +245,7 @@
         android:text="0"
         android:textAppearance="@style/menu_button_text" />
 
+    <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_home"
         android:layout_width="wrap_content"
@@ -248,7 +261,7 @@
         android:background="@android:color/transparent"
         />
 
-    <!-- Learning Categories Button -->
+    <!-- Lernkategorien Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_learning_categories"
         android:layout_width="wrap_content"
@@ -264,7 +277,7 @@
         android:background="@android:color/transparent"
         />
 
-    <!-- Learning Goals Button -->
+    <!-- Lernziele Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_learning_goals"
         android:layout_width="wrap_content"

@@ -13,6 +13,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Diese Klasse sorgt für den Informationsaustausch zwischen
+ * Repository und der UI. Diese Klasse wird mithilfe
+ * von Hilt injeziert und erhält eine Instanz des IProfileRepository-Interfaces, um auf
+ * Profil-Funktionen zugreifen zu können.
+ */
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     val repository: IProfileRepository
