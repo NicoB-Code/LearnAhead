@@ -87,6 +87,7 @@ class ProfileFragment : Fragment() {
             galleryLauncher.launch("image/*")
             viewModelAuth.getSession { user ->
                 if (user != null) {
+                    Log.d(TAG, "This is the current profileImageUrl - $user")
                     loadImageFromUrl(user.profileImageUrl)
                 }
             }
@@ -107,7 +108,7 @@ class ProfileFragment : Fragment() {
     }
 
     fun loadImageFromUrl(imageUrl: String) {
-        Log.d(TAG, "imageURL - $imageUrl")
+        Log.d(TAG, "loading imageURL into profilepic- $imageUrl")
         context?.let {
             Glide.with(it)
                 .load(imageUrl)

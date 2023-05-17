@@ -19,6 +19,7 @@ import java.io.File
 import java.util.UUID
 import com.example.learnahead_prototyp.Util.toast
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.ktx.storage
 
 
@@ -42,10 +43,12 @@ class ProfileRepository (
         deletePreviousImage(user) { success ->
             if (success) {
                 // Das alte Bild wurde erfolgreich gelöscht, lade das neue Bild hoch
-                val storageRefImage = storage.reference.child("images/$filename.jpg")
+                val storageRefImage = storageReference.child("images/$filename.jpg")
                 storageRefImage.putFile(imageUri)
                     .addOnSuccessListener { taskSnapshot ->
+                        storageReference.downloadUrl
                         taskSnapshot.storage.downloadUrl.addOnSuccessListener { downloadUri ->
+                            Log.d(TAG, "Image $downloadUri - will be downloaded to the user")
                             saveImageUrlToFirestore(downloadUri.toString(), user)
                         }
                     }
@@ -61,7 +64,7 @@ class ProfileRepository (
 
     private fun saveImageUrlToFirestore(imageUrl:String, user: User) {
 
-
+        Log.d(TAG, "User Obejct: $user")
         val userDocumentRef = database.collection("user").document(user.id)
         userDocumentRef.update("profileImageUrl", imageUrl)
             .addOnSuccessListener {
@@ -73,31 +76,59 @@ class ProfileRepository (
     }
     private fun deletePreviousImage(user: User, onComplete: (Boolean) -> Unit) {
         val oldImageUrl = user.profileImageUrl
-        Log.d(TAG, "Deleting old Image -> $oldImageUrl")
 
-        if (oldImageUrl != null && oldImageUrl.isNotEmpty()) {
-            val storageRefOldImage = storage.getReferenceFromUrl(oldImageUrl)
-            storageRefOldImage.delete()
-                .addOnSuccessListener {
-                    // Das Bild wurde erfolgreich gelöscht. Setze den profileImageUrl im Firebase-Dokument zurück.
-                    val userDocumentRef = database.collection("users").document(user.id)
-                    userDocumentRef.update("profileImageUrl", "")
-                        .addOnSuccessListener {
-                            onComplete(true) // Erfolgreich gelöscht und Dokument aktualisiert
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.d(TAG, "Failed to update user document: ${exception.message}")
-                            onComplete(false) // Fehler beim Aktualisieren des Dokuments
-                        }
+        Log.d(TAG,"Trying to delete image $oldImageUrl")
+        val imageStorageReference = storageReference.child(oldImageUrl)
+
+
+        imageStorageReference.listAll()
+            .addOnSuccessListener { listResult ->
+                val imageExists = listResult.items.isNotEmpty()
+
+
+                if (oldImageUrl != null && oldImageUrl.isNotEmpty()) {
+                    if (imageExists) {
+                        val storageRefOldImage =
+                            storageReference.storage.getReferenceFromUrl(oldImageUrl)
+                        storageRefOldImage.delete()
+                            .addOnSuccessListener {
+                                // Das Bild wurde erfolgreich gelöscht. Setze den profileImageUrl im Firebase-Dokument zurück.
+                                val userDocumentRef =
+                                    database.collection("users").document(user.id)
+                                userDocumentRef.update("profileImageUrl", "")
+                                    .addOnSuccessListener {
+                                        onComplete(true) // Erfolgreich gelöscht und Dokument aktualisiert
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Log.d(
+                                            TAG,
+                                            "Failed to update user document: ${exception.message}"
+                                        )
+                                        onComplete(false) // Fehler beim Aktualisieren des Dokuments
+                                    }
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.d(
+                                    TAG,
+                                    "Failed to delete previous image: ${exception.message}"
+                                )
+                                onComplete(false) // Fehler beim Löschen
+                            }
+                    }
+                } else {
+                    onComplete(true) // Kein vorheriges Bild vorhanden
                 }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "Failed to delete previous image: ${exception.message}")
-                    onComplete(false) // Fehler beim Löschen
-                }
-        } else {
-            onComplete(true) // Kein vorheriges Bild vorhanden
-        }
+            }
+            .addOnFailureListener { exception ->
+                // Wenn das ein String vorhanden ist, und das Objekt in Firebase nicht existiert, dann liegt ein Fehler vor und
+                // der String für das Profilbild muss manuell zurückgesetzt werden
+                val userDocumentRef = database.collection("users").document(user.id)
+                userDocumentRef.update("profileImageUrl", "")
+                Log.e(TAG, "Failed to check if object exists", exception)
+            }
+
+    }
+
     }
 
 
-}
