@@ -2,68 +2,52 @@ package com.example.learnahead_prototyp.Data.Repository
 
 import android.net.Uri
 import android.util.Log
-import androidx.fragment.app.viewModels
 import com.example.learnahead_prototyp.Data.Model.User
-import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
-import com.example.learnahead_prototyp.Util.FireStoreCollection
-import com.example.learnahead_prototyp.Util.FireStoreDocumentField
 import com.example.learnahead_prototyp.Util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.Query
 import com.google.firebase.storage.StorageReference
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
-import java.io.File
 import java.util.UUID
-import com.example.learnahead_prototyp.Util.toast
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageException
-import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.suspendCancellableCoroutine
 
 
-class ProfileRepository (
+class ProfileRepository(
     val database: FirebaseFirestore,
-    val storageReference: StorageReference
+    private val storageReference: StorageReference
 ) : IProfileRepository {
 
     val TAG: String = "ProfileRepository"
-    private val storage = Firebase.storage
-
 
     /**
      * Diese Funktion managed den Vorgang der Aktualisierung des Profilbilds
      * @param imageUri Uri zum Bild, welches hochgeladen werden soll
      * @param user Der User der von der Aktualisierung betroffen ist.
-     * @param onResult Wird für die Auswertung, ob die Funktion erfolgreich ist, verwendet
+     * @param result Wird für die Auswertung, ob die Funktion erfolgreich ist, verwendet
      */
-    override suspend fun uploadImage(imageUri: Uri, user: User, onResult: (UiState<Uri>) -> Unit) {
+    override fun uploadImage(imageUri: Uri, user: User, result: (UiState<String>) -> Unit) {
 
         Log.d(TAG, "Starting uploadImage function - URI: $imageUri")
 
-        val filename = UUID.randomUUID().toString()
-
-        // Lösche das alte Bild, bevor das neue hochgeladen wird
-        val success = deletePreviousImage(user)
-        if (success) {
-            // Das alte Bild wurde erfolgreich gelöscht, lade das neue Bild hoch
-            val storageRefImage = storageReference.child("images/$filename.jpg")
-            storageRefImage.putFile(imageUri)
-                .addOnSuccessListener { taskSnapshot ->
-                    storageRefImage.downloadUrl.addOnSuccessListener { downloadUri ->
-                        Log.d(TAG, "Image $downloadUri will be downloaded to the user")
-                        saveImageUrlToFirestore(downloadUri.toString(), user)
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "Failure while uploading Image ${exception.message}")
-                }
-        } else {
-            // Fehler beim Löschen des alten Bildes
-            Log.d(TAG, "deletePreviousImage did not succeed")
+        if (!user.profileImageUrl.isNullOrEmpty()) {
+            // Lösche das alte Bild, bevor das neue hochgeladen wird
+            deletePreviousImage(user)
         }
+
+        val filename = UUID.randomUUID().toString()
+        val storageRefImage = storageReference.child("images/$filename.jpg")
+        storageRefImage.putFile(imageUri)
+            .addOnSuccessListener {
+                storageRefImage.downloadUrl.addOnSuccessListener { downloadUri ->
+                    Log.d(TAG, "Image $downloadUri will be downloaded to the user")
+                    saveImageUrlToFirestore(downloadUri.toString(), user, result)
+                }
+            }
+            .addOnFailureListener {
+                // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
+                result.invoke(
+                    UiState.Failure(
+                        it.localizedMessage
+                    )
+                )
+            }
     }
 
 
@@ -71,16 +55,27 @@ class ProfileRepository (
      * Diese Funktion speichert die Addresse des Bilds in Firestore im Dokument des dementsprechenden Users
      * @param imageUrl String der in der DB gespeichert wird
      * @param user Der User der von der Aktualisierung betroffen ist.
+     * @param result Gibt an ob der Image Upload erfolgreich war oder ob es ein Fehler gab
      */
-    private fun saveImageUrlToFirestore(imageUrl: String, user: User) {
+    private fun saveImageUrlToFirestore(
+        imageUrl: String,
+        user: User,
+        result: (UiState<String>) -> Unit
+    ) {
         // Baue Verbindung zu DB auf und ändere URL zum Profilbild ab
         val userDocumentRef = database.collection("user").document(user.id)
         userDocumentRef.update("profileImageUrl", imageUrl)
             .addOnSuccessListener {
-                Log.d(TAG, "Image URL added to DB")
+                result.invoke(
+                    UiState.Success("Image was Uploaded successfully")
+                )
             }
-            .addOnFailureListener { exception ->
-                Log.e(TAG, "Image URL could not be added to DB")
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(
+                        it.localizedMessage
+                    )
+                )
             }
     }
 
@@ -88,59 +83,45 @@ class ProfileRepository (
      * Diese Funktion löscht das vorherige Profilbild nach der Aktualisierung
      * @param user Der User der von der Aktualisierung betroffen ist.
      */
-    private suspend fun deletePreviousImage(user: User): Boolean =
-        suspendCancellableCoroutine { continuation ->
-            val oldImageUrl = user.profileImageUrl
-            var isResumed = false
-
-
-            if (oldImageUrl == null || oldImageUrl.isEmpty()) {
-                // Es muss kein Bild gelöscht werden, das nicht existiert.
-                isResumed = true
-                continuation.resume(true) {}
-            } else {
-                // Hole Referenz zum alten Bild und lösche es
-                val storageReferenceUrl = storageReference.storage.getReferenceFromUrl(oldImageUrl)
-                val imageStorageReference = storageReferenceUrl.storage.getReference(storageReferenceUrl.path)
-                try {
-                    // Lösche altes Bild
-                    imageStorageReference.delete()
+    private fun deletePreviousImage(user: User) {
+        // Hole Referenz zum alten Bild und lösche es
+        val storageReferenceUrl = storageReference.storage.getReferenceFromUrl(user.profileImageUrl)
+        val imageStorageReference =
+            storageReferenceUrl.storage.getReference(storageReferenceUrl.path)
+        try {
+            // Lösche altes Bild
+            imageStorageReference.delete()
+                .addOnSuccessListener {
+                    Log.d(TAG, "Successfully deleted image")
+                    val userDocumentRef = database.collection("user").document(user.id)
+                    // update Profil-Dokument des betroffenen Users
+                    userDocumentRef.update("profileImageUrl", "")
                         .addOnSuccessListener {
-                            Log.d(TAG, "Successfully deleted image")
-                            val userDocumentRef = database.collection("user").document(user.id)
-                            // update Profil-Dokument des betroffenen Users
-                            userDocumentRef.update("profileImageUrl", "")
-                                .addOnSuccessListener {
-                                    if (!isResumed) {
-                                        isResumed = true
-                                        continuation.resume(true) {}
-                                    } // User Dokument erfolgreich geupdated
-                                }
-                                .addOnFailureListener { exception ->
-                                    Log.d(
-                                        TAG,
-                                        "Failed to update user document: ${exception.message}"
-                                    )
-                                    if (!isResumed) {
-                                        isResumed = true
-                                        continuation.resume(false) {}
-                                    } // Fehler beim Updaten des User Dokuments
-                                }
+                            // Erfolgreich gelöscht
                         }
                         .addOnFailureListener { exception ->
-                            Log.d(TAG, "Failed to delete previous image: ${exception.message}")
-                            if (!isResumed) {
-                                isResumed = true
-                                continuation.resume(false) {}
-                            } // Fehler beim Löschen des Bilds
+                            Log.d(
+                                TAG,
+                                "Failed to update user document: ${exception.message}"
+                            )
+                            // Fehler beim Updaten des User Dokuments
                         }
-                }catch (e: Exception) {
-                    // Exception beim Löschen des Bilds
-                    Log.e(TAG, "Exception occurred while trying to delete the image: ${e.message}", e)
                 }
-            }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Failed to delete previous image: ${exception.message}")
+                    // Fehler beim Löschen des Bilds
+                }
+
+        } catch (e: Exception) {
+            // Exception beim Löschen des Bilds
+            Log.e(
+                TAG,
+                "Exception occurred while trying to delete the image: ${e.message}",
+                e
+            )
         }
     }
+}
 
 
 

@@ -48,39 +48,44 @@
 
 
     <!-- Produktiv Strings -->
-    <string name="register_subject"> Registrierung </string>
-    <string name="username"> Benutzername </string>
-    <string name="e_mail_address"> E-Mail-Adresse </string>
-    <string name="password"> Passwort </string>
-    <string name="register_verb"> Registrieren </string>
-    <string name="got_already_an_account"> Du hast schon ein Konto? </string>
-    <string name="not_have_an_account"> Du hast noch kein Konto? </string>
-    <string name="login"> Login </string>
-    <string name="login_subject"> Anmeldung </string>
-    <string name="login_verb"> Anmelden </string>
-    <string name="forgot_password"> Passwort vergessen </string>
-    <string name="forgot_password_question"> Passwort vergessen ? </string>
-    <string name="send"> Senden </string>
-    <string name="learning_goal_for_today"> Heutige Lernziele </string>
-    <string name="add_learning_goal"> Lernziel erstellen </string>
-    <string name="home"> Home </string>
-    <string name="learning_categories"> Lernkategorien </string>
-    <string name="add_learning_category"> Lernkategorie erstellen </string>
-    <string name="learning_goals"> Lernziele </string>
-    <string name="learning_goal_title"> Lernziel Name: </string>
-    <string name="learning_goal_start_date"> Start Datum: </string>
-    <string name="learning_goal_end_date"> Ziel Datum: </string>
-    <string name="learning_goal_description">Beschreibung: </string>
+    <string name="register_subject">Registrierung</string>
+    <string name="username">Benutzername</string>
+    <string name="e_mail_address">E-Mail-Adresse</string>
+    <string name="password">Passwort</string>
+    <string name="register_verb"> Registrieren</string>
+    <string name="got_already_an_account"> Du hast schon ein Konto?</string>
+    <string name="not_have_an_account"> Du hast noch kein Konto?</string>
+    <string name="login">Login</string>
+    <string name="login_subject">Anmeldung</string>
+    <string name="login_verb">Anmelden</string>
+    <string name="forgot_password">Passwort vergessen</string>
+    <string name="forgot_password_question">Passwort vergessen?</string>
+    <string name="send">Senden</string>
+    <string name="learning_goal_for_today">Heutige Lernziele</string>
+    <string name="add_learning_goal">Lernziel erstellen</string>
+    <string name="home">Home</string>
+    <string name="learning_categories">Lernkategorien</string>
+    <string name="add_learning_category">Lernkategorie erstellen</string>
+    <string name="learning_goals">Lernziele</string>
+    <string name="learning_goal_title">Lernziel Name:</string>
+    <string name="learning_goal_start_date">Start Datum:</string>
+    <string name="learning_goal_end_date">Ziel Datum:</string>
+    <string name="learning_goal_description">Beschreibung:</string>
     <string name="card_view_hint_goal_title">Goal Title</string>
     <string name="card_view_hint_date_interval">Date Interval</string>
     <string name="card_view_hint_calculated_left_days">Calculated left Days</string>
-    <string name="learning_category_name"> Lernkategorie Name: </string>
+    <string name="learning_category_name">Lernkategorie Name: </string>
     <string name="hint_learning_category_name">Lernkategorie Name eingeben</string>
     <string name="card_view_hint_learning_category_name">Lernkategorie Name</string>
     <!-- Section Profile -->
-    <string name="profile"> Profil</string>
-    <string name="biggest_learnstreak"> Höchste Lernstreak</string>
-    <string name="learning_goals_reached"> Lernziele erreicht</string>
+    <string name="profile">Profil</string>
+    <string name="biggest_learnstreak">Höchste Lernstreak</string>
+    <string name="learning_goals_reached">Lernziele erreicht</string>
+    <string name="placeholder_username">Der Benutzername</string>
+    <string name="placeholder_email">Die E-Mail</string>
+    <string name="placeholder_password">Das Passwort</string>
+    <string name="placeholder_learning_streak">Die höchste Learning Streak</string>
+    <string name="placeholder_achieved_goals">Die erreichten Ziele</string>
 
 
 </resources>
