@@ -112,5 +112,8 @@ class AuthViewModel @Inject constructor(
     fun getSession(result: (User?) -> Unit) {
         repository.getSession(result)
     }
+    fun storeSession(user: User, result: (User?) -> Unit) {
+        repository.storeSession(user.id, result)
+    }
 
 }

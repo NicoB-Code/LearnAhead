@@ -7,8 +7,11 @@ import com.example.learnahead_prototyp.Data.Repository.IAuthRepository
 import com.example.learnahead_prototyp.Data.Repository.IGoalRepository
 import com.example.learnahead_prototyp.Data.Repository.ILearnCategoryRepository
 import com.example.learnahead_prototyp.Data.Repository.LearningCategoryRepository
+import com.example.learnahead_prototyp.Data.Repository.IProfileRepository
+import com.example.learnahead_prototyp.Data.Repository.ProfileRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -72,5 +75,14 @@ object RepositoryModule {
         gson: Gson
     ): IAuthRepository {
         return AuthRepository(auth, database, appPreferences, gson)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileRepository(
+        database: FirebaseFirestore,
+        storageReference: StorageReference
+    ): IProfileRepository {
+        return ProfileRepository(database, storageReference)
     }
 }

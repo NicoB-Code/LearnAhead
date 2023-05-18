@@ -18,5 +18,6 @@ data class User(
     val learningStreak: Int = 0,
     val email: String = "",
     @ServerTimestamp
-    val registerDate: Date = Date()
+    val registerDate: Date = Date(),
+    val profileImageUrl: String = ""
 )
