@@ -1,0 +1,19 @@
+<!-- drawable/logo_prototype.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="126dp"
+    android:height="108dp"
+    android:viewportWidth="126"
+    android:viewportHeight="108"
+    >
+    <group>
+        <clip-path
+            android:pathData="M126 54C126 83.8234 97.7939 108 63 108C28.2061 108 0 83.8234 0 54C0 24.1766 28.2061 0 63 0C97.7939 0 126 24.1766 126 54Z"
+            />
+        <path
+            android:pathData="M0 0V108H126V0"
+            android:fillColor="#D9D9D9"
+            />
+    </group>
+</vector>
