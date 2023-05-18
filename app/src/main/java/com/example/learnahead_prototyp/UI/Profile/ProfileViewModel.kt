@@ -23,11 +23,18 @@ class ProfileViewModel @Inject constructor(
 
     val TAG: String = "ProfileViewModel"
 
+    /**
+     * MutableLiveData that holds the current state of the fileUri of an user Profile.
+     */
     private val _fileUris = MutableLiveData<UiState<String>>()
     val fileUris: LiveData<UiState<String>>
         get() = _fileUris
 
-
+    /**
+     * Calls the repository to upload an new profile Image for the given User and updates the _fileUris MutableLiveData.
+     * @param fileUris the new Image Uri
+     * @param user the User for which to retrieve the Goals.
+     */
     fun onUploadSingleFile(fileUris: Uri, user: User){
         _fileUris.value = UiState.Loading
         repository.uploadImage(fileUris, user) { _fileUris.value = it}

@@ -20,7 +20,7 @@ class ProfileRepository(
      * Diese Funktion managed den Vorgang der Aktualisierung des Profilbilds
      * @param imageUri Uri zum Bild, welches hochgeladen werden soll
      * @param user Der User der von der Aktualisierung betroffen ist.
-     * @param onResult Wird für die Auswertung, ob die Funktion erfolgreich ist, verwendet
+     * @param result Wird für die Auswertung, ob die Funktion erfolgreich ist, verwendet
      */
     override fun uploadImage(imageUri: Uri, user: User, result: (UiState<String>) -> Unit) {
 
@@ -55,6 +55,7 @@ class ProfileRepository(
      * Diese Funktion speichert die Addresse des Bilds in Firestore im Dokument des dementsprechenden Users
      * @param imageUrl String der in der DB gespeichert wird
      * @param user Der User der von der Aktualisierung betroffen ist.
+     * @param result Gibt an ob der Image Upload erfolgreich war oder ob es ein Fehler gab
      */
     private fun saveImageUrlToFirestore(
         imageUrl: String,
