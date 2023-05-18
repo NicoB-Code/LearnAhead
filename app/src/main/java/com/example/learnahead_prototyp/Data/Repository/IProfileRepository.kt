@@ -3,7 +3,6 @@ package com.example.learnahead_prototyp.Data.Repository
 import android.net.Uri
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Util.UiState
-import java.io.File
 
 
 /**
@@ -11,5 +10,10 @@ import java.io.File
  */
 interface IProfileRepository {
     // DocString siehe Implementierung
-    suspend fun uploadImage(imageUri: Uri, user: User, onResult: (UiState<Uri>) -> Unit)
+
+    /**
+     * Image Upload
+     * bitte noch kommentieren @Nico
+     */
+     fun uploadImage(imageUri: Uri, user: User, result: (UiState<String>) -> Unit)
 }
