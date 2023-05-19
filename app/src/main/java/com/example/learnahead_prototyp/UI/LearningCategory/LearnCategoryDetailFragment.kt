@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
@@ -29,6 +30,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LearnCategoryDetailFragment : Fragment() {
 
+    private lateinit var currentUser: User
+
     // Ein Tag zur Identifizierung des Lernkategorie-Detail-Fragments für Logging-Zwecke.
     val TAG: String = "LearningCategoryDetailFragment"
 
@@ -36,16 +39,17 @@ class LearnCategoryDetailFragment : Fragment() {
     lateinit var binding: FragmentLearnCategoryDetailBinding
 
     // Das LearnCategoryViewModel-Objekt, das die Geschäftslogik enthält und die Daten für die Lernkategorie liefert.
-    val viewModel: LearnCategoryViewModel by viewModels()
+    private val learnCategoryViewModel: LearnCategoryViewModel by viewModels()
 
     // Das AuthViewModel-Objekt, das für die Authentifizierung des Benutzers verantwortlich ist.
-    val authViewModel: AuthViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     // Eine Flagge, die angibt, ob die Lernkategorie bearbeitet wird (true) oder ob es neu erstellt wird (false).
-    var isEdit = false
+    private var isEdit = false
 
     // Die Lernkategorie, die bearbeitet wird.
-    var objLearningCategory: LearningCategory? = null
+    private var objLearningCategory: LearningCategory? = null
+
 
     /**
      * Erstellt die View und gibt sie zurück.
@@ -57,7 +61,7 @@ class LearnCategoryDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLearnCategoryDetailBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -71,8 +75,13 @@ class LearnCategoryDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observer()
+        setLocalCurrentUser()
         updateUI()
         setEventListener()
+    }
+
+    private fun setLocalCurrentUser() {
+        authViewModel.getSession()
     }
 
     /**
@@ -153,7 +162,7 @@ class LearnCategoryDetailFragment : Fragment() {
      */
     private fun observer() {
         // Eine Beobachtung auf viewModel.addLearningCategory ausführen
-        viewModel.addLearningCategory.observe(viewLifecycleOwner) { state ->
+        learnCategoryViewModel.addLearningCategory.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
@@ -174,7 +183,7 @@ class LearnCategoryDetailFragment : Fragment() {
         }
 
         // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
-        viewModel.updateLearningCategory.observe(viewLifecycleOwner) { state ->
+        learnCategoryViewModel.updateLearningCategory.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
@@ -192,6 +201,27 @@ class LearnCategoryDetailFragment : Fragment() {
                 }
             }
         }
+
+        // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.btnProgressAr.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.btnProgressAr.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.btnProgressAr.hide()
+                    currentUser = state.data
+                    learnCategoryViewModel.getLearningCategories(currentUser)
+                }
+            }
+        }
     }
 
     /**
@@ -202,11 +232,10 @@ class LearnCategoryDetailFragment : Fragment() {
     private fun updateButtonVisibility() {
         val title = binding.textLearningCategoryName.text.toString().trim()
 
-        if (title.isNotEmpty()) {
+        if (title.isNotEmpty())
             binding.saveButton.show()
-        } else {
+        else
             binding.saveButton.hide()
-        }
     }
 
     /**
@@ -217,7 +246,7 @@ class LearnCategoryDetailFragment : Fragment() {
     private fun createLearningCategory() {
         // Wenn die Eingabevalidierung erfolgreich ist, die Lernkategorie an viewModel.addLearningCategory übergeben
         if (validation()) {
-            viewModel.addLearningCategory(getLearningCategory())
+            learnCategoryViewModel.addLearningCategory(getLearningCategory())
         }
     }
 
@@ -229,7 +258,7 @@ class LearnCategoryDetailFragment : Fragment() {
     private fun updateLearningCategory() {
         // Wenn die Eingabevalidierung erfolgreich ist, die Lernkategorie an viewModel.updateLearningCategory übergeben
         if (validation()) {
-            viewModel.updateLearningCategory(getLearningCategory())
+            learnCategoryViewModel.updateLearningCategory(getLearningCategory())
         }
     }
 
@@ -281,11 +310,6 @@ class LearnCategoryDetailFragment : Fragment() {
         return LearningCategory(
             id = objLearningCategory?.id ?: "",
             name = binding.textLearningCategoryName.text.toString(),
-        ).apply {
-            // Session-Daten werden aktualisiert
-            authViewModel.getSession {
-                this.user_id = it?.id ?: ""
-            }
-        }
+        )
     }
 }

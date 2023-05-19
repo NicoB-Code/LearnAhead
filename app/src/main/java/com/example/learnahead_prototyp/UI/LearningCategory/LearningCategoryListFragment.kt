@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
@@ -26,18 +27,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LearningCategoryListFragment : Fragment() {
 
+    private lateinit var currentUser: User
+
     // Konstante für das Logging-Tag
     val TAG: String = "LearningCategoryListFragment"
 
     // Deklaration der benötigten Variablen
     lateinit var binding: FragmentLearningCategoryListBinding
-    val viewModel: LearnCategoryViewModel by viewModels()
-    val authViewModel: AuthViewModel by viewModels()
-    var deletePosition: Int = -1
+    private val learnCategoryViewModel: LearnCategoryViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
+    private var deletePosition: Int = -1
     var list: MutableList<LearningCategory> = arrayListOf()
 
     // Initialisierung des Adapters mit den entsprechenden Click-Callbacks
-    val adapter by lazy {
+    private val adapter by lazy {
         LearningCategoryListingAdapter(
             onItemClicked = { pos, item ->
                 // Navigation zum Lernkategorie-Detail-Fragment mit Parameter-Übergabe
@@ -51,7 +54,7 @@ class LearningCategoryListFragment : Fragment() {
             onDeleteClicked = { pos, item ->
                 // Speichern der zu löschenden Position und Löschen der Lernkategorie über das ViewModel
                 deletePosition = pos
-                viewModel.deleteLearningCategory(item)
+                learnCategoryViewModel.deleteLearningCategory(item)
             }
         )
     }
@@ -68,7 +71,7 @@ class LearningCategoryListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Das Binding-Objekt für das Fragment-Layout wird initialisiert.
         binding = FragmentLearningCategoryListBinding.inflate(layoutInflater)
         // Die erzeugte View-Instanz wird zurückgegeben.
@@ -85,51 +88,30 @@ class LearningCategoryListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observer()
+        setLocalCurrentUser()
         setEventListener()
 
         // Setzen des Adapters auf die RecyclerView
         binding.recyclerView.adapter = adapter
+    }
 
-        // Abrufen der aktuellen Benutzersitzung, um die zugehörigen Lernkategorien abzurufen.
-        authViewModel.getSession {
-            viewModel.getLearningCategories(it)
-        }
+    private fun setLocalCurrentUser() {
+        authViewModel.getSession()
     }
 
     // Alle Event-Listener aufsetzen
     private fun setEventListener() {
         // Klick-Listener für den "Create"-Button, welcher zur "LearningCategoryDetailFragment" navigiert.
-        binding.buttonAdd.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_learningCategoryListFragment_to_learnCategoryDetailFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonAdd.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_learnCategoryDetailFragment) }
 
         // Klick-Listener für den "LearningCategory"-Button, welcher den Benutzer zum "HomeFragment" navigiert.
-        binding.buttonHome.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_learningCategoryListFragment_to_homeFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_homeFragment)}
 
         // Klick-Listener für den "LearningCategory"-Button, welcher den Benutzer zur "LearningCategoryListFragment" navigiert.
-        binding.buttonLearningGoals.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_learningCategoryListFragment_to_goalListingFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_goalListingFragment) }
 
         // Klick-Listener für den "Logout"-Button, welcher den Benutzer ausloggt und zur "LoginFragment" navigiert.
-        binding.logout.setOnClickListener {
-            authViewModel.logout {
-                findNavController().navigate(R.id.action_learningCategoryListFragment_to_loginFragment)
-            }
+        binding.logout.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_learningCategoryListFragment_to_loginFragment) }
         }
     }
 
@@ -138,7 +120,7 @@ class LearningCategoryListFragment : Fragment() {
      */
     private fun observer() {
         // Observer für "learningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen in der Liste der Lernkategorien.
-        viewModel.learningCategory.observe(viewLifecycleOwner) { state ->
+        learnCategoryViewModel.learningCategory.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
                     // Fortschrittsanzeige anzeigen
@@ -161,7 +143,7 @@ class LearningCategoryListFragment : Fragment() {
         }
 
         // Observer für "deleteLearningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen beim Löschen von Lernkategorien.
-        viewModel.deleteLearningCategory.observe(viewLifecycleOwner) { state ->
+        learnCategoryViewModel.deleteLearningCategory.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
                     // Fortschrittsanzeige anzeigen
@@ -182,6 +164,28 @@ class LearningCategoryListFragment : Fragment() {
                         list.removeAt(deletePosition)
                         adapter.updateList(list)
                     }
+                }
+            }
+        }
+
+        // Observer für "deleteLearningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen beim Löschen von Lernkategorien.
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
+                    binding.progressBar.hide()
+                    this.currentUser = state.data
                 }
             }
         }

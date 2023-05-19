@@ -86,19 +86,17 @@ class LoginFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Ruft die "observer"-Funktion auf, um auf ViewModel-Änderungen zu reagieren
         observer()
+        setEventListener()
+    }
 
+    private fun setEventListener() {
         // Setzt den Click-Listener für die Login-Button
         binding.buttonLogin.setOnClickListener {
             // Überprüft, ob die Eingaben des Benutzers gültig sind
             if (validation()) {
                 // Ruft die "login"-Funktion des ViewModels auf, um den Benutzer anzumelden
-                viewModel.login(
-                    email = binding.editTextEmail.text.toString(),
-                    password = binding.editTextPassword.text.toString()
-                )
+                viewModel.login(email = binding.editTextEmail.text.toString(), password = binding.editTextPassword.text.toString())
             }
         }
 
@@ -146,6 +144,24 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+        viewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            // Überprüft den Status des UI-States und aktualisiert die UI entsprechend
+            when (state) {
+                is UiState.Loading -> {
+
+                }
+
+                is UiState.Failure -> {
+
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    // CurrentUser wurde gesetzt und man kann weiter navigieren
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }
+            }
+        }
     }
 
     /**
@@ -188,11 +204,6 @@ class LoginFragment : Fragment() {
      */
     override fun onStart() {
         super.onStart()
-        viewModel.getSession { user ->
-            if (user != null) {
-                // Wenn ein Benutzer angemeldet ist, navigiert es zum "HomeFragment"
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-            }
-        }
+        viewModel.getSession()
     }
 }

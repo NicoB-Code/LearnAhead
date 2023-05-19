@@ -55,12 +55,12 @@ interface IAuthRepository {
      * @param it Die zu speichernden Sitzungsinformationen.
      * @param result Die Rückruffunktion zum Bearbeiten des Ergebnisses.
      */
-    fun storeSession(it: String, result: (User?) -> Unit)
+    fun storeSession(it: String, result: (UiState<User>) -> Unit)
 
     /**
      * This method retrieves the stored session information.
      * The result is returned in a callback that takes a [User] parameter.
      * @param result The callback function to handle the result.
      */
-    fun getSession(result: (User?) -> Unit)
+    fun getSession(result: (UiState<User>) -> Unit)
 }

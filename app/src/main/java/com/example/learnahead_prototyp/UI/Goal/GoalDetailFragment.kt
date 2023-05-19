@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.Goal
+import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
+import com.example.learnahead_prototyp.Util.GoalStatus
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -34,6 +36,8 @@ import java.util.Locale
 @AndroidEntryPoint
 class GoalDetailFragment : Fragment() {
 
+    private var currentUser: User? = null
+
     // Ein Tag zur Identifizierung des Ziel-Detail-Fragments für Logging-Zwecke.
     val TAG: String = "GoalDetailFragment"
 
@@ -41,16 +45,16 @@ class GoalDetailFragment : Fragment() {
     lateinit var binding: FragmentGoalDetailBinding
 
     // Das GoalViewModel-Objekt, das die Geschäftslogik enthält und die Daten für das Ziel liefert.
-    val viewModel: GoalViewModel by viewModels()
+    private val goalViewModel: GoalViewModel by viewModels()
 
     // Das AuthViewModel-Objekt, das für die Authentifizierung des Benutzers verantwortlich ist.
-    val authViewModel: AuthViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     // Eine Flagge, die angibt, ob das Ziel bearbeitet wird (true) oder ob es neu erstellt wird (false).
-    var isEdit = false
+    private var isEdit = false
 
     // Das Ziel, das bearbeitet wird.
-    var objGoal: Goal? = null
+    private var objGoal: Goal? = null
 
     /**
      * Erstellt die View und gibt sie zurück.
@@ -62,7 +66,7 @@ class GoalDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGoalDetailBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -76,9 +80,14 @@ class GoalDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observer()
+        setLocalCurrentUser()
         updateUI()
         setEventListener()
 
+    }
+
+    private fun setLocalCurrentUser() {
+        authViewModel.getSession()
     }
 
     /**
@@ -86,46 +95,27 @@ class GoalDetailFragment : Fragment() {
      */
     private fun setEventListener() {
         binding.saveButton.setOnClickListener {
-            if (isEdit) {
+            if (isEdit)
                 updateGoal()
-            } else {
+            else
                 createGoal()
-            }
         }
 
         binding.editButton.setOnClickListener {
             isMakeEnableUI(true)
             isEdit = true
             binding.editButton.hide()
-            binding.textLearningGoalTitle.requestFocus()
+            binding.textLearningGoalName.requestFocus()
         }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_goalDetailFragment_to_homeFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_goalDetailFragment_to_homeFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_goalDetailFragment_to_learningCategoryListFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_goalDetailFragment_to_learningCategoryListFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.buttonLearningGoals.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_goalDetailFragment_to_goalListingFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_goalDetailFragment_to_goalListingFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.backIcon.setOnClickListener {
@@ -133,7 +123,7 @@ class GoalDetailFragment : Fragment() {
         }
 
         // Event Listener wenn sich der Titel verändert
-        binding.textLearningGoalTitle.doAfterTextChanged {
+        binding.textLearningGoalName.doAfterTextChanged {
             updateButtonVisibility()
         }
 
@@ -161,7 +151,7 @@ class GoalDetailFragment : Fragment() {
      *                  (`true`) oder nicht (`false`). Der Standardwert ist `false`.
      */
     private fun isMakeEnableUI(isDisable: Boolean = false) {
-        binding.textLearningGoalTitle.isEnabled = isDisable
+        binding.textLearningGoalName.isEnabled = isDisable
         binding.textLearningGoalStartDate.isEnabled = isDisable
         binding.textLearningGoalEndDate.isEnabled = isDisable
         binding.textGoalDescription.isEnabled = isDisable
@@ -174,7 +164,7 @@ class GoalDetailFragment : Fragment() {
      */
     private fun observer() {
         // Eine Beobachtung auf viewModel.addGoal ausführen
-        viewModel.addGoal.observe(viewLifecycleOwner) { state ->
+        goalViewModel.addGoal.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
@@ -188,14 +178,23 @@ class GoalDetailFragment : Fragment() {
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    binding.editButton.show()
-                    toast(state.data)
+                    if(state.data != null && currentUser != null) {
+                        // Das neue Lernziel in dem User hinzufügen
+                        currentUser!!.goals.add(state.data)
+                        // Den User in der DB updaten
+                        authViewModel.updateUserInfo(currentUser!!)
+                        findNavController().navigate(R.id.action_goalDetailFragment_to_goalListingFragment)
+                        toast("Das Lernziel konnte erfolgreich erstellt werden")
+                    }
+                    else {
+                        toast("Das Lernziel konnte nicht erstellt werden")
+                    }
                 }
             }
         }
 
         // Eine Beobachtung auf viewModel.updateGoal ausführen
-        viewModel.updateGoal.observe(viewLifecycleOwner) { state ->
+        goalViewModel.updateGoal.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
@@ -209,7 +208,39 @@ class GoalDetailFragment : Fragment() {
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    toast(state.data)
+                    if(state.data != null && currentUser != null) {
+                        val indexOfCurrentObject = currentUser!!.goals.indexOfFirst { it.id == state.data.id }
+                        if (indexOfCurrentObject != -1) {
+                            currentUser!!.goals[indexOfCurrentObject] = state.data
+                        } else {
+                            currentUser!!.goals.add(state.data)
+                        }
+
+                        // Den User in der DB updaten
+                        authViewModel.updateUserInfo(currentUser!!)
+                        toast("Das Lernziel konnte erfolgreich geupdated werden")
+                    }
+                    else {
+                        toast("Das Lernziel konnte nicht geupdated werden")
+                    }
+                }
+            }
+        }
+        // Eine Beobachtung auf viewModel.updateGoal ausführen
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.btnProgressAr.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.btnProgressAr.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    currentUser = state.data
                 }
             }
         }
@@ -221,7 +252,7 @@ class GoalDetailFragment : Fragment() {
      * Ist eines der Felder nicht ausgefüllt, dann soll der Speichern Button nicht sichtbar sein.
      */
     private fun updateButtonVisibility() {
-        val title = binding.textLearningGoalTitle.text.toString().trim()
+        val title = binding.textLearningGoalName.text.toString().trim()
         val startDate = binding.textLearningGoalStartDate.text.toString().trim()
         val endDate = binding.textLearningGoalEndDate.text.toString().trim()
         val description = binding.textGoalDescription.text.toString().trim()
@@ -241,7 +272,7 @@ class GoalDetailFragment : Fragment() {
     private fun createGoal() {
         // Wenn die Eingabevalidierung erfolgreich ist, das Ziel an viewModel.addGoal übergeben
         if (validation()) {
-            viewModel.addGoal(getGoal())
+            goalViewModel.addGoal(getGoal())
         }
     }
 
@@ -253,7 +284,7 @@ class GoalDetailFragment : Fragment() {
     private fun updateGoal() {
         // Wenn die Eingabevalidierung erfolgreich ist, das Ziel an viewModel.updateGoal übergeben
         if (validation()) {
-            viewModel.updateGoal(getGoal())
+            goalViewModel.updateGoal(getGoal())
         }
     }
 
@@ -266,7 +297,7 @@ class GoalDetailFragment : Fragment() {
         objGoal = arguments?.getParcelable("goal")
         // Wenn ein Lernziel existiert z.B. wenn es editiert wird, dann werden die Daten des Lernziels geladen
         objGoal?.let { goal ->
-            binding.textLearningGoalTitle.setText(goal.title)
+            binding.textLearningGoalName.setText(goal.name)
             binding.textLearningGoalStartDate.setText(dateFormat.format(goal.startDate))
             binding.textLearningGoalEndDate.setText(dateFormat.format(goal.endDate))
             binding.textGoalDescription.setText(goal.description)
@@ -276,7 +307,7 @@ class GoalDetailFragment : Fragment() {
             isMakeEnableUI()
         } ?: run {
             // Standardmaske für Lernziel erstellen
-            binding.textLearningGoalTitle.setText("")
+            binding.textLearningGoalName.setText("")
             binding.textLearningGoalStartDate.setText(dateFormat.format(Date()))
             binding.textLearningGoalEndDate.setText(dateFormat.format(Date()))
             binding.textGoalDescription.setText("")
@@ -284,7 +315,7 @@ class GoalDetailFragment : Fragment() {
             binding.editButton.hide()
             //binding.delete.hide()
             isMakeEnableUI(true)
-            binding.textLearningGoalTitle.requestFocus()
+            binding.textLearningGoalName.requestFocus()
         }
     }
 
@@ -294,7 +325,7 @@ class GoalDetailFragment : Fragment() {
      */
     private fun validation(): Boolean {
         // Überprüfen, ob der Lernzielname leer oder null ist
-        if (binding.textLearningGoalTitle.text.isNullOrEmpty()) {
+        if (binding.textLearningGoalName.text.isNullOrEmpty()) {
             // Wenn ja, eine Toast-Meldung ausgeben und false zurückgeben
             toast("Enter title")
             return false
@@ -355,15 +386,12 @@ class GoalDetailFragment : Fragment() {
         // Ziel-Objekt wird erstellt
         return Goal(
             id = objGoal?.id ?: "",
-            title = binding.textLearningGoalTitle.text.toString(),
+            name = binding.textLearningGoalName.text.toString(),
             description = binding.textGoalDescription.text.toString(),
             startDate = dateValidation(binding.textLearningGoalStartDate),
-            endDate = dateValidation(binding.textLearningGoalEndDate)
-        ).apply {
-            // Session-Daten werden aktualisiert
-            authViewModel.getSession {
-                this.user_id = it?.id ?: ""
-            }
-        }
+            endDate = dateValidation(binding.textLearningGoalEndDate),
+            lastLearned = objGoal?.lastLearned,
+            status = GoalStatus.ToDo
+        )
     }
 }

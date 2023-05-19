@@ -29,15 +29,15 @@ class GoalViewModel @Inject constructor(
     /**
      * MutableLiveData that holds the current state of adding a new Goal.
      */
-    private val _addGoal = MutableLiveData<UiState<String>>()
-    val addGoal: LiveData<UiState<String>>
+    private val _addGoal = MutableLiveData<UiState<Goal?>>()
+    val addGoal: LiveData<UiState<Goal?>>
         get() = _addGoal
 
     /**
      * MutableLiveData that holds the current state of updating a Goal.
      */
-    private val _updateGoal = MutableLiveData<UiState<String>>()
-    val updateGoal: LiveData<UiState<String>>
+    private val _updateGoal = MutableLiveData<UiState<Goal?>>()
+    val updateGoal: LiveData<UiState<Goal?>>
         get() = _updateGoal
 
     /**

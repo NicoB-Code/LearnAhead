@@ -1,6 +1,7 @@
 package com.example.learnahead_prototyp.Data.Repository
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Util.FireStoreCollection
 import com.example.learnahead_prototyp.Util.SharedPrefConstants
@@ -20,6 +21,8 @@ class AuthRepository(
     val gson: Gson // Gson-Objekt
 ) : IAuthRepository {
 
+    val TAG: String = "AuthRepository"
+
     /**
      * Diese Funktion registriert einen Benutzer mit seiner E-Mail-Adresse und seinem Passwort
      * und aktualisiert anschließend seine Benutzerdaten. Das Ergebnis der Registrierung wird
@@ -31,13 +34,7 @@ class AuthRepository(
      * @return Diese Funktion gibt kein Ergebnis zurück, sondern ruft die übergebene Funktion "result"
      * auf, um das Ergebnis an den Aufrufer zurückzugeben.
      */
-    override fun registerUser(
-        email: String,
-        password: String,
-        user: User,
-        // Funktion zur Rückgabe des Ergebnisses an den
-        result: (UiState<String>) -> Unit
-    ) {
+    override fun registerUser(email: String, password: String, user: User, result: (UiState<String>) -> Unit) {
         // Neuen Benutzer mit Email und Passwort erstellen
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
@@ -48,12 +45,8 @@ class AuthRepository(
                     when (state) {
                         is UiState.Success -> {
                             // Session speichern
-                            storeSession(id = authResult.user?.uid ?: "") { sessionResult ->
-                                if (sessionResult == null) {
-                                    result.invoke(UiState.Failure("User register successfully but session failed to store!"))
-                                } else {
-                                    result.invoke(UiState.Success("User register successfully!"))
-                                }
+                            storeSession(id = authResult.user?.uid ?: "") {
+                                result.invoke(UiState.Success("User register successfully!"))
                             }
                         }
 
@@ -112,11 +105,7 @@ class AuthRepository(
      *               Die Erfolgsmeldung gibt an, dass der Benutzer erfolgreich angemeldet wurde.
      *               Die Fehlermeldung gibt an, dass die Anmeldung fehlgeschlagen ist.
      */
-    override fun loginUser(
-        email: String,
-        password: String,
-        result: (UiState<String>) -> Unit
-    ) {
+    override fun loginUser(email: String, password: String, result: (UiState<String>) -> Unit) {
         // Benutzer mit Email und Passwort anmelden
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -124,13 +113,7 @@ class AuthRepository(
                 if (task.isSuccessful) {
                     // Session speichern
                     storeSession(id = task.result.user?.uid ?: "") {
-                        if (it == null) {
-                            // Fehler: Session konnte nicht gespeichert werden
-                            result.invoke(UiState.Failure("Failed to store local session!"))
-                        } else {
-                            // Erfolg: Benutzer wurde erfolgreich angemeldet und Session wurde gespeichert
-                            result.invoke(UiState.Success("Login successfully!"))
-                        }
+                        result.invoke(UiState.Success("Login successfully!"))
                     }
                 }
             }.addOnFailureListener {
@@ -202,7 +185,7 @@ class AuthRepository(
      * @param result Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
      * Das Ergebnis ist ein User-Objekt, das die Details des Benutzers enthält, oder null, wenn das Speichern der Sitzung fehlgeschlagen ist.
      */
-    override fun storeSession(id: String, result: (User?) -> Unit) {
+    override fun storeSession(id: String, result: (UiState<User>) -> Unit) {
         // Zugriff auf die Firestore-Sammlung "USER"
         database.collection(FireStoreCollection.USER).document(id)
             .get()
@@ -213,9 +196,8 @@ class AuthRepository(
                     // Fügt die Sitzungsdetails des Benutzers im lokalen Speicher hinzu
                     appPreferences.edit()
                         .putString(SharedPrefConstants.USER_SESSION, gson.toJson(user)).apply()
+                    result.invoke(UiState.Success(user))
                 }
-                // Gibt das User-Objekt an den Aufrufer zurück
-                result.invoke(user)
             }
     }
 
@@ -225,17 +207,17 @@ class AuthRepository(
      * @param result Funktion zum Rückgabewert des Ergebnisses an den Aufrufer.
      * Wenn eine gültige Sitzung vorhanden ist, gibt die Funktion das Benutzerobjekt zurück, andernfalls wird null zurückgegeben.
      */
-    override fun getSession(result: (User?) -> Unit) {
+    override fun getSession(result: ((UiState<User>)) -> Unit) {
         // Holt die gespeicherten Sitzungsdaten des Benutzers aus dem lokalen Speicher
         val user_str = appPreferences.getString(SharedPrefConstants.USER_SESSION, null)
         // Wenn keine gespeicherten Sitzungsdaten vorhanden sind, gib null zurück
         if (user_str == null) {
-            result.invoke(null)
+            Log.e(TAG,"ES WURDE KEINE USER SESSION GEFUNDEN")
         } else {
             // Konvertiert die JSON-Zeichenfolge in ein Benutzerobjekt
             val user = gson.fromJson(user_str, User::class.java)
             // Gibt das Benutzerobjekt zurück
-            result.invoke(user)
+            result.invoke(UiState.Success(user))
         }
     }
 }

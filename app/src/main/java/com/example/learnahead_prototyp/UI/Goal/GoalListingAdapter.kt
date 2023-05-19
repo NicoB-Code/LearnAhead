@@ -1,14 +1,17 @@
 package com.example.learnahead_prototyp.UI.Goal
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Goal
 import com.example.learnahead_prototyp.databinding.ItemGoalLayoutBinding
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.concurrent.TimeUnit
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 
 
 /**
@@ -46,6 +49,7 @@ class GoalListingAdapter(
      * @param holder Der [MyViewHolder], an den die Daten gebunden werden sollen.
      * @param position Der Index des Ziel in der Liste.
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = list[position]
         holder.bind(item)
@@ -88,16 +92,24 @@ class GoalListingAdapter(
          * Bindet die Daten des übergebenen Goal-Objekts an die Ansichtselemente des ViewHolders.
          * @param goal Das Goal-Objekt, das an die Ansichtselemente gebunden werden soll.
          */
+        @SuppressLint("SetTextI18n")
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(goal: Goal) {
-            binding.cardViewTextGoalTitle.text = goal.title
+            binding.cardViewTextGoalName.text = goal.name
 
             val dateFormat = SimpleDateFormat("dd.MM.yyyy")
             binding.cardViewGoalDate.text = dateFormat.format(goal.startDate) + " - " + dateFormat.format(goal.endDate)
 
-            // calculate the number of days between the two dates
-            val daysBetweenDates = getDaysBetweenDates(goal.startDate, goal.endDate)
-            if(daysBetweenDates == 1)
-                binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates Tage"
+            // Get the current date (today)
+            val currentDate = LocalDate.now()
+            // Parse the formatted endDate string back to a LocalDate object
+            val newEndDate = dateFormat.parse(dateFormat.format(goal.endDate))
+            val endDate = newEndDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
+            // Calculate the number of days between the current date and the endDate
+            val daysBetweenDates = ChronoUnit.DAYS.between(currentDate, endDate).toInt()
+
+            if (daysBetweenDates == 1)
+                binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates Tag"
             else if (daysBetweenDates > 1)
                 binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates Tagen"
             else
@@ -115,21 +127,6 @@ class GoalListingAdapter(
                     goal
                 )
             }
-        }
-
-        private fun getDaysBetweenDates(startDate: Date, endDate: Date): Int {
-            val startCalendar = Calendar.getInstance().apply { time = startDate }
-            val endCalendar = Calendar.getInstance().apply { time = endDate }
-            startCalendar.set(Calendar.HOUR_OF_DAY, 0)
-            startCalendar.set(Calendar.MINUTE, 0)
-            startCalendar.set(Calendar.SECOND, 0)
-            startCalendar.set(Calendar.MILLISECOND, 0)
-            endCalendar.set(Calendar.HOUR_OF_DAY, 0)
-            endCalendar.set(Calendar.MINUTE, 0)
-            endCalendar.set(Calendar.SECOND, 0)
-            endCalendar.set(Calendar.MILLISECOND, 0)
-            val diff = endCalendar.timeInMillis - startCalendar.timeInMillis
-            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
         }
     }
 }

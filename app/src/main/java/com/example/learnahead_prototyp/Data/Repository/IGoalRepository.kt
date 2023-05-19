@@ -25,7 +25,7 @@ interface IGoalRepository {
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Nachricht enthält, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Operation erfolgreich war oder nicht.
      */
-    fun addGoal(goal: Goal, result: (UiState<String>) -> Unit)
+    fun addGoal(goal: Goal, result: (UiState<Goal?>) -> Unit)
 
     /**
      * Funktion zum Aktualisieren eines vorhandenen Ziels.
@@ -34,7 +34,7 @@ interface IGoalRepository {
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Nachricht enthält, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Operation erfolgreich war oder nicht.
      */
-    fun updateGoal(goal: Goal, result: (UiState<String>) -> Unit)
+    fun updateGoal(goal: Goal, result: (UiState<Goal?>) -> Unit)
 
     /**
      * Funktion zum Löschen eines vorhandenen Ziels.
