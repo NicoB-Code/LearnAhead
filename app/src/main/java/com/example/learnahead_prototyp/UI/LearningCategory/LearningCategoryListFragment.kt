@@ -16,7 +16,6 @@ import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryListBinding
-
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -27,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LearningCategoryListFragment : Fragment() {
 
-    private lateinit var currentUser: User
+    private var currentUser: User? = null
 
     // Konstante für das Logging-Tag
     val TAG: String = "LearningCategoryListFragment"
@@ -55,10 +54,17 @@ class LearningCategoryListFragment : Fragment() {
                 // Speichern der zu löschenden Position und Löschen der Lernkategorie über das ViewModel
                 deletePosition = pos
                 learnCategoryViewModel.deleteLearningCategory(item)
+                updateUserObject(item, true)
             }
         )
     }
 
+    private fun updateUserObject(learningCategory: LearningCategory, deleteLearningCategory: Boolean) {
+        if (deleteLearningCategory && currentUser != null)
+            currentUser!!.learningCategories.remove(learningCategory)
+
+        currentUser?.let { authViewModel.updateUserInfo(it) }
+    }
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
@@ -163,6 +169,8 @@ class LearningCategoryListFragment : Fragment() {
                     if (deletePosition != -1) {
                         list.removeAt(deletePosition)
                         adapter.updateList(list)
+                        // Die Lernkategorie wurde gelöscht, somit deletePosition wieder zurücksetzen
+                        deletePosition = -1
                     }
                 }
             }
@@ -186,6 +194,7 @@ class LearningCategoryListFragment : Fragment() {
                     // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
                     binding.progressBar.hide()
                     this.currentUser = state.data
+                    learnCategoryViewModel.getLearningCategories(this.currentUser)
                 }
             }
         }

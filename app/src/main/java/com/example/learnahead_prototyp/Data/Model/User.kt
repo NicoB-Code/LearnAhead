@@ -19,7 +19,8 @@ data class User(
     @ServerTimestamp
     val registerDate: Date = Date(),
     val profileImageUrl: String = "",
-    var goals: MutableList<Goal> = mutableListOf()
+    var goals: MutableList<Goal> = mutableListOf(),
+    var learningCategories: MutableList<LearningCategory> = mutableListOf()
 ) {
 
 }

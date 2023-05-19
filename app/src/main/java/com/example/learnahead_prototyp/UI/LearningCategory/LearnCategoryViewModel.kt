@@ -29,15 +29,15 @@ class LearnCategoryViewModel @Inject constructor(
     /**
      * MutableLiveData that holds the current state of adding a new LearningCategory.
      */
-    private val _addLearningCategory = MutableLiveData<UiState<String>>()
-    val addLearningCategory: LiveData<UiState<String>>
+    private val _addLearningCategory = MutableLiveData<UiState<LearningCategory?>>()
+    val addLearningCategory: LiveData<UiState<LearningCategory?>>
         get() = _addLearningCategory
 
     /**
      * MutableLiveData that holds the current state of updating a LearningCategory.
      */
-    private val _updateLearningCategory = MutableLiveData<UiState<String>>()
-    val updateLearningCategory: LiveData<UiState<String>>
+    private val _updateLearningCategory = MutableLiveData<UiState<LearningCategory?>>()
+    val updateLearningCategory: LiveData<UiState<LearningCategory?>>
         get() = _updateLearningCategory
 
     /**

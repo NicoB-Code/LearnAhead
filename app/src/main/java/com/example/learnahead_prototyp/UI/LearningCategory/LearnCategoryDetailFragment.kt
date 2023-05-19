@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LearnCategoryDetailFragment : Fragment() {
 
-    private lateinit var currentUser: User
+    private var currentUser: User? = null
 
     // Ein Tag zur Identifizierung des Lernkategorie-Detail-Fragments für Logging-Zwecke.
     val TAG: String = "LearningCategoryDetailFragment"
@@ -89,13 +89,10 @@ class LearnCategoryDetailFragment : Fragment() {
      */
     private fun setEventListener() {
         binding.saveButton.setOnClickListener {
-            if (isEdit) {
+            if (isEdit)
                 updateLearningCategory()
-            } else {
+            else
                 createLearningCategory()
-                binding.saveButton.hide()
-                isMakeEnableUI()
-            }
         }
 
         binding.editButton.setOnClickListener {
@@ -106,31 +103,13 @@ class LearnCategoryDetailFragment : Fragment() {
         }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_learnCategoryDetailFragment_to_homeFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_homeFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.buttonLearningGoals.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_learnCategoryDetailFragment_to_goalListingFragment,
-                Bundle().apply {
-                    putString("type", "create")
-                })
-        }
+        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_goalListingFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.backIcon.setOnClickListener {
@@ -176,8 +155,17 @@ class LearnCategoryDetailFragment : Fragment() {
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    binding.editButton.show()
-                    toast(state.data)
+                    if(state.data != null && currentUser != null) {
+                        // Die neue Lernkategorie dem User hinzufügen
+                        currentUser!!.learningCategories.add(state.data)
+                        // Den User in der DB updaten
+                        authViewModel.updateUserInfo(currentUser!!)
+                        findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment)
+                        toast("Die Lernkategorie konnte erfolgreich erstellt werden")
+                    }
+                    else {
+                        toast("Die Lernkategorie konnte nicht erstellt werden")
+                    }
                 }
             }
         }
@@ -197,7 +185,21 @@ class LearnCategoryDetailFragment : Fragment() {
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    toast(state.data)
+                    if(state.data != null && currentUser != null) {
+                        val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == state.data.id }
+                        if (indexOfCurrentObject != -1) {
+                            currentUser!!.learningCategories[indexOfCurrentObject] = state.data
+                        } else {
+                            currentUser!!.learningCategories.add(state.data)
+                        }
+
+                        // Den User in der DB updaten
+                        authViewModel.updateUserInfo(currentUser!!)
+                        toast("Die Lernkategorie konnte erfolgreich geupdated werden")
+                    }
+                    else {
+                        toast("Die Lernkategorie konnte nicht geupdated werden")
+                    }
                 }
             }
         }
@@ -218,7 +220,6 @@ class LearnCategoryDetailFragment : Fragment() {
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
                     currentUser = state.data
-                    learnCategoryViewModel.getLearningCategories(currentUser)
                 }
             }
         }

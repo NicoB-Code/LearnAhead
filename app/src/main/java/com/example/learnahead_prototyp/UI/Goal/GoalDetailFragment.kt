@@ -240,6 +240,7 @@ class GoalDetailFragment : Fragment() {
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
+                    binding.btnProgressAr.hide()
                     currentUser = state.data
                 }
             }

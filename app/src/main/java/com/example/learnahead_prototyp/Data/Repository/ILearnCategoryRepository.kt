@@ -25,7 +25,7 @@ interface ILearnCategoryRepository {
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Nachricht enthält, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Operation erfolgreich war oder nicht.
      */
-    fun addLearningCategory(learningCategory: LearningCategory, result: (UiState<String>) -> Unit)
+    fun addLearningCategory(learningCategory: LearningCategory, result: (UiState<LearningCategory?>) -> Unit)
 
     /**
      * Funktion zum Aktualisieren einer vorhandenen Lernkategorie.
@@ -34,7 +34,7 @@ interface ILearnCategoryRepository {
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Nachricht enthält, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Operation erfolgreich war oder nicht.
      */
-    fun updateLearningCategory(learningCategory: LearningCategory, result: (UiState<String>) -> Unit)
+    fun updateLearningCategory(learningCategory: LearningCategory, result: (UiState<LearningCategory?>) -> Unit)
 
     /**
      * Funktion zum Löschen einer vorhandenen Lernkategorie.
