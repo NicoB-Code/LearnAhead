@@ -3,10 +3,8 @@ package com.example.learnahead_prototyp.Data.Repository
 import com.example.learnahead_prototyp.Data.Model.Goal
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Util.FireStoreCollection
-import com.example.learnahead_prototyp.Util.FireStoreDocumentField
 import com.example.learnahead_prototyp.Util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 /**
  * Klasse, die die Schnittstelle IGoalRepository implementiert und Methoden enthält, um Ziele aus der Datenbank zu holen.
@@ -16,6 +14,8 @@ class GoalRepository(
     val database: FirebaseFirestore
 ) : IGoalRepository {
 
+    val TAG: String = "GOALREPOSITORY"
+
     /**
      * Funktion, um Ziele aus der Datenbank zu holen.
      * @param user Der Benutzer, dessen Ziele abgerufen werden sollen.
@@ -24,32 +24,22 @@ class GoalRepository(
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Zielauswahl erfolgreich war oder nicht.
      */
     override fun getGoals(user: User?, result: (UiState<List<Goal>>) -> Unit) {
-        // Auswahl aller Ziele des Benutzers aus der Datenbank, geordnet nach dem Datum, absteigend
-        // ACHTUNG: Ein Index in Firebase muss erstellt werden, um die orderBy-Funktion zu nutzen. Fehler würden im LogCat protokolliert werden
-        database.collection(FireStoreCollection.GOAL)
-            // Filtern der Dokumente auf die, die zum übergebenen Benutzer gehören
-            .whereEqualTo(FireStoreDocumentField.USER_ID, user?.id)
-            // Sortieren der Dokumente nach dem Datum, absteigend
-            .orderBy(FireStoreDocumentField.END_DATE, Query.Direction.DESCENDING)
-            // Abfrage der ausgewählten Dokumente
-            .get()
-            // Falls die Abfrage erfolgreich war
-            .addOnSuccessListener {
-                // Erstellen einer leeren Liste für die abgerufenen Ziele
-                val goals = arrayListOf<Goal>()
-                // Schleife über die abgerufenen Dokumente
-                for (document in it) {
-                    // Umwandeln des Dokuments in ein Goal-Objekt
-                    val goal = document.toObject(Goal::class.java)
-                    // Hinzufügen des Goal-Objekts zur goals-Liste
-                    goals.add(goal)
-                }
-                // Erfolgreiche Auswahl der Ziele wird an den Aufrufer zurückgegeben
-                result.invoke(UiState.Success(goals))
+        if (user == null) {
+            result.invoke(UiState.Failure("User is null"))
+            return
+        }
+        // Get the user document reference
+        val userDocument = database.collection(FireStoreCollection.USER).document(user.id)
+        // Fetch the user document to get the goals collection reference
+        userDocument.get()
+            .addOnSuccessListener { userDocument ->
+                val goalsList = userDocument.toObject(User::class.java)?.goals?.toMutableList() ?: mutableListOf()
+                // Update the user object with the retrieved goals
+                result.invoke(UiState.Success(goalsList))
             }
-            .addOnFailureListener {
-                // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
-                result.invoke(UiState.Failure(it.localizedMessage))
+
+            .addOnFailureListener { exception ->
+                result.invoke(UiState.Failure(exception.localizedMessage))
             }
     }
 
@@ -61,7 +51,7 @@ class GoalRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob das Ziel erfolgreich erstellt wurde oder nicht.
      */
-    override fun addGoal(goal: Goal, result: (UiState<String>) -> Unit) {
+    override fun addGoal(goal: Goal, result: (UiState<Goal?>) -> Unit) {
         // Erstellung eines neuen Dokuments in der GOAL-Sammlung der Datenbank
         val document = database.collection(FireStoreCollection.GOAL).document()
         // Festlegen der ID des Ziels als ID des erstellten Dokuments in der Datenbank
@@ -72,7 +62,7 @@ class GoalRepository(
             .addOnSuccessListener {
                 // Bei Erfolg wird eine Erfolgsmeldung an den Aufrufer zurückgegeben
                 result.invoke(
-                    UiState.Success("Goal has been created successfully")
+                    UiState.Success(goal)
                 )
             }
             .addOnFailureListener {
@@ -92,7 +82,7 @@ class GoalRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Meldung, ob das Ziel erfolgreich aktualisiert wurde oder nicht.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Aktualisierung erfolgreich war oder nicht.
      */
-    override fun updateGoal(goal: Goal, result: (UiState<String>) -> Unit) {
+    override fun updateGoal(goal: Goal, result: (UiState<Goal?>) -> Unit) {
         // Dokument des Ziels in der Datenbank wird geholt
         val document = database.collection(FireStoreCollection.GOAL).document(goal.id)
         document
@@ -100,7 +90,7 @@ class GoalRepository(
             .set(goal)
             .addOnSuccessListener {
                 result.invoke(
-                    UiState.Success("Goal has been update successfully")
+                    UiState.Success(goal)
                 )
             }
             .addOnFailureListener {

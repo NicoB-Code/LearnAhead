@@ -3,10 +3,8 @@ package com.example.learnahead_prototyp.Data.Repository
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Util.FireStoreCollection
-import com.example.learnahead_prototyp.Util.FireStoreDocumentField
 import com.example.learnahead_prototyp.Util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 /**
  * Klasse, die die Schnittstelle IGoalRepository implementiert und Methoden enthält, um Ziele aus der Datenbank zu holen.
@@ -24,30 +22,22 @@ class LearningCategoryRepository(
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob es erfolgreich war oder nicht.
      */
     override fun getLearningCategories(user: User?, result: (UiState<List<LearningCategory>>) -> Unit) {
-        database.collection(FireStoreCollection.LEARNING_CATEGORY)
-            // Filtern der Dokumente auf die, die zum übergebenen Benutzer gehören
-            .whereEqualTo(FireStoreDocumentField.USER_ID, user?.id)
-            // Sortieren der Dokumente nach dem Datum, absteigend
-            .orderBy(FireStoreDocumentField.NAME, Query.Direction.ASCENDING)
-            // Abfrage der ausgewählten Dokumente
-            .get()
-            // Falls die Abfrage erfolgreich war
-            .addOnSuccessListener {
-                // Erstellen einer leeren Liste für die abgerufenen Ziele
-                val learningCategories = arrayListOf<LearningCategory>()
-                // Schleife über die abgerufenen Dokumente
-                for (document in it) {
-                    // Umwandeln des Dokuments in ein LearningCategory-Objekt
-                    val learningCategory = document.toObject(LearningCategory::class.java)
-                    // Hinzufügen des LearningCategory-Objekts zur goals-Liste
-                    learningCategories.add(learningCategory)
-                }
-                // Erfolgreiche Auswahl der Lernkategorien wird an den Aufrufer zurückgegeben
+        if (user == null) {
+            result.invoke(UiState.Failure("User is null"))
+            return
+        }
+        // Get the user document reference
+        val userDocument = database.collection(FireStoreCollection.USER).document(user.id)
+        // Fetch the user document to get the learningCategories collection reference
+        userDocument.get()
+            .addOnSuccessListener { userDocument ->
+                val learningCategories = userDocument.toObject(User::class.java)?.learningCategories?.toMutableList() ?: mutableListOf()
+                // Update the user object with the retrieved goals
                 result.invoke(UiState.Success(learningCategories))
             }
-            .addOnFailureListener {
-                // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
-                result.invoke(UiState.Failure(it.localizedMessage))
+
+            .addOnFailureListener { exception ->
+                result.invoke(UiState.Failure(exception.localizedMessage))
             }
     }
 
@@ -59,18 +49,18 @@ class LearningCategoryRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Lernkategorie erfolgreich erstellt wurde oder nicht.
      */
-    override fun addLearningCategory(learningCategory: LearningCategory, result: (UiState<String>) -> Unit) {
-        // Erstellung eines neuen Dokuments in der Lernkategorie-Sammlung der Datenbank
+    override fun addLearningCategory(learningCategory: LearningCategory, result: (UiState<LearningCategory?>) -> Unit) {
+        // Erstellung eines neuen Dokuments in der GOAL-Sammlung der Datenbank
         val document = database.collection(FireStoreCollection.LEARNING_CATEGORY).document()
-        // Festlegen der ID der Lernkategorie als ID des erstellten Dokuments in der Datenbank
+        // Festlegen der ID des Ziels als ID des erstellten Dokuments in der Datenbank
         learningCategory.id = document.id
-        // Hinzufügen der Lernkategorie als Dokument zur Datenbank
+        // Hinzufügen des Ziels als Dokument zur Datenbank
         document
             .set(learningCategory)
             .addOnSuccessListener {
                 // Bei Erfolg wird eine Erfolgsmeldung an den Aufrufer zurückgegeben
                 result.invoke(
-                    UiState.Success("Learning Category has been created successfully")
+                    UiState.Success(learningCategory)
                 )
             }
             .addOnFailureListener {
@@ -90,7 +80,7 @@ class LearningCategoryRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Meldung, ob die Lernkategorie erfolgreich aktualisiert wurde oder nicht.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Aktualisierung erfolgreich war oder nicht.
      */
-    override fun updateLearningCategory(learningCategory: LearningCategory, result: (UiState<String>) -> Unit) {
+    override fun updateLearningCategory(learningCategory: LearningCategory, result: (UiState<LearningCategory?>) -> Unit) {
         // Dokument der Lernkategorie in der Datenbank wird geholt
         val document = database.collection(FireStoreCollection.LEARNING_CATEGORY).document(learningCategory.id)
         document
@@ -98,7 +88,7 @@ class LearningCategoryRepository(
             .set(learningCategory)
             .addOnSuccessListener {
                 result.invoke(
-                    UiState.Success("Learning Category has been update successfully")
+                    UiState.Success(learningCategory)
                 )
             }
             .addOnFailureListener {

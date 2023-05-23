@@ -1,5 +1,6 @@
 package com.example.learnahead_prototyp.UI.Auth
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -41,6 +42,7 @@ class RegisterFragment : Fragment() {
      * Die onCreateView-Methode wird aufgerufen, um das Fragment-Layout aufzubauen und zurückzugeben.
      * Hier wird das Binding-Objekt für "fragment_register.xml" initialisiert und zurückgegeben.
      */
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,11 +79,6 @@ class RegisterFragment : Fragment() {
                 false // Andere Touch-Events nicht verbrauchen
             }
         }
-
-        // Set click listener on the register button
-        binding.buttonSignUp.setOnClickListener {
-            // Perform registration logic here
-        }
         return binding.root
     }
 
@@ -94,25 +91,21 @@ class RegisterFragment : Fragment() {
 
         // Ruft die "observer"-Funktion auf, um auf ViewModel-Änderungen zu reagieren
         observer()
+        setEventListener()
+    }
 
+    private fun setEventListener() {
         // Setzt den Click-Listener für die Registrieren-Button
         binding.buttonSignUp.setOnClickListener {
             // Überprüft, ob die Eingaben des Benutzers gültig sind
             if (validation()) {
                 // Ruft die "register"-Funktion des ViewModels auf, um einen neuen Benutzer zu registrieren
-                viewModel.register(
-                    email = binding.editTextEmail.text.toString(),
-                    password = binding.editTextPassword.text.toString(),
-                    user = getUserObj()
-                )
+                viewModel.register(email = binding.editTextEmail.text.toString(), password = binding.editTextPassword.text.toString(), user = getUserObj())
             }
         }
 
         // Setzt den Click-Listener für die Registrieren-Label
-        binding.textLogin.setOnClickListener {
-            // Navigiert zum RegisterFragment
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-        }
+        binding.textLogin.setOnClickListener { findNavController().navigate(R.id.action_registerFragment_to_loginFragment) }
     }
 
     /**
@@ -142,8 +135,6 @@ class RegisterFragment : Fragment() {
                     toast(state.data)
                     findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                 }
-
-                else -> {}
             }
         }
     }
@@ -152,10 +143,11 @@ class RegisterFragment : Fragment() {
      * Erstellt ein neues User-Objekt mit den Eingabedaten des Benutzers aus den Fragment-Views und gibt es zurück.
      * @return Das neu erstellte User-Objekt
      */
-    fun getUserObj(): User {
+    private fun getUserObj(): User {
         return User(
             id = "",
             username = binding.editTextUsername.text.toString(),
+            password = binding.editTextPassword.text.toString(),
             email = binding.editTextEmail.text.toString(),
         )
     }
@@ -166,7 +158,7 @@ class RegisterFragment : Fragment() {
      * Zeigt Toast-Nachrichten an, wenn eine Eingabe ungültig ist.
      * @return True, wenn alle Eingaben gültig sind, andernfalls False
      */
-    fun validation(): Boolean {
+    private fun validation(): Boolean {
         var isValid = true
 
         if (binding.editTextUsername.text.isNullOrEmpty()) {

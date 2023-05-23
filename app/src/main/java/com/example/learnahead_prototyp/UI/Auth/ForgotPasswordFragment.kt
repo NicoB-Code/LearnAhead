@@ -58,7 +58,11 @@ class ForgotPasswordFragment : Fragment() {
 
         // Initialisierung der Beobachter für die verschiedenen Authentifizierungsaktionen
         observer()
+        setEventListener()
 
+    }
+
+    private fun setEventListener() {
         // Fügt einen Klicklistener zum Zurücksetzen-Button hinzu
         binding.buttonForgotPassword.setOnClickListener {
             // Überprüft die Eingabevalidierung des Benutzers

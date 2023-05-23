@@ -6,12 +6,10 @@ import kotlinx.parcelize.Parcelize
 import java.util.Date
 
 @Parcelize
-data class LearningCategory(
+data class Summary(
     var id: String = "",
     val name: String = "",
+    val content: String = "",
     @ServerTimestamp
     val createDate: Date = Date(),
-    var questions: MutableList<Question> = mutableListOf(),
-    var summaries: MutableList<Summary> = mutableListOf(),
-    var tests: MutableList<Test> = mutableListOf()
 ) : Parcelable

@@ -28,6 +28,10 @@ class AuthViewModel @Inject constructor(
     val register: LiveData<UiState<String>>
         get() = _register
 
+    private val _currentUser = MutableLiveData<UiState<User>>()
+    val currentUser: LiveData<UiState<User>>
+        get() = _currentUser
+
     /**
      * Diese Eigenschaft ist eine LiveData-Instanz, die den aktuellen Status des Anmeldevorgangs
      * in der UI-Schicht widerspiegelt.
@@ -44,6 +48,10 @@ class AuthViewModel @Inject constructor(
     val forgotPassword: LiveData<UiState<String>>
         get() = _forgotPassword
 
+    private val _updateUserInfo = MutableLiveData<UiState<String>>()
+    val updateUserInfo: LiveData<UiState<String>>
+        get() = _updateUserInfo
+
     /**
      * Diese Methode ruft die registerUser-Funktion im IAuthRepository auf, um einen neuen Benutzer
      * zu registrieren. Sie aktualisiert den Status der _register-LiveData-Eigenschaft, um den Fortschritt
@@ -52,17 +60,9 @@ class AuthViewModel @Inject constructor(
      * @param password Das Passwort des Benutzers.
      * @param user Ein Objekt, das den Benutzer darstellt.
      */
-    fun register(
-        email: String,
-        password: String,
-        user: User
-    ) {
+    fun register(email: String, password: String, user: User) {
         _register.value = UiState.Loading
-        repository.registerUser(
-            email = email,
-            password = password,
-            user = user
-        ) { _register.value = it }
+        repository.registerUser(email = email, password = password, user = user) { _register.value = it }
     }
 
     /**
@@ -72,17 +72,9 @@ class AuthViewModel @Inject constructor(
      * @param email Die E-Mail-Adresse des Benutzers.
      * @param password Das Passwort des Benutzers.
      */
-    fun login(
-        email: String,
-        password: String
-    ) {
+    fun login(email: String, password: String) {
         _login.value = UiState.Loading
-        repository.loginUser(
-            email,
-            password
-        ) {
-            _login.value = it
-        }
+        repository.loginUser(email, password) { _login.value = it }
     }
 
     /**
@@ -91,9 +83,7 @@ class AuthViewModel @Inject constructor(
      */
     fun forgotPassword(email: String) {
         _forgotPassword.value = UiState.Loading
-        repository.forgotPassword(email) {
-            _forgotPassword.value = it
-        }
+        repository.forgotPassword(email) { _forgotPassword.value = it }
     }
 
     /**
@@ -109,11 +99,18 @@ class AuthViewModel @Inject constructor(
      * @param result Callback-Funktion, die aufgerufen wird, wenn die Benutzersitzung abgerufen wurde.
      * Die zurückgegebene [User] Instanz enthält Informationen über den aktuellen Benutzer oder ist null, wenn kein Benutzer angemeldet ist.
      */
-    fun getSession(result: (User?) -> Unit) {
-        repository.getSession(result)
+    fun getSession() {
+        repository.getSession() {_currentUser.value = it }
     }
-    fun storeSession(user: User, result: (User?) -> Unit) {
-        repository.storeSession(user.id, result)
+
+    fun storeSession(user: User) {
+        repository.storeSession(user.id) {_currentUser.value = it }
+    }
+
+    fun updateUserInfo(user: User) {
+        _updateUserInfo.value = UiState.Loading
+        repository.updateUserInfo(user) { _updateUserInfo.value = it}
+        storeSession(user)
     }
 
 }
