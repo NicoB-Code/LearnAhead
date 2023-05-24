@@ -124,9 +124,10 @@ class GoalListingFragment : Fragment() {
         binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_goalListingFragment_to_learningCategoryListFragment)}
 
         // Klick-Listener für den "Logout"-Button, welcher den Benutzer ausloggt und zur "LoginFragment" navigiert.
-        binding.logout.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)}
+        binding.logout.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)} }
 
-        }
+        // Klick-Listener für den "Profile"-Button
+        binding.profile.setOnClickListener { findNavController().navigate(R.id.action_goalListingFragment_to_profileFragment)}
     }
 
     /**

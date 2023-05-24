@@ -44,7 +44,7 @@ class LearningCategoryListFragment : Fragment() {
             onItemClicked = { pos, item ->
                 // Navigation zum Lernkategorie-Detail-Fragment mit Parameter-Übergabe
                 findNavController().navigate(
-                    R.id.action_learningCategoryListFragment_to_learnCategoryDetailFragment,
+                    R.id.action_learningCategoryListFragment_to_learningCategoryInnerViewFragment,
                     Bundle().apply {
                         putString("type", "view")
                         putParcelable("learning_category", item)
@@ -117,8 +117,10 @@ class LearningCategoryListFragment : Fragment() {
         binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_goalListingFragment) }
 
         // Klick-Listener für den "Logout"-Button, welcher den Benutzer ausloggt und zur "LoginFragment" navigiert.
-        binding.logout.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_learningCategoryListFragment_to_loginFragment) }
-        }
+        binding.logout.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_learningCategoryListFragment_to_loginFragment) } }
+
+        // Klick-Listener für den "Profil"-Button
+        binding.profile.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_profileFragment)}
     }
 
     /**
