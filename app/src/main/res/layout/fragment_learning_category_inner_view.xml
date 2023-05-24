@@ -61,8 +61,8 @@
         android:id="@+id/logout"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_alignRight="@id/dark_background"
-        android:layout_marginRight="5dp"
+        android:layout_alignEnd="@id/dark_background"
+        android:layout_marginEnd="5dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/logout"
         android:elevation="7dp" />
@@ -127,9 +127,8 @@
         android:layout_below="@id/header_line"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <!-- Anmelden -->
     <TextView
-        android:id="@+id/button_login"
+        android:id="@+id/button_tests_and_questions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/recycler_view"
@@ -147,6 +146,54 @@
         app:backgroundTint="@null"
         app:drawableStartCompat="@drawable/folder_icon"
         tools:ignore="RtlSymmetry" />
+
+
+    <!-- LernTipp Box -->
+    <View
+        android:id="@+id/rectangle_learning_tip_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/button_tests_and_questions"
+        android:layout_above="@id/background_bottom_menu"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/learning_tip_of_the_day_rectangle"
+        android:elevation="2dp" />
+
+    <TextView
+        android:id="@+id/learning_tip_of_the_day_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/learning_tip_of_the_day"
+        android:textAppearance="@style/summary_label_inner_view"
+        android:textColor="@null"
+        android:layout_alignTop="@id/rectangle_learning_tip_box"
+        android:layout_alignStart="@id/rectangle_learning_tip_box"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:elevation="8dp"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/learning_tip_of_the_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/learning_tip_of_the_day_placeholder"
+        android:gravity="start|top"
+        android:textAppearance="@style/learning_tip_of_the_day"
+        android:textColor="@null"
+        android:layout_below="@id/learning_tip_of_the_day_header"
+        android:layout_alignStart="@id/rectangle_learning_tip_box"
+        android:layout_alignEnd="@id/rectangle_learning_tip_box"
+        android:paddingStart="16dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="16dp"
+        android:elevation="8dp"
+        tools:ignore="RtlSymmetry" />
+
 
     <ProgressBar
         android:id="@+id/progress_bar"

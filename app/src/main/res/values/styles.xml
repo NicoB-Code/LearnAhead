@@ -230,4 +230,10 @@
         <item name="android:textColor">#000000</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
+
+    <style name="learning_tip_of_the_day">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
 </resources>
