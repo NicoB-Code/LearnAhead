@@ -94,6 +94,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
         android:text="@string/learning_goal_title"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +103,8 @@
 
     <!-- Lernziel Name EditText -->
     <EditText
-        android:id="@+id/text_learning_goal_name"
-        android:layout_width="390dp"
+        android:id="@+id/text_learning_goal_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="12dp"
@@ -120,7 +121,7 @@
         android:text="@string/learning_goal_start_date"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_learning_goal_name"
+        app:layout_constraintTop_toBottomOf="@id/text_learning_goal_title"
         app:drawableBottomCompat="@drawable/green_line" />
 
     <!-- Lernziel Start Datum EditText -->
@@ -175,17 +176,16 @@
     <EditText
         android:id="@+id/text_goal_description"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="210dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/black_white_rect_bg"
         android:gravity="start|top"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/learning_goal_description_label"
+        app:layout_constraintBottom_toTopOf="@id/background_bottom_menu"
         android:autofillHints="Beschreibung" />
 
     <ProgressBar

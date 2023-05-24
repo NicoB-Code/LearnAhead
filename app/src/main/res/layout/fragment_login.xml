@@ -1,6 +1,7 @@
 <!-- Android Large - Login -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/android_lar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -60,35 +61,55 @@
         />
 
     <!-- E-Mail -->
-    <EditText
-        android:id="@+id/editText_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <HorizontalScrollView
+        android:id="@+id/email_scrollview"
+        android:layout_width="214dp"
+        android:layout_height="49dp"
+        android:layout_below="@id/placeholder_logo"
         android:layout_alignTop="@id/rectangle_register_box"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
-        android:background="@drawable/rectangle_register_or_login_content"
-        android:drawableLeft="@drawable/email_icon"
-        android:drawablePadding="13dp"
-        android:paddingLeft="13dp"
-        android:elevation="6dp"
-        android:hint="@string/e_mail_address"
-        android:textAppearance="@style/register_content_text"
-        android:textSize="16sp"
-        android:textColor="@null"
-        />
+        android:elevation="8dp"
+        android:layout_centerHorizontal="true">
 
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_register_or_login_content"
+            android:drawableStart="@drawable/email_icon"
+            android:drawablePadding="13dp"
+            android:paddingStart="13dp"
+            android:elevation="6dp"
+            android:hint="@string/e_mail_address"
+            android:textAppearance="@style/register_content_text"
+            android:textSize="16sp"
+            android:textColor="@null"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:inputType="textEmailAddress"
+            android:ellipsize="none"
+            tools:ignore="RtlSymmetry" />
+
+
+    </HorizontalScrollView>
+
+    <!-- Password -->
+    <HorizontalScrollView
+        android:id="@+id/password_scrollview"
+        android:layout_width="214dp"
+        android:layout_height="49dp"
+        android:layout_below="@id/email_scrollview"
+        android:layout_marginTop="18dp"
+        android:elevation="8dp"
+        android:layout_centerHorizontal="true">
     <!-- Password -->
     <EditText
         android:id="@+id/editText_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText_email"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
         android:background="@drawable/rectangle_register_or_login_content"
-        android:drawableLeft="@drawable/password_icon"
-        android:drawableRight="@drawable/show_password_icon"
+        android:drawableStart="@drawable/password_icon"
+        android:drawableEnd="@drawable/show_password_icon"
         android:drawablePadding="13dp"
         android:inputType="textPassword"
         android:elevation="6dp"
@@ -97,16 +118,19 @@
         android:hint="@string/password"
         android:textAppearance="@style/register_content_text"
         android:textColor="@null"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:ellipsize="end"
+        />
+    </HorizontalScrollView>
 
     <!-- Login -->
     <TextView
         android:id="@+id/text_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText_password"
+        android:layout_below="@id/password_scrollview"
         android:layout_marginTop="7dp"
-        android:layout_alignLeft="@id/editText_password"
+        android:layout_alignLeft="@id/password_scrollview"
         android:layout_marginLeft="10dp"
         android:layout_centerHorizontal="true"
         android:elevation="8dp"
