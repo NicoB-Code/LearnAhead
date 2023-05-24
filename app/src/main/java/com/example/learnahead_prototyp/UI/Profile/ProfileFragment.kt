@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
@@ -61,6 +62,8 @@ class ProfileFragment : Fragment() {
         context?.let {
             Glide.with(it)
                 .load(imageUrl)
+                // override the image if its size does not match our requirements and crop if not a square
+                .apply(RequestOptions().override(300,300).placeholder(R.drawable.profile_image_placeholder).centerCrop())
                 .into(binding.profilePic)
         }
     }
@@ -93,6 +96,7 @@ class ProfileFragment : Fragment() {
         binding.profilePic.setOnClickListener {
             // Wenn Button gedrückt, wähle Bild aus der Gallerie aus
             galleryLauncher.launch("image/*")
+
             // Wenn Bild geholt, dann aktualisiere Session und lade Bild neu
             if (currentUser != null)
                 loadImageFromUrl(currentUser!!.profileImageUrl)
@@ -121,6 +125,9 @@ class ProfileFragment : Fragment() {
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
+                    // if profileURL was succesfully updated, make sure that our user is actually the user we want
+                    // because if the user has been updated, we need to store a new session
+                    viewModelAuth.storeSession(currentUser!!)
                     binding.btnProgressAr.hide()
                     toast(state.data)
                 }
