@@ -86,6 +86,10 @@
     <string name="placeholder_password">Das Passwort</string>
     <string name="placeholder_learning_streak">Die höchste Learning Streak</string>
     <string name="placeholder_achieved_goals">Die erreichten Ziele</string>
+    <string name="summary_label">Zusammenfassungen</string>
+    <string name="remaining_summary_items">enthält %1$d weitere Zusammenfassungen</string>
+    <string name="placeholder">Platzhalter</string>
+    <string name="tests_and_questions">Tests / Fragen</string>
 
 
 </resources>

@@ -12,4 +12,4 @@ data class Summary(
     val content: String = "",
     @ServerTimestamp
     val createDate: Date = Date(),
-) : Parcelable
+    ) : Parcelable

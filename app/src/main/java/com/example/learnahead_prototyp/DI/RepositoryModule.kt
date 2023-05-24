@@ -6,9 +6,11 @@ import com.example.learnahead_prototyp.Data.Repository.GoalRepository
 import com.example.learnahead_prototyp.Data.Repository.IAuthRepository
 import com.example.learnahead_prototyp.Data.Repository.IGoalRepository
 import com.example.learnahead_prototyp.Data.Repository.ILearnCategoryRepository
-import com.example.learnahead_prototyp.Data.Repository.LearningCategoryRepository
 import com.example.learnahead_prototyp.Data.Repository.IProfileRepository
+import com.example.learnahead_prototyp.Data.Repository.ISummaryRepository
+import com.example.learnahead_prototyp.Data.Repository.LearningCategoryRepository
 import com.example.learnahead_prototyp.Data.Repository.ProfileRepository
+import com.example.learnahead_prototyp.Data.Repository.SummaryRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
@@ -41,6 +43,20 @@ object RepositoryModule {
         database: FirebaseFirestore
     ): IGoalRepository {
         return GoalRepository(database)
+    }
+
+    /**
+     * Funktion zur Bereitstellung eines IGoalRepository-Objekts, das Zugriff auf die Ziele in der Firebase-Datenbank bietet.
+     * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
+     * @return Das IGoalRepository-Objekt, das für den Zugriff auf die Ziele in der Datenbank verwendet werden soll.
+     * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
+     */
+    @Provides
+    @Singleton
+    fun provideSummaryRepository(
+        database: FirebaseFirestore
+    ): ISummaryRepository {
+        return SummaryRepository(database)
     }
 
     /**

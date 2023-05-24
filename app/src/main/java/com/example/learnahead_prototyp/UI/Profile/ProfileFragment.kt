@@ -43,16 +43,6 @@ class ProfileFragment : Fragment() {
     // Binding-Objekt für die Layout-Datei "fragment_login.xml"
     lateinit var binding: FragmentProfileBinding
 
-    // Aufrufen der handy-internen Gallerie
-    private val galleryLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-            // hole einen User, damit wir seine Daten verarbeiten können
-            if (result != null && currentUser != null)
-                viewModelProfile.onUploadSingleFile(result, currentUser!!)
-            else
-                Log.e(TAG, "Error in galleryLauncer")
-        }
-
     // wird ausgeführt, wenn die Benutzeroberfläche erstellt wird
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,12 +81,20 @@ class ProfileFragment : Fragment() {
         // Hole User und aktualisiere die angezeigten Informationen
         Log.e(TAG, "UpdateUI currentUser holen")
 
+        // Aufrufen der handy-internen Gallerie
+        val galleryLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+                if (result != null && currentUser != null)
+                    viewModelProfile.onUploadSingleFile(result, currentUser!!)
+            }
+
+
         // Handler für Button Click
         binding.profilePic.setOnClickListener {
             // Wenn Button gedrückt, wähle Bild aus der Gallerie aus
             galleryLauncher.launch("image/*")
             // Wenn Bild geholt, dann aktualisiere Session und lade Bild neu
-            if(currentUser != null)
+            if (currentUser != null)
                 loadImageFromUrl(currentUser!!.profileImageUrl)
         }
         // Setze Listener für Buttons für Navigation
