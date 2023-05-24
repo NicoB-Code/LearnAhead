@@ -26,7 +26,7 @@ class ProfileRepository(
 
         Log.d(TAG, "Starting uploadImage function - URI: $imageUri")
 
-        if (!user.profileImageUrl.isNullOrEmpty()) {
+        if (user.profileImageUrl.isNotEmpty()) {
             // Lösche das alte Bild, bevor das neue hochgeladen wird
             deletePreviousImage(user)
         }
