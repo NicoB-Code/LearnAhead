@@ -15,148 +15,143 @@ import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
-import com.example.learnahead_prototyp.Util.hide
-import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-// Constant for Android Systems Intent mechanism to launch the gallery app
-private const val PICK_IMAGE_REQUEST = 123
-
-
 /**
- * Das ist die ProfileFragment-Klasse, die für die Anmeldung von Benutzern zuständig ist.
- * Sie ist mit dem AndroidEntryPoint-Annotation versehen, um sicherzustellen, dass die erforderlichen
- * Abhängigkeiten im Fragment eingesetzt werden.
+ * Das Profilfragment zeigt das Profil des aktuellen Benutzers an.
+ * Hier kann der Benutzer sein Profilbild ändern und seine Lernfortschritte anzeigen.
  */
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
-    private var currentUser: User? = null
 
-    // Konstante für das Logging-Tag
-    val TAG: String = "ProfileFragment"
-
-    // Viewmodel-Objekte, um die Geschäftslogiken von AuthViewModel und ProfileViewModel zu nutzen
+    private lateinit var binding: FragmentProfileBinding
+    private lateinit var currentUser: User
     private val viewModelAuth: AuthViewModel by viewModels()
     private val viewModelProfile: ProfileViewModel by viewModels()
 
-    // Binding-Objekt für die Layout-Datei "fragment_login.xml"
-    lateinit var binding: FragmentProfileBinding
+    /**
+     * Der GalleryLauncher wird verwendet, um ein Bild aus der Galerie auszuwählen.
+     * Wenn ein Bild ausgewählt wurde, wird es an die Funktion [viewModelProfile.onUploadSingleFile] übergeben.
+     */
+    private val galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+            result?.let {
+                viewModelProfile.onUploadSingleFile(it, currentUser)
+                loadImageFromUrl(currentUser.profileImageUrl)
+            }
+        }
 
-    // wird ausgeführt, wenn die Benutzeroberfläche erstellt wird
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(layoutInflater)
+        // Inflate the layout for this fragment
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observer()
+        setLocalCurrentUser()
+        updateUI()
+    }
+
     /**
-     * Diese Funktion lädt ein Bild per URL in das Profilbild
-     * @param imageUrl String der in das Profilbild geladen werden soll.
+     * Funktion zum Laden des aktuellen Benutzers aus der lokalen Sitzung.
+     */
+    private fun setLocalCurrentUser() {
+        viewModelAuth.getSession()
+    }
+
+    /**
+     * Funktion zum Aktualisieren der Benutzeroberfläche.
+     * Hier werden die Klick-Listener für die Schaltflächen und das Profilbild festgelegt.
+     */
+    private fun updateUI() {
+        binding.apply {
+            buttonHome.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+            }
+
+            buttonLearningCategories.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_learningCategoryListFragment)
+            }
+
+            buttonLearningGoals.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_goalListingFragment)
+            }
+
+            backIcon.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+            }
+
+            profilePic.setOnClickListener {
+                galleryLauncher.launch("image/*")
+            }
+        }
+    }
+
+    /**
+     * Funktion zum Beobachten von Änderungen im ViewModel.
+     * Hier wird der Zustand der Datei-Uploads und des aktuellen Benutzers beobachtet und die Benutzeroberfläche entsprechend aktualisiert.
+     */
+    private fun observer() {
+        viewModelProfile.fileUris.observe(viewLifecycleOwner) { state ->
+            binding.btnProgressAr.visibility = when (state) {
+                is UiState.Loading -> View.VISIBLE
+                is UiState.Success -> {
+                    viewModelAuth.storeSession(currentUser)
+                    toast(state.data)
+                    View.GONE
+                }
+                is UiState.Failure -> {
+                    toast(state.error)
+                    View.GONE
+                }
+            }
+        }
+
+        viewModelAuth.currentUser.observe(viewLifecycleOwner) { state ->
+            binding.btnProgressAr.visibility = when (state) {
+                is UiState.Loading -> View.VISIBLE
+                is UiState.Success -> {
+                    currentUser = state.data
+                    binding.apply {
+                        usernameDisplay.text = currentUser.username
+                        passwordDisplay.text = currentUser.password
+                        emailDisplay.text = currentUser.email
+                        learningStreakDisplay.text = currentUser.learningStreak.toString()
+                        achievedGoalsDisplay.text = currentUser.achievedGoals.toString()
+                    }
+                    loadImageFromUrl(currentUser.profileImageUrl)
+                    View.GONE
+                }
+                is UiState.Failure -> {
+                    toast(state.error)
+                    View.GONE
+                }
+            }
+        }
+    }
+
+    /**
+     * Funktion zum Laden eines Bildes aus einer URL in das Profilbild.
+     * @param imageUrl Die URL des Bildes, das geladen werden soll.
      */
     private fun loadImageFromUrl(imageUrl: String) {
         Log.d(TAG, "loading imageURL into profilepic- $imageUrl")
         context?.let {
             Glide.with(it)
                 .load(imageUrl)
-                // override the image if its size does not match our requirements and crop if not a square
-                .apply(RequestOptions().override(300,300).placeholder(R.drawable.profile_image_placeholder).centerCrop())
+                .apply(RequestOptions().override(300, 300).placeholder(R.drawable.profile_image_placeholder).centerCrop())
                 .into(binding.profilePic)
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // Eine Beobachtung auf viewModel.addGoal ausführen
-        observer()
-        setLocalCurrentUser()
-        updateUI()
-    }
-
-    private fun setLocalCurrentUser() {
-        viewModelAuth.getSession()
-    }
-
-    private fun updateUI() {
-        // Hole User und aktualisiere die angezeigten Informationen
-        Log.e(TAG, "UpdateUI currentUser holen")
-
-        // Aufrufen der handy-internen Gallerie
-        val galleryLauncher =
-            registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-                if (result != null && currentUser != null)
-                    viewModelProfile.onUploadSingleFile(result, currentUser!!)
-            }
-
-
-        // Handler für Button Click
-        binding.profilePic.setOnClickListener {
-            // Wenn Button gedrückt, wähle Bild aus der Gallerie aus
-            galleryLauncher.launch("image/*")
-
-            // Wenn Bild geholt, dann aktualisiere Session und lade Bild neu
-            if (currentUser != null)
-                loadImageFromUrl(currentUser!!.profileImageUrl)
-        }
-        // Setze Listener für Buttons für Navigation
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_homeFragment) }
-
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_learningCategoryListFragment) }
-
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_goalListingFragment) }
-
-        binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_homeFragment) }
-    }
-
-    private fun observer() {
-        viewModelProfile.fileUris.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
-            when (state) {
-                is UiState.Loading -> {
-                    binding.btnProgressAr.show()
-                }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
-                is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
-                    toast(state.error)
-                }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
-                is UiState.Success -> {
-                    // if profileURL was succesfully updated, make sure that our user is actually the user we want
-                    // because if the user has been updated, we need to store a new session
-                    viewModelAuth.storeSession(currentUser!!)
-                    binding.btnProgressAr.hide()
-                    toast(state.data)
-                }
-            }
-        }
-
-        viewModelAuth.currentUser.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
-            when (state) {
-                is UiState.Loading -> {
-                    binding.btnProgressAr.show()
-                }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
-                is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
-                    toast(state.error)
-                }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
-                is UiState.Success -> {
-                    binding.btnProgressAr.hide()
-                    currentUser = state.data
-                    binding.usernameDisplay.text = currentUser!!.username
-                    binding.passwordDisplay.text = currentUser!!.password
-                    binding.emailDisplay.text = currentUser!!.email
-                    binding.learningStreakDisplay.text = currentUser!!.learningStreak.toString()
-                    binding.achievedGoalsDisplay.text = currentUser!!.achievedGoals.toString()
-                    loadImageFromUrl(currentUser!!.profileImageUrl)
-                }
-            }
-        }
+    companion object {
+        private const val TAG = "ProfileFragment"
     }
 }
