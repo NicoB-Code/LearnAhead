@@ -100,9 +100,7 @@ class SummaryRepository(
         val document = database.collection(FireStoreCollection.SUMMARY).document(summary.id)
 
         // Zusammenfassung in der Datenbank aktualisieren
-        document.apply {
-            set(summary)
-        }.addOnSuccessListener {
+        document.set(summary).addOnSuccessListener {
             result(UiState.Success(summary))
         }.addOnFailureListener {
             // Fehlermeldung an den Aufrufer zurückgeben
