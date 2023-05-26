@@ -15,6 +15,8 @@ import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
+import com.example.learnahead_prototyp.Util.hide
+import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,8 +28,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
+    // Binding-Objekt für die Layout-Datei des Fragments
     private lateinit var binding: FragmentProfileBinding
+
+    // Aktueller Benutzer
     private lateinit var currentUser: User
+
+    // ViewModels für die Authentifizierung und das Profil
     private val viewModelAuth: AuthViewModel by viewModels()
     private val viewModelProfile: ProfileViewModel by viewModels()
 
@@ -47,13 +54,15 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+        // Das Layout aufblasen und das Binding-Objekt initialisieren
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Beobachter und UI-Update-Funktionen initialisieren
         observer()
         setLocalCurrentUser()
         updateUI()
@@ -72,6 +81,7 @@ class ProfileFragment : Fragment() {
      */
     private fun updateUI() {
         binding.apply {
+            // Klick-Listener für die Schaltflächen festlegen
             buttonHome.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
@@ -88,6 +98,7 @@ class ProfileFragment : Fragment() {
                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
 
+            // Klick-Listener für das Profilbild festlegen
             profilePic.setOnClickListener {
                 galleryLauncher.launch("image/*")
             }
@@ -120,6 +131,7 @@ class ProfileFragment : Fragment() {
                 is UiState.Success -> {
                     currentUser = state.data
                     binding.apply {
+                        // Benutzerdaten in die Benutzeroberfläche einfügen
                         usernameDisplay.text = currentUser.username
                         passwordDisplay.text = currentUser.password
                         emailDisplay.text = currentUser.email
