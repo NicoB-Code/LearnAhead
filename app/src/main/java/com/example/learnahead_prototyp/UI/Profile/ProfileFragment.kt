@@ -45,7 +45,9 @@ class ProfileFragment : Fragment() {
     private val galleryLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
             result?.let {
+                // Das ausgewählte Bild wird an die Funktion onUploadSingleFile() übergeben
                 viewModelProfile.onUploadSingleFile(it, currentUser)
+                // Das Profilbild wird aktualisiert
                 loadImageFromUrl(currentUser.profileImageUrl)
             }
         }
@@ -72,6 +74,7 @@ class ProfileFragment : Fragment() {
      * Funktion zum Laden des aktuellen Benutzers aus der lokalen Sitzung.
      */
     private fun setLocalCurrentUser() {
+        // Die Funktion getSession() des AuthViewModels wird aufgerufen, um den aktuellen Benutzer aus der lokalen Sitzung zu laden
         viewModelAuth.getSession()
     }
 
@@ -114,11 +117,14 @@ class ProfileFragment : Fragment() {
             binding.btnProgressAr.visibility = when (state) {
                 is UiState.Loading -> View.VISIBLE
                 is UiState.Success -> {
+                    // Die aktuelle Sitzung wird im AuthViewModel gespeichert
                     viewModelAuth.storeSession(currentUser)
+                    // Eine Toast-Nachricht wird angezeigt, um den Benutzer über den erfolgreichen Upload zu informieren
                     toast(state.data)
                     View.GONE
                 }
                 is UiState.Failure -> {
+                    // Eine Toast-Nachricht wird angezeigt, um den Benutzer über den fehlgeschlagenen Upload zu informieren
                     toast(state.error)
                     View.GONE
                 }
@@ -129,19 +135,22 @@ class ProfileFragment : Fragment() {
             binding.btnProgressAr.visibility = when (state) {
                 is UiState.Loading -> View.VISIBLE
                 is UiState.Success -> {
+                    // Der aktuelle Benutzer wird aus dem ViewModel geladen
                     currentUser = state.data
                     binding.apply {
-                        // Benutzerdaten in die Benutzeroberfläche einfügen
+                        // Die Benutzerdaten werden in die Benutzeroberfläche eingefügt
                         usernameDisplay.text = currentUser.username
                         passwordDisplay.text = currentUser.password
                         emailDisplay.text = currentUser.email
                         learningStreakDisplay.text = currentUser.learningStreak.toString()
                         achievedGoalsDisplay.text = currentUser.achievedGoals.toString()
                     }
+                    // Das Profilbild wird aus der URL des Benutzers geladen
                     loadImageFromUrl(currentUser.profileImageUrl)
                     View.GONE
                 }
                 is UiState.Failure -> {
+                    // Eine Toast-Nachricht wird angezeigt, um den Benutzer über den fehlgeschlagenen Ladevorgang zu informieren
                     toast(state.error)
                     View.GONE
                 }
@@ -156,6 +165,7 @@ class ProfileFragment : Fragment() {
     private fun loadImageFromUrl(imageUrl: String) {
         Log.d(TAG, "loading imageURL into profilepic- $imageUrl")
         context?.let {
+            // Das Bild wird mit Glide aus der URL geladen und in das Profilbild eingefügt
             Glide.with(it)
                 .load(imageUrl)
                 .apply(RequestOptions().override(300, 300).placeholder(R.drawable.profile_image_placeholder).centerCrop())
