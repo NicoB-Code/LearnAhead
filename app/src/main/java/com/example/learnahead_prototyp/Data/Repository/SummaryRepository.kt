@@ -1,3 +1,13 @@
+package com.example.learnahead_prototyp.Data.Repository
+
+import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.Summary
+import com.example.learnahead_prototyp.Data.Model.User
+import com.example.learnahead_prototyp.Util.FireStoreCollection
+import com.example.learnahead_prototyp.Util.UiState
+import com.google.firebase.firestore.FirebaseFirestore
+
+
 /**
  * Klasse, die die Schnittstelle ISummaryRepository implementiert und Methoden enthält, um Zusammenfassungen aus der Datenbank zu holen, hinzuzufügen, zu aktualisieren und zu löschen.
  * @param database Die Firebase Firestore-Datenbank-Instanz, auf die zugegriffen werden soll.
