@@ -12,6 +12,8 @@ import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
+import com.example.learnahead_prototyp.Util.hide
+import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryInnerViewBinding
 import dagger.hilt.android.AndroidEntryPoint

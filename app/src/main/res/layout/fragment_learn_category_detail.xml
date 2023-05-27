@@ -108,9 +108,11 @@
         android:hint="@string/hint_learning_category_name"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
+        android:maxLines="1"
+        android:inputType="text|textNoSuggestions"
+        android:gravity="start|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/learning_category_name_label"
-        />
+        app:layout_constraintTop_toBottomOf="@id/learning_category_name_label" />
 
     <ProgressBar
         android:id="@+id/btn_progress_ar"
