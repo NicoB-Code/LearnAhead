@@ -1,0 +1,415 @@
+\section{Definitionsphase}
+
+% Neurowissenschaftliche Grundlagen
+\subsection{Wissenschaftliche Grundlagen}
+% Technische Grundlagen (Informatik Zeugs)
+\subsection{Technische Grundlagen}
+
+
+\subsection{Pflichtenheft}
+Das Pflichtenheft ist analog zum \hyperref[sec:arbeitspaketplan]{Arbeitspaketplan} in diesem Dokument nicht genauer beschrieben, sondern in Form eines Backlog auf \href{https://studienarbeitlernapp.atlassian.net/jira/software/projects/LER/boards/1}{\underline{Jira}}\footnote{\href{https://studienarbeitlernapp.atlassian.net/jira/software/projects/LER/boards/1}{https://studienarbeitlernapp.atlassian.net/jira/software/projects/LER/boards/1}} aufgeführt. 
+Dort kann entweder der Reiter \gqq{Roadmap} oder der Reiter \gqq{Board} aufgerufen werden. 
+
+\subsection{Use Case Diagramm}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/diagramme/UseCase_Diagramm.png}
+    \caption{Use Case Diagramm}
+    \label{fig:UseCaseDiagramm}
+\end{figure}
+\newpage
+\subsection{Use Case Beschreibung}
+
+% Use Case Login
+\begin{table}[h!]
+    \begin{tabular}{p{0.2\textwidth}|p{0.74\textwidth}}
+    \textbf{Name:} &  \textbf{Login} \\ \hline
+    Ziel:          & Anmelden mit bestehenden Logindaten in der App \\ \hline
+    Kategorie:     &  Primär\\ \hline
+    Vorbedingung:  & Der Benutzer muss bereits einen Account erstellt haben \\ \hline
+    Nachbedingung: & Der Benutzer ist eingeloggt \\ \hline
+    Fehlerfälle:   &  
+    \begin{minipage}[t]{\linewidth}
+    Falsche Logindaten 
+    \strut
+    \begin{itemize}
+        \item Rückmeldung, dass falsche Zugangsdaten verwendet wurden
+        \item Möglichkeit, das Kennwort über die E-Mail zurückzusetzen
+    \end{itemize}
+    Abbruch durch den Benutzer
+    \begin{itemize}
+        \item keine Zustandsänderung
+        \strut
+    \end{itemize}
+      \end{minipage}\\ \hline
+    Akteure:       & User \\ \hline
+    Auslösendes Event:  & Benutzer öffnet die App und klickt auf einloggen \\ \hline
+    Beschreibung/
+    Erweiterungen:      & Der Benutzer meldet sich an, um die verschiedenen Dienste der App zu verwenden \\ \hline
+    Alternativen:       & Benutzer kann sich registrieren, sofern die E-Mail nicht schon registriert ist. \\ 
+    \end{tabular}
+    \end{table}
+    \newpage
+% Use Case Registrieren
+\begin{table}[h!]
+    \begin{tabular}{p{0.2\textwidth}|p{0.74\textwidth}}
+    \textbf{Name:} &  \textbf{Registrieren} \\ \hline
+    Ziel:          & Anlegen eines neuen Accounts \\ \hline
+    Kategorie:     &  Primär\\ \hline
+    Vorbedingung:  & E-Mail ist noch nicht mit einem anderen Account registriert \\ \hline
+    Nachbedingung: & Der Benutzer ist eingeloggt \\ \hline
+    Fehlerfälle:   &  
+    \begin{minipage}[t]{\linewidth}
+        E-Mail bereits verwendet
+        \strut
+        \begin{itemize}
+            \item Rückmeldung, dass E-Mail bereits verwendet wurde
+        \end{itemize}
+        Abbruch durch den Benutzer
+        \begin{itemize}
+            \item Keine Zustandsänderung
+            \item Account wird nicht angelegt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Akteure:       & User \\ \hline
+    Auslösendes Event:  & Benutzer öffnet die App und klickt auf Registrieren. \\ \hline
+    Beschreibung/
+    Erweiterungen:      & Ein Benutzer möchte einen neuen Account erstellen. \\ \hline
+    Alternativen:       & Login mit bestehendem Account. \\ 
+    \end{tabular}
+    \end{table}
+    \newpage
+% Use Case Lernziel erstellen
+\begin{table}[h!]
+    \begin{tabular}{p{0.2\textwidth}|p{0.74\textwidth}}
+    \textbf{Name:} &  \textbf{Lernziel erstellen} \\ \hline
+    Ziel:          & Anlegen eines neuen Lernziels \\ \hline
+    Kategorie:     &  Primär\\ \hline
+    Vorbedingung:  &
+    \begin{minipage}[t]{\linewidth}
+        \strut
+        \begin{itemize}
+            \item User musss eingeloggt sein
+            \item Lernziel mit gleichem Namen ist noch nicht erstellt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Nachbedingung: & Lernziel ist erstellt \\ \hline
+    Fehlerfälle:   &  
+    \begin{minipage}[t]{\linewidth}
+        Lernziel mit gleichem Namen existiert bereits
+        \strut
+        \begin{itemize}
+            \item Rückmeldung, dass dieses Lernziel bereits existiert
+        \end{itemize}
+        Abbruch durch den Benutzer
+        \begin{itemize}
+            \item keine Zustandsänderung
+            \item Lernziel wird nicht angelegt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Akteure:       & User \\ \hline
+    Auslösendes Event:  & Benutzer öffnet Lernziel Reiter und klickt auf \gqq{Lernziel erstellen} \\ \hline
+    Beschreibung/
+    Erweiterungen:      & Durch das Ausfüllen der Eingabefelder und anschließendes bestätigen, kann der User ein Lernziel erstellen. Aus sämtlichen Lernzielen wird daraufhin ein Lernplan erstellt. \\ \hline
+    Alternativen:       &  \\ 
+    \end{tabular}
+    \end{table}
+    \newpage
+% Use Case Lernkategorie erstellen
+\begin{table}[h!]
+    \begin{tabular}{p{0.2\textwidth}|p{0.74\textwidth}}
+    \textbf{Name:} &  \textbf{Lernziel erstellen} \\ \hline
+    Ziel:          & Anlegen einer neuen Lernkategorie \\ \hline
+    Kategorie:     &  Primär\\ \hline
+    Vorbedingung:  &
+    \begin{minipage}[t]{\linewidth}
+        \strut
+        \begin{itemize}
+            \item User musss eingeloggt sein
+            \item Lernkategorie mit gleichem Namen ist noch nicht erstellt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline 
+    Nachbedingung: & Lernkategorie ist erstellt \\ \hline
+    Fehlerfälle:   &  
+    \begin{minipage}[t]{\linewidth}
+        Lernkategorie mit gleichem Namen existiert bereits
+        \strut
+        \begin{itemize}
+            \item Rückmeldung, dass diese Lernkategorie bereits existiert
+        \end{itemize}
+        Abbruch durch den Benutzer
+        \begin{itemize}
+            \item keine Zustandsänderung
+            \item Lernkategorie wird nicht angelegt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Akteure:       & User \\ \hline
+    Auslösendes Event:  & Benutzer öffnet Lernkategorie Reiter und klickt auf \gqq{Lernkategorie erstellen} \\ \hline
+    Beschreibung/
+    Erweiterungen:      & Durch das Ausfüllen der Eingabefelder und anschließendes bestätigen, kann der User eine Lernkategorie erstellen. In einer Lernkategorie können Zusammenfassungen, Fragen und Tests erstellt werden. \\ \hline
+    Alternativen:       &  \\ 
+    \end{tabular}
+    \end{table}
+    \newpage
+% Use Case Zusammenfassung erstellen
+\begin{table}[h!]
+    \begin{tabular}{p{0.2\textwidth}|p{0.74\textwidth}}
+    \textbf{Name:} &  \textbf{Zusammenfassung erstellen} \\ \hline
+    Ziel:          & Anlegen einer neuen Zusammenfassung \\ \hline
+    Kategorie:     &  Primär\\ \hline
+    Vorbedingung:  &
+    \begin{minipage}[t]{\linewidth}
+        \strut
+        \begin{itemize}
+            \item User musss eingeloggt sein
+            \item Zusammenfassung mit gleichem Namen ist noch nicht in der gleichen Lernkategorie erstellt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Nachbedingung: & Zusammenfassung für Lernkategorie ist erstellt \\ \hline
+    Fehlerfälle:   &  
+    \begin{minipage}[t]{\linewidth}
+        Zusammenfassung mit gleichem Namen existiert bereits in dieser Lernkategorie
+        \strut
+        \begin{itemize}
+            \item Rückmeldung, dass diese Zusammenfassung bereits existiert
+        \end{itemize}
+        Abbruch durch den Benutzer
+        \begin{itemize}
+            \item keine Zustandsänderung
+            \item Zusammenfassung wird nicht angelegt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Akteure:       & User \\ \hline
+    Auslösendes Event:  & Benutzer öffnet eine Lernkategorie, klickt auf \gqq{Zusammenfassungen} und danach auf \gqq{Zusammenfassung erstellen}\\ \hline
+    Beschreibung/
+    Erweiterungen:      & Durch das Ausfüllen der Eingabefelder und anschließendes bestätigen, kann der User eine Zusammenfassung erstellen. In einer Zusammenfassung können Inhalte eingefügt und formatiert werden. \\ \hline
+    Alternativen:       &  \\ 
+    \end{tabular}
+    \end{table}
+    \newpage
+% Use Case Frage erstellen
+\begin{table}[h!]
+    \begin{tabular}{p{0.2\textwidth}|p{0.74\textwidth}}
+    \textbf{Name:} &  \textbf{Frage erstellen} \\ \hline
+    Ziel:          & Anlegen einer neuen Frage \\ \hline
+    Kategorie:     &  Primär\\ \hline
+    Vorbedingung:  &
+    \begin{minipage}[t]{\linewidth}
+        \strut
+        \begin{itemize}
+            \item User musss eingeloggt sein
+            \item Frage mit gleichem Index ist noch nicht in der gleichen Lernkategorie erstellt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline 
+    Nachbedingung: & Frage für Lernkategorie ist erstellt \\ \hline
+    Fehlerfälle:   &  
+    \begin{minipage}[t]{\linewidth}
+        Frage mit gleichem Namen existiert bereits in dieser Lernkategorie
+        \strut
+        \begin{itemize}
+            \item Rückmeldung, dass Frage mit gleicher Bezeichnung bereits existiert
+        \end{itemize}
+        Abbruch durch den Benutzer
+        \begin{itemize}
+            \item keine Zustandsänderung
+            \item Frage wird nicht angelegt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Akteure:       & User \\ \hline
+    Auslösendes Event:  & Benutzer öffnet eine Lernkategorie, klickt auf \gqq{Tests / Fragen} und danach auf \gqq{Frage erstellen}\\ \hline
+    Beschreibung/
+    Erweiterungen:      & Durch das Ausfüllen der Eingabefelder und anschließendes bestätigen, kann der User eine Frage erstellen. Eine Frage kann unterschiedliche Vorlagen (beispielsweise Karteikarte) besitzen, jedoch gibt es immer eine Meldung (Text der Frage) und eine gültige Antwort. \\ \hline
+    Alternativen:       &  \\ 
+    \end{tabular}
+    \end{table}
+    \newpage
+% Use Case Test erstellen
+\begin{table}[h!]
+    \begin{tabular}{p{0.2\textwidth}|p{0.74\textwidth}}
+    \textbf{Name:} &  \textbf{Test erstellen} \\ \hline
+    Ziel:          & Anlegen eines neuen Tests \\ \hline
+    Kategorie:     &  Primär\\ \hline
+    Vorbedingung:  &
+    \begin{minipage}[t]{\linewidth}
+        \strut
+        \begin{itemize}
+            \item User musss eingeloggt sein
+            \item Test mit gleichem Namen ist noch nicht in der gleichen Lernkategorie erstellt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Nachbedingung: & Test für Lernkategorie ist erstellt \\ \hline
+    Fehlerfälle:   &  
+    \begin{minipage}[t]{\linewidth}
+        Test mit gleichem Namen existiert bereits in dieser Lernkategorie
+        \strut
+        \begin{itemize}
+            \item Rückmeldung, dass Test mit gleicher Bezeichnung bereits existiert
+        \end{itemize}
+        Abbruch durch den Benutzer
+        \begin{itemize}
+            \item keine Zustandsänderung
+            \item Test wird nicht angelegt
+            \strut
+        \end{itemize}
+        \end{minipage}\\ \hline
+    Akteure:       & User \\ \hline
+    Auslösendes Event:  & Benutzer öffnet eine Lernkategorie, klickt auf \gqq{Tests / Fragen} und danach auf \gqq{Test erstellen}\\ \hline
+    Beschreibung/
+    Erweiterungen:      & Durch das Ausfüllen der Eingabefelder und anschließendes bestätigen, kann der User einen Test erstellen. Eine Test kann mehrere Fragen besitzen. Wenn ein Test gestartet wird, bekommt der User nach abschließen des Tests eine Meldung, wie viele und welche Fragen er richtig beantwortet hast.  \\ \hline
+    Alternativen:       &  \\ 
+    \end{tabular}
+    \end{table}
+    \newpage
+
+\subsection{Datenbankmodell}
+
+\subsection{Data Dictionary}
+
+\subsection{HMI}
+
+\subsubsection{Seitenhirarchie}
+Innerhalb der Seitenhierarchie wird dargestellt, wie man in der App navigieren kann.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/diagramme/Seitenhierarchie.png}
+    \caption{Die Seitenhierarchie in LearnAhead}
+    \label{fig:UseCaseDiagramm}
+\end{figure}
+
+\newpage
+\subsubsection{UI-Mockups}
+
+\begin{center}
+    \underline{\textbf{Login-Screen}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Login.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Registrierung}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Registrierung.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Home-Screen}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Home.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Profilansicht}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Profile.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Erstellen einer Lernkategorie}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/createLernkategorie.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansicht Lernkategorien}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Lernkategorie.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansicht Zusammenfassungen}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Summaries.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Erstellen einer Zusammenfassung}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Summaries_Look.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansicht Fragen und Tests}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/FragenTests.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansicht Fragen}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Fragen.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Erstellen einer Frage}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/FrageErstellen.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansichts Tests}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Tests.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Erstellen eines Tests}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/TestErstellen.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansicht einer Frage innerhalb eines Tests}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/TestFrage.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansicht einer Antwort zu einer Frage innerhalb eines Tests}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/TestAntwort.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Ansicht Lernziele}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/Lernziele.JPG}
+\end{center}
+\newpage
+\begin{center}
+    \underline{\textbf{Erstellen eines Lernziels}}\\
+    \includegraphics[width=.5\textwidth]{images/Mockups/LernzielErstellen.JPG}
+\end{center}
+
+\subsection{Datenflussdiagramm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
