@@ -286,66 +286,155 @@ Dort kann entweder der Reiter \gqq{Roadmap} oder der Reiter \gqq{Board} aufgeruf
     \end{figure}\noindent
     \subsubsection{Data Dictionary}
     \underline{\textbf{User}}
-    % Please add the following required packages to your document preamble:
-    % \usepackage{graphicx}
     \begin{table}[H]
-        \centering
-        \resizebox{\columnwidth}{!}{%
-        \begin{tabular}{c|c|c|c|c|c|l}
-        \textbf{Attribut} &
-          \textbf{Datentyp} &
-          \textbf{Länge} &
-          \textbf{Null} &
-          \textbf{Default} &
-          \textbf{Schlüssel} &
-          \textbf{Beschreibung} \\ \hline
-        ID &
-          string &
-          - &
-          Nein &
-          - &
-          P &
-           \\ \hline
-        Username &
-          string &
-          - &
-          Nein &
-          - &
-          - &
-          Der Benutzername des Nutzers \\ \hline
-        E-Mail &
-          string &
-          - &
-          Nein &
-          - &
-          - &
-          Die E-Mail-Adresse des Nutzers \\ \hline
-        Password &
-          string &
-          - &
-          Nein &
-          - &
-          - &
-          Das Passwort des Nutzers \\ \hline
-        ProfileImageURL & string & - & Ja & - & - & \begin{tabular}[c]{@{}l@{}}Der Link des Profilbilds welches\\ im Firebase Storage gespeichert\\ ist\end{tabular}         \\ \hline
-        RegisterDate &
-          timestamp &
-          - &
-          Nein &
-          - &
-          - &
-          \begin{tabular}[c]{@{}l@{}}Das Datum an dem sich der \\ Nutzer registriert hat.\end{tabular} \\ \hline
-        LearningStreak  & number & - & Ja & 0 & - & \begin{tabular}[c]{@{}l@{}}Dies gibt die Anzahl an, wie viele\\ Tage der Nutzer aufeinander \\ gelernt hat.\end{tabular} \\ \hline
-        CurrentPoints &
-          number &
-          - &
-          Ja &
-          0 &
-          - &
-          \begin{tabular}[c]{@{}l@{}}Die aktuelle Level Punkte des\\ Nutzers\end{tabular}
-        \end{tabular}%
-        }
-        \end{table}
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{c|c|c|c|c|c|l}
+    \textbf{Attribut} &
+      \textbf{Datentyp} &
+      \textbf{Länge} &
+      \textbf{Null} &
+      \textbf{Default} &
+      \textbf{Schlüssel} &
+      \textbf{Beschreibung} \\ \hline
+    ID &
+      string &
+      - &
+      Nein &
+      - &
+      P &
+       \\ \hline
+    Username &
+      string &
+      - &
+      Nein &
+      - &
+      - &
+      Der Benutzername des Nutzers \\ \hline
+    E-Mail &
+      string &
+      - &
+      Nein &
+      - &
+      - &
+      Die E-Mail-Adresse des Nutzers \\ \hline
+    Password &
+      string &
+      - &
+      Nein &
+      - &
+      - &
+      Das Passwort des Nutzers \\ \hline
+    ProfileImageURL &
+      string &
+      - &
+      Ja &
+      Null &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Der Link des Profilbilds welches\\ im Firebase Storage gespeichert\\ ist\end{tabular} \\ \hline
+    RegisterDate &
+      timestamp &
+      - &
+      Nein &
+      - &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Das Datum an dem sich der \\ Nutzer registriert hat.\end{tabular} \\ \hline
+    LearningStreak &
+      number &
+      - &
+      Ja &
+      0 &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies gibt die Anzahl an, wie viele\\ Tage der Nutzer aufeinander \\ gelernt hat.\end{tabular} \\ \hline
+    CurrentPoints &
+      number &
+      - &
+      Ja &
+      0 &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Die aktuelle Level Punkte des\\ Nutzers\end{tabular} \\ \hline
+    LearningCategories &
+      map &
+      - &
+      Ja &
+      Null &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies ist eine gemappte Liste zu\\ der Tabelle LearningCategories, \\ wo alle Lernkategorien drin sind,\\ die der Nutzer erstellt hat.\end{tabular} \\ \hline
+    Goals &
+      map &
+      - &
+      Ja &
+      Null &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies ist eine gemappte Liste zu \\ der Tabelle Goals, wo alle\\ Lernziele drin sind, die der\\ Nutzer erstellt hat.\end{tabular}
+    \end{tabular}%
+    }
+    \end{table}
+    \newpage
+    \underline{\textbf{Goals}}
+    \begin{table}[H]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{c|c|c|c|c|c|l}
+    \textbf{Attribut} &
+      \textbf{Datentyp} &
+      \textbf{Länge} &
+      \textbf{Null} &
+      \textbf{Default} &
+      \textbf{Schlüssel} &
+      \textbf{Beschreibung} \\ \hline
+    ID &
+      string &
+      - &
+      Nein &
+      - &
+      P &
+       \\ \hline
+    Name &
+      string &
+      - &
+      Nein &
+      - &
+      - &
+      Der Name des Lernziels \\ \hline
+    Description &
+      string &
+      - &
+      Ja &
+      Null &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies soll als Beschreibung des\\ Lernziels gelten. Hier können\\ z.B. die relevanten Themen\\ aufgelistet werden.\end{tabular} \\ \hline
+    Status &
+      string &
+      - &
+      Ja &
+      ToDo &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies gibt den aktuellen Status\\ des Lernziels an.\\ Es gibt die folgende Status:\\ - ToDo\\ - In Progress\\ - Done\end{tabular} \\ \hline
+    StartDate &
+      timestamp &
+      - &
+      Ja &
+      \begin{tabular}[c]{@{}c@{}}Server\\ Timestamp\end{tabular} &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies gibt an, wann das \\ Lernziel startet\end{tabular} \\ \hline
+    EndDate &
+      timestamp &
+      - &
+      Nein &
+      - &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies gibt an, bis wann das\\ Lernziel abgeschlossen sein\\ soll\end{tabular} \\ \hline
+    LastLearned &
+      timestamp &
+      - &
+      Ja &
+      Null &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Dies gibt, wann das Lernziel\\ das letzte mal gelernt wurde.\end{tabular}
+    \end{tabular}%
+    }
+    \end{table}
     \subsection{HMI}
     
     \subsubsection{Seitenhirarchie}
