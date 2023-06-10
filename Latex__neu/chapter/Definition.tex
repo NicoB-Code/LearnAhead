@@ -283,6 +283,86 @@ Dort kann entweder der Reiter \gqq{Roadmap} oder der Reiter \gqq{Board} aufgeruf
 
 \subsection{Data Dictionary}
 
+\section{Definition}
+\subsection{Definition Fachbegriffe}
+\subsubsection{Lernen}
+\subsubsection{Synapsen}
+\subsubsection{Neuronen}
+\subsubsection{Neuronales Netz}
+\subsection{Pflichtenheft}
+\subsection{Use-Case-Diagramme}
+\subsection{Use-Case-Beschreibungen}
+\newpage
+\subsection{Datenbankmodell}
+\subsection{Datenbankstruktur}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/LearnAheadDatenbankstruktur.png}
+    \caption{LearnAhead Datenbankstruktur}
+    \label{fig:LearnAheadDatenbankstruktur}
+\end{figure}\noindent
+\subsubsection{Data Dictionary}
+\underline{\textbf{User}}
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[H]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{c|c|c|c|c|c|l}
+    \textbf{Attribut} &
+      \textbf{Datentyp} &
+      \textbf{Länge} &
+      \textbf{Null} &
+      \textbf{Default} &
+      \textbf{Schlüssel} &
+      \textbf{Beschreibung} \\ \hline
+    ID &
+      string &
+      - &
+      Nein &
+      - &
+      P &
+       \\ \hline
+    Username &
+      string &
+      - &
+      Nein &
+      - &
+      - &
+      Der Benutzername des Nutzers \\ \hline
+    E-Mail &
+      string &
+      - &
+      Nein &
+      - &
+      - &
+      Die E-Mail-Adresse des Nutzers \\ \hline
+    Password &
+      string &
+      - &
+      Nein &
+      - &
+      - &
+      Das Passwort des Nutzers \\ \hline
+    ProfileImageURL & string & - & Ja & - & - & \begin{tabular}[c]{@{}l@{}}Der Link des Profilbilds welches\\ im Firebase Storage gespeichert\\ ist\end{tabular}         \\ \hline
+    RegisterDate &
+      timestamp &
+      - &
+      Nein &
+      - &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Das Datum an dem sich der \\ Nutzer registriert hat.\end{tabular} \\ \hline
+    LearningStreak  & number & - & Ja & 0 & - & \begin{tabular}[c]{@{}l@{}}Dies gibt die Anzahl an, wie viele\\ Tage der Nutzer aufeinander \\ gelernt hat.\end{tabular} \\ \hline
+    CurrentPoints &
+      number &
+      - &
+      Ja &
+      0 &
+      - &
+      \begin{tabular}[c]{@{}l@{}}Die aktuelle Level Punkte des\\ Nutzers\end{tabular}
+    \end{tabular}%
+    }
+    \end{table}
 \subsection{HMI}
 
 \subsubsection{Seitenhirarchie}

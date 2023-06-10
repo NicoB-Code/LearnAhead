@@ -9,7 +9,7 @@
 - Zeitplan (Phillipp)
 - Qualitätsmanagement Maßnahmen (Phillipp)
 - Konfigurationsmanagement Maßnahmen (Nico)
-- Auswahl kritischer Technologien (Phillipp)
+- Evaluierung der Plattformen und Programmiersprachen für die App-Entwicklung (Phillipp)
 
 ## Definition
 - Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp)
