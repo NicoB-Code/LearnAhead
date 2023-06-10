@@ -2,7 +2,10 @@
 
 % Neurowissenschaftliche Grundlagen
 \subsection{Wissenschaftliche Grundlagen}
-% Technische Grundlagen (Informatik Zeugs)
+\subsubsection{Lernen}
+\subsubsection{Synapsen}
+\subsubsection{Neuronen}
+\subsubsection{Neuronales Netz}
 \subsection{Technische Grundlagen}
 
 
@@ -273,193 +276,175 @@ Dort kann entweder der Reiter \gqq{Roadmap} oder der Reiter \gqq{Board} aufgeruf
     \end{table}
     \newpage
 
-    \subsection{Datenbankmodell}
+    \subsection{Datenbankstruktur}
+    \subsubsection{Datenbankmodell}
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{images/LearnAheadDatenbankstruktur.png}
         \caption{LearnAhead Datenbankstruktur}
         \label{fig:LearnAheadDatenbankstruktur}
     \end{figure}\noindent
+    \subsubsection{Data Dictionary}
+    \underline{\textbf{User}}
+    % Please add the following required packages to your document preamble:
+    % \usepackage{graphicx}
+    \begin{table}[H]
+        \centering
+        \resizebox{\columnwidth}{!}{%
+        \begin{tabular}{c|c|c|c|c|c|l}
+        \textbf{Attribut} &
+          \textbf{Datentyp} &
+          \textbf{Länge} &
+          \textbf{Null} &
+          \textbf{Default} &
+          \textbf{Schlüssel} &
+          \textbf{Beschreibung} \\ \hline
+        ID &
+          string &
+          - &
+          Nein &
+          - &
+          P &
+           \\ \hline
+        Username &
+          string &
+          - &
+          Nein &
+          - &
+          - &
+          Der Benutzername des Nutzers \\ \hline
+        E-Mail &
+          string &
+          - &
+          Nein &
+          - &
+          - &
+          Die E-Mail-Adresse des Nutzers \\ \hline
+        Password &
+          string &
+          - &
+          Nein &
+          - &
+          - &
+          Das Passwort des Nutzers \\ \hline
+        ProfileImageURL & string & - & Ja & - & - & \begin{tabular}[c]{@{}l@{}}Der Link des Profilbilds welches\\ im Firebase Storage gespeichert\\ ist\end{tabular}         \\ \hline
+        RegisterDate &
+          timestamp &
+          - &
+          Nein &
+          - &
+          - &
+          \begin{tabular}[c]{@{}l@{}}Das Datum an dem sich der \\ Nutzer registriert hat.\end{tabular} \\ \hline
+        LearningStreak  & number & - & Ja & 0 & - & \begin{tabular}[c]{@{}l@{}}Dies gibt die Anzahl an, wie viele\\ Tage der Nutzer aufeinander \\ gelernt hat.\end{tabular} \\ \hline
+        CurrentPoints &
+          number &
+          - &
+          Ja &
+          0 &
+          - &
+          \begin{tabular}[c]{@{}l@{}}Die aktuelle Level Punkte des\\ Nutzers\end{tabular}
+        \end{tabular}%
+        }
+        \end{table}
+    \subsection{HMI}
+    
+    \subsubsection{Seitenhirarchie}
+    Innerhalb der Seitenhierarchie wird dargestellt, wie man in der App navigieren kann.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/diagramme/Seitenhierarchie.png}
+        \caption{Die Seitenhierarchie in LearnAhead}
+        \label{fig:UseCaseDiagramm}
+    \end{figure}
+    
+    \newpage
+    \subsubsection{UI-Mockups}
+    
+    \begin{center}
+        \underline{\textbf{Login-Screen}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Login.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Registrierung}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Registrierung.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Home-Screen}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Home.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Profilansicht}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Profile.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Erstellen einer Lernkategorie}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/createLernkategorie.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansicht Lernkategorien}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Lernkategorie.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansicht Zusammenfassungen}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Summaries.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Erstellen einer Zusammenfassung}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Summaries_Look.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansicht Fragen und Tests}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/FragenTests.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansicht Fragen}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Fragen.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Erstellen einer Frage}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/FrageErstellen.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansichts Tests}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Tests.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Erstellen eines Tests}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/TestErstellen.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansicht einer Frage innerhalb eines Tests}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/TestFrage.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansicht einer Antwort zu einer Frage innerhalb eines Tests}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/TestAntwort.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Ansicht Lernziele}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/Lernziele.JPG}
+    \end{center}
+    \newpage
+    \begin{center}
+        \underline{\textbf{Erstellen eines Lernziels}}\\
+        \includegraphics[width=.5\textwidth]{images/Mockups/LernzielErstellen.JPG}
+    \end{center}
+    
+    \subsection{Datenflussdiagramm}
 
-\subsection{Data Dictionary}
 
-\section{Definition}
-\subsection{Definition Fachbegriffe}
-\subsubsection{Lernen}
-\subsubsection{Synapsen}
-\subsubsection{Neuronen}
-\subsubsection{Neuronales Netz}
-\subsection{Pflichtenheft}
-\subsection{Use-Case-Diagramme}
-\subsection{Use-Case-Beschreibungen}
-\newpage
-\subsection{Datenbankmodell}
-\subsection{Datenbankstruktur}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/LearnAheadDatenbankstruktur.png}
-    \caption{LearnAhead Datenbankstruktur}
-    \label{fig:LearnAheadDatenbankstruktur}
-\end{figure}\noindent
-\subsubsection{Data Dictionary}
-\underline{\textbf{User}}
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
-\begin{table}[H]
-    \centering
-    \resizebox{\columnwidth}{!}{%
-    \begin{tabular}{c|c|c|c|c|c|l}
-    \textbf{Attribut} &
-      \textbf{Datentyp} &
-      \textbf{Länge} &
-      \textbf{Null} &
-      \textbf{Default} &
-      \textbf{Schlüssel} &
-      \textbf{Beschreibung} \\ \hline
-    ID &
-      string &
-      - &
-      Nein &
-      - &
-      P &
-       \\ \hline
-    Username &
-      string &
-      - &
-      Nein &
-      - &
-      - &
-      Der Benutzername des Nutzers \\ \hline
-    E-Mail &
-      string &
-      - &
-      Nein &
-      - &
-      - &
-      Die E-Mail-Adresse des Nutzers \\ \hline
-    Password &
-      string &
-      - &
-      Nein &
-      - &
-      - &
-      Das Passwort des Nutzers \\ \hline
-    ProfileImageURL & string & - & Ja & - & - & \begin{tabular}[c]{@{}l@{}}Der Link des Profilbilds welches\\ im Firebase Storage gespeichert\\ ist\end{tabular}         \\ \hline
-    RegisterDate &
-      timestamp &
-      - &
-      Nein &
-      - &
-      - &
-      \begin{tabular}[c]{@{}l@{}}Das Datum an dem sich der \\ Nutzer registriert hat.\end{tabular} \\ \hline
-    LearningStreak  & number & - & Ja & 0 & - & \begin{tabular}[c]{@{}l@{}}Dies gibt die Anzahl an, wie viele\\ Tage der Nutzer aufeinander \\ gelernt hat.\end{tabular} \\ \hline
-    CurrentPoints &
-      number &
-      - &
-      Ja &
-      0 &
-      - &
-      \begin{tabular}[c]{@{}l@{}}Die aktuelle Level Punkte des\\ Nutzers\end{tabular}
-    \end{tabular}%
-    }
-    \end{table}
-\subsection{HMI}
-
-\subsubsection{Seitenhirarchie}
-Innerhalb der Seitenhierarchie wird dargestellt, wie man in der App navigieren kann.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/diagramme/Seitenhierarchie.png}
-    \caption{Die Seitenhierarchie in LearnAhead}
-    \label{fig:UseCaseDiagramm}
-\end{figure}
-
-\newpage
-\subsubsection{UI-Mockups}
-
-\begin{center}
-    \underline{\textbf{Login-Screen}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Login.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Registrierung}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Registrierung.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Home-Screen}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Home.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Profilansicht}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Profile.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Erstellen einer Lernkategorie}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/createLernkategorie.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansicht Lernkategorien}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Lernkategorie.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansicht Zusammenfassungen}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Summaries.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Erstellen einer Zusammenfassung}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Summaries_Look.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansicht Fragen und Tests}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/FragenTests.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansicht Fragen}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Fragen.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Erstellen einer Frage}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/FrageErstellen.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansichts Tests}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Tests.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Erstellen eines Tests}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/TestErstellen.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansicht einer Frage innerhalb eines Tests}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/TestFrage.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansicht einer Antwort zu einer Frage innerhalb eines Tests}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/TestAntwort.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Ansicht Lernziele}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/Lernziele.JPG}
-\end{center}
-\newpage
-\begin{center}
-    \underline{\textbf{Erstellen eines Lernziels}}\\
-    \includegraphics[width=.5\textwidth]{images/Mockups/LernzielErstellen.JPG}
-\end{center}
-
-\subsection{Datenflussdiagramm}
