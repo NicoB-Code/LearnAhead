@@ -3,54 +3,54 @@
 # Einleitung  
 - 90% Done
 
-## Planung
-- Lastenheft (Nico)
-- Arbeitspaketplan (Nico)
-- Zeitplan (Phillipp)
-- Qualitätsmanagement Maßnahmen (Phillipp)
-- Konfigurationsmanagement Maßnahmen (Nico)
-- Evaluierung der Plattformen und Programmiersprachen für die App-Entwicklung (Phillipp)
+## Planung Done
+- Lastenheft (Nico) Done
+- Arbeitspaketplan (Nico) Done
+- Zeitplan (Phillipp) Done
+- Qualitätsmanagement Maßnahmen (Phillipp) Done
+- Konfigurationsmanagement Maßnahmen (Nico) Done
+- Evaluierung der Plattformen und Programmiersprachen für die App-Entwicklung (Phillipp) Done
 
 ## Definition
-- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp)
-- Pflichtenheft
-- Use-Case-Diagramme (Nico)
-- Use-Case-Beschreibungen (Nico)
-- Datenbankmodell (Phillipp)
-- Data Dictionary (Phillipp)
-- HMI
-  - Seitenhierarchie (Nico)
-  - UI-Mockups (Nico)
-- Datenflussdiagramm (Phillipp)
+- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
+- Pflichtenheft Done
+- Use-Case-Diagramme (Nico) Done
+- Use-Case-Beschreibungen (Nico) Done
+- Datenbankmodell (Phillipp) Done
+- Data Dictionary (Phillipp) Done
+- HMI Done
+  - Seitenhierarchie (Nico) Done
+  - UI-Mockups (Nico) Done
+- Datenflussdiagramm (Phillipp) **ToDo**
 - Benutzerhandbuch (optional)
 
 ## Entwurf
-- Prototyp (optional)
-- BPMN
-- Begründung des Datenbankkonzepts
-- Auswahl der Klassenbibliotheken/Frameworks
-- Design Patterns für relevante Problemstellungen
-- Software-Komponenten
-- Gesamtkomposition
-- Deployment Diagramm
-- Klassen Diagramm
-- Aktivitätsdiagramm
-- Sequenzdiagramme
+- Prototyp (optional) **ToDo**
+- BPMN **ToDo**
+- Begründung des Datenbankkonzepts **ToDo**
+- Auswahl der Klassenbibliotheken/Frameworks **ToDo**
+- Design Patterns für relevante Problemstellungen **ToDo**
+- Software-Komponenten **ToDo**
+- Gesamtkomposition **ToDo**
+- Deployment Diagramm **ToDo**
+- Klassen Diagramm **ToDo**
+- Aktivitätsdiagramm **ToDo**
+- Sequenzdiagramme **ToDo**
 
 ## Implementierung
-- Deployment
-- Installationsanleitung
-- Code Conventions
-- Code Dokumentation
-- IT-Security (Firebase Authentifizierung)
+- Deployment **ToDo**
+- Installationsanleitung **ToDo**
+- Code Conventions **ToDo**
+- Code Dokumentation **ToDo**
+- IT-Security (Firebase Authentifizierung) **ToDo**
 
 ## Tests
-- User Tests 
-- ggf. Unit Tests
+- User Tests **ToDo**
+- ggf. Unit Tests **ToDo**
 
 ## Ergebnisse
-- Nutzen der App
+- Nutzen der App **ToDo**
 
 ## Ausblick
-- Features (Kalender, Collaboration, etc.)
-- Zeitliche Dokumentation
+- Features (Kalender, Collaboration, etc.) **ToDo**
+- Zeitliche Dokumentation **ToDo**
