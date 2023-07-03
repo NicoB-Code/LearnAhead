@@ -13,6 +13,13 @@
 
 ## Definition
 - Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
+  - Lernen Phillipp **ToDo**
+  - Synapsen Nico **ToDo**
+  - Neuronen & Neuronales Netz Nico **ToDo**
+  - Optimierter Lernplan Phillipp **ToDo**
+  - Tagging Phillipp **ToDo**
+  - Lernkategorien & Lernziele Nico **ToDo**
+  - Gamification Nico **ToDo**
 - Pflichtenheft Done
 - Use-Case-Diagramme (Nico) Done
 - Use-Case-Beschreibungen (Nico) Done
@@ -26,16 +33,16 @@
 
 ## Entwurf
 - Prototyp (optional) **ToDo**
-- BPMN **ToDo**
-- Begründung des Datenbankkonzepts **ToDo**
-- Auswahl der Klassenbibliotheken/Frameworks **ToDo**
-- Design Patterns für relevante Problemstellungen **ToDo**
-- Software-Komponenten **ToDo**
-- Gesamtkomposition **ToDo**
-- Deployment Diagramm **ToDo**
-- Klassen Diagramm **ToDo**
-- Aktivitätsdiagramm **ToDo**
-- Sequenzdiagramme **ToDo**
+- BPMN **ToDo** Phillipp
+- Begründung des Datenbankkonzepts **ToDo** Phillipp
+- Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
+- Design Patterns für relevante Problemstellungen **ToDo** Nico
+- Software-Komponenten **ToDo** Phillipp
+- Gesamtkomposition **ToDo** Phillipp
+- Deployment Diagramm **ToDo** Nico
+- Klassen Diagramm **ToDo** Nico
+- Aktivitätsdiagramm **ToDo** Phillipp
+- Sequenzdiagramme **ToDo** Nico
 
 ## Implementierung
 - Deployment **ToDo**
