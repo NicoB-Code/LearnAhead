@@ -13,7 +13,7 @@
 
 ## Definition
 - Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
-  - Lernen Phillipp **ToDo**
+  - Lernen ist nicht gleich Verstehen Phillipp **Done ggbf. nochmal drüber lesen**
   - Synapsen Nico **ToDo**
   - Neuronen & Neuronales Netz Nico **ToDo**
   - Optimierter Lernplan Phillipp **ToDo**
