@@ -136,13 +136,14 @@
 
     <!-- Item Layout -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_summary_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:layout_below="@id/button_add_summary"
+        android:layout_above="@id/background_bottom_menu"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 

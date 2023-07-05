@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -46,10 +47,9 @@ class SummaryAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        if (list.isNotEmpty()) {
             val item = list[position]
             holder.bind(item)
-        }
+            Log.d("SummaryAdapter", "Bound")
     }
 
     fun updateList(list: MutableList<Summary>) {
@@ -71,7 +71,7 @@ class SummaryAdapter(
          */
         fun bind(item: Summary) {
             binding.itemListText.text = item.name
-
+            Log.d("LOL", "HAHAHAHAHAHAHAHAHAH")
 
             // Set the click listener for the inner view summary layout
             binding.innerViewSummaryLayout.setOnClickListener {

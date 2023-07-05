@@ -171,8 +171,8 @@
             android:id="@+id/action_summaryFragment_to_innerSummaryFragment"
             app:destination="@id/innerSummaryFragment" />
         <action
-            android:id="@+id/action_summaryFragment_to_summaryCreateFragment"
-            app:destination="@id/summaryCreateFragment" />
+            android:id="@+id/action_summaryFragment_to_createSummaryFragment"
+            app:destination="@id/createSummaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/innerSummaryFragment"
@@ -184,12 +184,21 @@
             app:destination="@id/summaryFragment" />
     </fragment>
     <fragment
-        android:id="@+id/summaryCreateFragment"
-        android:name="com.example.learnahead_prototyp.summaryCreateFragment"
-        android:label="fragment_summary_create"
-        tools:layout="@layout/fragment_summary_create" >
+        android:id="@+id/createSummaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.CreateSummaryFragment"
+        android:label="fragment_create_summary"
+        tools:layout="@layout/fragment_create_summary" >
         <action
-            android:id="@+id/action_summaryCreateFragment_to_summaryFragment"
+            android:id="@+id/action_createSummaryFragment_to_summaryFragment"
             app:destination="@id/summaryFragment" />
+        <action
+            android:id="@+id/action_createSummaryFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_createSummaryFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_createSummaryFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
     </fragment>
 </navigation>

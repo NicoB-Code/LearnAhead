@@ -35,6 +35,7 @@ class SummaryFragment : Fragment() {
     private val summaryViewModel: SummaryViewModel by viewModels()
     private var currentLearningCategory: LearningCategory?= null
     private var deletePosition: Int = -1
+    val TAG: String = "SummaryFragment"
     var list: MutableList<Summary> = arrayListOf()
 
     private val adapter by lazy {
@@ -89,15 +90,17 @@ class SummaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setzt die Event-Listener, beobachtet die LiveData-Objekte und aktualisiert die UI
-        setEventListener()
         observer()
         setLocalCurrentUser()
-        updateUI()
+        setEventListener()
+        //updateUI()
 
 
         // Setzt den Adapter für das RecyclerView
-        binding.recyclerView.adapter = adapter
-    }
+        binding.recyclerSummaryView.adapter = adapter
+        Log.d("SummaryAdapter", "List Size: ${list.size}")
+        Log.d("SummaryAdapter", "summary Size: ${summaryViewModel.summary.value}")  }
+
 
     /**
      * Aktualisiert die UI des Fragments.
@@ -127,7 +130,7 @@ class SummaryFragment : Fragment() {
         }
 
         binding.buttonAddSummary.setOnClickListener {
-            findNavController().navigate(R.id.action_summaryFragment_to_summaryCreateFragment)
+            findNavController().navigate(R.id.action_summaryFragment_to_createSummaryFragment)
         }
 
         // Setzt den Event-Listener für den Learning Goals-Button
@@ -160,16 +163,24 @@ class SummaryFragment : Fragment() {
     private fun observer() {
         // Beobachtet die LiveData-Objekte des SummaryViewModels und aktualisiert die UI entsprechend
         summaryViewModel.summary.observe(viewLifecycleOwner) { state ->
-            binding.progressBar.visibility = when (state) {
-                is UiState.Loading -> View.VISIBLE
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
                 is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
                     toast(state.error)
-                    View.GONE
                 }
 
                 is UiState.Success -> {
-                    adapter.updateList(state.data.toMutableList())
-                    View.GONE
+                    Log.d("Success", "Haalahlihihl")
+                    binding.progressBar.hide()
+                    list = state.data.toMutableList()
+                    Log.d("SummaryAdapter", "List Size: ${list.size}")
+                    adapter.updateList(list)
                 }
             }
         }
@@ -191,6 +202,7 @@ class SummaryFragment : Fragment() {
                     toast(state.data)
                     if (deletePosition != -1) {
                         list.removeAt(deletePosition)
+                        Log.d("SummaryAdapter", "List Size: ${list.size}")
                         adapter.updateList(list)
                         deletePosition = -1
                     }
@@ -207,11 +219,9 @@ class SummaryFragment : Fragment() {
                     View.GONE
                 }
                 is UiState.Success -> {
-                    Log.d("Simon", "Unge")
+                    Log.d(TAG,"Success")
                     currentUser = state.data
-                    currentLearningCategory?.let {
-                        summaryViewModel.getSummaries(currentUser, it)
-                    }
+                    currentLearningCategory?.let { summaryViewModel.getSummaries(currentUser, it) }
                     View.GONE
                 }
             }

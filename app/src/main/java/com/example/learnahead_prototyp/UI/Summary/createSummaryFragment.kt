@@ -5,7 +5,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.Goal.SummaryViewModel
-import com.example.learnahead_prototyp.databinding.FragmentSummaryCreateBinding
+import com.example.learnahead_prototyp.databinding.FragmentCreateSummaryBinding
 import androidx.fragment.app.viewModels
 import com.example.learnahead_prototyp.Data.Model.Summary
 import androidx.navigation.fragment.findNavController
@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.os.Bundle
+import android.util.Log
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -25,7 +26,7 @@ import androidx.core.widget.doAfterTextChanged
 class CreateSummaryFragment : Fragment() {
 
     private var currentUser: User? = null
-    lateinit var binding: FragmentSummaryCreateBinding
+    lateinit var binding: FragmentCreateSummaryBinding
     private val summaryViewModel: SummaryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private var isEdit = false
@@ -42,7 +43,7 @@ class CreateSummaryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSummaryCreateBinding.inflate(layoutInflater)
+        binding = FragmentCreateSummaryBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -71,7 +72,7 @@ class CreateSummaryFragment : Fragment() {
      * @param isDisable Ein boolescher Wert, der angibt, ob die Benutzeroberfläche deaktiviert werden soll
      *                  (`true`) oder nicht (`false`). Der Standardwert ist `false`.
      */
-    private fun isMakeEnableUI(isDisable: Boolean = false) {
+    private fun isMakeEnableUI(isDisable: Boolean) {
         binding.textSummaryName.isEnabled = isDisable
     }
 
@@ -94,21 +95,21 @@ class CreateSummaryFragment : Fragment() {
         }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_homeFragment) }
+        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_homeFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment) }
+        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_learningCategoryListFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_goalListingFragment) }
+        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_goalListingFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.backIcon.setOnClickListener {
-            findNavController().navigateUp()
+        binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_summaryFragment)
         }
 
         // Event Listener wenn sich der Titel verändert
         binding.textSummaryName.doAfterTextChanged {
+            Log.d("Test", "Hallo")
             updateButtonVisibility()
         }
     }
@@ -163,7 +164,7 @@ class CreateSummaryFragment : Fragment() {
             binding.saveButton.hide()
             binding.editButton.show()
             //binding.delete.show()
-            isMakeEnableUI()
+            isMakeEnableUI(false)
         } ?: run {
             // Standardmaske für Lernkategorie erstellen
             binding.textSummaryName.setText("")
@@ -223,7 +224,7 @@ class CreateSummaryFragment : Fragment() {
                         currentUser!!.summaries.add(state.data)
                         // Den User in der DB updaten
                         authViewModel.updateUserInfo(currentUser!!)
-                        findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment)
+                        findNavController().navigate(R.id.action_createSummaryFragment_to_summaryFragment)
                         toast("Die Lernkategorie konnte erfolgreich erstellt werden")
                     }
                     else {
