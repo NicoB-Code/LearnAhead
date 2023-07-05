@@ -117,21 +117,31 @@
         />
 
     <!-- Item Layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <TextView
+        android:id="@+id/button_summaries"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@id/header_line"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:background="@drawable/rectangle_tests_questions"
+        android:drawablePadding="8dp"
+        android:paddingStart="24dp"
+        android:elevation="8dp"
+        android:text= "@string/summary_label"
+        android:textAppearance="@style/summary_label_inner_view"
+        android:textColor="@null"
+        android:gravity="center_vertical"
+        app:backgroundTint="@null"
+        app:drawableStartCompat="@drawable/folder_icon"
+        />
 
     <TextView
         android:id="@+id/button_tests_and_questions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recycler_view"
+        android:layout_below="@id/button_summaries"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -149,17 +159,19 @@
 
 
     <!-- LernTipp Box -->
+
     <View
         android:id="@+id/rectangle_learning_tip_box"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_above="@id/background_bottom_menu"
+        android:layout_below="@id/button_tests_and_questions"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="31dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@id/button_tests_and_questions"
-        android:layout_above="@id/background_bottom_menu"
-        android:layout_centerHorizontal="true"
+
         android:background="@drawable/learning_tip_of_the_day_rectangle"
         android:elevation="2dp" />
 
@@ -205,4 +217,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </RelativeLayout>

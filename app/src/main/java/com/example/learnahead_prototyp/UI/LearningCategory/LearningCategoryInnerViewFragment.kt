@@ -35,19 +35,6 @@ class LearningCategoryInnerViewFragment : Fragment() {
     private val summaryViewModel: SummaryViewModel by viewModels()
     private var currentLearningCategory: LearningCategory? = null
 
-    // Lazy initialization des Adapters
-    private val adapter by lazy {
-        LearningCategoryInnerViewAdapter { pos, item ->
-            findNavController().navigate(
-                R.id.action_learningCategoryListFragment_to_learningCategoryInnerViewFragment,
-                Bundle().apply {
-                    putString("type", "view")
-                    putParcelable("learning_category", item)
-                }
-            )
-        }
-    }
-
     /**
      * Erstellt die View-Hierarchie des Fragments.
      * @param inflater Der LayoutInflater, der verwendet wird, um die View-Hierarchie aufzubauen.
@@ -75,27 +62,8 @@ class LearningCategoryInnerViewFragment : Fragment() {
 
         // Setzt die Event-Listener, beobachtet die LiveData-Objekte und aktualisiert die UI
         setEventListener()
-        observer()
         setLocalCurrentUser()
         updateUI()
-
-        // Wenn ein Element angeklickt wird, rufe die Navigation auf
-        val adapter = LearningCategoryInnerViewAdapter { position, item ->
-            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
-            Log.d("Hallo", "JaHallo")
-        }
-
-        adapter.setOnItemClickListener(object : LearningCategoryInnerViewAdapter.OnItemClickListener {
-            override fun onItemClick(item: Summary) {
-                // Aktion, die bei Klick auf das Element ausgeführt werden soll
-                // Verwende "item" für weitere Verarbeitung oder Navigation
-                findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
-                Log.d("Hallo", "JaHallo")
-            }
-        })
-
-        // Setzt den Adapter für das RecyclerView
-        binding.recyclerView.adapter = adapter
     }
 
     /**
@@ -148,43 +116,10 @@ class LearningCategoryInnerViewFragment : Fragment() {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
 
-    }
-
-    /**
-     * Beobachtet die LiveData-Objekte der ViewModels und aktualisiert die UI entsprechend.
-     */
-    private fun observer() {
-        // Beobachtet die LiveData-Objekte des SummaryViewModels und aktualisiert die UI entsprechend
-        summaryViewModel.summary.observe(viewLifecycleOwner) { state ->
-            binding.progressBar.visibility = when (state) {
-                is UiState.Loading -> View.VISIBLE
-                is UiState.Failure -> {
-                    toast(state.error)
-                    View.GONE
-                }
-                is UiState.Success -> {
-                    adapter.updateList(state.data.toMutableList())
-                    View.GONE
-                }
-            }
-        }
-
-        // Beobachtet die LiveData-Objekte des AuthViewModels und aktualisiert die UI entsprechend
-        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
-            binding.progressBar.visibility = when (state) {
-                is UiState.Loading -> View.VISIBLE
-                is UiState.Failure -> {
-                    toast(state.error)
-                    View.GONE
-                }
-                is UiState.Success -> {
-                    currentUser = state.data
-                    currentLearningCategory?.let {
-                        summaryViewModel.getSummaries(currentUser, it)
-                    }
-                    View.GONE
-                }
-            }
+        binding.buttonSummaries.setOnClickListener {
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
         }
     }
+
+
 }

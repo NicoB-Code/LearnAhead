@@ -167,5 +167,29 @@
         <action
             android:id="@+id/action_summaryFragment_to_learningCategoryInnerViewFragment"
             app:destination="@id/learningCategoryInnerViewFragment" />
+        <action
+            android:id="@+id/action_summaryFragment_to_innerSummaryFragment"
+            app:destination="@id/innerSummaryFragment" />
+        <action
+            android:id="@+id/action_summaryFragment_to_summaryCreateFragment"
+            app:destination="@id/summaryCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/innerSummaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.innerSummaryFragment"
+        android:label="fragment_inner_summary"
+        tools:layout="@layout/fragment_inner_summary" >
+        <action
+            android:id="@+id/action_innerSummaryFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryCreateFragment"
+        android:name="com.example.learnahead_prototyp.summaryCreateFragment"
+        android:label="fragment_summary_create"
+        tools:layout="@layout/fragment_summary_create" >
+        <action
+            android:id="@+id/action_summaryCreateFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
     </fragment>
 </navigation>
