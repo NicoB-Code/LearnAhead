@@ -1,6 +1,7 @@
 package com.example.learnahead_prototyp.UI.Goal
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
@@ -77,6 +79,21 @@ class LearningCategoryInnerViewFragment : Fragment() {
         setLocalCurrentUser()
         updateUI()
 
+        // Wenn ein Element angeklickt wird, rufe die Navigation auf
+        val adapter = LearningCategoryInnerViewAdapter { position, item ->
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
+            Log.d("Hallo", "JaHallo")
+        }
+
+        adapter.setOnItemClickListener(object : LearningCategoryInnerViewAdapter.OnItemClickListener {
+            override fun onItemClick(item: Summary) {
+                // Aktion, die bei Klick auf das Element ausgeführt werden soll
+                // Verwende "item" für weitere Verarbeitung oder Navigation
+                findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
+                Log.d("Hallo", "JaHallo")
+            }
+        })
+
         // Setzt den Adapter für das RecyclerView
         binding.recyclerView.adapter = adapter
     }
@@ -109,7 +126,9 @@ class LearningCategoryInnerViewFragment : Fragment() {
 
         // Setzt den Event-Listener für den Learning Goals-Button
         binding.buttonLearningGoals.setOnClickListener {
-            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
+            //findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
+
         }
 
         // Setzt den Event-Listener für den Learning Categories-Button
@@ -128,6 +147,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
         binding.backIcon.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
+
     }
 
     /**

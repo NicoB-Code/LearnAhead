@@ -155,5 +155,17 @@
         <action
             android:id="@+id/action_learningCategoryInnerViewFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_learningCategoryInnerViewFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.SummaryFragment"
+        android:label="fragment_summary"
+        tools:layout="@layout/fragment_summary" >
+        <action
+            android:id="@+id/action_summaryFragment_to_learningCategoryInnerViewFragment"
+            app:destination="@id/learningCategoryInnerViewFragment" />
     </fragment>
 </navigation>

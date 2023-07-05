@@ -7,11 +7,15 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.databinding.LearningCategoryInnerViewSummaryBinding
+import androidx.navigation.fragment.findNavController
+
 
 /**
  * Ein Adapter zur Darstellung von Zielen in einer RecyclerView.
@@ -24,6 +28,13 @@ class LearningCategoryInnerViewAdapter(
 
     private var list: MutableList<Summary> = arrayListOf()
     private lateinit var resources: Resources
+    // Wir müssen auf die einzelnen Objekte in unserem View hören
+    private var itemClickListener: OnItemClickListener? = null
+
+
+    interface OnItemClickListener {
+        fun onItemClick(item: Summary)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = LearningCategoryInnerViewSummaryBinding.inflate(
@@ -39,6 +50,10 @@ class LearningCategoryInnerViewAdapter(
         if (list.isNotEmpty()) {
             val item = list[position]
             holder.bind(item)
+
+            holder.itemView.setOnClickListener {
+                //findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
+            }
         }
     }
 
@@ -49,6 +64,10 @@ class LearningCategoryInnerViewAdapter(
 
     override fun getItemCount(): Int {
         return 1 // Return 1 to indicate a single view
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
     }
 
     inner class MyViewHolder(private val binding: LearningCategoryInnerViewSummaryBinding) :
@@ -91,8 +110,8 @@ class LearningCategoryInnerViewAdapter(
             binding.itemListText.text = itemListBuilder
 
             // Set the click listener for the inner view summary layout
-            binding.innerViewSummaryLayout.setOnClickListener {
-                onItemClicked.invoke(bindingAdapterPosition, item)
+            binding.root.setOnClickListener {
+                itemClickListener?.onItemClick(item)
             }
         }
 
