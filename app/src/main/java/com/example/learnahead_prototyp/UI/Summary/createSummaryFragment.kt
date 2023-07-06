@@ -83,10 +83,7 @@ class CreateSummaryFragment : Fragment() {
      */
     private fun setEventListener() {
         binding.saveButton.setOnClickListener {
-            if (isEdit)
-                updateSummary()
-            else
-                createSummary()
+            createSummary()
         }
 
         binding.editButton.setOnClickListener {
@@ -142,17 +139,6 @@ class CreateSummaryFragment : Fragment() {
         }
     }
 
-    /**
-     * Aktualisiert eine Zusammenfassung, indem es eine Beobachtung auf viewModel.updateSummary ausführt und je nach Zustand der Beobachtung
-     * verschiedene Aktionen durchführt, wie z.B. Anzeigen oder Ausblenden des Fortschrittsindikators und Anzeigen einer Toast-Nachricht
-     * in Abhängigkeit vom Zustand. Wenn die Eingabevalidierung erfolgreich ist, wird die Zusammenfassung an viewModel.updateSummary übergeben.
-     */
-    private fun updateSummary() {
-        // Wenn die Eingabevalidierung erfolgreich ist, die Lernkategorie an viewModel.updateLearningCategory übergeben
-        if (validation()) {
-            summaryViewModel.updateSummary(getSummary())
-        }
-    }
 
     /**
      * Methode zum Aktualisieren der Benutzeroberfläche basierend auf dem Typ des übergebenen Arguments.
@@ -161,23 +147,12 @@ class CreateSummaryFragment : Fragment() {
     private fun updateUI() {
         currentLearningCategory = arguments?.getParcelable("learning_category")
         binding.createSummaryMenuHeaderLabel.text = currentLearningCategory?.name
-        objSummary = arguments?.getParcelable("summary")
-        // Wenn eine Lernkategorie existiert z.B. wenn es editiert wird, dann werden die Daten der Lernkategorie geladen
-        objSummary?.let { summary ->
-            binding.textSummaryName.setText(summary.name)
-            binding.saveButton.hide()
-            binding.editButton.show()
-            //binding.delete.show()
-            isMakeEnableUI(false)
-        } ?: run {
-            // Standardmaske für Lernkategorie erstellen
-            binding.textSummaryName.setText("")
-            binding.saveButton.hide()
-            binding.editButton.hide()
-            //binding.delete.hide()
-            isMakeEnableUI(true)
-            binding.textSummaryName.requestFocus()
-        }
+        binding.textSummaryName.setText("")
+        binding.saveButton.hide()
+        binding.editButton.hide()
+        //binding.delete.hide()
+        isMakeEnableUI(true)
+        binding.textSummaryName.requestFocus()
     }
 
     /**
@@ -232,45 +207,15 @@ class CreateSummaryFragment : Fragment() {
                         }
                         // Den User in der DB updaten
                         authViewModel.updateUserInfo(currentUser!!)
-                        findNavController().navigate(R.id.action_createSummaryFragment_to_summaryFragment)
+                        findNavController().navigate(R.id.action_createSummaryFragment_to_summaryFragment,
+                            Bundle().apply {
+                                putString("type","view")
+                                putParcelable("learning_category", currentLearningCategory)
+                            })
                         toast("Die Lernkategorie konnte erfolgreich erstellt werden")
                     }
                     else {
                         toast("Die Lernkategorie konnte nicht erstellt werden")
-                    }
-                }
-            }
-        }
-
-        // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
-        summaryViewModel.updateSummary.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
-            when (state) {
-                is UiState.Loading -> {
-                    binding.btnProgressAr.show()
-                }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
-                is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
-                    toast(state.error)
-                }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
-                is UiState.Success -> {
-                    binding.btnProgressAr.hide()
-                    if(state.data != null && currentUser != null) {
-                        val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == state.data.id }
-                        if (indexOfCurrentObject != -1) {
-                            currentUser!!.summaries[indexOfCurrentObject] = state.data
-                        } else {
-                            currentUser!!.summaries.add(state.data)
-                        }
-
-                        // Den User in der DB updaten
-                        authViewModel.updateUserInfo(currentUser!!)
-                        toast("Die Lernkategorie konnte erfolgreich geupdated werden")
-                    }
-                    else {
-                        toast("Die Lernkategorie konnte nicht geupdated werden")
                     }
                 }
             }

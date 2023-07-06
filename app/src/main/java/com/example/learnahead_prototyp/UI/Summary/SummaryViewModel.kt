@@ -65,25 +65,16 @@ class SummaryViewModel @Inject constructor(
      * Calls the repository to add a new LearningCategory and updates the _addLearningCategory MutableLiveData.
      * @param learningCategory the LearningCategory to add.
      */
-    fun addSummary(summary: Summary?) {
+    fun addSummary(summary: Summary) {
         _addSummary.value = UiState.Loading
         repository.addSummary(summary) { _addSummary.value = it }
-    }
-
-    /**
-     * Calls the repository to update a LearningCategory and updates the _updateLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to update.
-     */
-    fun updateSummary(summary: Summary?) {
-        _updateSummary.value = UiState.Loading
-        repository.updateSummary(summary) { _updateSummary.value = it }
     }
 
     /**
      * Calls the repository to delete a LearningCategory and updates the _deleteLearningCategory MutableLiveData.
      * @param learningCategory the LearningCategory to delete.
      */
-    fun deleteSummary(summary: Summary?) {
+    fun deleteSummary(summary: Summary) {
         _deleteSummary.value = UiState.Loading
         repository.deleteSummary(summary) { _deleteSummary.value = it }
     }

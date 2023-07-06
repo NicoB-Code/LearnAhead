@@ -26,7 +26,7 @@ interface ISummaryRepository {
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Nachricht enthält, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Operation erfolgreich war oder nicht.
      */
-    fun addSummary(summary: Summary?, result: (UiState<Summary?>) -> Unit)
+    fun addSummary(summary: Summary, result: (UiState<Summary?>) -> Unit)
 
     /**
      * Funktion zum Aktualisieren einer vorhandenen Lernkategorie.
@@ -35,7 +35,7 @@ interface ISummaryRepository {
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Nachricht enthält, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Operation erfolgreich war oder nicht.
      */
-    fun updateSummary(summary: Summary?, result: (UiState<Summary?>) -> Unit)
+    fun updateSummary(summary: Summary, result: (UiState<Summary?>) -> Unit)
 
     /**
      * Funktion zum Löschen einer vorhandenen Lernkategorie.
@@ -44,5 +44,5 @@ interface ISummaryRepository {
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Nachricht enthält, die den Status beschreibt.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Operation erfolgreich war oder nicht.
      */
-    fun deleteSummary(summary: Summary?, result: (UiState<String>) -> Unit)
+    fun deleteSummary(summary: Summary, result: (UiState<String>) -> Unit)
 }

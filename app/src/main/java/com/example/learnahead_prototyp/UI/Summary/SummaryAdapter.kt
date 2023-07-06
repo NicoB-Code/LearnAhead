@@ -77,6 +77,9 @@ class SummaryAdapter(
             binding.innerViewSummaryLayout.setOnClickListener {
                 onItemClicked.invoke(bindingAdapterPosition, item)
             }
+            binding.delete.setOnClickListener {
+                onDeleteClicked.invoke(bindingAdapterPosition, item)
+            }
         }
 
     }
