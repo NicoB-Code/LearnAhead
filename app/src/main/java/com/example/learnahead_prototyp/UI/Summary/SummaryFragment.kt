@@ -59,9 +59,15 @@ class SummaryFragment : Fragment() {
     }
 
     private fun updateUserObject(summary: Summary, deleteSummary: Boolean) {
-        if (deleteSummary && currentUser != null)
-            currentUser!!.summaries.remove(summary)
-        currentUser?.let { authViewModel.updateUserInfo(it) }
+        if (deleteSummary && currentUser != null) {
+            currentLearningCategory?.summaries?.remove(summary)
+            val foundIndex =
+                currentUser!!.learningCategories.indexOfFirst { it.id == currentLearningCategory?.id }
+            if (foundIndex != -1) {
+                currentUser!!.learningCategories[foundIndex] = currentLearningCategory!!
+            }
+            currentUser?.let { authViewModel.updateUserInfo(it) }
+        }
     }
 
     /**
@@ -156,7 +162,11 @@ class SummaryFragment : Fragment() {
 
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_summaryFragment_to_learningCategoryInnerViewFragment)
+            findNavController().navigate(R.id.action_summaryFragment_to_learningCategoryInnerViewFragment,
+                Bundle().apply {
+                    putString("type","view")
+                    putParcelable("learning_category", currentLearningCategory)
+                })
         }
 
     }

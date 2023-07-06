@@ -86,13 +86,6 @@ class CreateSummaryFragment : Fragment() {
             createSummary()
         }
 
-        binding.editButton.setOnClickListener {
-            isMakeEnableUI(true)
-            isEdit = true
-            binding.editButton.hide()
-            binding.textSummaryName.requestFocus()
-        }
-
         // Klick Listener zum Weiterleiten auf den Home Screen
         binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_homeFragment) }
 
@@ -103,7 +96,11 @@ class CreateSummaryFragment : Fragment() {
         binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_goalListingFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_summaryFragment)
+        binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_summaryFragment,
+            Bundle().apply {
+                putString("type","view")
+                putParcelable("learning_category", currentLearningCategory)
+            })
         }
 
         // Event Listener wenn sich der Titel verändert

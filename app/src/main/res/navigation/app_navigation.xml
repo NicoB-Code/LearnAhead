@@ -201,4 +201,9 @@
             android:id="@+id/action_createSummaryFragment_to_goalListingFragment"
             app:destination="@id/goalListingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.EditFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" />
 </navigation>
