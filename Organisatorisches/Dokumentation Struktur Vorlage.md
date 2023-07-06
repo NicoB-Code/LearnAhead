@@ -16,8 +16,8 @@
   - Lernen ist nicht gleich Verstehen Phillipp **Done ggbf. nochmal drüber lesen**
   - Synapsen Nico **ToDo**
   - Neuronen & Neuronales Netz Nico **ToDo**
-  - Optimierter Lernplan Phillipp **ToDo**
-  - Tagging Phillipp **ToDo**
+  - Optimierter Lernplan Phillipp **Done ggbf. nochmal drüber lesen**
+  - Tagging Phillipp **Done ggbf. nochmal drüber lesen**
   - Lernkategorien & Lernziele Nico **ToDo**
   - Gamification Nico **ToDo**
 - Pflichtenheft Done

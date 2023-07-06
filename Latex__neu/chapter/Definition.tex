@@ -14,7 +14,61 @@ Beim Erlernen neuer Informationen treffen diese zuerst auf den Hippocampus des G
 \subsubsection{Synapsen}
 \subsubsection{Neuronen}
 \subsubsection{Neuronales Netz}
-\subsection{Technische Grundlagen}
+\newpage
+\subsubsection{Optimaler Lernplan anhand des Spacing Effect}
+In dem Buch \gqq{Das neue Lernen heißt verstehen} vergleicht Ulrich Beck das langfristige Lernen mit dem gießen einer Blume. Hierbei ist es wichtig, dass die Blumen in regelmäßigen Abständen gegossen werden, anstatt sie einmal mit einer großen Menge Wasser zu gießen. Bei den Menschen ist dies ähnlich. Viele lernen den ganzen Tag und versuchen so viel wie möglich in kurzer Zeit zu lernen. Jedoch ist dies nicht effektiv, da das Gehirn nicht in der Lage ist, so viel auf einmal zu verarbeiten und dieses Wissen nach einer Prüfung wieder vergessen wird. \cite[159]{beck_das_neue_lernen_heißt_verstehen} \newline
+
+\noindent
+Dadurch ist es wichtig Pausen zwischen dem Lernen einzulegen, damit das Gehirn die Informationen verarbeiten kann. Dieser Effekt wird auch \gqq{Spacing Effect} genannt und wurde von dem deutschen Psychologen und Pionier der Gedächtnisforschung Hermann Ebbinghaus entdeckt. \cite{spacing_effect} Die größten Entdeckungen war im Bereich der Vergessen und des Lernens. Im folgenden Diagramm \ref*{fig:EbbinghausVergesseneskurve} ist die Kurve des Vergessens von Ebbinghaus dargestellt. Hierbei ist zu erkennen, dass nach einer Stunde bereits 50\% des Wissens vergessen wurde. Nach einem Tag sind es bereits 70\% und nach einem Monat nur noch 20\%.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{images/diagramme/Forgetting_Curve.png}
+  \caption{Ebbinghaus Vergessenskurve}
+  \label{fig:EbbinghausVergesseneskurve}
+\end{figure}
+
+\newpage
+\noindent
+Durch das regelmäßige Wiederholen des gelernten Wissens, kann die Vergessenskurve verzögert werden. Im folgenden Diagramm \ref*{fig:EbbinghausVerzoegerteVergesseneskurve} wird verdeutlicht, dass durch das Wiederholen des Wissens, die Kurve des Vergessens verzögert wird. Hierbei besteht die Möglichkeit, dass nach der dritten Wiederholung das Wissen nach 60 Tagen noch zu 90\% vorhanden ist. \cite*{spacing_effect} Der Abstand der Wiederholungen bezieht sich hierbei, dass erst wieder der Stoff gelernt wird, wenn dieser nur noch eine 90 prozentige Chance hat, vorhanden zu sein. Hierdurch wird klargestellt, dass das Wiederholen des Wissens wichtig ist, um das Wissen langfristig zu behalten. \newline
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{images/diagramme/Delayed_Forgetting_Curve.png}
+  \caption{Ebbinghaus verzögerte Vergessenskurve durch Wiederholungen}
+  \label{fig:EbbinghausVerzoegerteVergesseneskurve}
+\end{figure}
+
+\noindent
+Die Daumenregel für die optimale Pausenlänge beträgt 10 - 20\% der Zeit, bis diese Information angewendet werden muss. Wenn beispielsweise eine Prüfung in 30 Tagen stattfindet, sollte der Stoff alle 3 - 6 Tage wiederholt werden. \cite[160]{beck_das_neue_lernen_heißt_verstehen}  Dieser Fall kann beschrieben werden: 
+\[ \text{{Pausenlänge}} = (\text{{30 Tage}}) \times (0.1 - 0.2) \]
+\noindent
+Die allgemeine Formel könnte man beschreiben als: 
+\[ \text{{Pausenlänge}} = (\text{{Zeit bis zur Anwendung}}) \times (0.1 - 0.2) \]
+\newpage
+\noindent
+Aus dieser Formel kann abgeleitet werden, dass zwischen fünf und zehn Wiederholungen notwendig sind, um das Wissen langfristig zu behalten. \cite[160]{beck_das_neue_lernen_heißt_verstehen} Mit diesen Informationen kann ein optimaler Lernplan erstellt werden, der die Wiederholungen automatisch berechnet und den Nutzer daran erinnert, wann er wieder lernen muss.
+
+\subsubsection{Tagging innerhalb der Lernapp}
+%ToDo Tagging Begriff ins Glossar
+Um den Benutzer:in das Lernen so einfach wie möglich zu gestalten, wurde entschieden, dass dieser die Möglichkeit hat, bestimmte Lerninhalte zu taggen. Die Benutzung der Tags wird in den folgenden Funktionen der App benutzt:
+\begin{itemize}
+  \item Fragen erstellen
+  \item Test erstellen
+  \item Zusammenfassung erstellen
+  \item Lernhilfe bei beantworten fehlerhafter Fragen
+\end{itemize}
+
+\noindent
+Wenn ein Nutzer eine \textbf{Frage erstellen} möchte, dann muss die neu erstellte Frage mindestens einen Tag besitzen. Es besteht die Möglichkeit, dass eine Frage mehrere Tags enthalten darf. \newline
+
+\noindent
+Wenn ein Nutzer einen \textbf{Test erstellen} möchte, dann hat dieser die Option eine Frage manuell hinzuzufügen oder er kann Fragen anhand der Tags hinzufügen. Hierbei werden alle Fragen, die den Tag beinhalten, in den Test hinzugefügt. Dies vereinfacht das Erstellen eines Tests, da der Nutzer nicht jede Frage einzeln hinzufügen muss. \newline
+
+\noindent
+In der Lernapp kann der Nutzer mithilfe eines Editors eine \textbf{Zusammenfassung erstellen}. Dieser soll grundsätzlich die gleichen Funktionen wie bekannte Texteditoren besitzen. Das heißt im genaueren Sinne, dass der Nutzer die Option hat seinen Text zu formatieren, Bilder sowie Links einzufügen und den Text zu speichern. Zusätzlich soll es möglich sein, dass ein Text mit einem Tag versehen werden kann. \newline 
+
+\noindent
+Wenn ein Anwender eine Frage hintereinander mehrfach falsch beantwortet, dann soll anhand des Tags ein \textbf{Lernhilfe} angeboten werden. Hierbei wird der Nutzer gefragt, ob dieser sich den Teil der Zusammenfassung nochmal anschauen möchte. Dabei ist es erforderlich, dass in der Zusammenfassung mindestens ein Tag dieser Frage vorhanden ist. Wenn der Nutzer sich die Zusammenfassung anschauen möchte, dann soll der Tag als Sprungmarke dienen und der Nutzer wird direkt zu dem Teil der Zusammenfassung weitergeleitet. \newline 
 
 \subsection{Pflichtenheft}
 Das Pflichtenheft ist analog zum
