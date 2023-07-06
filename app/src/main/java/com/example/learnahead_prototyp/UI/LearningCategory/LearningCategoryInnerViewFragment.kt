@@ -117,7 +117,11 @@ class LearningCategoryInnerViewFragment : Fragment() {
         }
 
         binding.buttonSummaries.setOnClickListener {
-            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment,
+                Bundle().apply {
+                    putString("type","view")
+                    putParcelable("learning_category", currentLearningCategory)
+                })
         }
     }
 

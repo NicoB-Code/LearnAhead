@@ -20,12 +20,14 @@ import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.R
 import androidx.core.widget.doAfterTextChanged
+import com.example.learnahead_prototyp.Data.Model.LearningCategory
 
 
 @AndroidEntryPoint
 class CreateSummaryFragment : Fragment() {
 
     private var currentUser: User? = null
+    private var currentLearningCategory: LearningCategory?= null
     lateinit var binding: FragmentCreateSummaryBinding
     private val summaryViewModel: SummaryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
@@ -157,6 +159,8 @@ class CreateSummaryFragment : Fragment() {
      * @return Nothing
      */
     private fun updateUI() {
+        currentLearningCategory = arguments?.getParcelable("learning_category")
+        binding.createSummaryMenuHeaderLabel.text = currentLearningCategory?.name
         objSummary = arguments?.getParcelable("summary")
         // Wenn eine Lernkategorie existiert z.B. wenn es editiert wird, dann werden die Daten der Lernkategorie geladen
         objSummary?.let { summary ->
@@ -221,7 +225,11 @@ class CreateSummaryFragment : Fragment() {
                     binding.btnProgressAr.hide()
                     if(state.data != null && currentUser != null) {
                         // Die neue Lernkategorie dem User hinzufügen
-                        currentUser!!.summaries.add(state.data)
+                        currentLearningCategory?.summaries?.add(state.data)
+                        val foundIndex = currentUser!!.learningCategories.indexOfFirst { it.id == currentLearningCategory?.id}
+                        if(foundIndex != -1) {
+                            currentUser!!.learningCategories[foundIndex] = currentLearningCategory!!
+                        }
                         // Den User in der DB updaten
                         authViewModel.updateUserInfo(currentUser!!)
                         findNavController().navigate(R.id.action_createSummaryFragment_to_summaryFragment)

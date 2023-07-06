@@ -93,7 +93,7 @@ class SummaryFragment : Fragment() {
         observer()
         setLocalCurrentUser()
         setEventListener()
-        //updateUI()
+        updateUI()
 
 
         // Setzt den Adapter für das RecyclerView
@@ -130,7 +130,11 @@ class SummaryFragment : Fragment() {
         }
 
         binding.buttonAddSummary.setOnClickListener {
-            findNavController().navigate(R.id.action_summaryFragment_to_createSummaryFragment)
+            findNavController().navigate(R.id.action_summaryFragment_to_createSummaryFragment,
+                Bundle().apply {
+                    putString("type","view")
+                    putParcelable("learning_category", currentLearningCategory)
+                })
         }
 
         // Setzt den Event-Listener für den Learning Goals-Button

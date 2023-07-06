@@ -40,30 +40,25 @@ class SummaryRepository(
         // Dokumentreferenz des Benutzers holen
         val userDocumentRef = database.collection(FireStoreCollection.USER).document(user.id)
 
-        // Benutzerdokument abrufen
-        val learningCategoriesTask = userDocumentRef.get().continueWith { task ->
-            task.result?.toObject(User::class.java)?.learningCategories
-        }
+        val query = userDocumentRef.collection("learningCategories")
+            .whereEqualTo("id", learningCategory.id)
 
-        // Zusammenfassungen für die Ziel-Lernkategorie holen
-        val summariesTask = learningCategoriesTask.continueWith { task ->
-            val learningCategories = task.result
-            if (learningCategories.isNullOrEmpty()) {
-                throw Exception("Learning categories are null or empty")
+        // Abfrage ausführen
+        query.get().addOnSuccessListener { querySnapshot ->
+            if(!querySnapshot.isEmpty) {
+                val matchingDocument = querySnapshot.documents.first()
+                val matchingDocumentRef = matchingDocument.reference
+                val summariesTask = matchingDocumentRef.get()
+                    .addOnSuccessListener { learningCategoryDocument ->
+                        val summaries = learningCategoryDocument.toObject(User::class.java)?.summaries?.toMutableList() ?: mutableListOf()
+                        result.invoke(UiState.Success(summaries))
+                    }
+                    .addOnFailureListener { exception ->
+                        result.invoke(UiState.Failure(exception.localizedMessage))
+                    }
             }
-            val targetLearningCategory = learningCategories.find { it.id == learningCategory.id }
-                ?: throw Exception("Learning category not found")
-            targetLearningCategory.summaries
-        }
-
-        // Ergebnis zurückgeben
-        summariesTask.addOnSuccessListener { summaries ->
-            result(UiState.Success(summaries))
-        }.addOnFailureListener { exception ->
-            result(UiState.Failure(exception.localizedMessage))
         }
     }
-
     /**
      * Funktion, um eine Zusammenfassung in der Datenbank hinzuzufügen.
      * @param summary Die Zusammenfassung, die hinzugefügt werden soll.
@@ -71,7 +66,11 @@ class SummaryRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Zusammenfassung erfolgreich hinzugefügt wurde oder nicht.
      */
-    override fun addSummary(summary: Summary, result: (UiState<Summary?>) -> Unit) {
+    override fun addSummary(summary: Summary?, result: (UiState<Summary?>) -> Unit) {
+        if (summary == null) {
+            result(UiState.Failure("sumamary is null"))
+            return
+        }
         // Neues Dokument in der SUMMARY-Sammlung der Datenbank erstellen
         val document = database.collection(FireStoreCollection.SUMMARY).document()
 
@@ -95,7 +94,11 @@ class SummaryRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Meldung, ob die Zusammenfassung erfolgreich aktualisiert wurde oder nicht.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Aktualisierung erfolgreich war oder nicht.
      */
-    override fun updateSummary(summary: Summary, result: (UiState<Summary?>) -> Unit) {
+    override fun updateSummary(summary: Summary?, result: (UiState<Summary?>) -> Unit) {
+        if (summary == null) {
+            result(UiState.Failure("sumamary is null"))
+            return
+        }
         // Dokument der Zusammenfassung in der Datenbank holen
         val document = database.collection(FireStoreCollection.SUMMARY).document(summary.id)
 
@@ -115,7 +118,11 @@ class SummaryRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Zusammenfassung erfolgreich gelöscht wurde oder nicht.
      */
-    override fun deleteSummary(summary: Summary, result: (UiState<String>) -> Unit) {
+    override fun deleteSummary(summary: Summary?, result: (UiState<String>) -> Unit) {
+        if (summary == null) {
+            result(UiState.Failure("sumamary is null"))
+            return
+        }
         // Zugriff auf das Zusammenfassungs-Dokument in der Datenbank basierend auf der Zusammenfassungs-ID
         val document = database.collection(FireStoreCollection.SUMMARY).document(summary.id)
 
