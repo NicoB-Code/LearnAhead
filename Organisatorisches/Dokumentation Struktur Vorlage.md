@@ -37,8 +37,10 @@
 - Begründung des Datenbankkonzepts **Done ggbf. nochmal drüber lesen** Phillipp
 - Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
 - Design Patterns für relevante Problemstellungen **ToDo** Nico
-- Software-Komponenten **ToDo** Phillipp
-- Gesamtkomposition **ToDo** Phillipp
+- Software-Komponenten Done Phillipp
+- Gesamtkomposition Done Phillipp
+- Frontend Done Phillipp
+- Backend Done Phillipp
 - Deployment Diagramm **ToDo** Nico
 - Klassen Diagramm **ToDo** Nico
 - Aktivitätsdiagramm **ToDo** Phillipp
