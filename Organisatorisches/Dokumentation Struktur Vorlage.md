@@ -28,7 +28,7 @@
 - HMI Done
   - Seitenhierarchie (Nico) Done
   - UI-Mockups (Nico) Done
-- Datenflussdiagramm (Phillipp) **ToDo**
+- Flow-Chart-Diagramm (Phillipp) Done
 - Benutzerhandbuch (optional)
 
 ## Entwurf
