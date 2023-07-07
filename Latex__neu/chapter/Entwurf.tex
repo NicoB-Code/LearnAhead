@@ -1,0 +1,26 @@
+\section{Entwurf}
+\subsection{Geschäftsfälle anhand des BPMN Workflows}
+\subsection{Auswahl und Begründung des Datenbankkonzepts}
+Die Lernapp \gqq{LearnAhead} benötigt eine Datenbank, um die Lerninhalte des Benutzers zu speichern. Die Datenbank soll die folgenden Anforderungen erfüllen:
+\begin{itemize}
+    \item Es soll möglich sein, Bilder einfach zu speichern und abzurufen.
+    \item Die Datenbank soll gut skalierbar sein, um auch bei vielen Benutzern eine gute Performance zu gewährleisten.
+    \item Es müssen gute Frameworks für die Anbindung existieren für die Sprache Kotlin.
+    \item Die Datenbank soll in der Cloud gehostet werden, um die Wartungskosten zu minimieren.
+    \item Die Datenbank soll möglichst kostenlos sein.
+\end{itemize}
+
+\noindent
+Hierbei gab es die Entscheidung zwischen einer relationalen und einer NoSQL Datenbank. Da diese für die Speicherung von Bildern zuständig ist, ist eine NoSQL Datenbank die bessere Wahl. In diesem Zusammenhang kam der Anbieter \gqq{Firebase} in Frage. Dieser bietet zwei unterschiedliche Datenbanken an: \gqq{Cloud Firestore} und \gqq{Realtime Database}. Realtime Database wird genutzt, wenn die Datenbank in Echtzeit synchronisiert werden soll. Da dies bei der Lernapp nicht notwendig ist, wurde sich für Cloud Firestore entschieden. Cloud Firestore baut auf den Erfolgen von Realtime Database auf und bietet zusätzlich eine bessere Skalierbarkeit und schnellere Abfragen sind möglich. \cite*{Firestore} Für die Speicherung von Inhalten gibt es den Firebase Storage. Dieser bietet eine einfache Möglichkeit, um Inhalte z.B. Bilder oder Videos zu speichern. \newline
+
+\noindent
+Firebase bietet eine gute Anbindung für Kotlin siehe \ref*{Auswahl der Klassenbibliotheken/Frameworks}. Zusätzlich ist Firebase kostenlos, solange die Datenbank nicht zu groß wird. Hierbei kann eine monatliche Anzahl von 50.000 Nutzern, 20.000 Schreibvorgängen und 50.000 Lesevorgängen kostenlos genutzt werden. Der Speicherplatz für den Firebase Storage beträgt 1 GB, welches für die Lernapp ausreichend ist. \cite*{Firebase_Pricing}
+\subsection{Auswahl der Klassenbibliotheken/Frameworks} \label{Auswahl der Klassenbibliotheken/Frameworks}
+\subsection{Design Patterns für relevante Problemstellungen}
+\subsection{Software-Komponenten}
+\subsection{Gesamtkomposition}
+\subsection{Deployment Diagramm}
+\subsection{Klassen Diagramm}
+\subsection{Aktivitätsdiagramm}
+\subsection{Sequenzdiagramme}
+\subsection{Prototyp (optional)}

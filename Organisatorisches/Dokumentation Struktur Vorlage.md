@@ -34,7 +34,7 @@
 ## Entwurf
 - Prototyp (optional) **ToDo**
 - BPMN **ToDo** Phillipp
-- Begründung des Datenbankkonzepts **ToDo** Phillipp
+- Begründung des Datenbankkonzepts **Done ggbf. nochmal drüber lesen** Phillipp
 - Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
 - Design Patterns für relevante Problemstellungen **ToDo** Nico
 - Software-Komponenten **ToDo** Phillipp
