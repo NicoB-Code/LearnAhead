@@ -236,4 +236,16 @@
         <item name="android:textColor">#000000</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
+
+    <style name="twenty_sp_bold">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="fourteen_sp_regular_white">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
 </resources>

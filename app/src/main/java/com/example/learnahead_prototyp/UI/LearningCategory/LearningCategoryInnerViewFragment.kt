@@ -1,9 +1,10 @@
-package com.example.learnahead_prototyp.UI.Goal
+package com.example.learnahead_prototyp.UI.LearningCategory
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,9 +12,8 @@ import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
+import com.example.learnahead_prototyp.UI.Goal.SummaryViewModel
 import com.example.learnahead_prototyp.Util.UiState
-import com.example.learnahead_prototyp.Util.hide
-import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryInnerViewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +32,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
     private val authViewModel: AuthViewModel by viewModels()
     private val summaryViewModel: SummaryViewModel by viewModels()
     private var currentLearningCategory: LearningCategory? = null
+    private val learnCategoryViewModel: LearnCategoryViewModel by viewModels({ requireParentFragment() })
 
     // Lazy initialization des Adapters
     private val adapter by lazy {
@@ -128,12 +129,36 @@ class LearningCategoryInnerViewFragment : Fragment() {
         binding.backIcon.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
+
+        binding.buttonTestsAndQuestions.setOnClickListener{
+            if(binding.buttonQuestions.visibility != View.VISIBLE && binding.buttonTests.visibility != View.VISIBLE) {
+                binding.recyclerView.visibility = View.GONE
+                binding.buttonTestsAndQuestions.visibility = View.GONE
+                binding.buttonQuestions.visibility = View.VISIBLE
+                binding.buttonTests.visibility = View.VISIBLE
+
+                val layoutParams = binding.rectangleLearningTipBox.layoutParams as RelativeLayout.LayoutParams
+                layoutParams.addRule(RelativeLayout.BELOW, binding.buttonTests.id)
+                binding.rectangleLearningTipBox.layoutParams = layoutParams
+            }
+        }
+
+        binding.buttonTests.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_learningCategoryInnerViewFragment_to_testListingFragment)
+        }
+
+        binding.buttonQuestions.setOnClickListener{
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_questionListingFragment)
+        }
     }
 
     /**
      * Beobachtet die LiveData-Objekte der ViewModels und aktualisiert die UI entsprechend.
      */
     private fun observer() {
+
+
         // Beobachtet die LiveData-Objekte des SummaryViewModels und aktualisiert die UI entsprechend
         summaryViewModel.summary.observe(viewLifecycleOwner) { state ->
             binding.progressBar.visibility = when (state) {

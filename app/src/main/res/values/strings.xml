@@ -92,5 +92,9 @@
     <string name="tests_and_questions">Tests / Fragen</string>
     <string name="learning_tip_of_the_day">Lerntipp des Tages:</string>
     <string name="learning_tip_of_the_day_placeholder">Wenn wir kurz vor dem Schlafengehen noch einmal das Gelernte durchgehen, wird unser Gehirn erneut stimuliert und die neu gebildeten Verbindungen werden gestärkt. Dies führt dazu, dass die Informationen besser im Langzeitgedächtnis abgespeichert werden und später leichter abgerufen werden können.</string>
-
+    <string name="questions">Fragen</string>
+    <string name="test_annotation">Anmerkung: Klicke auf einen Test um ihn zu editieren. Wenn du ihn starten möchtest, gehe bitte zurück und klicke auf “Test Starten”</string>
+    <string name="tests">Tests</string>
+    <string name="create_test">Test erstellen</string>
+    <string name="create_question">Frage erstellen</string>
 </resources>

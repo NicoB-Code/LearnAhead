@@ -106,8 +106,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/background_bottom_menu"
         android:layout_alignBottom="@id/background_bottom_menu"
-        android:layout_alignRight="@id/background_bottom_menu"
-        android:layout_marginRight="4dp"
+        android:layout_alignEnd="@id/background_bottom_menu"
+        android:layout_marginEnd="4dp"
         android:drawableTop="@drawable/learning_goal_button"
         app:iconPadding="-15dp"
         android:text="@string/learning_goals"
@@ -116,122 +116,42 @@
         android:background="@android:color/transparent"
         />
 
-    <!-- Item Layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+    <TextView
+        android:id="@+id/test_annotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_annotation"
+        android:gravity="start|top"
+        android:textAppearance="@style/fourteen_sp_regular_white"
+        android:textColor="@null"
+        android:layout_marginStart="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginTop="11dp"
         android:layout_below="@id/header_line"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    <!-- Question -->
-    <TextView
-        android:id="@+id/button_questions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="33dp"
-        android:background="@drawable/question_test_rectangle"
         android:elevation="8dp"
-        android:visibility="invisible"
-        android:text="@string/questions"
-        android:textAppearance="@style/twenty_sp_bold"
-        android:textColor="@null"
-        android:gravity="center_horizontal|center_vertical"
-        app:backgroundTint="@null"
         tools:ignore="RtlSymmetry" />
 
-    <!-- Tests -->
-    <TextView
-        android:id="@+id/button_tests"
-        android:layout_width="match_parent"
+    <!-- Test erstellen -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_add_learning_goal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_questions"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/question_test_rectangle"
-        android:elevation="8dp"
-        android:visibility="invisible"
-        android:text="@string/tests"
-        android:textAppearance="@style/twenty_sp_bold"
-        android:textColor="@null"
-        android:gravity="center_horizontal|center_vertical"
-        app:backgroundTint="@null"
-        tools:ignore="RtlSymmetry" />
-    <TextView
-        android:id="@+id/button_tests_and_questions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recycler_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rectangle_tests_questions"
-        android:drawablePadding="8dp"
-        android:paddingStart="24dp"
-        android:elevation="8dp"
-        android:text="@string/tests_and_questions"
-        android:textAppearance="@style/summary_label_inner_view"
-        android:textColor="@null"
-        android:gravity="center_vertical"
-        app:backgroundTint="@null"
-        app:drawableStartCompat="@drawable/folder_icon"
-        tools:ignore="RtlSymmetry" />
-
-
-    <!-- LernTipp Box -->
-    <View
-        android:id="@+id/rectangle_learning_tip_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_below="@id/button_tests_and_questions"
         android:layout_above="@id/background_bottom_menu"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/learning_tip_of_the_day_rectangle"
-        android:elevation="2dp" />
-
-    <TextView
-        android:id="@+id/learning_tip_of_the_day_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/learning_tip_of_the_day"
-        android:textAppearance="@style/summary_label_inner_view"
-        android:textColor="@null"
-        android:layout_alignTop="@id/rectangle_learning_tip_box"
-        android:layout_alignStart="@id/rectangle_learning_tip_box"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="34dp"
+        android:background="@drawable/add_button"
+        android:drawableLeft="@drawable/add_circle_black"
+        app:iconPadding="-55dp"
         android:elevation="8dp"
+        android:paddingStart="55dp"
+        android:text="@string/create_test"
+        android:textAppearance="@style/button_add_learning_category_or_goal"
+        android:textColor="@null"
+        app:backgroundTint="@null"
         tools:ignore="RtlSymmetry" />
 
-    <TextView
-        android:id="@+id/learning_tip_of_the_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/learning_tip_of_the_day_placeholder"
-        android:gravity="start|top"
-        android:textAppearance="@style/learning_tip_of_the_day"
-        android:textColor="@null"
-        android:layout_below="@id/learning_tip_of_the_day_header"
-        android:layout_alignStart="@id/rectangle_learning_tip_box"
-        android:layout_alignEnd="@id/rectangle_learning_tip_box"
-        android:paddingStart="16dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="16dp"
-        android:elevation="8dp"
-        tools:ignore="RtlSymmetry" />
 
 
     <ProgressBar

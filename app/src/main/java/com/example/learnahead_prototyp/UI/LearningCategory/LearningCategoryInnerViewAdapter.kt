@@ -1,4 +1,4 @@
-package com.example.learnahead_prototyp.UI.Goal
+package com.example.learnahead_prototyp.UI.LearningCategory
 
 import android.content.res.Resources
 import android.graphics.Color

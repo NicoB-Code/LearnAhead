@@ -11,6 +11,8 @@ import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
+import com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryViewModel
+import com.example.learnahead_prototyp.UI.LearningCategory.LearningCategoryListingAdapter
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
