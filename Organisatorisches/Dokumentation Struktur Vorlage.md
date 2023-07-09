@@ -13,11 +13,11 @@
 
 ## Definition
 - Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
-  - Lernen ist nicht gleich Verstehen Phillipp **Done ggbf. nochmal drüber lesen**
+  - Lernen ist nicht gleich Verstehen Phillipp Done
   - Synapsen Nico **ToDo**
   - Neuronen & Neuronales Netz Nico **ToDo**
-  - Optimierter Lernplan Phillipp **Done ggbf. nochmal drüber lesen**
-  - Tagging Phillipp **Done ggbf. nochmal drüber lesen**
+  - Optimierter Lernplan Phillipp Done
+  - Tagging Phillipp Done
   - Lernkategorien & Lernziele Nico **ToDo**
   - Gamification Nico **ToDo**
 - Pflichtenheft Done
@@ -34,7 +34,7 @@
 ## Entwurf
 - Prototyp (optional) **ToDo**
 - BPMN **ToDo** Phillipp
-- Begründung des Datenbankkonzepts **Done ggbf. nochmal drüber lesen** Phillipp
+- Begründung des Datenbankkonzepts Done Phillipp
 - Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
 - Design Patterns für relevante Problemstellungen **ToDo** Nico
 - Software-Komponenten Done Phillipp
