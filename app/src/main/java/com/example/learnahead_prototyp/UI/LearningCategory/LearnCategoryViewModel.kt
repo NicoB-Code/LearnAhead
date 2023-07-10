@@ -19,6 +19,15 @@ class LearnCategoryViewModel @Inject constructor(
     val repository: ILearnCategoryRepository
 ) : ViewModel() {
 
+    private val _currentSelectedLearningCategory = MutableLiveData<LearningCategory?>()
+    val currentSelectedLearningCategory: LiveData<LearningCategory?>
+        get() = _currentSelectedLearningCategory
+
+    fun setCurrentSelectedLearningCategory(learningCategory: LearningCategory?) {
+        _currentSelectedLearningCategory.value = learningCategory
+    }
+
+
     /**
      * MutableLiveData that holds the current state of the list of LearningCategories.
      */

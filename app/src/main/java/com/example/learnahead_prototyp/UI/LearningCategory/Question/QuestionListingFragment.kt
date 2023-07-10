@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
@@ -30,8 +31,8 @@ class QuestionListingFragment : Fragment() {
 
     // Deklaration der benötigten Variablen
     lateinit var binding: FragmentQuestionListingBinding
-    private val learnCategoryViewModel: LearnCategoryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
+    private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private var deletePosition: Int = -1
     var list: MutableList<LearningCategory> = arrayListOf()
 
@@ -65,6 +66,15 @@ class QuestionListingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setEventListener()
+        updateUI()
+    }
+
+    private fun updateUI() {
+        // Retrieve the selected learning category from the shared view model
+        val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
+
+        // Set the text of the learning_goal_menu_header_label TextView
+        binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Fragen"
     }
 
     private fun setEventListener() {
@@ -92,7 +102,7 @@ class QuestionListingFragment : Fragment() {
 
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_questionListingFragment_to_learningCategoryInnerViewFragment)
+            findNavController().navigateUp()
         }
     }
 }

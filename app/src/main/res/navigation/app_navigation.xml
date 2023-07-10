@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/learningCategoryListFragment"
-        android:name="com.example.learnahead_prototyp.UI.Goal.LearningCategoryListFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearningCategoryListFragment"
         android:label="LearningCategoryListFragment" >
         <action
             android:id="@+id/action_learningCategoryListFragment_to_homeFragment"
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/learnCategoryDetailFragment"
-        android:name="com.example.learnahead_prototyp.UI.Goal.LearnCategoryDetailFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryDetailFragment"
         android:label="LearnCategoryDetailFragment" >
         <action
             android:id="@+id/action_learnCategoryDetailFragment_to_learningCategoryListFragment"

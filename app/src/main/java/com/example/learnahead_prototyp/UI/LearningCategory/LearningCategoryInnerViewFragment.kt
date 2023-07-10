@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
-import com.example.learnahead_prototyp.UI.Goal.SummaryViewModel
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryInnerViewBinding
@@ -31,8 +31,8 @@ class LearningCategoryInnerViewFragment : Fragment() {
     private lateinit var binding: FragmentLearningCategoryInnerViewBinding
     private val authViewModel: AuthViewModel by viewModels()
     private val summaryViewModel: SummaryViewModel by viewModels()
+    private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private var currentLearningCategory: LearningCategory? = null
-    private val learnCategoryViewModel: LearnCategoryViewModel by viewModels({ requireParentFragment() })
 
     // Lazy initialization des Adapters
     private val adapter by lazy {
@@ -144,13 +144,17 @@ class LearningCategoryInnerViewFragment : Fragment() {
         }
 
         binding.buttonTests.setOnClickListener{
-            findNavController().navigate(
-                R.id.action_learningCategoryInnerViewFragment_to_testListingFragment)
+            val selectedLearningCategory = currentLearningCategory
+            learnCategoryViewModel.setCurrentSelectedLearningCategory(selectedLearningCategory)
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_testListingFragment)
         }
 
-        binding.buttonQuestions.setOnClickListener{
+        binding.buttonQuestions.setOnClickListener {
+            val selectedLearningCategory = currentLearningCategory
+            learnCategoryViewModel.setCurrentSelectedLearningCategory(selectedLearningCategory)
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_questionListingFragment)
         }
+
     }
 
     /**

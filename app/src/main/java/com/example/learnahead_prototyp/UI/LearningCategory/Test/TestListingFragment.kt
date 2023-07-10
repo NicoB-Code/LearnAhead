@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
@@ -31,7 +32,7 @@ class TestListingFragment : Fragment() {
 
     // Deklaration der benötigten Variablen
     lateinit var binding: FragmentTestListingBinding
-    private val learnCategoryViewModel: LearnCategoryViewModel by viewModels()
+    private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private var deletePosition: Int = -1
     var list: MutableList<LearningCategory> = arrayListOf()
@@ -66,17 +67,19 @@ class TestListingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         setEventListener()
+        updateUI()
+    }
+
+    private fun updateUI() {
+        // Retrieve the selected learning category from the shared view model
+        val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
+
+        // Set the text of the learning_goal_menu_header_label TextView
+        binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Tests"
     }
 
     @SuppressLint("SetTextI18n")
     private fun setEventListener() {
-        // Holen Sie sich den Namen der Lernkategorie aus den Argumenten
-        // VORLÄUFIGE LÖSUNG MAN MUSS IM VIEWMODEL CURRENTSELETECTEDLEARNINGCATEGORY EINRICHTEN
-        val learningCategoryName = arguments?.getString("learningCategoryName")
-
-        // Setzen Sie den Text für learningGoalMenuHeaderLabel
-        binding.learningGoalMenuHeaderLabel.text = "$learningCategoryName / Tests"
-
         // Setzt den Event-Listener für den Home-Button
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(R.id.action_testListingFragment_to_homeFragment)
@@ -101,7 +104,7 @@ class TestListingFragment : Fragment() {
 
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_testListingFragment_to_learningCategoryInnerViewFragment)
+            findNavController().navigateUp()
         }
     }
 }
