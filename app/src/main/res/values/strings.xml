@@ -96,4 +96,7 @@
     <string name="learning_tip_of_the_day">Lerntipp des Tages:</string>
     <string name="learning_tip_of_the_day_placeholder">Wenn wir kurz vor dem Schlafengehen noch einmal das Gelernte durchgehen, wird unser Gehirn erneut stimuliert und die neu gebildeten Verbindungen werden gestärkt. Dies führt dazu, dass die Informationen besser im Langzeitgedächtnis abgespeichert werden und später leichter abgerufen werden können.</string>
 
+    <string name="markdown_input_description">Hier kommt die Zusammenfassung hin...</string>
+
+
 </resources>

@@ -104,8 +104,7 @@ class SummaryFragment : Fragment() {
 
         // Setzt den Adapter für das RecyclerView
         binding.recyclerSummaryView.adapter = adapter
-        Log.d("SummaryAdapter", "List Size: ${list.size}")
-        Log.d("SummaryAdapter", "summary Size: ${summaryViewModel.summary.value}")  }
+    }
 
 
     /**
@@ -145,18 +144,18 @@ class SummaryFragment : Fragment() {
 
         // Setzt den Event-Listener für den Learning Goals-Button
         binding.buttonLearningGoals.setOnClickListener {
-            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
+            findNavController().navigate(R.id.action_summaryFragment_to_goalListingFragment)
         }
 
         // Setzt den Event-Listener für den Learning Categories-Button
         binding.buttonLearningCategories.setOnClickListener {
-            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
+            findNavController().navigate(R.id.action_summaryFragment_to_learningCategoryListFragment)
         }
 
         // Setzt den Event-Listener für den Logout-Button
         binding.logout.setOnClickListener {
             authViewModel.logout {
-                findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_summaryFragment_to_loginFragment)
             }
         }
 

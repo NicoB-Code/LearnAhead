@@ -5,7 +5,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.Goal.SummaryViewModel
-import com.example.learnahead_prototyp.databinding.FragmentInnerSummaryBinding
+import com.example.learnahead_prototyp.databinding.FragmentSummaryPreviewBinding
 import androidx.fragment.app.viewModels
 import com.example.learnahead_prototyp.Data.Model.Summary
 import androidx.navigation.fragment.findNavController
@@ -13,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
+import android.widget.TextView
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -21,19 +23,21 @@ import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.R
 import androidx.core.widget.doAfterTextChanged
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
 
 @AndroidEntryPoint
-class innerSummaryFragment : Fragment() {
+class summaryPreviewFragment : Fragment() {
 
     private var currentUser: User? = null
     private var currentLearningCategory: LearningCategory?= null
-    lateinit var binding: FragmentInnerSummaryBinding
+    lateinit var binding: FragmentSummaryPreviewBinding
     private val summaryViewModel: SummaryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private var isEdit = false
     private var objSummary: Summary? = null
-    private var markdownInput: String = ""
+    private var markdownOutput: String = ""
 
     /**
      * Erstellt die View und gibt sie zurück.
@@ -46,7 +50,7 @@ class innerSummaryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentInnerSummaryBinding.inflate(layoutInflater)
+        binding = FragmentSummaryPreviewBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -60,10 +64,31 @@ class innerSummaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setLocalCurrentUser()
         setEventListener()
+        parseMarkdown()
     }
 
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
+    }
+
+    fun convertMarkdownToHtml(markdown: String): String {
+        val parser = Parser.builder().build()
+        val document = parser.parse(markdown)
+
+        val renderer = HtmlRenderer.builder().build()
+        val html = renderer.render(document)
+
+        return html
+    }
+    fun displayMarkdownInTextView(markdownText: String, textView: TextView) {
+        val htmlText = convertMarkdownToHtml(markdownText)
+        val spannedText = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_COMPACT)
+
+        textView.text = spannedText
+    }
+    private fun parseMarkdown() {
+        markdownOutput = arguments?.getString("markdownInputText").toString()
+        displayMarkdownInTextView(markdownOutput, binding.markdownViewText)
     }
 
 
@@ -73,26 +98,26 @@ class innerSummaryFragment : Fragment() {
      */
     private fun setEventListener() {
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_homeFragment) }
+        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_homeFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_learningCategoryListFragment) }
+        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_learningCategoryListFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_goalListingFragment) }
+        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_goalListingFragment) }
 
         // Setzt den Event-Listener für den Logout-Button
         binding.logout.setOnClickListener {
             authViewModel.logout {
-                findNavController().navigate(R.id.action_innerSummaryFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_summaryPreviewFragment_to_loginFragment)
             }
         }
 
-        binding.buttonPreview.setOnClickListener {
+        binding.buttonEdit.setOnClickListener {
             findNavController().navigate(R.id.action_innerSummaryFragment_to_summaryPreviewFragment,
-            Bundle().apply {
-                putString("markdownInputText", markdownInput)
-            })
+                Bundle().apply {
+                    putString("markdownOutputText", binding.markdownViewText.text.toString())
+                })
         }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
@@ -102,9 +127,6 @@ class innerSummaryFragment : Fragment() {
             })
         }
 
-        binding.markdownEditText.doAfterTextChanged {
-            markdownInput = binding.markdownEditText.text.toString()
-        }
     }
 
 
