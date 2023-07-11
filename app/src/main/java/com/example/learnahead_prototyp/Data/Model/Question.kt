@@ -12,4 +12,5 @@ data class Question(
     val type: QuestionType = QuestionType.IndexCard,
     val lastTest: Boolean? = null,
     val wrongCounter: Int = 0,
-) : Parcelable
+    var tags: MutableList<Tag> = mutableListOf(),
+    ) : Parcelable

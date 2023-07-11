@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.Question
-import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Data.Repository.IQuestionRepository
-import com.example.learnahead_prototyp.Data.Repository.ISummaryRepository
 import com.example.learnahead_prototyp.Util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -29,8 +27,8 @@ class QuestionViewModel @Inject constructor(
     val question: LiveData<UiState<List<Question>>>
         get() = _questions
 
-    private val _currentQuestion = MutableLiveData<UiState<Question>>()
-    val currentQuestion: LiveData<UiState<Question>>
+    private val _currentQuestion = MutableLiveData<Question>()
+    val currentQuestion: LiveData<Question>
         get() = _currentQuestion
 
     /**

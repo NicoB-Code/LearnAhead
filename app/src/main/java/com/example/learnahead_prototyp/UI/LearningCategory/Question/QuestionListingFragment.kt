@@ -8,11 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.Question
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryViewModel
+import com.example.learnahead_prototyp.Util.UiState
+import com.example.learnahead_prototyp.Util.hide
+import com.example.learnahead_prototyp.Util.show
+import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentQuestionListingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,10 +37,28 @@ class QuestionListingFragment : Fragment() {
     lateinit var binding: FragmentQuestionListingBinding
     private val authViewModel: AuthViewModel by viewModels()
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
+    private val questionViewModel: QuestionViewModel by activityViewModels()
     private var deletePosition: Int = -1
-    var list: MutableList<LearningCategory> = arrayListOf()
+    var list: MutableList<Question> = arrayListOf()
 
-
+    private val adapter by lazy {
+        QuestionListingAdapter(
+            onItemClicked = { pos, item ->
+                // Navigation zum Lernkategorie-Detail-Fragment mit Parameter-Übergabe
+                findNavController().navigate(
+                    R.id.action_questionListingFragment_to_questionDetailFragment,
+                    Bundle().apply {
+                        putString("type", "view")
+                        putParcelable("question", item)
+                    })
+            },
+            onDeleteClicked = { pos, item ->
+                // Speichern der zu löschenden Position und Löschen der Lernkategorie über das ViewModel
+                deletePosition = pos
+                questionViewModel.deleteQuestion(item)
+            }
+        )
+    }
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
@@ -66,7 +88,64 @@ class QuestionListingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setEventListener()
+        observer()
+        setLocalCurrentUser()
         updateUI()
+
+        // Setzen des Adapters auf die RecyclerView
+        binding.recyclerView.adapter = adapter
+    }
+
+    private fun setLocalCurrentUser() {
+        // Holt den aktuellen Benutzer aus der Datenbank und speichert ihn in der Variable currentUser
+        authViewModel.getSession()
+    }
+    private fun observer() {
+        // Observer für "deleteLearningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen beim Löschen von Lernkategorien.
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
+                    binding.progressBar.hide()
+                    this.currentUser = state.data
+                    questionViewModel.getQuestions(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+                }
+            }
+        }
+
+        // Observer für "learningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen in der Liste der Lernkategorien.
+        questionViewModel.question.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    // Fortschrittsanzeige ausblenden und Liste der Benutzerziele aktualisieren
+                    binding.progressBar.hide()
+                    list = state.data.toMutableList()
+                    adapter.updateList(list)
+                }
+            }
+        }
     }
 
     private fun updateUI() {
@@ -102,13 +181,11 @@ class QuestionListingFragment : Fragment() {
 
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(R.id.action_questionListingFragment_to_learningCategoryInnerViewFragment)
         }
 
         binding.buttonSaveQuestion.setOnClickListener {
-            authViewModel.logout {
                 findNavController().navigate(R.id.action_questionListingFragment_to_questionDetailFragment)
-            }
         }
     }
 }

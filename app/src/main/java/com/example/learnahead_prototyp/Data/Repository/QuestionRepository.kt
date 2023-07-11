@@ -56,18 +56,24 @@ class QuestionRepository(
     }
 
     override fun addQuestion(question: Question, result: (UiState<Question?>) -> Unit) {
-        // Neues Dokument in der SUMMARY-Sammlung der Datenbank erstellen
-        val document = database.collection(FireStoreCollection.QUESTION).document()
-
-        // ID der Zusammenfassung als ID des erstellten Dokuments in der Datenbank festlegen
-        question.id = document.id
-
-        // Zusammenfassung als Dokument zur Datenbank hinzufügen
-        document.set(question).addOnSuccessListener {
-            // Bei Erfolg wird eine Erfolgsmeldung an den Aufrufer zurückgegeben
-            result(UiState.Success(question))
+        // Save the tags to the database
+        val tagsCollection = database.collection(FireStoreCollection.TAG)
+        val batch = database.batch()
+        question.tags.forEach { tag ->
+            val tagRef = tagsCollection.document()
+            tag.id = tagRef.id
+            batch.set(tagRef, tag)
+        }
+        batch.commit().addOnSuccessListener {
+            // Add the question to the database
+            val document = database.collection(FireStoreCollection.QUESTION).document()
+            question.id = document.id
+            document.set(question).addOnSuccessListener {
+                result(UiState.Success(question))
+            }.addOnFailureListener {
+                result(UiState.Failure(it.localizedMessage))
+            }
         }.addOnFailureListener {
-            // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
             result(UiState.Failure(it.localizedMessage))
         }
     }

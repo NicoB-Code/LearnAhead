@@ -4,6 +4,7 @@ package com.example.learnahead_prototyp.Util
  * Das sind Tabellen in Firebase
  */
 object FireStoreCollection {
+    val TAG = "tag"
     val QUESTION = "question"
     val SUMMARY = "summary"
     val GOAL = "goal"

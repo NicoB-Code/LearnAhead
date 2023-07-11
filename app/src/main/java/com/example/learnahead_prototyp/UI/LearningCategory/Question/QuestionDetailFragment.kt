@@ -1,14 +1,11 @@
 package com.example.learnahead_prototyp.UI.LearningCategory.Question
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -18,12 +15,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.Question
+import com.example.learnahead_prototyp.Data.Model.Tag
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryViewModel
+import com.example.learnahead_prototyp.Util.UiState
+import com.example.learnahead_prototyp.Util.hide
+import com.example.learnahead_prototyp.Util.show
+import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentQuestionDetailBinding
-import com.example.learnahead_prototyp.databinding.FragmentQuestionListingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -45,8 +47,10 @@ class QuestionDetailFragment : Fragment() {
     private val MAX_TAGS = 2
     private val isEdit: Boolean = false
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
+    private val questionViewModel: QuestionViewModel by activityViewModels()
     private var deletePosition: Int = -1
-    private val tagsList: MutableList<String> = mutableListOf()
+    private val tagsListString: MutableList<String> = mutableListOf()
+
 
     var list: MutableList<LearningCategory> = arrayListOf()
 
@@ -79,9 +83,75 @@ class QuestionDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observer()
+        setLocalCurrentUser()
         setEventListener()
         populateDropdown()
         updateUI()
+    }
+
+    private fun setLocalCurrentUser() {
+        authViewModel.getSession()
+    }
+
+    private fun observer() {
+        // Eine Beobachtung auf viewModel.addLearningCategory ausführen
+        questionViewModel.addQuestion.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.progressBar.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.progressBar.hide()
+                    if(state.data != null && currentUser != null) {
+                        learnCategoryViewModel.currentSelectedLearningCategory.value!!.questions.add(state.data)
+                        learnCategoryViewModel.updateLearningCategory(learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+
+                        // Die neue Lernkategorie dem User hinzufügen
+                        val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value!!.id }
+                        if (indexOfCurrentObject != -1) {
+                            currentUser!!.learningCategories[indexOfCurrentObject] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
+                        } else {
+                            currentUser!!.learningCategories.add(learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+                        }
+                        // Den User in der DB updaten
+                        authViewModel.updateUserInfo(currentUser!!)
+                        findNavController().navigate(R.id.action_questionDetailFragment_to_questionListingFragment)
+                        toast("Die Lernkategorie konnte erfolgreich erstellt werden")
+                    }
+                    else {
+                        toast("Die Lernkategorie konnte nicht erstellt werden")
+                    }
+                }
+            }
+        }
+
+        // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.progressBar.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.progressBar.hide()
+                    currentUser = state.data
+                }
+            }
+        }
     }
 
     private fun populateDropdown() {
@@ -155,23 +225,46 @@ class QuestionDetailFragment : Fragment() {
     }
 
     private fun createQuestion() {
+        if (validation()) {
+            questionViewModel.addQuestion(getQuestion())
+        }
+    }
 
+    private fun getQuestion(): Question {
+        val tagsList = mutableListOf<Tag>()
+        tagsListString.forEach{ tagName ->
+            val tag = Tag(
+                name = tagName
+            )
+            tagsList.add(tag)
+        }
+        // Bei Erweiterung muss type noch hinzugefügt werden, da aktuell nur ein Fragen Typ existiert
+        return Question(
+            id = questionViewModel.currentQuestion.value?.id ?: "",
+            question = binding.questionContent.text.toString(),
+            answer = binding.answerContent.text.toString(),
+            tags = tagsList
+        )
+    }
+
+    private fun validation(): Boolean {
+        return true
     }
 
     private fun addTag(tag: String) {
-        if (tagsList.size >= MAX_TAGS) {
+        if (tagsListString.size >= MAX_TAGS) {
             // Maximum limit reached, show a notification
             Toast.makeText(context, "Maximum limit of $MAX_TAGS tags reached.", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (tagsList.contains(tag)) {
+        if (tagsListString.contains(tag)) {
             // Duplicate tag, show a notification
             Toast.makeText(context, "Tag '$tag' already exists.", Toast.LENGTH_SHORT).show()
             return
         }
 
-        tagsList.add(tag)
+        tagsListString.add(tag)
 
         val tagView = layoutInflater.inflate(R.layout.tag_item, null)
         val tagText = tagView.findViewById<TextView>(R.id.tag_text)
@@ -223,7 +316,7 @@ class QuestionDetailFragment : Fragment() {
         val tagText = tagToRemove.findViewById<TextView>(R.id.tag_text)
         val tagValue = tagText.text.toString()
 
-        tagsList.remove(tagValue)
+        tagsListString.remove(tagValue)
         binding.tagsContainer.removeView(tagToRemove)
 
         // Shift the remaining tags to the left
