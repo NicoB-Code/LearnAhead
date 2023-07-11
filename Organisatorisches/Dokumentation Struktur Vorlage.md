@@ -19,6 +19,7 @@
   - Optimierter Lernplan Phillipp **Done ggbf. nochmal drüber lesen**
   - Tagging Phillipp **Done ggbf. nochmal drüber lesen**
   - Lernkategorien & Lernziele Nico **ToDo**
+  - Fragen Typen **ToDo** Phillipp
   - Gamification Nico **ToDo**
 - Pflichtenheft Done
 - Use-Case-Diagramme (Nico) Done
@@ -47,19 +48,20 @@
 - Sequenzdiagramme **ToDo** Nico
 
 ## Implementierung
-- Deployment **ToDo**
-- Installationsanleitung **ToDo**
-- Code Conventions **ToDo**
-- Code Dokumentation **ToDo**
-- IT-Security (Firebase Authentifizierung) **ToDo**
+- Deployment **ToDo** Nico
+- Installationsanleitung **ToDo** Nico
+- Code Conventions **ToDo** Phillipp
+- Code Dokumentation **ToDo** Phillipp
+- IT-Security (Firebase Authentifizierung) **ToDo** Phillipp
 
 ## Tests
 - User Tests **ToDo**
 - ggf. Unit Tests **ToDo**
 
 ## Ergebnisse
-- Nutzen der App **ToDo**
+- Nutzen der App **ToDo** Phillipp
+- Feedback von Studienpräsentation **ToDo** Phillipp
 
 ## Ausblick
-- Features (Kalender, Collaboration, etc.) **ToDo**
-- Zeitliche Dokumentation **ToDo**
+- Features (Kalender, Collaboration, etc.) **ToDo** Phillipp und Nico
+- Zeitliche Dokumentation **ToDo** Phillipp

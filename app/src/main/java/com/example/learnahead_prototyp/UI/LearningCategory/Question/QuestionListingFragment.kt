@@ -104,5 +104,11 @@ class QuestionListingFragment : Fragment() {
         binding.backIcon.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.buttonSaveQuestion.setOnClickListener {
+            authViewModel.logout {
+                findNavController().navigate(R.id.action_questionListingFragment_to_questionDetailFragment)
+            }
+        }
     }
 }

@@ -97,4 +97,9 @@
     <string name="tests">Tests</string>
     <string name="create_test">Test erstellen</string>
     <string name="create_question">Frage erstellen</string>
+    <string name="add_question">Frage hinzufügen</string>
+    <string name="choose_a_type_of_test">Wähle eine Art von Test aus:</string>
+    <string name="add_tags">Tags hinzufügen</string>
+    <string name="question_colon">Frage:</string>
+    <string name="answer_colon">Antwort:</string>
 </resources>

@@ -135,7 +135,7 @@
 
     <!-- Test erstellen -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_add_create_question"
+        android:id="@+id/button_save_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/background_bottom_menu"

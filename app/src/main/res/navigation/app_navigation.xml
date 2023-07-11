@@ -181,6 +181,9 @@
         <action
             android:id="@+id/action_questionListingFragment_to_learningCategoryInnerViewFragment"
             app:destination="@id/learningCategoryInnerViewFragment" />
+        <action
+            android:id="@+id/action_questionListingFragment_to_questionDetailFragment"
+            app:destination="@id/questionDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/testListingFragment"
@@ -200,6 +203,26 @@
             app:destination="@id/goalListingFragment" />
         <action
             android:id="@+id/action_testListingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionDetailFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Question.QuestionDetailFragment"
+        android:label="QuestionDetailFragment" >
+        <action
+            android:id="@+id/action_questionDetailFragment_to_questionListingFragment"
+            app:destination="@id/questionListingFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
