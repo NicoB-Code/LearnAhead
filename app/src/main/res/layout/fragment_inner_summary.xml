@@ -113,8 +113,18 @@
         android:layout_below="@id/button_container"
         android:contentDescription="@string/markdown_input_description"
         android:layout_above="@id/background_bottom_menu"
-        android:textColor="@color/white"/>
-
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton

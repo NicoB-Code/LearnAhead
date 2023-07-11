@@ -23,6 +23,7 @@ import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.R
 import androidx.core.widget.doAfterTextChanged
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import io.noties.markwon.Markwon
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
@@ -36,7 +37,7 @@ class summaryPreviewFragment : Fragment() {
     private val summaryViewModel: SummaryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private var isEdit = false
-    private var objSummary: Summary? = null
+    private var currentSummary: Summary? = null
     private var markdownOutput: String = ""
 
     /**
@@ -62,13 +63,21 @@ class summaryPreviewFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currentSummary = arguments?.getParcelable("summary")
         setLocalCurrentUser()
         setEventListener()
         parseMarkdown()
+        updateUI()
     }
 
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
+    }
+
+    private fun updateUI() {
+        // Holt die Lernkategorie aus den Argumenten und setzt den Text des Labels
+        currentLearningCategory = arguments?.getParcelable("learning_category")
+        binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
     }
 
     fun convertMarkdownToHtml(markdown: String): String {
@@ -87,8 +96,9 @@ class summaryPreviewFragment : Fragment() {
         textView.text = spannedText
     }
     private fun parseMarkdown() {
-        markdownOutput = arguments?.getString("markdownInputText").toString()
-        displayMarkdownInTextView(markdownOutput, binding.markdownViewText)
+        val markwon = Markwon.builder(requireContext()).build()
+        currentSummary?.let { it1 -> Log.d("Preview", it1.content) }
+        currentSummary?.let { markwon.setMarkdown(binding.markdownViewText, it.content) }
     }
 
 
@@ -114,14 +124,15 @@ class summaryPreviewFragment : Fragment() {
         }
 
         binding.buttonEdit.setOnClickListener {
-            findNavController().navigate(R.id.action_innerSummaryFragment_to_summaryPreviewFragment,
+            findNavController().navigate(R.id.action_summaryPreviewFragment_to_innerSummaryFragment,
                 Bundle().apply {
-                    putString("markdownOutputText", binding.markdownViewText.text.toString())
+                    putParcelable("learning_category", currentLearningCategory)
+                    putParcelable("summary", currentSummary)
                 })
         }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_summaryFragment,
+        binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_summaryFragment,
             Bundle().apply {
                 putParcelable("learning_category", currentLearningCategory)
             })

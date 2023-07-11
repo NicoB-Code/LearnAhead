@@ -113,7 +113,7 @@
         android:contentDescription="@string/markdown_input_description"
         android:layout_above="@id/background_bottom_menu"
         android:textColor="@color/white"
-        android:textSize="40dp"/>
+        android:textSize="14sp"/>
 
 
     <!-- Home Button -->

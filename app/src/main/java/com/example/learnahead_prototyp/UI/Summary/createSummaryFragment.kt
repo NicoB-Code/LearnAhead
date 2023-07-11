@@ -180,7 +180,7 @@ class CreateSummaryFragment : Fragment() {
     }
 
     private fun observer() {
-        // Eine Beobachtung auf viewModel.addLearningCategory ausführen
+        // Eine Beobachtung auf viewModel.addSummary ausführen
         summaryViewModel.addSummary.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
@@ -196,7 +196,7 @@ class CreateSummaryFragment : Fragment() {
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
                     if(state.data != null && currentUser != null) {
-                        // Die neue Lernkategorie dem User hinzufügen
+                        // Die neue Zusammenfassung dem User hinzufügen
                         currentLearningCategory?.summaries?.add(state.data)
                         val foundIndex = currentUser!!.learningCategories.indexOfFirst { it.id == currentLearningCategory?.id}
                         if(foundIndex != -1) {
@@ -209,10 +209,10 @@ class CreateSummaryFragment : Fragment() {
                                 putString("type","view")
                                 putParcelable("learning_category", currentLearningCategory)
                             })
-                        toast("Die Lernkategorie konnte erfolgreich erstellt werden")
+                        toast("Die Zusammenfassung konnte erfolgreich erstellt werden")
                     }
                     else {
-                        toast("Die Lernkategorie konnte nicht erstellt werden")
+                        toast("Die Zusammenfassung konnte nicht erstellt werden")
                     }
                 }
             }

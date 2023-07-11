@@ -78,4 +78,8 @@ class SummaryViewModel @Inject constructor(
         _deleteSummary.value = UiState.Loading
         repository.deleteSummary(summary) { _deleteSummary.value = it }
     }
+    fun updateSummary(summary: Summary){
+        _updateSummary.value = UiState.Loading
+        repository.updateSummary(summary) { _updateSummary.value = it}
+    }
 }

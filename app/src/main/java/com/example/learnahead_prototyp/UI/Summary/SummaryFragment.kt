@@ -46,6 +46,7 @@ class SummaryFragment : Fragment() {
                 Bundle().apply {
                     putString("type","view")
                     putParcelable("summary", item)
+                    putParcelable("learning_category", currentLearningCategory)
                 }
             )
         },
@@ -114,7 +115,6 @@ class SummaryFragment : Fragment() {
         // Holt die Lernkategorie aus den Argumenten und setzt den Text des Labels
         currentLearningCategory = arguments?.getParcelable("learning_category")
         binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
-
     }
 
     /**
@@ -189,7 +189,6 @@ class SummaryFragment : Fragment() {
                 }
 
                 is UiState.Success -> {
-                    Log.d("Success", "Haalahlihihl")
                     binding.progressBar.hide()
                     list = state.data.toMutableList()
                     Log.d("SummaryAdapter", "List Size: ${list.size}")

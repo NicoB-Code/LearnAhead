@@ -37,14 +37,6 @@ class SummaryAdapter(
         return MyViewHolder(binding)
     }
 
-    /**
-     * Entfernt die Zusammenfassung an der angegebenen Position aus der Liste und benachrichtigt den Adapter, dass sich die Daten geändert haben.
-     * @param position Der Index der Zusammenfassung, die entfernt werden soll.
-     */
-    fun removeItem(position: Int) {
-        list.removeAt(position)
-        notifyItemChanged(position)
-    }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             val item = list[position]
@@ -71,7 +63,6 @@ class SummaryAdapter(
          */
         fun bind(item: Summary) {
             binding.itemListText.text = item.name
-            Log.d("LOL", "HAHAHAHAHAHAHAHAHAH")
 
             // Set the click listener for the inner view summary layout
             binding.innerViewSummaryLayout.setOnClickListener {

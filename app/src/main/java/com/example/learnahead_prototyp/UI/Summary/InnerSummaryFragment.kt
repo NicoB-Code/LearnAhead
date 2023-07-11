@@ -21,6 +21,7 @@ import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.R
 import androidx.core.widget.doAfterTextChanged
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import io.noties.markwon.Markwon
 
 
 @AndroidEntryPoint
@@ -31,8 +32,7 @@ class innerSummaryFragment : Fragment() {
     lateinit var binding: FragmentInnerSummaryBinding
     private val summaryViewModel: SummaryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
-    private var isEdit = false
-    private var objSummary: Summary? = null
+    private var currentSummary: Summary? = null
     private var markdownInput: String = ""
 
     /**
@@ -58,14 +58,94 @@ class innerSummaryFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currentSummary = arguments?.getParcelable("summary")
         setLocalCurrentUser()
         setEventListener()
+        updateUI()
+        observer()
     }
 
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
     }
 
+    private fun updateUI() {
+        // Holt die Lernkategorie aus den Argumenten und setzt den Text des Labels
+        currentLearningCategory = arguments?.getParcelable("learning_category")
+        binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
+        if(currentSummary?.content != null) {
+            binding.markdownEditText.setText(currentSummary?.content)
+        } else {
+            binding.markdownEditText.setText("# Hello Zusammenfassung")
+        }
+    }
+
+
+
+    private fun observer() {
+        // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.progressBar.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.progressBar.hide()
+                    currentUser = state.data
+                }
+            }
+        }
+        summaryViewModel.updateSummary.observe(viewLifecycleOwner) {state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    binding.progressBar.hide()
+                    if(state.data != null && currentUser != null) {
+                        // Die neue Zusammenfassung dem User hinzufügen
+                        var foundSummaryIndex: Int = 0
+                        for (category in currentUser!!.learningCategories){
+                            foundSummaryIndex = category!!.summaries.indexOfFirst { it.id == state.data.id }
+                        }
+                        currentLearningCategory?.summaries?.set(foundSummaryIndex, state.data)
+                        val foundIndex =
+                            currentUser!!.learningCategories.indexOfFirst { it.id == currentLearningCategory?.id }
+                        if (foundIndex != -1) {
+                            currentUser!!.learningCategories[foundIndex] = currentLearningCategory!!
+                        }
+                        // Den User in der DB updaten
+                        authViewModel.updateUserInfo(currentUser!!)
+                        findNavController().navigate(R.id.action_innerSummaryFragment_to_summaryPreviewFragment,
+                            Bundle().apply {
+                                putParcelable("summary", currentSummary)
+                                putParcelable("learning_category", currentLearningCategory)
+                            })
+                        toast("Die Zusammenfassung konnte erfolgreich aktualisiert werden")
+                    }
+                    else {
+                        toast("Die Zusammenfassung konnte nicht aktualisiert werden")
+                    }
+
+                }
+            }
+        }
+    }
 
 
     /**
@@ -89,21 +169,16 @@ class innerSummaryFragment : Fragment() {
         }
 
         binding.buttonPreview.setOnClickListener {
-            findNavController().navigate(R.id.action_innerSummaryFragment_to_summaryPreviewFragment,
-            Bundle().apply {
-                putString("markdownInputText", markdownInput)
-            })
+            currentSummary?.content = binding.markdownEditText.text.toString()
+            currentSummary?.let { summary -> summaryViewModel.updateSummary(summary) }
         }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_summaryFragment,
             Bundle().apply {
+                putParcelable("summary", currentSummary)
                 putParcelable("learning_category", currentLearningCategory)
             })
-        }
-
-        binding.markdownEditText.doAfterTextChanged {
-            markdownInput = binding.markdownEditText.text.toString()
         }
     }
 
