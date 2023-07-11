@@ -1,6 +1,8 @@
 package com.example.learnahead_prototyp.UI.LearningCategory.Question
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class QuestionListingFragment : Fragment() {
 
     private var currentUser: User? = null
+    private var searchQuery: String = ""
 
     // Konstante für das Logging-Tag
     val TAG: String = "LearningCategoryListFragment"
@@ -156,7 +159,43 @@ class QuestionListingFragment : Fragment() {
         binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Fragen"
     }
 
+    private fun performSearch() {
+        val filteredList = if (searchQuery.isEmpty()) {
+            // If the search query is empty, show all items
+            list.toMutableList()
+        } else {
+            // Filter the list based on the search query
+            list.filter { question ->
+                question.tags.any { tag ->
+                    tag.name.contains(searchQuery, ignoreCase = true)
+                }
+            }.toMutableList()
+        }
+
+        // Update the adapter with the filtered list
+        adapter.updateList(filteredList)
+    }
+
     private fun setEventListener() {
+        // Set up the search functionality
+        binding.questionSearchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Update the search query
+                searchQuery = s.toString()
+
+                // Perform the search
+                performSearch()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Not needed
+            }
+        })
+
         // Setzt den Event-Listener für den Home-Button
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(R.id.action_questionListingFragment_to_homeFragment)

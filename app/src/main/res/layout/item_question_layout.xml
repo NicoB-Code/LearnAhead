@@ -33,11 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginStart="15dp"
+            android:paddingEnd="25dp"
             android:hint="Frage"
             android:textAppearance="@style/card_view_date_interval"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tags"
-            android:gravity="center_horizontal"/>
+            android:gravity="top|left"/>
 
 
         <View
