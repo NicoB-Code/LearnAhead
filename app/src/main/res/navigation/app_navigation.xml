@@ -207,6 +207,9 @@
         <action
             android:id="@+id/action_testListingFragment_to_testDetailFragment"
             app:destination="@id/testDetailFragment" />
+        <action
+            android:id="@+id/action_testListingFragment_to_testExecuteFragment"
+            app:destination="@id/testExecuteFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionDetailFragment"
@@ -248,5 +251,25 @@
         <action
             android:id="@+id/action_testDetailFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testExecuteFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Test.TestExecuteFragment"
+        android:label="TestExecuteFragment" >
+        <action
+            android:id="@+id/action_testExecuteFragment_to_testListingFragment"
+            app:destination="@id/testListingFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

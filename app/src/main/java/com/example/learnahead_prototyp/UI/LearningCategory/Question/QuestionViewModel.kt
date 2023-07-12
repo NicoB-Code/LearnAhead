@@ -27,9 +27,13 @@ class QuestionViewModel @Inject constructor(
     val question: LiveData<UiState<List<Question>>>
         get() = _questions
 
-    private val _currentQuestion = MutableLiveData<Question>()
-    val currentQuestion: LiveData<Question>
+    private val _currentQuestion = MutableLiveData<Question?>()
+    val currentQuestion: LiveData<Question?>
         get() = _currentQuestion
+
+    fun setCurrentQuestion(question: Question?) {
+        _currentQuestion.value = question
+    }
 
     /**
      * MutableLiveData that holds the current state of adding a new LearningCategory.

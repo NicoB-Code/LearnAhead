@@ -1,7 +1,7 @@
 package com.example.learnahead_prototyp.Data.Repository
 
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
-import com.example.learnahead_prototyp.Data.Model.Question
+import com.example.learnahead_prototyp.Data.Model.Test
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.Util.FireStoreCollection
 import com.example.learnahead_prototyp.Util.UiState
@@ -13,9 +13,8 @@ import com.google.firebase.firestore.FirebaseFirestore
  */
 class TestRepository(
     val database: FirebaseFirestore
-) : IQuestionRepository {
-
-    override fun getQuestions(user: User?, learningCategory: LearningCategory?, result: (UiState<List<Question>>) -> Unit) {
+) : ITestRepository {
+    override fun getTests(user: User?, learningCategory: LearningCategory?, result: (UiState<List<Test>>) -> Unit) {
         // Überprüfen, ob learningCategory null ist
         if (learningCategory == null) {
             result(UiState.Failure("learningCategory is null"))
@@ -36,47 +35,40 @@ class TestRepository(
             task.result?.toObject(User::class.java)?.learningCategories
         }
 
-        // Zusammenfassungen für die Ziel-Lernkategorie holen
-        val questionTask = learningCategoriesTask.continueWith { task ->
+        // Tests für die Ziel-Lernkategorie holen
+        val testTask = learningCategoriesTask.continueWith { task ->
             val learningCategories = task.result
             if (learningCategories.isNullOrEmpty()) {
                 throw Exception("Learning categories are null or empty")
             }
             val targetLearningCategory = learningCategories.find { it.id == learningCategory.id }
                 ?: throw Exception("Learning category not found")
-            targetLearningCategory.questions
+            targetLearningCategory.tests
         }
 
         // Ergebnis zurückgeben
-        questionTask.addOnSuccessListener { questions ->
-            result(UiState.Success(questions))
+        testTask.addOnSuccessListener { tests ->
+            result(UiState.Success(tests))
         }.addOnFailureListener { exception ->
             result(UiState.Failure(exception.localizedMessage))
         }
     }
 
-    override fun addQuestion(question: Question, result: (UiState<Question?>) -> Unit) {
-        // Neues Dokument in der SUMMARY-Sammlung der Datenbank erstellen
-        val document = database.collection(FireStoreCollection.QUESTION).document()
-
-        // ID der Zusammenfassung als ID des erstellten Dokuments in der Datenbank festlegen
-        question.id = document.id
-
-        // Zusammenfassung als Dokument zur Datenbank hinzufügen
-        document.set(question).addOnSuccessListener {
-            // Bei Erfolg wird eine Erfolgsmeldung an den Aufrufer zurückgegeben
-            result(UiState.Success(question))
-        }.addOnFailureListener {
-            // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
-            result(UiState.Failure(it.localizedMessage))
+    override fun addTest(test: Test, result: (UiState<Test?>) -> Unit) {
+        val document = database.collection(FireStoreCollection.TEST).document()
+            test.id = document.id
+            document.set(test).addOnSuccessListener {
+                result(UiState.Success(test))
+            }.addOnFailureListener {
+                result(UiState.Failure(it.localizedMessage))
+            }
         }
-    }
 
-    override fun updateQuestion(question: Question, result: (UiState<Question?>) -> Unit) {
+    override fun updateTest(test: Test, result: (UiState<Test?>) -> Unit) {
         TODO("Not yet implemented")
     }
 
-    override fun deleteQuestion(question: Question, result: (UiState<String>) -> Unit) {
+    override fun deleteTest(test: Test, result: (UiState<String>) -> Unit) {
         TODO("Not yet implemented")
     }
 }

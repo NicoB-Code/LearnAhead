@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.Test
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
@@ -38,10 +38,27 @@ class TestListingFragment : Fragment() {
     lateinit var binding: FragmentTestListingBinding
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by viewModels()
+    private val testViewModel: TestViewModel by activityViewModels()
     private var deletePosition: Int = -1
-    var list: MutableList<LearningCategory> = arrayListOf()
+    var list: MutableList<Test> = arrayListOf()
 
-
+    private val adapter by lazy {
+        TestListingAdapter(
+            onItemClicked = { pos, item ->
+                testViewModel.setCurrentTest(item)
+                findNavController().navigate(
+                    R.id.action_testListingFragment_to_testExecuteFragment,
+                    Bundle().apply {
+                        putParcelable("test", item)
+                    })
+            },
+            onDeleteClicked = { pos, item ->
+                // Speichern der zu löschenden Position und Löschen der Lernkategorie über das ViewModel
+                deletePosition = pos
+                testViewModel.deleteTest(item)
+            }
+        )
+    }
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
@@ -74,6 +91,8 @@ class TestListingFragment : Fragment() {
         observer()
         setLocalCurrentUser()
         updateUI()
+
+        binding.recyclerView.adapter = adapter
     }
 
     private fun observer() {
@@ -95,6 +114,30 @@ class TestListingFragment : Fragment() {
                     // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
                     binding.progressBar.hide()
                     this.currentUser = state.data
+                    testViewModel.getTest(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+                }
+            }
+        }
+
+        // Observer für "learningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen in der Liste der Lernkategorien.
+        testViewModel.test.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    // Fortschrittsanzeige ausblenden und Liste der Benutzerziele aktualisieren
+                    binding.progressBar.hide()
+                    list = state.data.toMutableList()
+                    adapter.updateList(list)
                 }
             }
         }

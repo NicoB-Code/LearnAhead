@@ -9,10 +9,12 @@ import com.example.learnahead_prototyp.Data.Repository.ILearnCategoryRepository
 import com.example.learnahead_prototyp.Data.Repository.IProfileRepository
 import com.example.learnahead_prototyp.Data.Repository.IQuestionRepository
 import com.example.learnahead_prototyp.Data.Repository.ISummaryRepository
+import com.example.learnahead_prototyp.Data.Repository.ITestRepository
 import com.example.learnahead_prototyp.Data.Repository.LearningCategoryRepository
 import com.example.learnahead_prototyp.Data.Repository.ProfileRepository
 import com.example.learnahead_prototyp.Data.Repository.QuestionRepository
 import com.example.learnahead_prototyp.Data.Repository.SummaryRepository
+import com.example.learnahead_prototyp.Data.Repository.TestRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
@@ -110,5 +112,13 @@ object RepositoryModule {
         database: FirebaseFirestore,
     ): IQuestionRepository {
         return QuestionRepository(database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTestRepository(
+        database: FirebaseFirestore,
+    ): ITestRepository {
+        return TestRepository(database)
     }
 }

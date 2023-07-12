@@ -220,7 +220,7 @@ class QuestionListingFragment : Fragment() {
 
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_questionListingFragment_to_learningCategoryInnerViewFragment)
+            findNavController().navigateUp()
         }
 
         binding.buttonSaveQuestion.setOnClickListener {
