@@ -1,14 +1,221 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/android_lar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.LearningCategory.Test.TestDetailFragment">
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Dark Background Full Screen -->
+
+    <!-- Black Background for Bottom Menu -->
+    <View
+        android:id="@+id/dark_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/dark_full_screen" />
 
-</FrameLayout>
+    <View
+        android:id="@+id/background_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@id/dark_background"
+        android:background="@drawable/black_bottom_menu"
+        android:backgroundTint="@null"
+        />
+
+    <!-- Back Icon -->
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/back_button"
+        android:elevation="7dp"
+        android:rotation="-90" />
+
+    <!-- Profil Header Label -->
+
+    <!-- Header Line -->
+    <TextView
+        android:id="@+id/learning_goal_menu_header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/header_line"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toEndOf="@id/back_icon"
+        android:text="Test erstellen"
+        android:textAppearance="@style/top_menu_header" />
+
+    <View
+        android:id="@+id/header_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/back_icon"
+        android:background="@drawable/header_line"
+        />
+
+    <!-- Logout Icon -->
+    <ImageView
+        android:id="@+id/logout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@id/dark_background"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/logout"
+        android:elevation="7dp"
+        />
+
+    <!-- Choose a type of test -->
+
+    <!-- Dropdown Element -->
+
+
+    <EditText
+        android:id="@+id/test_title"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:hint="@string/choose_a_type_of_test"
+        android:textColorHint="@color/white"
+        android:textAppearance="@style/fourteen_sp_regular_white"
+        android:gravity="top"
+        android:background="@drawable/no_underline"
+        android:textColor="@color/white"
+        />
+
+    <Spinner
+        android:id="@+id/dropdown_element"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/test_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/small_rectangle_for_create_question_and_tests"
+        android:spinnerMode="dropdown"
+        />
+
+    <EditText
+        android:id="@+id/add_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dropdown_element"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:hint="@string/add_tags"
+        android:paddingStart="8dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/small_rectangle_for_create_question_and_tests"
+        android:textAppearance="@style/fourteen_sp_regular_black"
+        android:gravity="center_vertical"
+        app:drawableLeftCompat="@drawable/add_circle_black"
+        />
+
+    <!-- Question and Answer Box -->
+
+    <!-- Label Frage -->
+
+    <!-- Question and Answer Box -->
+
+    <!-- Label Antwort -->
+
+    <!-- Label Antwort -->
+
+    <!-- Generelle Antwort -->
+
+    <!-- Frage erstellen -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_save_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/background_bottom_menu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/add_question_rectangle"
+        android:drawableLeft="@drawable/add_circle_black"
+        app:iconPadding="-10dp"
+        android:elevation="8dp"
+        android:paddingStart="10dp"
+        android:text="Test erstellen"
+        android:textAppearance="@style/sixteen_sp_regular_black"
+        android:textColor="@null"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry"
+        />
+
+    <!-- Home Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:drawableTop="@drawable/home_button"
+        android:layout_marginStart="4dp"
+        app:iconPadding="-15dp"
+        android:text="@string/home"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Categories Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/learning_category_button"
+        app:iconPadding="-15dp"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Goals Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/background_bottom_menu"
+        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignEnd="@id/background_bottom_menu"
+        android:layout_marginEnd="4dp"
+        android:drawableTop="@drawable/learning_goal_button"
+        app:iconPadding="-15dp"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/menu_button_text"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</RelativeLayout>

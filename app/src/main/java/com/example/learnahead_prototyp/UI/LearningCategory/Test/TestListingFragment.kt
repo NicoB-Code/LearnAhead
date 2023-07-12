@@ -14,6 +14,10 @@ import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryViewModel
+import com.example.learnahead_prototyp.Util.UiState
+import com.example.learnahead_prototyp.Util.hide
+import com.example.learnahead_prototyp.Util.show
+import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentTestListingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,15 +71,44 @@ class TestListingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         setEventListener()
+        observer()
+        setLocalCurrentUser()
         updateUI()
     }
 
+    private fun observer() {
+        // Observer für "deleteLearningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen beim Löschen von Lernkategorien.
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
+                    binding.progressBar.hide()
+                    this.currentUser = state.data
+                }
+            }
+        }
+    }
+    private fun setLocalCurrentUser() {
+        // Holt den aktuellen Benutzer aus der Datenbank und speichert ihn in der Variable currentUser
+        authViewModel.getSession()
+    }
     private fun updateUI() {
         // Retrieve the selected learning category from the shared view model
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
 
         // Set the text of the learning_goal_menu_header_label TextView
-        binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Tests"
+        binding.testListingMenuHeaderLabel.text = "$selectedLearningCategoryName / Tests"
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,6 +138,10 @@ class TestListingFragment : Fragment() {
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.buttonCreateTest.setOnClickListener {
+            findNavController().navigate(R.id.action_testListingFragment_to_testDetailFragment)
         }
     }
 }

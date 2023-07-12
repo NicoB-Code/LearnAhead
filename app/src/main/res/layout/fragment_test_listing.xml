@@ -38,7 +38,7 @@
 
     <!-- Profil Header Label -->
     <TextView
-        android:id="@+id/learning_goal_menu_header_label"
+        android:id="@+id/test_listing_menu_header_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/placeholder"
@@ -131,9 +131,22 @@
         android:elevation="8dp"
         tools:ignore="RtlSymmetry" />
 
+    <!-- Item Layout -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/test_annotation"
+        android:layout_above="@id/button_create_test"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
     <!-- Test erstellen -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_add_learning_goal"
+        android:id="@+id/button_create_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/background_bottom_menu"

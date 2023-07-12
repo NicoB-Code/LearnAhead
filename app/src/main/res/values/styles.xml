@@ -243,7 +243,7 @@
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
-    <style name="fourteen_sp_regular_white">
+    <style name="fourteen_sp_regular_white" parent="Theme.AppCompat.Light">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_regular</item>
