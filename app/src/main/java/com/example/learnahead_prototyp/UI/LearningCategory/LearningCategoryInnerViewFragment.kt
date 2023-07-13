@@ -15,6 +15,7 @@ import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.LearningCategory.Summary.SummaryViewModel
 import com.example.learnahead_prototyp.Util.UiState
+import com.example.learnahead_prototyp.Util.getRandomLerntipp
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryInnerViewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,6 +75,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
         // Holt die Lernkategorie aus den Argumenten und setzt den Text des Labels
         currentLearningCategory = arguments?.getParcelable("learning_category")
         binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
+        binding.learningTipOfTheDay.text = getRandomLerntipp()
     }
 
     /**
