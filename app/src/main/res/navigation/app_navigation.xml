@@ -53,7 +53,7 @@
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.learnahead_prototyp.UI.HomeFragment"
+        android:name="com.example.learnahead_prototyp.UI.Home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_learningCategoryListFragment"

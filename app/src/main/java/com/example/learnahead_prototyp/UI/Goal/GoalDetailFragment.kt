@@ -1,21 +1,21 @@
 package com.example.learnahead_prototyp.UI.Goal
 
-import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.EditText
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.Goal
+import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
+import com.example.learnahead_prototyp.UI.LearningCategory.Question.CustomSpinnerAdapter
 import com.example.learnahead_prototyp.Util.GoalStatus
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
@@ -67,6 +67,11 @@ class GoalDetailFragment : Fragment() {
     // Das Ziel, das bearbeitet wird.
     private var objGoal: Goal? = null
 
+    private var isInitialSelection = false // Flag to track initial selection
+
+    private var learningCategoriesList: MutableList<LearningCategory> = mutableListOf()
+
+
     /**
      * Erstellt die View und gibt sie zurück.
      * @param inflater Der LayoutInflater, der verwendet wird, um die View zu erstellen.
@@ -96,6 +101,13 @@ class GoalDetailFragment : Fragment() {
         setEventListener()
     }
 
+    private fun populateDropdown() {
+        val dropdownItems = learningCategoriesList.map { it.name } // Extract the category names from the list
+
+        val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItems)
+        binding.dropdownElement.adapter = adapter
+    }
+
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
     }
@@ -109,6 +121,8 @@ class GoalDetailFragment : Fragment() {
                 updateGoal()
             else
                 createGoal()
+
+            isInitialSelection = false
         }
 
         binding.editButton.setOnClickListener {
@@ -154,7 +168,23 @@ class GoalDetailFragment : Fragment() {
         // Event Listener wenn sich der Beschreibung verändert
         binding.textGoalDescription.doAfterTextChanged {
             updateButtonVisibility()
-        }    }
+        }
+
+        // Event Listener when the dropdown selection changes
+        binding.dropdownElement.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (isInitialSelection) {
+                    updateButtonVisibility()
+                }
+                isInitialSelection = true
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+    }
 
 
     /**
@@ -169,6 +199,7 @@ class GoalDetailFragment : Fragment() {
         binding.textLearningGoalStartDate.isEnabled = isDisable
         binding.textLearningGoalEndDate.isEnabled = isDisable
         binding.textGoalDescription.isEnabled = isDisable
+        binding.dropdownElement.isEnabled = isDisable
     }
 
     /**
@@ -195,8 +226,16 @@ class GoalDetailFragment : Fragment() {
                     if(state.data != null && currentUser != null) {
                         // Das neue Lernziel in dem User hinzufügen
                         currentUser!!.goals.add(state.data)
+
+                        val selectedCategory = learningCategoriesList[binding.dropdownElement.selectedItemPosition]
+                        selectedCategory.relatedLearningGoal = state.data
+
                         // Den User in der DB updaten
-                        authViewModel.updateUserInfo(currentUser!!)
+                        currentUser?.let {
+                            it.learningCategories[learningCategoriesList.indexOf(selectedCategory)] = selectedCategory
+                            authViewModel.updateUserInfo(it)
+                        }
+
                         findNavController().navigate(R.id.action_goalDetailFragment_to_goalListingFragment)
                         toast("Das Lernziel konnte erfolgreich erstellt werden")
                     }
@@ -230,8 +269,31 @@ class GoalDetailFragment : Fragment() {
                             currentUser!!.goals.add(state.data)
                         }
 
-                        // Den User in der DB updaten
-                        authViewModel.updateUserInfo(currentUser!!)
+                        val selectedCategory = learningCategoriesList[binding.dropdownElement.selectedItemPosition]
+                        val oldCategory = learningCategoriesList.find { it.relatedLearningGoal?.id == state.data.id }
+
+                        // Remove the goal from the old learning category
+                        oldCategory?.relatedLearningGoal = null
+
+                        // Set the goal in the new learning category
+                        selectedCategory.relatedLearningGoal = state.data
+
+                        // Update the learning categories in the user object and update it in the database
+                        currentUser?.let {
+                            val oldCategoryIndex = learningCategoriesList.indexOf(oldCategory)
+                            val selectedCategoryIndex = learningCategoriesList.indexOf(selectedCategory)
+
+                            if (oldCategoryIndex != -1) {
+                                if (oldCategory != null) {
+                                    it.learningCategories[oldCategoryIndex] = oldCategory
+                                }
+                            }
+                            if (selectedCategoryIndex != -1) {
+                                it.learningCategories[selectedCategoryIndex] = selectedCategory
+                            }
+
+                            authViewModel.updateUserInfo(it)
+                        }
                         toast("Das Lernziel konnte erfolgreich geupdated werden")
                     }
                     else {
@@ -256,6 +318,10 @@ class GoalDetailFragment : Fragment() {
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
                     currentUser = state.data
+                    learningCategoriesList = currentUser!!.learningCategories
+                    populateDropdown()
+                    updateUI()
+                    binding.saveButton.hide()
                 }
             }
         }
@@ -272,7 +338,7 @@ class GoalDetailFragment : Fragment() {
         val endDate = binding.textLearningGoalEndDate.text.toString().trim()
         val description = binding.textGoalDescription.text.toString().trim()
 
-        if (title.isNotEmpty() && startDate.isNotEmpty() && endDate.isNotEmpty() && description.isNotEmpty()) {
+        if (isInitialSelection && title.isNotEmpty() && startDate.isNotEmpty() && endDate.isNotEmpty() && description.isNotEmpty()) {
             binding.saveButton.show()
         } else {
             binding.saveButton.hide()
@@ -318,6 +384,15 @@ class GoalDetailFragment : Fragment() {
             binding.textGoalDescription.setText(goal.description)
             binding.saveButton.hide()
             binding.editButton.show()
+
+            // Find the related learning category by goal ID
+            val relatedCategory = learningCategoriesList.find { it.relatedLearningGoal?.id == goal.id }
+
+            // Set the dropdown selection to the related learning category if found
+            relatedCategory?.let { category ->
+                val selectedIndex = learningCategoriesList.indexOf(category)
+                binding.dropdownElement.setSelection(selectedIndex)
+            }
             //binding.delete.show()
             isMakeEnableUI()
         } ?: run {

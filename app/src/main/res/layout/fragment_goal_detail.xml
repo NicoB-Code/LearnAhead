@@ -21,7 +21,7 @@
     <View
         android:id="@+id/background_bottom_menu"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@id/dark_background"
@@ -120,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="16dp"
         android:text="@string/learning_goal_start_date"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +144,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="16dp"
         android:text="@string/learning_goal_end_date"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="16dp"
         android:drawableBottom="@drawable/green_line"
         android:text="@string/learning_goal_description"
         android:textAppearance="@style/learning_category_or_goal_label"
@@ -186,10 +186,37 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:textColor="@color/black"
+        android:layout_marginTop="16dp"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/learning_goal_description_label"
-        app:layout_constraintBottom_toTopOf="@id/background_bottom_menu"
         android:autofillHints="Beschreibung" />
+
+    <!-- Lernziel Ziel Datum Label -->
+    <TextView
+        android:id="@+id/related_learning_category_label"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:text="Lernkategorie dem Ziel zuordnen:"
+        android:textAppearance="@style/learning_category_or_goal_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_goal_description"
+        app:drawableBottomCompat="@drawable/green_line" />
+
+
+    <!-- Dropdown Element -->
+    <Spinner
+        android:id="@+id/dropdown_element"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/small_rectangle_for_create_question_and_tests"
+        android:spinnerMode="dropdown"
+        app:layout_constraintTop_toBottomOf="@id/related_learning_category_label"
+        />
 
     <ProgressBar
         android:id="@+id/btn_progress_ar"
@@ -211,44 +238,44 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_home"
         android:layout_width="92dp"
-        android:layout_height="98dp"
+        android:layout_height="68dp"
         android:layout_marginStart="4dp"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/home_button"
         android:text="@string/home"
         android:textAppearance="@style/menu_button_text"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+        />
 
     <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_learning_categories"
         android:layout_width="126dp"
-        android:layout_height="98dp"
+        android:layout_height="68dp"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/learning_category_button"
         android:text="@string/learning_categories"
         android:textAppearance="@style/menu_button_text"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+        />
 
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_learning_goals"
         android:layout_width="88dp"
-        android:layout_height="98dp"
+        android:layout_height="68dp"
         android:layout_marginEnd="4dp"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/learning_goal_button"
         android:text="@string/learning_goals"
         android:textAppearance="@style/menu_button_text"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
         app:layout_constraintRight_toRightOf="@id/background_bottom_menu"
-        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+         />
 </androidx.constraintlayout.widget.ConstraintLayout>
