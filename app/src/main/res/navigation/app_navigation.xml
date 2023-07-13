@@ -167,7 +167,7 @@
     </fragment>
     <fragment
         android:id="@+id/summaryFragment"
-        android:name="com.example.learnahead_prototyp.UI.Summary.SummaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.SummaryFragment"
         android:label="fragment_summary"
         tools:layout="@layout/fragment_summary" >
         <action
@@ -191,7 +191,7 @@
     </fragment>
     <fragment
         android:id="@+id/innerSummaryFragment"
-        android:name="com.example.learnahead_prototyp.UI.Summary.innerSummaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.InnerSummaryFragment"
         android:label="fragment_inner_summary"
         tools:layout="@layout/fragment_inner_summary" >
         <action
@@ -215,7 +215,7 @@
     </fragment>
     <fragment
         android:id="@+id/createSummaryFragment"
-        android:name="com.example.learnahead_prototyp.UI.Summary.CreateSummaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.CreateSummaryFragment"
         android:label="fragment_create_summary"
         tools:layout="@layout/fragment_create_summary" >
         <action
@@ -233,7 +233,7 @@
     </fragment>
     <fragment
         android:id="@+id/summaryPreviewFragment"
-        android:name="com.example.learnahead_prototyp.UI.Summary.summaryPreviewFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.SummaryPreviewFragment"
         android:label="fragment_summary_preview"
         tools:layout="@layout/fragment_summary_preview" >
         <action

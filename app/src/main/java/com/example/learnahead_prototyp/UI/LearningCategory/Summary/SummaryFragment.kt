@@ -1,25 +1,24 @@
-package com.example.learnahead_prototyp.UI.Summary
+package com.example.learnahead_prototyp.UI.LearningCategory.Summary
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.learnahead_prototyp.Data.Model.User
-import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
-import com.example.learnahead_prototyp.databinding.FragmentSummaryBinding
+import com.example.learnahead_prototyp.Data.Model.Summary
+import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
-import com.example.learnahead_prototyp.UI.Goal.SummaryViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
+import com.example.learnahead_prototyp.databinding.FragmentSummaryBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 /**

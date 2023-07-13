@@ -1,17 +1,11 @@
-package com.example.learnahead_prototyp.UI.Summary
+package com.example.learnahead_prototyp.UI.LearningCategory.Summary
 
 import android.content.res.Resources
-import android.graphics.Color
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Summary
-import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.databinding.InnerViewSummaryBinding
 
 /**

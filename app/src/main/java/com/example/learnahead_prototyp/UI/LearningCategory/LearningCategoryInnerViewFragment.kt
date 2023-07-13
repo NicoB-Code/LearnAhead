@@ -1,7 +1,6 @@
 package com.example.learnahead_prototyp.UI.LearningCategory
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
-import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
+import com.example.learnahead_prototyp.UI.LearningCategory.Summary.SummaryViewModel
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryInnerViewBinding
@@ -96,8 +95,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
 
         // Setzt den Event-Listener für den Learning Goals-Button
         binding.buttonLearningGoals.setOnClickListener {
-            // TODO findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
-            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
 
         }
 
@@ -118,20 +116,21 @@ class LearningCategoryInnerViewFragment : Fragment() {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
 
-        binding.buttonTestsAndQuestions.setOnClickListener{
-            if(binding.buttonQuestions.visibility != View.VISIBLE && binding.buttonTests.visibility != View.VISIBLE) {
-                //binding.recyclerView.visibility = View.GONE
+        binding.buttonTestsAndQuestions.setOnClickListener {
+            if (binding.buttonQuestions.visibility != View.VISIBLE && binding.buttonTests.visibility != View.VISIBLE) {
+                binding.buttonSummaries.visibility = View.GONE
                 binding.buttonTestsAndQuestions.visibility = View.GONE
                 binding.buttonQuestions.visibility = View.VISIBLE
                 binding.buttonTests.visibility = View.VISIBLE
 
-                val layoutParams = binding.rectangleLearningTipBox.layoutParams as RelativeLayout.LayoutParams
+                val layoutParams =
+                    binding.rectangleLearningTipBox.layoutParams as RelativeLayout.LayoutParams
                 layoutParams.addRule(RelativeLayout.BELOW, binding.buttonTests.id)
                 binding.rectangleLearningTipBox.layoutParams = layoutParams
             }
         }
 
-        binding.buttonTests.setOnClickListener{
+        binding.buttonTests.setOnClickListener {
             val selectedLearningCategory = currentLearningCategory
             learnCategoryViewModel.setCurrentSelectedLearningCategory(selectedLearningCategory)
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_testListingFragment)
@@ -146,11 +145,12 @@ class LearningCategoryInnerViewFragment : Fragment() {
         binding.buttonSummaries.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment,
                 Bundle().apply {
-                    putString("type","view")
-                    putParcelable("learning_category", currentLearningCategory)
-                })
+                putString("type","view")
+                putParcelable("learning_category", currentLearningCategory)
+                 })
         }
     }
+
     /**
      * Beobachtet die LiveData-Objekte der ViewModels und aktualisiert die UI entsprechend.
      */
@@ -163,6 +163,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
                     toast(state.error)
                     View.GONE
                 }
+
                 is UiState.Success -> {
                     currentUser = state.data
                     currentLearningCategory?.let {
@@ -174,4 +175,5 @@ class LearningCategoryInnerViewFragment : Fragment() {
         }
 
 
+    }
 }

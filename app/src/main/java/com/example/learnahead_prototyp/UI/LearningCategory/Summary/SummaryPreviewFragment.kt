@@ -1,35 +1,29 @@
-package com.example.learnahead_prototyp.UI.Summary
+package com.example.learnahead_prototyp.UI.LearningCategory.Summary
 
-import androidx.fragment.app.Fragment
-import dagger.hilt.android.AndroidEntryPoint
-import com.example.learnahead_prototyp.Data.Model.User
-import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
-import com.example.learnahead_prototyp.UI.Goal.SummaryViewModel
-import com.example.learnahead_prototyp.databinding.FragmentSummaryPreviewBinding
-import androidx.fragment.app.viewModels
-import com.example.learnahead_prototyp.Data.Model.Summary
-import androidx.navigation.fragment.findNavController
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import com.example.learnahead_prototyp.Util.UiState
-import com.example.learnahead_prototyp.Util.hide
-import com.example.learnahead_prototyp.Util.show
-import com.example.learnahead_prototyp.Util.toast
-import com.example.learnahead_prototyp.R
-import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
+import com.example.learnahead_prototyp.Data.Model.Summary
+import com.example.learnahead_prototyp.Data.Model.User
+import com.example.learnahead_prototyp.R
+import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
+import com.example.learnahead_prototyp.databinding.FragmentSummaryPreviewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
+import org.commonmark.parser.Parser
+import org.commonmark.renderer.html.HtmlRenderer
 
 
 @AndroidEntryPoint
-class summaryPreviewFragment : Fragment() {
+class SummaryPreviewFragment : Fragment() {
 
     private var currentUser: User? = null
     private var currentLearningCategory: LearningCategory?= null

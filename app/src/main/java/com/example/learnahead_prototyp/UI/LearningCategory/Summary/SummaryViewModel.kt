@@ -1,4 +1,4 @@
-package com.example.learnahead_prototyp.UI.LearningCategory
+package com.example.learnahead_prototyp.UI.LearningCategory.Summary
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
