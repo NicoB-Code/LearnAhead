@@ -18,6 +18,9 @@ import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.databinding.FragmentSummaryPreviewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
+import io.noties.markwon.image.ImagesPlugin
+import io.noties.markwon.image.network.NetworkSchemeHandler
+import io.noties.markwon.syntax.Prism4jThemeDefault
 import org.commonmark.parser.Parser
 import org.commonmark.renderer.html.HtmlRenderer
 
@@ -90,8 +93,16 @@ class SummaryPreviewFragment : Fragment() {
         textView.text = spannedText
     }
     private fun parseMarkdown() {
-        val markwon = Markwon.builder(requireContext()).build()
-        currentSummary?.let { it1 -> Log.d("Preview", it1.content) }
+        val imagesPlugin = ImagesPlugin.create { plugin ->
+            plugin.addSchemeHandler(
+                NetworkSchemeHandler.create()
+            )
+        }
+        val theme = Prism4jThemeDefault.create()
+
+        val markwon = Markwon.builder(requireContext())
+            .usePlugin(imagesPlugin)
+            .build()
         currentSummary?.let { markwon.setMarkdown(binding.markdownViewText, it.content) }
     }
 

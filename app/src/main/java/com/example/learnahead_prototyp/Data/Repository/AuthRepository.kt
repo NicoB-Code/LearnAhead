@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
+import java.util.Date
 
 // Die Klasse AuthRepository implementiert das Interface IAuthRepository.
 class AuthRepository(
@@ -76,13 +77,38 @@ class AuthRepository(
         // Eine Referenz auf das Dokument des Benutzers in der Firebase Firestore-Datenbank abrufen
         val document = database.collection(FireStoreCollection.USER).document(user.id)
 
+        var pointsReceived = false
+        val currentDate = Date()
+        // Ist ein neuer Tag angebrochen?
+        if(user.lastLogin.date == currentDate.date ) {
+            pointsReceived = true
+            // Ist mehr als ein Tag vergangen?
+            if(user.lastLogin.date + 1 != currentDate.date){
+                user.learningStreak = 1
+                user.currentPoints += 10
+            } else {
+                // Wenn der User sich gestern schon eingeloggt hat, belohne ihn
+                user.learningStreak++
+                if(user.learningStreak > 10){
+                    user.currentPoints += 100
+                } else {
+                    user.currentPoints += (10 * user.learningStreak)
+                }
+            }
+        }
+        user.lastLogin = Date()
         // Das Benutzerobjekt in der Datenbank aktualisieren
         document
             .set(user)
             .addOnSuccessListener {
                 // Bei erfolgreicher Aktualisierung den Erfolgsstatus im UiState-Objekt setzen und die result-Funktion aufrufen
                 result.invoke(
-                    UiState.Success("User has been update successfully")
+                    if(pointsReceived){
+                        val totalPoints = 10 * user.learningStreak
+                        UiState.Success("User has received $totalPoints points")
+                    } else {
+                        UiState.Success("User has been update successfully")
+                    }
                 )
             }
             .addOnFailureListener {

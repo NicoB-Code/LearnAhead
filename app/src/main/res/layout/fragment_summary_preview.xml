@@ -82,23 +82,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit"
-            android:textColor="#FFFFFF"
+            android:textColor="@null"
+            app:backgroundTint="@null"
+            android:textAppearance="@style/button_add_learning_category_or_goal"
+            android:background="@drawable/markdown_button"
             />
 
-        <!-- Spacer View -->
-        <View
-            android:layout_width="32dp"
-            android:layout_height="1dp"
-            />
-
-        <!-- Preview Button -->
-        <Button
-            android:id="@+id/button_preview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Preview"
-            android:textColor="#FFFFFF"
-            />
 
     </LinearLayout>
 

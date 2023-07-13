@@ -62,6 +62,8 @@ class HomeFragment : Fragment() {
 
         observer()
         setLocalCurrentUser()
+        // Wir updaten den User um zu überprüfen ob er sich einen Login Bonus verdient hat
+        currentUser?.let { authViewModel.updateUserInfo(it) }
         setEventListener()
 
 
@@ -170,6 +172,19 @@ class HomeFragment : Fragment() {
                     binding.progressBar.hide()
                     this.currentUser = state.data
                     learningCategoryViewModel.getLearningCategories(this.currentUser)
+                }
+            }
+        }
+        authViewModel.updateUserInfo.observe(viewLifecycleOwner) { state ->
+            binding.progressBar.visibility = when (state) {
+                is UiState.Loading -> View.VISIBLE
+                is UiState.Failure -> {
+                    toast(state.error)
+                    View.GONE
+                }
+                is UiState.Success -> {
+                    toast("Du hast für deinen Login gerade $state.data erhalten.")
+                    View.GONE
                 }
             }
         }
