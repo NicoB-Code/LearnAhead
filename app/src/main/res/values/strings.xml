@@ -87,6 +87,9 @@
     <string name="placeholder_learning_streak">Die höchste Learning Streak</string>
     <string name="placeholder_achieved_goals">Die erreichten Ziele</string>
     <string name="summary_label">Zusammenfassungen</string>
+    <string name="create_summary">Zusammenfassung erstellen</string>
+    <string name="summary_name">Name der Zusammenfassung</string>
+    <string name="enter_summary_name">Name der Zusammenfassung eingeben...</string>
     <string name="remaining_summary_items">enthält %1$d weitere Zusammenfassungen</string>
     <string name="placeholder">Platzhalter</string>
     <string name="tests_and_questions">Tests / Fragen</string>
@@ -102,4 +105,8 @@
     <string name="add_tags">Tags hinzufügen</string>
     <string name="question_colon">Frage:</string>
     <string name="answer_colon">Antwort:</string>
+
+    <string name="markdown_input_description">Hier kommt die Zusammenfassung hin...</string>
+
+
 </resources>

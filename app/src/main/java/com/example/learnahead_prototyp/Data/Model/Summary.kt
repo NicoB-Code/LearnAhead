@@ -9,7 +9,7 @@ import java.util.Date
 data class Summary(
     var id: String = "",
     val name: String = "",
-    val content: String = "",
+    var content: String = "",
     @ServerTimestamp
     val createDate: Date = Date(),
     ) : Parcelable

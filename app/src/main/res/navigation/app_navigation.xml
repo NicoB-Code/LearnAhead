@@ -156,11 +156,104 @@
             android:id="@+id/action_learningCategoryInnerViewFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
+            android:id="@+id/action_learningCategoryInnerViewFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+        <action
             android:id="@+id/action_learningCategoryInnerViewFragment_to_questionListingFragment"
             app:destination="@id/questionListingFragment" />
         <action
             android:id="@+id/action_learningCategoryInnerViewFragment_to_testListingFragment"
             app:destination="@id/testListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.SummaryFragment"
+        android:label="fragment_summary"
+        tools:layout="@layout/fragment_summary" >
+        <action
+            android:id="@+id/action_summaryFragment_to_learningCategoryInnerViewFragment"
+            app:destination="@id/learningCategoryInnerViewFragment" />
+        <action
+            android:id="@+id/action_summaryFragment_to_innerSummaryFragment"
+            app:destination="@id/innerSummaryFragment" />
+        <action
+            android:id="@+id/action_summaryFragment_to_createSummaryFragment"
+            app:destination="@id/createSummaryFragment" />
+        <action
+            android:id="@+id/action_summaryFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_summaryFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_summaryFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/innerSummaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.innerSummaryFragment"
+        android:label="fragment_inner_summary"
+        tools:layout="@layout/fragment_inner_summary" >
+        <action
+            android:id="@+id/action_innerSummaryFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+        <action
+            android:id="@+id/action_innerSummaryFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_innerSummaryFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_innerSummaryFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_innerSummaryFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_innerSummaryFragment_to_summaryPreviewFragment"
+            app:destination="@id/summaryPreviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createSummaryFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.CreateSummaryFragment"
+        android:label="fragment_create_summary"
+        tools:layout="@layout/fragment_create_summary" >
+        <action
+            android:id="@+id/action_createSummaryFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+        <action
+            android:id="@+id/action_createSummaryFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_createSummaryFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_createSummaryFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryPreviewFragment"
+        android:name="com.example.learnahead_prototyp.UI.Summary.summaryPreviewFragment"
+        android:label="fragment_summary_preview"
+        tools:layout="@layout/fragment_summary_preview" >
+        <action
+            android:id="@+id/action_summaryPreviewFragment_to_innerSummaryFragment"
+            app:destination="@id/innerSummaryFragment" />
+        <action
+            android:id="@+id/action_summaryPreviewFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_summaryPreviewFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_summaryPreviewFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_summaryPreviewFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_summaryPreviewFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionListingFragment"
