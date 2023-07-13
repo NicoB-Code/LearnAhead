@@ -18,6 +18,11 @@ import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentInnerSummaryBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.noties.markwon.Markwon
+import io.noties.markwon.core.spans.HeadingSpan
+import io.noties.markwon.editor.MarkwonEditor
+import io.noties.markwon.editor.MarkwonEditorTextWatcher
+import io.noties.markwon.editor.PersistedSpans
 
 
 @AndroidEntryPoint
@@ -29,7 +34,6 @@ class InnerSummaryFragment : Fragment() {
     private val summaryViewModel: SummaryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private var currentSummary: Summary? = null
-    private var markdownInput: String = ""
 
     /**
      * Erstellt die View und gibt sie zurück.
@@ -59,6 +63,7 @@ class InnerSummaryFragment : Fragment() {
         setEventListener()
         updateUI()
         observer()
+        initEditor()
     }
 
     private fun setLocalCurrentUser() {
@@ -74,6 +79,19 @@ class InnerSummaryFragment : Fragment() {
         } else {
             binding.markdownEditText.setText("# Hello Zusammenfassung")
         }
+    }
+
+    private fun initEditor() {
+        val markwon = context?.let { Markwon.create(it) }
+
+        val editor = markwon?.let { MarkwonEditor.create(it) }
+
+
+        binding.markdownEditText.addTextChangedListener(editor?.let {
+            MarkwonEditorTextWatcher.withProcess(
+                editor
+            )
+        })
     }
 
 

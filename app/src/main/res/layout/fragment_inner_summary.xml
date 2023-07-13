@@ -76,20 +76,6 @@
         android:layout_marginTop="8dp"
         android:gravity="center">
 
-        <!-- Edit Button -->
-        <Button
-            android:id="@+id/button_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:textColor="#FFFFFF"
-            />
-
-        <!-- Spacer View -->
-        <View
-            android:layout_width="32dp"
-            android:layout_height="1dp"
-            />
 
         <!-- Preview Button -->
         <Button
@@ -97,7 +83,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Preview"
-            android:textColor="#FFFFFF"
+            android:textColor="@null"
+            app:backgroundTint="@null"
+            android:textAppearance="@style/button_add_learning_category_or_goal"
+            android:background="@drawable/markdown_button"
             />
 
     </LinearLayout>
@@ -114,7 +103,10 @@
         android:contentDescription="@string/markdown_input_description"
         android:layout_above="@id/background_bottom_menu"
         android:textColor="@color/white"
-        android:textSize="14sp"/>
+        android:layout_marginBottom="60dp"
+        android:textSize="14sp"
+        android:background="@drawable/summary_edittext_background" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"

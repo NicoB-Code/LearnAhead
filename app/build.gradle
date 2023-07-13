@@ -42,7 +42,9 @@ android {
         correctErrorTypes true
     }
 }
-
+configurations.all {
+    exclude group: 'org.jetbrains', module: 'annotations-java5'
+}
 dependencies {
     // General
     implementation 'androidx.core:core-ktx:1.10.1'
@@ -54,6 +56,10 @@ dependencies {
     implementation 'com.atlassian.commonmark:commonmark:0.15.2'
     implementation 'io.noties.markwon:core:4.6.2'
     implementation 'io.noties.markwon:editor:4.6.2'
+    implementation "io.noties.markwon:core:4.6.2"
+    implementation 'io.noties.markwon:syntax-highlight:4.6.2'
+    implementation 'io.noties.markwon:image:4.6.2'
+    kapt 'io.noties:prism4j-bundler:2.0.0'
 
     //Jetpack Navigation Component
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

@@ -121,15 +121,17 @@
         android:id="@+id/button_add_summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header_line"
+        android:layout_above="@id/background_bottom_menu"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/add_button"
         android:drawableLeft="@drawable/add_circle_black"
         app:iconPadding="5dp"
         android:paddingLeft="10dp"
+        android:layout_marginBottom="25dp"
         android:text= "@string/create_summary"
         android:textAppearance="@style/button_add_learning_category_or_goal"
+        android:textSize="16dp"
         android:textColor="@null"
         app:backgroundTint="@null" />
 
@@ -142,8 +144,8 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@id/button_add_summary"
-        android:layout_above="@id/background_bottom_menu"
+        android:layout_below="@id/header_line"
+        android:layout_above="@+id/button_add_summary"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
@@ -157,5 +159,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch" />
 
 </RelativeLayout>

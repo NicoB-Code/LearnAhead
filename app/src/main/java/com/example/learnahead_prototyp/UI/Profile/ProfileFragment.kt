@@ -137,10 +137,14 @@ class ProfileFragment : Fragment() {
                 is UiState.Success -> {
                     // Der aktuelle Benutzer wird aus dem ViewModel geladen
                     currentUser = state.data
+                    var currentLevel = (currentUser.currentPoints / 100) + 1
+                    var progressBarValue = currentUser.currentPoints % 100
+                    binding.progressBar.progress = progressBarValue
+                    //binding.progressBar.progress = 5
                     binding.apply {
                         // Die Benutzerdaten werden in die Benutzeroberfläche eingefügt
                         usernameDisplay.text = currentUser.username
-                        passwordDisplay.text = currentUser.password
+                        levelDisplay.text = currentLevel.toString()
                         emailDisplay.text = currentUser.email
                         learningStreakDisplay.text = currentUser.learningStreak.toString()
                         achievedGoalsDisplay.text = currentUser.achievedGoals.toString()
