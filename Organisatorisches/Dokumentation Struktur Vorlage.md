@@ -16,9 +16,10 @@
   - Lernen ist nicht gleich Verstehen Phillipp **Done ggbf. nochmal drüber lesen**
   - Synapsen Nico **ToDo**
   - Neuronen & Neuronales Netz Nico **ToDo**
-  - Optimierter Lernplan Phillipp **ToDo**
-  - Tagging Phillipp **ToDo**
+  - Optimierter Lernplan Phillipp **Done ggbf. nochmal drüber lesen**
+  - Tagging Phillipp **Done ggbf. nochmal drüber lesen**
   - Lernkategorien & Lernziele Nico **ToDo**
+  - Fragen Typen **ToDo** Phillipp
   - Gamification Nico **ToDo**
 - Pflichtenheft Done
 - Use-Case-Diagramme (Nico) Done
@@ -28,36 +29,39 @@
 - HMI Done
   - Seitenhierarchie (Nico) Done
   - UI-Mockups (Nico) Done
-- Datenflussdiagramm (Phillipp) **ToDo**
+- Flow-Chart-Diagramm (Phillipp) Done
 - Benutzerhandbuch (optional)
 
 ## Entwurf
 - Prototyp (optional) **ToDo**
 - BPMN **ToDo** Phillipp
-- Begründung des Datenbankkonzepts **ToDo** Phillipp
+- Begründung des Datenbankkonzepts **Done ggbf. nochmal drüber lesen** Phillipp
 - Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
 - Design Patterns für relevante Problemstellungen **ToDo** Nico
-- Software-Komponenten **ToDo** Phillipp
-- Gesamtkomposition **ToDo** Phillipp
+- Software-Komponenten Done Phillipp
+- Gesamtkomposition Done Phillipp
+- Frontend Done Phillipp
+- Backend Done Phillipp
 - Deployment Diagramm **ToDo** Nico
 - Klassen Diagramm **ToDo** Nico
 - Aktivitätsdiagramm **ToDo** Phillipp
 - Sequenzdiagramme **ToDo** Nico
 
 ## Implementierung
-- Deployment **ToDo**
-- Installationsanleitung **ToDo**
-- Code Conventions **ToDo**
-- Code Dokumentation **ToDo**
-- IT-Security (Firebase Authentifizierung) **ToDo**
+- Deployment **ToDo** Nico
+- Installationsanleitung **ToDo** Nico
+- Code Conventions **ToDo** Phillipp
+- Code Dokumentation **ToDo** Phillipp
+- IT-Security (Firebase Authentifizierung) **ToDo** Phillipp
 
 ## Tests
 - User Tests **ToDo**
 - ggf. Unit Tests **ToDo**
 
 ## Ergebnisse
-- Nutzen der App **ToDo**
+- Nutzen der App **ToDo** Phillipp
+- Feedback von Studienpräsentation **ToDo** Phillipp
 
 ## Ausblick
-- Features (Kalender, Collaboration, etc.) **ToDo**
-- Zeitliche Dokumentation **ToDo**
+- Features (Kalender, Collaboration, etc.) **ToDo** Phillipp und Nico
+- Zeitliche Dokumentation **ToDo** Phillipp

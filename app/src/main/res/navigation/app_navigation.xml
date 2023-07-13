@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/learningCategoryListFragment"
-        android:name="com.example.learnahead_prototyp.UI.Goal.LearningCategoryListFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearningCategoryListFragment"
         android:label="LearningCategoryListFragment" >
         <action
             android:id="@+id/action_learningCategoryListFragment_to_homeFragment"
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/learnCategoryDetailFragment"
-        android:name="com.example.learnahead_prototyp.UI.Goal.LearnCategoryDetailFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryDetailFragment"
         android:label="LearnCategoryDetailFragment" >
         <action
             android:id="@+id/action_learnCategoryDetailFragment_to_learningCategoryListFragment"
@@ -141,7 +141,7 @@
     </fragment>
     <fragment
         android:id="@+id/learningCategoryInnerViewFragment"
-        android:name="com.example.learnahead_prototyp.UI.Goal.LearningCategoryInnerViewFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearningCategoryInnerViewFragment"
         android:label="LearningCategoryInnerViewFragment" >
         <action
             android:id="@+id/action_learningCategoryInnerViewFragment_to_homeFragment"
@@ -158,6 +158,12 @@
         <action
             android:id="@+id/action_learningCategoryInnerViewFragment_to_summaryFragment"
             app:destination="@id/summaryFragment" />
+        <action
+            android:id="@+id/action_learningCategoryInnerViewFragment_to_questionListingFragment"
+            app:destination="@id/questionListingFragment" />
+        <action
+            android:id="@+id/action_learningCategoryInnerViewFragment_to_testListingFragment"
+            app:destination="@id/testListingFragment" />
     </fragment>
     <fragment
         android:id="@+id/summaryFragment"
@@ -248,5 +254,115 @@
         <action
             android:id="@+id/action_summaryPreviewFragment_to_summaryFragment"
             app:destination="@id/summaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionListingFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Question.QuestionListingFragment"
+        android:label="QuestionListingFragment" >
+        <action
+            android:id="@+id/action_questionListingFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_questionListingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_questionListingFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_questionListingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_questionListingFragment_to_learningCategoryInnerViewFragment"
+            app:destination="@id/learningCategoryInnerViewFragment" />
+        <action
+            android:id="@+id/action_questionListingFragment_to_questionDetailFragment"
+            app:destination="@id/questionDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testListingFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Test.TestListingFragment"
+        android:label="TestListingFragment" >
+        <action
+            android:id="@+id/action_testListingFragment_to_learningCategoryInnerViewFragment"
+            app:destination="@id/learningCategoryInnerViewFragment" />
+        <action
+            android:id="@+id/action_testListingFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_testListingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_testListingFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_testListingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_testListingFragment_to_testDetailFragment"
+            app:destination="@id/testDetailFragment" />
+        <action
+            android:id="@+id/action_testListingFragment_to_testExecuteFragment"
+            app:destination="@id/testExecuteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionDetailFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Question.QuestionDetailFragment"
+        android:label="QuestionDetailFragment" >
+        <action
+            android:id="@+id/action_questionDetailFragment_to_questionListingFragment"
+            app:destination="@id/questionListingFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_questionDetailFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testDetailFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Test.TestDetailFragment"
+        android:label="fragment_test_detail"
+        tools:layout="@layout/fragment_test_detail" >
+        <action
+            android:id="@+id/action_testDetailFragment_to_testListingFragment"
+            app:destination="@id/testListingFragment" />
+        <action
+            android:id="@+id/action_testDetailFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_testDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_testDetailFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_testDetailFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testExecuteFragment"
+        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Test.TestExecuteFragment"
+        android:label="TestExecuteFragment" >
+        <action
+            android:id="@+id/action_testExecuteFragment_to_testListingFragment"
+            app:destination="@id/testListingFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_learningCategoryListFragment"
+            app:destination="@id/learningCategoryListFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_goalListingFragment"
+            app:destination="@id/goalListingFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_testExecuteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

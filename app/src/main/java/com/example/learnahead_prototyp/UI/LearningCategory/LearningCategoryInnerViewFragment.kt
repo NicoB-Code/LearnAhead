@@ -1,11 +1,13 @@
-package com.example.learnahead_prototyp.UI.Goal
+package com.example.learnahead_prototyp.UI.LearningCategory
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
@@ -14,8 +16,6 @@ import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
-import com.example.learnahead_prototyp.Util.hide
-import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryInnerViewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +33,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
     private lateinit var binding: FragmentLearningCategoryInnerViewBinding
     private val authViewModel: AuthViewModel by viewModels()
     private val summaryViewModel: SummaryViewModel by viewModels()
+    private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private var currentLearningCategory: LearningCategory? = null
 
     /**
@@ -62,6 +63,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
 
         // Setzt die Event-Listener, beobachtet die LiveData-Objekte und aktualisiert die UI
         setEventListener()
+        observer()
         setLocalCurrentUser()
         updateUI()
     }
@@ -94,7 +96,7 @@ class LearningCategoryInnerViewFragment : Fragment() {
 
         // Setzt den Event-Listener für den Learning Goals-Button
         binding.buttonLearningGoals.setOnClickListener {
-            //findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
+            // TODO findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment)
 
         }
@@ -116,6 +118,31 @@ class LearningCategoryInnerViewFragment : Fragment() {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
 
+        binding.buttonTestsAndQuestions.setOnClickListener{
+            if(binding.buttonQuestions.visibility != View.VISIBLE && binding.buttonTests.visibility != View.VISIBLE) {
+                //binding.recyclerView.visibility = View.GONE
+                binding.buttonTestsAndQuestions.visibility = View.GONE
+                binding.buttonQuestions.visibility = View.VISIBLE
+                binding.buttonTests.visibility = View.VISIBLE
+
+                val layoutParams = binding.rectangleLearningTipBox.layoutParams as RelativeLayout.LayoutParams
+                layoutParams.addRule(RelativeLayout.BELOW, binding.buttonTests.id)
+                binding.rectangleLearningTipBox.layoutParams = layoutParams
+            }
+        }
+
+        binding.buttonTests.setOnClickListener{
+            val selectedLearningCategory = currentLearningCategory
+            learnCategoryViewModel.setCurrentSelectedLearningCategory(selectedLearningCategory)
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_testListingFragment)
+        }
+
+        binding.buttonQuestions.setOnClickListener {
+            val selectedLearningCategory = currentLearningCategory
+            learnCategoryViewModel.setCurrentSelectedLearningCategory(selectedLearningCategory)
+            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_questionListingFragment)
+        }
+
         binding.buttonSummaries.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment,
                 Bundle().apply {
@@ -124,6 +151,27 @@ class LearningCategoryInnerViewFragment : Fragment() {
                 })
         }
     }
+    /**
+     * Beobachtet die LiveData-Objekte der ViewModels und aktualisiert die UI entsprechend.
+     */
+    private fun observer() {
+        // Beobachtet die LiveData-Objekte des AuthViewModels und aktualisiert die UI entsprechend
+        authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
+            binding.progressBar.visibility = when (state) {
+                is UiState.Loading -> View.VISIBLE
+                is UiState.Failure -> {
+                    toast(state.error)
+                    View.GONE
+                }
+                is UiState.Success -> {
+                    currentUser = state.data
+                    currentLearningCategory?.let {
+                        summaryViewModel.getSummaries(currentUser, it)
+                    }
+                    View.GONE
+                }
+            }
+        }
 
 
 }

@@ -49,7 +49,7 @@
 
     <!-- Registrierungs Box -->
     <View
-        android:id="@+id/rectangle_register_box"
+        android:id="@+id/question_and_answer_box"
         android:layout_width="266dp"
         android:layout_height="444dp"
         android:layout_below="@id/register_label_header"
@@ -63,7 +63,7 @@
         android:layout_width="214dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@id/rectangle_register_box"
+        android:layout_alignTop="@id/question_and_answer_box"
         android:layout_marginTop="34dp"
         android:background="@drawable/rectangle_register_or_login_content"
         android:drawableStart="@drawable/user_icon"

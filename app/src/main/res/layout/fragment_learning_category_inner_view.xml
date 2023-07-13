@@ -137,6 +137,45 @@
         app:drawableStartCompat="@drawable/folder_icon"
         />
 
+    <!-- Question -->
+    <TextView
+        android:id="@+id/button_questions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/question_test_rectangle"
+        android:elevation="8dp"
+        android:visibility="invisible"
+        android:text="@string/questions"
+        android:textAppearance="@style/twenty_sp_bold"
+        android:textColor="@null"
+        android:gravity="center_horizontal|center_vertical"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry" />
+
+    <!-- Tests -->
+    <TextView
+        android:id="@+id/button_tests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_questions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/question_test_rectangle"
+        android:elevation="8dp"
+        android:visibility="invisible"
+        android:text="@string/tests"
+        android:textAppearance="@style/twenty_sp_bold"
+        android:textColor="@null"
+        android:gravity="center_horizontal|center_vertical"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry" />
     <TextView
         android:id="@+id/button_tests_and_questions"
         android:layout_width="match_parent"
@@ -159,7 +198,6 @@
 
 
     <!-- LernTipp Box -->
-
     <View
         android:id="@+id/rectangle_learning_tip_box"
         android:layout_width="wrap_content"
@@ -171,7 +209,6 @@
         android:layout_marginTop="31dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-
         android:background="@drawable/learning_tip_of_the_day_rectangle"
         android:elevation="2dp" />
 
@@ -217,5 +254,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </RelativeLayout>

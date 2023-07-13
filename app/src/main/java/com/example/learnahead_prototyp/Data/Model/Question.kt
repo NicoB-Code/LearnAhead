@@ -10,6 +10,7 @@ data class Question(
     val question: String = "",
     val answer: String = "",
     val type: QuestionType = QuestionType.IndexCard,
-    val lastTest: Boolean? = null,
-    val wrongCounter: Int = 0,
-) : Parcelable
+    var lastTest: Boolean? = null,
+    var wrongCounter: Int = 0,
+    var tags: MutableList<Tag> = mutableListOf(),
+    ) : Parcelable
