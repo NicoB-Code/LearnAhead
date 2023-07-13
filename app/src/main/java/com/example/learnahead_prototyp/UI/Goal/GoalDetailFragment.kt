@@ -1,10 +1,13 @@
 package com.example.learnahead_prototyp.UI.Goal
 
+import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,8 +25,10 @@ import com.example.learnahead_prototyp.databinding.FragmentGoalDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+
 
 /**
  * Dies ist die Detailansicht einer Ziels auf der App. Es zeigt Informationen wie Zielname, Beschreibung,
@@ -35,6 +40,12 @@ import java.util.Locale
  */
 @AndroidEntryPoint
 class GoalDetailFragment : Fragment() {
+
+
+    private val currentDate: Calendar = Calendar.getInstance()
+    private var year = currentDate[Calendar.YEAR]
+    private var month = currentDate[Calendar.MONTH]
+    private var day = currentDate[Calendar.DAY_OF_MONTH]
 
     private var currentUser: User? = null
 
@@ -83,7 +94,6 @@ class GoalDetailFragment : Fragment() {
         setLocalCurrentUser()
         updateUI()
         setEventListener()
-
     }
 
     private fun setLocalCurrentUser() {
@@ -120,6 +130,10 @@ class GoalDetailFragment : Fragment() {
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.backIcon.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.textLearningGoalStartDate.setOnClickListener{
+                // TODO OnClickListener für die Daten
         }
 
         // Event Listener wenn sich der Titel verändert

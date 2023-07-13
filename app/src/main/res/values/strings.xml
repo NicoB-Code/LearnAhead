@@ -87,10 +87,26 @@
     <string name="placeholder_learning_streak">Die höchste Learning Streak</string>
     <string name="placeholder_achieved_goals">Die erreichten Ziele</string>
     <string name="summary_label">Zusammenfassungen</string>
+    <string name="create_summary">Zusammenfassung erstellen</string>
+    <string name="summary_name">Name der Zusammenfassung</string>
+    <string name="enter_summary_name">Name der Zusammenfassung eingeben...</string>
     <string name="remaining_summary_items">enthält %1$d weitere Zusammenfassungen</string>
     <string name="placeholder">Platzhalter</string>
     <string name="tests_and_questions">Tests / Fragen</string>
     <string name="learning_tip_of_the_day">Lerntipp des Tages:</string>
     <string name="learning_tip_of_the_day_placeholder">Wenn wir kurz vor dem Schlafengehen noch einmal das Gelernte durchgehen, wird unser Gehirn erneut stimuliert und die neu gebildeten Verbindungen werden gestärkt. Dies führt dazu, dass die Informationen besser im Langzeitgedächtnis abgespeichert werden und später leichter abgerufen werden können.</string>
+    <string name="questions">Fragen</string>
+    <string name="test_annotation">Anmerkung: Klicke auf einen Test um ihn zu editieren. Wenn du ihn starten möchtest, gehe bitte zurück und klicke auf “Test Starten”</string>
+    <string name="tests">Tests</string>
+    <string name="create_test">Test erstellen</string>
+    <string name="create_question">Frage erstellen</string>
+    <string name="add_question">Frage hinzufügen</string>
+    <string name="choose_a_type_of_test">Wähle eine Art von Test aus:</string>
+    <string name="add_tags">Tags hinzufügen</string>
+    <string name="question_colon">Frage:</string>
+    <string name="answer_colon">Antwort:</string>
+
+    <string name="markdown_input_description">Hier kommt die Zusammenfassung hin...</string>
+
 
 </resources>

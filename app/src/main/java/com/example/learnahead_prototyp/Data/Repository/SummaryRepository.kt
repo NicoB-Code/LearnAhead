@@ -1,5 +1,6 @@
 package com.example.learnahead_prototyp.Data.Repository
 
+import android.util.Log
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.User
@@ -63,7 +64,43 @@ class SummaryRepository(
             result(UiState.Failure(exception.localizedMessage))
         }
     }
+/*    override fun getSummaries(user: User?, learningCategory: LearningCategory?, result: (UiState<List<Summary>>) -> Unit) {
+        // Überprüfen, ob learningCategory null ist
+        if (learningCategory == null) {
+            result(UiState.Failure("learningCategory is null"))
+            return
+        }
 
+        // Überprüfen, ob user null ist
+        if (user == null) {
+            result(UiState.Failure("user is null"))
+            return
+        }
+
+        // Dokumentreferenz des Benutzers holen
+        val userDocumentRef = database.collection(FireStoreCollection.USER).document(user.id)
+
+        val query = userDocumentRef.collection("learningCategories")
+            .whereEqualTo("id", learningCategory.id)
+
+        // Abfrage ausführen
+        query.get().addOnSuccessListener { querySnapshot ->
+            if(!querySnapshot.isEmpty) {
+                val matchingDocument = querySnapshot.documents.first()
+                val matchingDocumentRef = matchingDocument.reference
+                val summariesTask = matchingDocumentRef.get()
+                    .addOnSuccessListener { learningCategoryDocument ->
+                        val summaries = learningCategoryDocument.toObject(User::class.java)?.summaries?.toMutableList() ?: mutableListOf()
+                        result.invoke(UiState.Success(summaries))
+                    }
+                    .addOnFailureListener { exception ->
+                        result.invoke(UiState.Failure(exception.localizedMessage))
+                    }
+            }
+        }
+    }
+
+ */
     /**
      * Funktion, um eine Zusammenfassung in der Datenbank hinzuzufügen.
      * @param summary Die Zusammenfassung, die hinzugefügt werden soll.

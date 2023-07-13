@@ -1,17 +1,11 @@
-package com.example.learnahead_prototyp.UI.Goal
+package com.example.learnahead_prototyp.UI.LearningCategory
 
 import android.content.res.Resources
-import android.graphics.Color
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Summary
-import com.example.learnahead_prototyp.R
-import com.example.learnahead_prototyp.databinding.LearningCategoryInnerViewSummaryBinding
+import com.example.learnahead_prototyp.databinding.FragmentLearningCategoryInnerViewBinding
 
 /**
  * Ein Adapter zur Darstellung von Zielen in einer RecyclerView.
@@ -26,7 +20,7 @@ class LearningCategoryInnerViewAdapter(
     private lateinit var resources: Resources
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = LearningCategoryInnerViewSummaryBinding.inflate(
+        val binding = FragmentLearningCategoryInnerViewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -38,7 +32,7 @@ class LearningCategoryInnerViewAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         if (list.isNotEmpty()) {
             val item = list[position]
-            holder.bind(item)
+            //holder.bind(item)
         }
     }
 
@@ -51,7 +45,7 @@ class LearningCategoryInnerViewAdapter(
         return 1 // Return 1 to indicate a single view
     }
 
-    inner class MyViewHolder(private val binding: LearningCategoryInnerViewSummaryBinding) :
+    inner class MyViewHolder(private val binding: FragmentLearningCategoryInnerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         /**
@@ -59,42 +53,5 @@ class LearningCategoryInnerViewAdapter(
          *
          * @param item The [Summary] object to bind.
          */
-        fun bind(item: Summary) {
-            val maxItems = 3 // Maximum number of items to display
-            val remainingCount = list.size - maxItems
-
-            // Create a list of formatted items, including the index and name
-            val formattedItems = list.take(maxItems).mapIndexed { index, it ->
-                "${index + 1}. ${it.name}"
-            }.toMutableList()
-
-            // Add the remaining count text if there are more items than the maximum
-            if (remainingCount > 0) {
-                val remainingText = resources.getString(R.string.remaining_summary_items, remainingCount)
-                formattedItems.add(remainingText)
-            }
-
-            val itemListBuilder = SpannableStringBuilder()
-            val blackSpan = ForegroundColorSpan(Color.BLACK)
-            val greySpan = ForegroundColorSpan(ContextCompat.getColor(binding.itemListText.context, R.color.special_grey))
-
-            // Iterate through the formatted items and apply the appropriate text color span
-            for ((index, formattedItem) in formattedItems.withIndex()) {
-                val spannableItem = SpannableString(formattedItem)
-                val textColorSpan = if (index < maxItems) blackSpan else greySpan
-                spannableItem.setSpan(textColorSpan, 0, formattedItem.length, 0)
-                itemListBuilder.append(spannableItem)
-                itemListBuilder.append("\n")
-            }
-
-            // Set the formatted item list to the item list text view
-            binding.itemListText.text = itemListBuilder
-
-            // Set the click listener for the inner view summary layout
-            binding.innerViewSummaryLayout.setOnClickListener {
-                onItemClicked.invoke(bindingAdapterPosition, item)
-            }
-        }
-
     }
 }

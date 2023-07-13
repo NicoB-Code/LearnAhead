@@ -1,0 +1,180 @@
+<!-- Android Large - Login -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar">
+
+    <!-- Dark Background Full Screen -->
+    <View
+        android:id="@+id/dark_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dark_full_screen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Black Background for Bottom Menu -->
+    <View
+        android:id="@+id/background_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/black_bottom_menu"
+        android:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@id/dark_background"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Header Line -->
+    <View
+        android:id="@+id/header_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/header_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Back Icon -->
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/back_button"
+        android:elevation="7dp"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Lernkategorie erstellen Header Label -->
+    <TextView
+        android:id="@+id/create_summary_menu_header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summary_label"
+        android:textAppearance="@style/top_menu_header"
+        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/back_icon"
+        />
+
+    <!-- Edit Icon -->
+    <ImageView
+        android:id="@+id/edit_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/edit_button"
+        android:elevation="7dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintRight_toLeftOf="@id/save_button" />
+
+    <!-- Create Icon -->
+    <ImageView
+        android:id="@+id/save_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/check_button"
+        android:elevation="7dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <!-- Lernkategorie Name Label -->
+    <TextView
+        android:id="@+id/summary_name_label"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/summary_name"
+        android:textAppearance="@style/learning_category_or_goal_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_line"
+        app:drawableBottomCompat="@drawable/green_line" />
+
+    <!-- Lernziel Name EditText -->
+    <EditText
+        android:id="@+id/text_summary_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="12dp"
+        android:hint="@string/enter_summary_name"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:inputType="text|textNoSuggestions"
+        android:gravity="start|center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toBottomOf="@id/summary_name_label" />
+
+    <ProgressBar
+        android:id="@+id/btn_progress_ar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:elevation="10dp"
+        android:indeterminateTint="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Home Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_home"
+        android:layout_width="92dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="4dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/home_button"
+        android:text="@string/home"
+        android:textAppearance="@style/menu_button_text"
+        app:iconPadding="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+
+    <!-- Learning Categories Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_categories"
+        android:layout_width="126dp"
+        android:layout_height="98dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/learning_category_button"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/menu_button_text"
+        app:iconPadding="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+
+    <!-- Learning Goals Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_learning_goals"
+        android:layout_width="88dp"
+        android:layout_height="98dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/learning_goal_button"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/menu_button_text"
+        app:iconPadding="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
+        app:layout_constraintRight_toRightOf="@id/background_bottom_menu"
+        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,8 @@ data class User(
     val registerDate: Date = Date(),
     val profileImageUrl: String = "",
     var goals: MutableList<Goal> = mutableListOf(),
-    var learningCategories: MutableList<LearningCategory> = mutableListOf()
+    var learningCategories: MutableList<LearningCategory> = mutableListOf(),
+    var summaries: MutableList<Summary> = mutableListOf()
 ) {
 
 }

@@ -3,54 +3,65 @@
 # Einleitung  
 - 90% Done
 
-## Planung
-- Lastenheft (Nico)
-- Arbeitspaketplan (Nico)
-- Zeitplan (Phillipp)
-- Qualitätsmanagement Maßnahmen (Phillipp)
-- Konfigurationsmanagement Maßnahmen (Nico)
-- Auswahl kritischer Technologien (Phillipp)
+## Planung Done
+- Lastenheft (Nico) Done
+- Arbeitspaketplan (Nico) Done
+- Zeitplan (Phillipp) Done
+- Qualitätsmanagement Maßnahmen (Phillipp) Done
+- Konfigurationsmanagement Maßnahmen (Nico) Done
+- Evaluierung der Plattformen und Programmiersprachen für die App-Entwicklung (Phillipp) Done
 
 ## Definition
-- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp)
-- Pflichtenheft
-- Use-Case-Diagramme (Nico)
-- Use-Case-Beschreibungen (Nico)
-- Datenbankmodell (Phillipp)
-- Data Dictionary (Phillipp)
-- HMI
-  - Seitenhierarchie (Nico)
-  - UI-Mockups (Nico)
-- Datenflussdiagramm (Phillipp)
+- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
+  - Lernen ist nicht gleich Verstehen Phillipp **Done ggbf. nochmal drüber lesen**
+  - Synapsen Nico **ToDo**
+  - Neuronen & Neuronales Netz Nico **ToDo**
+  - Optimierter Lernplan Phillipp **Done ggbf. nochmal drüber lesen**
+  - Tagging Phillipp **Done ggbf. nochmal drüber lesen**
+  - Lernkategorien & Lernziele Nico **ToDo**
+  - Fragen Typen **ToDo** Phillipp
+  - Gamification Nico **ToDo**
+- Pflichtenheft Done
+- Use-Case-Diagramme (Nico) Done
+- Use-Case-Beschreibungen (Nico) Done
+- Datenbankmodell (Phillipp) Done
+- Data Dictionary (Phillipp) Done
+- HMI Done
+  - Seitenhierarchie (Nico) Done
+  - UI-Mockups (Nico) Done
+- Flow-Chart-Diagramm (Phillipp) Done
 - Benutzerhandbuch (optional)
 
 ## Entwurf
-- Prototyp (optional)
-- BPMN
-- Begründung des Datenbankkonzepts
-- Auswahl der Klassenbibliotheken/Frameworks
-- Design Patterns für relevante Problemstellungen
-- Software-Komponenten
-- Gesamtkomposition
-- Deployment Diagramm
-- Klassen Diagramm
-- Aktivitätsdiagramm
-- Sequenzdiagramme
+- Prototyp (optional) **ToDo**
+- BPMN **ToDo** Phillipp
+- Begründung des Datenbankkonzepts **Done ggbf. nochmal drüber lesen** Phillipp
+- Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
+- Design Patterns für relevante Problemstellungen **ToDo** Nico
+- Software-Komponenten Done Phillipp
+- Gesamtkomposition Done Phillipp
+- Frontend Done Phillipp
+- Backend Done Phillipp
+- Deployment Diagramm **ToDo** Nico
+- Klassen Diagramm **ToDo** Nico
+- Aktivitätsdiagramm **ToDo** Phillipp
+- Sequenzdiagramme **ToDo** Nico
 
 ## Implementierung
-- Deployment
-- Installationsanleitung
-- Code Conventions
-- Code Dokumentation
-- IT-Security (Firebase Authentifizierung)
+- Deployment **ToDo** Nico
+- Installationsanleitung **ToDo** Nico
+- Code Conventions **ToDo** Phillipp
+- Code Dokumentation **ToDo** Phillipp
+- IT-Security (Firebase Authentifizierung) **ToDo** Phillipp
 
 ## Tests
-- User Tests 
-- ggf. Unit Tests
+- User Tests **ToDo**
+- ggf. Unit Tests **ToDo**
 
 ## Ergebnisse
-- Nutzen der App
+- Nutzen der App **ToDo** Phillipp
+- Feedback von Studienpräsentation **ToDo** Phillipp
 
 ## Ausblick
-- Features (Kalender, Collaboration, etc.)
-- Zeitliche Dokumentation
+- Features (Kalender, Collaboration, etc.) **ToDo** Phillipp und Nico
+- Zeitliche Dokumentation **ToDo** Phillipp
