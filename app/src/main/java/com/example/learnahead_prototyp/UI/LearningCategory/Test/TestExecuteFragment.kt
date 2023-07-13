@@ -51,7 +51,9 @@ class TestExecuteFragment : Fragment() {
     private val questionViewModel: QuestionViewModel by activityViewModels()
     private lateinit var currentQuestion: Question
     private var isShowingQuestion = true
-    var questionsToAnswer: MutableList<Question> = arrayListOf()
+    private var questionsToAnswer: MutableList<Question> = arrayListOf()
+    var questionsAfterAnswering: MutableList<Question> = arrayListOf()
+
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
@@ -77,10 +79,19 @@ class TestExecuteFragment : Fragment() {
      * @param view Die View der Fragment-Klasse
      * @param savedInstanceState Der gespeicherte Zustand des Fragments
      */
-    @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        questionsToAnswer = testViewModel.currentTest.value!!.questions
+        initAnimation(view)
+        setRandomQuestion()
+        setEventListener()
+        observer()
+        setLocalCurrentUser()
+    }
+
+    @SuppressLint("ResourceType")
+    private fun initAnimation(view: View) {
         // Initialize views
         cardView = view.findViewById(R.id.card_view)
         linearLayout = view.findViewById(R.id.index_card_box)
@@ -92,13 +103,6 @@ class TestExecuteFragment : Fragment() {
         linearLayout.setOnClickListener {
             flipCard()
         }
-        questionsToAnswer = testViewModel.currentTest.value!!.questions
-
-        setRandomQuestion()
-
-        setEventListener()
-        observer()
-        setLocalCurrentUser()
     }
 
     private fun setRandomQuestion() {
@@ -116,6 +120,25 @@ class TestExecuteFragment : Fragment() {
             binding.addQuestionsByTagsLabel.text = questionViewModel.currentQuestion.value!!.question
         } else {
             // No more questions remaining
+            testViewModel.currentTest.value!!.questions = questionsAfterAnswering
+            learnCategoryViewModel.currentSelectedLearningCategory.value?.let { currentLearningCategory ->
+                val indexOfTest = currentLearningCategory.tests.indexOfFirst { it.id == testViewModel.currentTest.value?.id }
+                if (indexOfTest != -1) {
+                    currentLearningCategory.tests[indexOfTest] = testViewModel.currentTest.value!!
+                    learnCategoryViewModel.updateLearningCategory(currentLearningCategory)
+                }
+            }
+
+            // Die neue Lernkategorie dem User hinzufügen
+            val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value!!.id }
+            if (indexOfCurrentObject != -1) {
+                currentUser!!.learningCategories[indexOfCurrentObject] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
+            } else {
+                currentUser!!.learningCategories.add(learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+            }
+            // Den User in der DB updaten
+            authViewModel.updateUserInfo(currentUser!!)
+
             binding.addQuestionsByTagsLabel.text = "Test beendet"
             toast("Test beendet")
             findNavController().navigate(R.id.action_testExecuteFragment_to_homeFragment)
@@ -212,7 +235,10 @@ class TestExecuteFragment : Fragment() {
         }
 
         binding.buttonCorrect.setOnClickListener {
+            questionViewModel.currentQuestion.value!!.lastTest = true
+            questionViewModel.currentQuestion.value!!.wrongCounter = 0
             questionViewModel.currentQuestion.value?.let { currentQuestion ->
+                questionsAfterAnswering.add(currentQuestion)
                 questionsToAnswer.remove(currentQuestion)
             }
 
@@ -221,7 +247,10 @@ class TestExecuteFragment : Fragment() {
         }
 
         binding.buttonFalse.setOnClickListener {
+            questionViewModel.currentQuestion.value!!.lastTest = false
+            questionViewModel.currentQuestion.value!!.wrongCounter += 1
             questionViewModel.currentQuestion.value?.let { currentQuestion ->
+                questionsAfterAnswering.add(currentQuestion)
                 questionsToAnswer.remove(currentQuestion)
             }
 
