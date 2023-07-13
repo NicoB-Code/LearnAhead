@@ -130,7 +130,7 @@ class SummaryFragment : Fragment() {
     private fun setEventListener() {
         // Setzt den Event-Listener für den Home-Button
         binding.buttonHome.setOnClickListener {
-            findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_summaryFragment_to_homeFragment)
         }
 
         binding.buttonAddSummary.setOnClickListener {
