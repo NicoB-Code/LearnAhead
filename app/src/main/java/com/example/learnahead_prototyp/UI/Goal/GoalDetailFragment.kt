@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.EditText
+import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +17,7 @@ import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.LearningCategory.Question.CustomSpinnerAdapter
+import com.example.learnahead_prototyp.Util.DatePickerFragment
 import com.example.learnahead_prototyp.Util.GoalStatus
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
@@ -112,6 +114,14 @@ class GoalDetailFragment : Fragment() {
         authViewModel.getSession()
     }
 
+    private fun showDatePickerDialog(textLearningGoalDate: TextView) {
+        val datePicker = DatePickerFragment {day, month, year -> onDateSelected(textLearningGoalDate, day, month, year) }
+        datePicker.show(parentFragmentManager, "datePicker")
+    }
+    private fun onDateSelected(textLearningGoalDate: TextView, day: Int, month: Int, year: Int) {
+        textLearningGoalDate.text = "$day.0${month + 1}.$year"
+    }
+
     /**
      * Erstellt alle notwendigen EventListener für das Fragment
      */
@@ -123,6 +133,14 @@ class GoalDetailFragment : Fragment() {
                 createGoal()
 
             isInitialSelection = false
+        }
+
+        binding.textLearningGoalStartDate.setOnClickListener {
+            showDatePickerDialog(binding.textLearningGoalStartDate)
+        }
+
+        binding.textLearningGoalEndDate.setOnClickListener {
+            showDatePickerDialog(binding.textLearningGoalEndDate)
         }
 
         binding.editButton.setOnClickListener {
@@ -146,9 +164,6 @@ class GoalDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.textLearningGoalStartDate.setOnClickListener{
-                // TODO OnClickListener für die Daten
-        }
 
         // Event Listener wenn sich der Titel verändert
         binding.textLearningGoalName.doAfterTextChanged {
@@ -435,7 +450,7 @@ class GoalDetailFragment : Fragment() {
         return true
     }
 
-    private fun dateValidation(textLearningGoalStartDate: EditText): Date {
+    private fun dateValidation(textLearningGoalStartDate: TextView): Date {
         // Holen Sie die Benutzereingabe aus dem EditText
         val userInput = textLearningGoalStartDate.text.toString()
 
