@@ -1,4 +1,5 @@
 <resources>
+    <string name="default_notification_channel_id">my_channel</string>
     <string name="app_name">LearnAhead_Prototyp</string>
     <string name="kein_konto">
     Du hast noch kein Konto?

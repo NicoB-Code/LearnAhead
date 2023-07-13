@@ -13,5 +13,6 @@ data class LearningCategory(
     val createDate: Date = Date(),
     var questions: MutableList<Question> = mutableListOf(),
     var summaries: MutableList<Summary> = mutableListOf(),
-    var tests: MutableList<Test> = mutableListOf()
+    var tests: MutableList<Test> = mutableListOf(),
+    var relatedLearningGoal: Goal? = null
 ) : Parcelable
