@@ -183,7 +183,7 @@ class HomeFragment : Fragment() {
                     View.GONE
                 }
                 is UiState.Success -> {
-                    toast("Du hast für deinen Login gerade $state.data erhalten.")
+                    toast("Du hast für deinen Login gerade ${state.data} erhalten.")
                     View.GONE
                 }
             }
