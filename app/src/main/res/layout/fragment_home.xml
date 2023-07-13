@@ -20,7 +20,7 @@
     <View
         android:id="@+id/background_bottom_menu"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:layout_alignBottom="@id/dark_background"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
@@ -56,6 +56,42 @@
         android:background="@drawable/logout"
         android:elevation="7dp"></ImageView>
 
+    <!-- Label Learning Goals for Today Header -->
+    <TextView
+        android:id="@+id/learning_goals_for_today"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/header_line"
+        android:layout_marginTop="26dp"
+        android:text="@string/learning_goal_for_today"
+        android:textAppearance="@style/learning_goals_for_today_label_header"
+        android:gravity="center_horizontal|center_vertical"
+        />
+
+    <!-- Item Layout -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/learning_goals_for_today"
+        android:layout_above="@id/background_bottom_menu"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_home"
@@ -65,7 +101,7 @@
         android:layout_alignBottom="@id/background_bottom_menu"
         android:drawableTop="@drawable/home_button"
         android:layout_marginLeft="4dp"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/home"
         android:textAppearance="@style/menu_button_text"
         android:textColor="@null"
@@ -81,7 +117,7 @@
         android:layout_alignBottom="@id/background_bottom_menu"
         android:layout_centerHorizontal="true"
         android:drawableTop="@drawable/learning_category_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_categories"
         android:textAppearance="@style/menu_button_text"
         android:textColor="@null"
@@ -98,7 +134,7 @@
         android:layout_alignRight="@id/background_bottom_menu"
         android:layout_marginRight="4dp"
         android:drawableTop="@drawable/learning_goal_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_goals"
         android:textAppearance="@style/menu_button_text"
         android:textColor="@null"
