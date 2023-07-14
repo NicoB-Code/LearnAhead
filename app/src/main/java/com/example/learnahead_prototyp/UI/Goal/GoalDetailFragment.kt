@@ -117,13 +117,13 @@ class GoalDetailFragment : Fragment() {
         val datePicker = DatePickerFragment {day, month, year -> onDateSelected(textLearningGoalDate, day, month, year) }
         datePicker.show(parentFragmentManager, "datePicker")
     }
+
     private fun onDateSelected(textLearningGoalDate: TextView, day: Int, month: Int, year: Int) {
-        if(day < 10){
-            textLearningGoalDate.text = "0$day.0${month + 1}.$year"
-        } else {
-            textLearningGoalDate.text = "$day.0${month + 1}.$year"
-        }
+        val formattedMonth = if (month + 1 < 10) "0${month + 1}" else "${month + 1}"
+        val formattedDay = if (day < 10) "0$day" else "$day"
+        textLearningGoalDate.text = "$formattedDay.$formattedMonth.$year"
     }
+
 
     /**
      * Erstellt alle notwendigen EventListener für das Fragment
@@ -314,6 +314,7 @@ class GoalDetailFragment : Fragment() {
 
                             authViewModel.updateUserInfo(it)
                         }
+                        findNavController().navigate(R.id.action_goalDetailFragment_to_goalListingFragment)
                         toast("Das Lernziel konnte erfolgreich geupdated werden")
                     }
                     else {
