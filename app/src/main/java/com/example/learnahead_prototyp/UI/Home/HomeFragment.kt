@@ -124,16 +124,21 @@ class HomeFragment : Fragment() {
                             val daysBetweenDates = ChronoUnit.DAYS.between(startDate, endDate)
                             val daysSinceStart = ChronoUnit.DAYS.between(startDate, today)
 
-                            val interval = if (daysBetweenDates != 0L) {
-                                ((daysBetweenDates.toDouble() + 1) / 10).toInt() // Calculate the interval
+                            val interval = if (daysBetweenDates < 10) {
+                                1 // Set interval to 1 if daysBetweenDates is less than 10
                             } else {
-                                1 // Set a default interval value of 1 if daysBetweenDates is zero
+                                ((daysBetweenDates.toDouble() + 1) / 10).toInt() // Calculate the interval
                             }
 
-                            val learningDayIndex = (daysSinceStart / interval) + 1
+                            val learningDayIndex = if (interval > 0) {
+                                (daysSinceStart / interval) + 1
+                            } else {
+                                0
+                            }
+
                             val nextLearningDay = startDate.plusDays((learningDayIndex - 1) * interval)
 
-                            today == nextLearningDay
+                            today == nextLearningDay && today != startDate
                         } else {
                             false
                         }

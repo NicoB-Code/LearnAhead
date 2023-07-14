@@ -1,7 +1,6 @@
 package com.example.learnahead_prototyp.UI.LearningCategory.Summary
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
-import com.example.learnahead_prototyp.Util.FireStoreCollection.TAG
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -78,7 +76,7 @@ class CreateSummaryFragment : Fragment() {
      *                  (`true`) oder nicht (`false`). Der Standardwert ist `false`.
      */
     private fun isMakeEnableUI(isDisable: Boolean) {
-        binding.textSummaryName.isEnabled = isDisable
+        binding.summaryNameEditText.isEnabled = isDisable
     }
 
     /**
@@ -90,13 +88,13 @@ class CreateSummaryFragment : Fragment() {
         }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_homeFragment) }
+        binding.homeButton.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_homeFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_learningCategoryListFragment) }
+        binding.learningCategoriesButton.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_learningCategoryListFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_goalListingFragment) }
+        binding.learningGoalsButton.setOnClickListener { findNavController().navigate(R.id.action_createSummaryFragment_to_goalListingFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.backIcon.setOnClickListener { findNavController().navigate(
@@ -108,8 +106,7 @@ class CreateSummaryFragment : Fragment() {
         }
 
         // Event Listener wenn sich der Titel verändert
-        binding.textSummaryName.doAfterTextChanged {
-            Log.d(TAG, "Hallo")
+        binding.summaryNameEditText.doAfterTextChanged {
             updateButtonVisibility()
         }
     }
@@ -120,7 +117,7 @@ class CreateSummaryFragment : Fragment() {
      * Ist das Feld nicht ausgefüllt, soll der Speichern-Button nicht sichtbar sein.
      */
     private fun updateButtonVisibility() {
-        val title = binding.textSummaryName.text.toString().trim()
+        val title = binding.summaryNameEditText.text.toString().trim()
 
         if (title.isNotEmpty())
             binding.saveButton.show()
@@ -133,13 +130,13 @@ class CreateSummaryFragment : Fragment() {
      */
     private fun updateUI() {
         currentLearningCategory = arguments?.getParcelable("learning_category")
-        binding.createSummaryMenuHeaderLabel.text = currentLearningCategory?.name
-        binding.textSummaryName.setText("")
+        binding.summaryMenuHeaderLabel.text = currentLearningCategory?.name
+        binding.summaryNameEditText.setText("")
         binding.saveButton.hide()
         binding.editButton.hide()
         //binding.delete.hide()
         isMakeEnableUI(true)
-        binding.textSummaryName.requestFocus()
+        binding.summaryNameEditText.requestFocus()
     }
 
     /**
@@ -148,7 +145,7 @@ class CreateSummaryFragment : Fragment() {
      */
     private fun validation(): Boolean {
         // Überprüfen, ob der Name der Zusammenfassung leer oder null ist
-        if (binding.textSummaryName.text.isNullOrEmpty()) {
+        if (binding.summaryNameEditText.text.isNullOrEmpty()) {
             // Wenn ja, eine Toast-Nachricht ausgeben und false zurückgeben
             toast("Geben Sie einen Namen ein")
             return false
@@ -177,7 +174,7 @@ class CreateSummaryFragment : Fragment() {
         // Erstellt ein Summary-Objekt mit den aktuellen Eingaben
         return Summary(
             id = objSummary?.id ?: "",
-            name = binding.textSummaryName.text.toString(),
+            name = binding.summaryNameEditText.text.toString(),
         )
     }
 
@@ -197,16 +194,16 @@ class CreateSummaryFragment : Fragment() {
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     if (state.data != null && currentUser != null) {
                         // Die neue Zusammenfassung zur Lernkategorie hinzufügen
                         currentLearningCategory?.summaries?.add(state.data)
@@ -236,16 +233,16 @@ class CreateSummaryFragment : Fragment() {
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     currentUser = state.data
                 }
             }

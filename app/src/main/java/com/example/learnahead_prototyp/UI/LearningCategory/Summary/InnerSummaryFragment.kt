@@ -149,10 +149,8 @@ class InnerSummaryFragment : Fragment() {
                     if (state.data != null && currentUser != null) {
                         // Die neue Zusammenfassung dem Benutzer hinzufügen
                         var foundSummaryIndex: Int = 0
-                        for (category in currentUser!!.learningCategories) {
-                            foundSummaryIndex =
-                                category!!.summaries.indexOfFirst { it.id == state.data.id }
-                        }
+                            foundSummaryIndex = currentLearningCategory!!.summaries.indexOfFirst { it.id == state.data.id }
+
                         currentLearningCategory?.summaries?.set(foundSummaryIndex, state.data)
                         val foundIndex =
                             currentUser!!.learningCategories.indexOfFirst { it.id == currentLearningCategory?.id }
