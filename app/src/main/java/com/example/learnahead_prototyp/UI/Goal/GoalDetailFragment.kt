@@ -106,7 +106,7 @@ class GoalDetailFragment : Fragment() {
         val dropdownItems = learningCategoriesList.map { it.name } // Extrahiere die Kategorienamen aus der Liste
 
         val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItems)
-        binding.dropdownElement.adapter = adapter
+        binding.relatedLearningCategoryDropdown.adapter = adapter
     }
 
     private fun setLocalCurrentUser() {
@@ -189,7 +189,7 @@ class GoalDetailFragment : Fragment() {
         }
 
         // Event Listener when the dropdown selection changes
-        binding.dropdownElement.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.relatedLearningCategoryDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (isInitialSelection) {
@@ -219,7 +219,7 @@ class GoalDetailFragment : Fragment() {
 
         binding.textLearningGoalEndDate.isEnabled = isDisable
         binding.textGoalDescription.isEnabled = isDisable
-        binding.dropdownElement.isEnabled = isDisable
+        binding.relatedLearningCategoryDropdown.isEnabled = isDisable
     }
 
     /**
@@ -233,21 +233,21 @@ class GoalDetailFragment : Fragment() {
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     if(state.data != null && currentUser != null) {
                         // Das neue Lernziel in dem User hinzufügen
                         currentUser!!.goals.add(state.data)
 
-                        val selectedCategory = learningCategoriesList[binding.dropdownElement.selectedItemPosition]
+                        val selectedCategory = learningCategoriesList[binding.relatedLearningCategoryDropdown.selectedItemPosition]
                         selectedCategory.relatedLearningGoal = state.data
 
                         // Den User in der DB updaten
@@ -271,16 +271,16 @@ class GoalDetailFragment : Fragment() {
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     if(state.data != null && currentUser != null) {
                         val indexOfCurrentObject = currentUser!!.goals.indexOfFirst { it.id == state.data.id }
                         if (indexOfCurrentObject != -1) {
@@ -289,7 +289,7 @@ class GoalDetailFragment : Fragment() {
                             currentUser!!.goals.add(state.data)
                         }
 
-                        val selectedCategory = learningCategoriesList[binding.dropdownElement.selectedItemPosition]
+                        val selectedCategory = learningCategoriesList[binding.relatedLearningCategoryDropdown.selectedItemPosition]
                         val oldCategory = learningCategoriesList.find { it.relatedLearningGoal?.id == state.data.id }
 
                         // Remove the goal from the old learning category
@@ -328,16 +328,16 @@ class GoalDetailFragment : Fragment() {
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     currentUser = state.data
                     learningCategoriesList = currentUser!!.learningCategories
                     populateDropdown()
@@ -420,7 +420,7 @@ class GoalDetailFragment : Fragment() {
             // Set the dropdown selection to the related learning category if found
             relatedCategory?.let { category ->
                 val selectedIndex = learningCategoriesList.indexOf(category)
-                binding.dropdownElement.setSelection(selectedIndex)
+                binding.relatedLearningCategoryDropdown.setSelection(selectedIndex)
             }
             //binding.delete.show()
             isMakeEnableUI()

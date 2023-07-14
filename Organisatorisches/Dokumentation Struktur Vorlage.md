@@ -13,15 +13,15 @@
 
 ## Definition
 - Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
-  - Lernen ist nicht gleich Verstehen Phillipp
-  - Synapsen Nico
-  - Neuronen & Neuronales Netz Nico
-  - Optimierter Lernplan Phillipp
-  - Tagging Phillipp
-  - Lernkategorien & Lernziele Nico
-  - Fragen Typen **ToDo** Nico
-  - Gamification Nico
-- Pflichtenheft Done
+  - Lernen ist nicht gleich Verstehen Phillipp Done
+  - Synapsen Nico Done 
+  - Neuronen & Neuronales Netz Nico Done
+  - Optimierter Lernplan Phillipp Done
+  - Tagging Phillipp Done
+  - Lernkategorien & Lernziele Nico Done
+  - Fragen Typen **ToDo** Nico 
+  - Gamification Nico Done
+- Pflichtenheft Done 
 - Use-Case-Diagramme (Nico) Done
 - Use-Case-Beschreibungen (Nico) Done
 - Datenbankmodell (Phillipp) Done
@@ -33,26 +33,26 @@
 - Benutzerhandbuch (optional)
 
 ## Entwurf
-- Prototyp (optional) **In Progress** Nico
+- Prototyp (optional) Nico Done
 - BPMN **ToDo** Phillipp
-- Begründung des Datenbankkonzepts Phillipp
-- Auswahl der Klassenbibliotheken/Frameworks Nico
-- Design Patterns für relevante Problemstellungen Nico
-- Software-Komponenten Done Phillipp
-- Gesamtkomposition Done Phillipp
-- Frontend Done Phillipp
-- Backend Done Phillipp
-- Deployment Diagramm  Nico
-- Klassen Diagramm Nico
+- Begründung des Datenbankkonzepts Phillipp Done
+- Auswahl der Klassenbibliotheken/Frameworks Nico Done
+- Design Patterns für relevante Problemstellungen Nico Done
+- Software-Komponenten Done Phillipp Done
+- Gesamtkomposition Done Phillipp Done
+- Frontend Phillipp Done
+- Backend Phillipp Done
+- Deployment Diagramm Nico Done
+- Klassen Diagramm Nico Done
 - Aktivitätsdiagramm **ToDo** Phillipp
-- Sequenzdiagramme **Nico
+- Sequenzdiagramme **Nico Done
 
 ## Implementierung
-- Deployment **ToDo** Nico
-- Installationsanleitung **ToDo** Nico
+- Deployment Nico Done
+- Installationsanleitung Nico Done
 - Code Conventions **ToDo** Phillipp
 - Code Dokumentation **ToDo** Phillipp
-- IT-Security (Firebase Authentifizierung) **ToDo** Phillipp
+- IT-Security (Firebase Authentifizierung) **In Progress** Nico
 
 ## Tests
 - User Tests **ToDo**
@@ -61,7 +61,7 @@
 ## Ergebnisse
 - Nutzen der App **ToDo** Phillipp
 - Feedback von Studienpräsentation **ToDo** Phillipp
-
+- Zeitliche Dokumentation **ToDo** Phillipp
+  
 ## Ausblick
 - Features (Kalender, Collaboration, etc.) **ToDo** Phillipp und Nico
-- Zeitliche Dokumentation **ToDo** Phillipp

@@ -159,7 +159,7 @@
         android:layout_below="@id/username_display"
         android:layout_marginTop="40dp"
         android:layout_marginStart="33dp"
-        android:text="@string/e_mail_address"
+        android:text="@string/email_address"
         android:textAppearance="@style/menu_button_text" />
 
     <!-- Text wo E-Mail steht -->

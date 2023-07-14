@@ -73,7 +73,7 @@
         android:paddingStart="13dp"
         android:layout_alignTop="@id/question_and_answer_box"
         android:elevation="6dp"
-        android:hint="@string/e_mail_address"
+        android:hint="@string/email_address"
         android:textAppearance="@style/register_content_text"
         android:textSize="16sp"
         android:textColor="@null"

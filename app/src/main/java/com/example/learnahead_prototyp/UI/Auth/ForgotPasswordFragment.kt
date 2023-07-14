@@ -62,9 +62,9 @@ class ForgotPasswordFragment : Fragment() {
      * Fügt den Klicklistener für den Zurücksetzen-Button hinzu.
      */
     private fun setEventListener() {
-        binding.buttonForgotPassword.setOnClickListener {
+        binding.forgotPasswordButton.setOnClickListener {
             if (validation()) {
-                viewModel.forgotPassword(binding.editTextEmail.text.toString())
+                viewModel.forgotPassword(binding.emailEditText.text.toString())
             }
         }
     }
@@ -76,17 +76,17 @@ class ForgotPasswordFragment : Fragment() {
         viewModel.forgotPassword.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    binding.buttonForgotPassword.setText("")
-                    binding.forgetPasswordProgress.show()
+                    binding.forgotPasswordButton.setText("")
+                    binding.forgotPasswordProgress.show()
                 }
                 is UiState.Failure -> {
-                    binding.buttonForgotPassword.setText("Send")
-                    binding.forgetPasswordProgress.hide()
+                    binding.forgotPasswordButton.setText("Send")
+                    binding.forgotPasswordProgress.hide()
                     toast(state.error)
                 }
                 is UiState.Success -> {
-                    binding.buttonForgotPassword.setText("Send")
-                    binding.forgetPasswordProgress.hide()
+                    binding.forgotPasswordButton.setText("Send")
+                    binding.forgotPasswordProgress.hide()
                     toast(state.data)
                 }
             }
@@ -99,7 +99,7 @@ class ForgotPasswordFragment : Fragment() {
      * @return True, wenn die E-Mail-Adresse gültig ist, ansonsten False.
      */
     private fun validation(): Boolean {
-        val email = binding.editTextEmail.text.toString().trim()
+        val email = binding.emailEditText.text.toString().trim()
 
         return if (email.isEmpty()) {
             toast(getString(R.string.enter_email))

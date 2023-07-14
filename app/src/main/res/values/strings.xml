@@ -51,7 +51,7 @@
     <!-- Produktiv Strings -->
     <string name="register_subject">Registrierung</string>
     <string name="username">Benutzername</string>
-    <string name="e_mail_address">E-Mail-Adresse</string>
+    <string name="email_address">E-Mail-Adresse</string>
     <string name="password">Passwort</string>
     <string name="register_verb"> Registrieren</string>
     <string name="got_already_an_account"> Du hast schon ein Konto?</string>
@@ -107,6 +107,9 @@
     <string name="question_colon">Frage:</string>
     <string name="answer_colon">Antwort:</string>
     <string name="markdown_input_description">Hier kommt die Zusammenfassung hin...</string>
+    <string name="please_enter_here_your_learning_goal">Bitte gebe hier dein Lernziel ein</string>
+    <string name="please_enter_here_your_description">Bitte gebe hier deine Beschreibung ein</string>
+    <string name="relate_learning_goal_to_learning_category">Das Ziel eine Lernkategorie zuordnen:</string>
 
 
 </resources>

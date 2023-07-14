@@ -2,34 +2,34 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/android_lar"
+    android:id="@+id/androidLar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/android_lar">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/dark_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dark_full_screen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
-        android:id="@+id/background_bottom_menu"
+        android:id="@+id/backgroundBottomMenu"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@id/dark_background"
+        app:layout_constraintBottom_toBottomOf="@id/darkBackground"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Header Line -->
+    <!-- Horizontale Linie als Header -->
     <View
-        android:id="@+id/header_line"
+        android:id="@+id/headerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="50dp"
@@ -37,59 +37,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Back Icon -->
+    <!-- Zurück-Icon -->
     <ImageView
-        android:id="@+id/back_icon"
+        android:id="@+id/backIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
         android:background="@drawable/back_button"
         android:elevation="7dp"
         android:rotation="-90"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- Lernziel erstellen Header Label -->
     <TextView
-        android:id="@+id/create_learning_goal_menu_header_label"
+        android:id="@+id/learningGoalMenuHeaderLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_learning_goal"
         android:textAppearance="@style/top_menu_header"
         android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/back_icon" />
+        app:layout_constraintLeft_toRightOf="@id/backIcon" />
 
     <!-- Edit Icon -->
     <ImageView
-        android:id="@+id/edit_button"
+        android:id="@+id/editButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/edit_button"
         android:elevation="7dp"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
-        app:layout_constraintRight_toLeftOf="@id/save_button" />
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
+        app:layout_constraintRight_toLeftOf="@id/saveButton" />
 
-    <!-- Create Icon -->
+    <!-- Save Icon -->
     <ImageView
-        android:id="@+id/save_button"
+        android:id="@+id/saveButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/check_button"
         android:elevation="7dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
 
     <!-- Lernziel Name Label -->
     <TextView
-        android:id="@+id/learning_goal_name_label"
+        android:id="@+id/learningGoalNameLabel"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
@@ -98,25 +98,29 @@
         android:text="@string/learning_goal_title"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_line"
+        app:layout_constraintTop_toBottomOf="@id/headerLine"
         app:drawableBottomCompat="@drawable/green_line" />
 
     <!-- Lernziel Name EditText -->
     <EditText
-        android:id="@+id/text_learning_goal_name"
+        android:id="@+id/textLearningGoalName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="12dp"
+        android:textAppearance="@style/eighteen_sp_regular_white"
+        android:textColor="@null"
+        android:hint="@string/please_enter_here_your_learning_goal"
+        android:textColorHint="@color/white"
         android:maxLines="1"
         android:inputType="text|textNoSuggestions"
         android:gravity="start|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/learning_goal_name_label" />
+        app:layout_constraintTop_toBottomOf="@id/learningGoalNameLabel" />
 
     <!-- Lernziel Start Datum Label -->
     <TextView
-        android:id="@+id/learning_goal_start_date_label"
+        android:id="@+id/learningGoalStartDateLabel"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
@@ -124,24 +128,23 @@
         android:text="@string/learning_goal_start_date"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_learning_goal_name"
+        app:layout_constraintTop_toBottomOf="@id/textLearningGoalName"
         app:drawableBottomCompat="@drawable/green_line" />
 
     <!-- Lernziel Start Datum EditText -->
     <TextView
-        android:id="@+id/text_learning_goal_start_date"
+        android:id="@+id/textLearningGoalStartDate"
         android:layout_width="390dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="12dp"
-        android:textSize="18dp"
-        android:textColor="@color/white"
+        android:textAppearance="@style/eighteen_sp_regular_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/learning_goal_start_date_label" />
+        app:layout_constraintTop_toBottomOf="@id/learningGoalStartDateLabel" />
 
     <!-- Lernziel Ziel Datum Label -->
     <TextView
-        android:id="@+id/learning_goal_end_date_label"
+        android:id="@+id/learningGoalEndDateLabel"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
@@ -149,37 +152,36 @@
         android:text="@string/learning_goal_end_date"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_learning_goal_start_date"
+        app:layout_constraintTop_toBottomOf="@id/textLearningGoalStartDate"
         app:drawableBottomCompat="@drawable/green_line" />
 
     <!-- Lernziel Ziel Datum EditText -->
     <TextView
-        android:id="@+id/text_learning_goal_end_date"
+        android:id="@+id/textLearningGoalEndDate"
         android:layout_width="390dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="12dp"
-        android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textAppearance="@style/eighteen_sp_regular_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/learning_goal_end_date_label" />
+        app:layout_constraintTop_toBottomOf="@id/learningGoalEndDateLabel" />
 
     <!-- Lernziel Beschreibung Label -->
     <TextView
-        android:id="@+id/learning_goal_description_label"
+        android:id="@+id/learningGoalDescriptionLabel"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:drawableBottom="@drawable/green_line"
         android:text="@string/learning_goal_description"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_learning_goal_end_date" />
+        app:layout_constraintTop_toBottomOf="@id/textLearningGoalEndDate" />
 
     <!-- Lernziel Beschreibung EditText -->
     <EditText
-        android:id="@+id/text_goal_description"
+        android:id="@+id/textGoalDescription"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
@@ -187,29 +189,30 @@
         android:background="@drawable/black_white_rect_bg"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:textColor="@color/black"
+        android:hint="@string/please_enter_here_your_description"
+        android:textColorHint="@color/black"
+        android:textAppearance="@style/fourteen_sp_regular_black"
         android:layout_marginTop="16dp"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/learning_goal_description_label"
+        app:layout_constraintTop_toBottomOf="@id/learningGoalDescriptionLabel"
         android:autofillHints="Beschreibung" />
 
-    <!-- Lernziel Ziel Datum Label -->
+    <!-- Zugehörige Lernkategorie -->
     <TextView
-        android:id="@+id/related_learning_category_label"
+        android:id="@+id/relatedLearningCategoryLabel"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:text="Lernkategorie dem Ziel zuordnen:"
+        android:text="@string/relate_learning_goal_to_learning_category"
         android:textAppearance="@style/learning_category_or_goal_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_goal_description"
+        app:layout_constraintTop_toBottomOf="@id/textGoalDescription"
         app:drawableBottomCompat="@drawable/green_line" />
 
 
-    <!-- Dropdown Element -->
+    <!-- Zugehörige Lernkategorie Dropdown -->
     <Spinner
-        android:id="@+id/dropdown_element"
+        android:id="@+id/relatedLearningCategoryDropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -217,11 +220,11 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/small_rectangle_for_create_question_and_tests"
         android:spinnerMode="dropdown"
-        app:layout_constraintTop_toBottomOf="@id/related_learning_category_label"
+        app:layout_constraintTop_toBottomOf="@id/relatedLearningCategoryLabel"
         />
 
     <ProgressBar
-        android:id="@+id/btn_progress_ar"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -238,7 +241,7 @@
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_home"
+        android:id="@+id/buttonHome"
         android:layout_width="92dp"
         android:layout_height="68dp"
         android:layout_marginStart="4dp"
@@ -247,13 +250,13 @@
         android:text="@string/home"
         android:textAppearance="@style/menu_button_text"
         app:iconPadding="-5dp"
-        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
+        app:layout_constraintBottom_toBottomOf="@id/backgroundBottomMenu"
         app:layout_constraintStart_toStartOf="parent"
         />
 
     <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_categories"
+        android:id="@+id/buttonLearningCategories"
         android:layout_width="126dp"
         android:layout_height="68dp"
         android:background="@android:color/transparent"
@@ -261,14 +264,14 @@
         android:text="@string/learning_categories"
         android:textAppearance="@style/menu_button_text"
         app:iconPadding="-5dp"
-        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
+        app:layout_constraintBottom_toBottomOf="@id/backgroundBottomMenu"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
 
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_goals"
+        android:id="@+id/buttonLearningGoals"
         android:layout_width="88dp"
         android:layout_height="68dp"
         android:layout_marginEnd="4dp"
@@ -277,7 +280,7 @@
         android:text="@string/learning_goals"
         android:textAppearance="@style/menu_button_text"
         app:iconPadding="-5dp"
-        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
-        app:layout_constraintRight_toRightOf="@id/background_bottom_menu"
-         />
+        app:layout_constraintBottom_toBottomOf="@id/backgroundBottomMenu"
+        app:layout_constraintRight_toRightOf="@id/backgroundBottomMenu"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
