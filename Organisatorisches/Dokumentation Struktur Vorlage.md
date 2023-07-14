@@ -12,14 +12,14 @@
 - Evaluierung der Plattformen und Programmiersprachen für die App-Entwicklung (Phillipp) Done
 
 ## Definition
-- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
+- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) Done
   - Lernen ist nicht gleich Verstehen Phillipp Done
-  - Synapsen Nico **ToDo**
-  - Neuronen & Neuronales Netz Nico **ToDo**
+  - Synapsen Nico Done
+  - Neuronen & Neuronales Netz Nico Done
   - Optimierter Lernplan Phillipp Done
   - Tagging Phillipp Done
-  - Lernkategorien & Lernziele Nico **ToDo**
-  - Gamification Nico **ToDo**
+  - Lernkategorien & Lernziele Nico Done
+  - Gamification Nico Done
 - Pflichtenheft Done
 - Use-Case-Diagramme (Nico) Done
 - Use-Case-Beschreibungen (Nico) Done
@@ -35,20 +35,22 @@
 - Prototyp (optional) **ToDo**
 - BPMN **ToDo** Phillipp
 - Begründung des Datenbankkonzepts Done Phillipp
-- Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
-- Design Patterns für relevante Problemstellungen **ToDo** Nico
+- Auswahl der Klassenbibliotheken/Frameworks Nico Done
+- Design Patterns für relevante Problemstellungen Nico Done
 - Software-Komponenten Done Phillipp
 - Gesamtkomposition Done Phillipp
 - Frontend Done Phillipp
 - Backend Done Phillipp
-- Deployment Diagramm **ToDo** Nico
-- Klassen Diagramm **ToDo** Nico
+- Deployment Diagramm  Nico Done
+- Klassen Diagramm Nico Done
 - Aktivitätsdiagramm **ToDo** Phillipp
 - Sequenzdiagramme **ToDo** Nico
 
 ## Implementierung
 - Deployment **ToDo**
 - Installationsanleitung **ToDo**
+  - Für Developer
+  - Für User
 - Code Conventions **ToDo**
 - Code Dokumentation **ToDo**
 - IT-Security (Firebase Authentifizierung) **ToDo**
