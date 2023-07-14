@@ -2,7 +2,6 @@ package com.example.learnahead_prototyp.UI.LearningCategory.Summary
 
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,13 +23,15 @@ import io.noties.markwon.syntax.Prism4jThemeDefault
 import org.commonmark.parser.Parser
 import org.commonmark.renderer.html.HtmlRenderer
 
-
+/**
+ * Ein [Fragment], das eine Vorschau des Summary anzeigt.
+ */
 @AndroidEntryPoint
 class SummaryPreviewFragment : Fragment() {
 
     private var currentUser: User? = null
-    private var currentLearningCategory: LearningCategory?= null
-    lateinit var binding: FragmentSummaryPreviewBinding
+    private var currentLearningCategory: LearningCategory? = null
+    private lateinit var binding: FragmentSummaryPreviewBinding
     private val summaryViewModel: SummaryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private var isEdit = false
@@ -38,22 +39,23 @@ class SummaryPreviewFragment : Fragment() {
     private var markdownOutput: String = ""
 
     /**
-     * Erstellt die View und gibt sie zurück.
-     * @param inflater Der LayoutInflater, der verwendet wird, um die View zu erstellen.
-     * @param container Der ViewGroup-Container, der die View enthält.
-     * @param savedInstanceState Das Bundle-Objekt, das den zuletzt gespeicherten Zustand enthält.
-     * @return Die erstellte View.
+     * Erstellt die View-Hierarchie des Fragments.
+     * @param inflater Der LayoutInflater, der verwendet wird, um die View-Hierarchie aufzubauen.
+     * @param container Der ViewGroup, in die die View-Hierarchie eingefügt wird.
+     * @param savedInstanceState Das Bundle, das den Zustand des Fragments enthält.
+     * @return Die View-Hierarchie des Fragments.
      */
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSummaryPreviewBinding.inflate(layoutInflater)
+        binding = FragmentSummaryPreviewBinding.inflate(inflater)
         return binding.root
     }
 
     /**
-     * Initialisiert die View und setzt die Listener auf die Schaltflächen. Ruft die UpdateUI()-Methode auf,
+     * Initialisiert die View und setzt die Listener auf die Schaltflächen. Ruft die [updateUI]()-Methode auf,
      * um die View mit den vorhandenen Daten zu aktualisieren.
      * @param view Die erstellte View.
      * @param savedInstanceState Das Bundle-Objekt, das den zuletzt gespeicherten Zustand enthält.
@@ -67,17 +69,27 @@ class SummaryPreviewFragment : Fragment() {
         updateUI()
     }
 
+    /**
+     * Holt den aktuellen Benutzer aus der Datenbank.
+     */
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
     }
 
+    /**
+     * Aktualisiert die Benutzeroberfläche des Fragments.
+     */
     private fun updateUI() {
-        // Holt die Lernkategorie aus den Argumenten und setzt den Text des Labels
         currentLearningCategory = arguments?.getParcelable("learning_category")
         binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
     }
 
-    fun convertMarkdownToHtml(markdown: String): String {
+    /**
+     * Konvertiert Markdown-Text in HTML-Text.
+     * @param markdown Der Markdown-Text.
+     * @return Der HTML-Text.
+     */
+    private fun convertMarkdownToHtml(markdown: String): String {
         val parser = Parser.builder().build()
         val document = parser.parse(markdown)
 
@@ -86,12 +98,22 @@ class SummaryPreviewFragment : Fragment() {
 
         return html
     }
-    fun displayMarkdownInTextView(markdownText: String, textView: TextView) {
+
+    /**
+     * Zeigt den Markdown-Text in einem TextView an.
+     * @param markdownText Der Markdown-Text.
+     * @param textView Der TextView, in dem der Markdown-Text angezeigt werden soll.
+     */
+    private fun displayMarkdownInTextView(markdownText: String, textView: TextView) {
         val htmlText = convertMarkdownToHtml(markdownText)
         val spannedText = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_COMPACT)
 
         textView.text = spannedText
     }
+
+    /**
+     * Parst den Markdown-Text und zeigt ihn an.
+     */
     private fun parseMarkdown() {
         val imagesPlugin = ImagesPlugin.create { plugin ->
             plugin.addSchemeHandler(
@@ -106,22 +128,14 @@ class SummaryPreviewFragment : Fragment() {
         currentSummary?.let { markwon.setMarkdown(binding.markdownViewText, it.content) }
     }
 
-
-
     /**
-     * Erstellt alle notwendigen EventListener für das Fragment
+     * Setzt die Event-Listener für die Buttons und Views des Fragments.
      */
     private fun setEventListener() {
-        // Klick Listener zum Weiterleiten auf den Home Screen
         binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_homeFragment) }
-
-        // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
         binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_learningCategoryListFragment) }
-
-        // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_goalListingFragment) }
 
-        // Setzt den Event-Listener für den Logout-Button
         binding.logout.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_summaryPreviewFragment_to_loginFragment)
@@ -136,14 +150,10 @@ class SummaryPreviewFragment : Fragment() {
                 })
         }
 
-        // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.backIcon.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_summaryFragment,
             Bundle().apply {
                 putParcelable("learning_category", currentLearningCategory)
             })
         }
-
     }
-
-
 }

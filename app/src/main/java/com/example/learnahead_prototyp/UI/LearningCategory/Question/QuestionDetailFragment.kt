@@ -29,9 +29,9 @@ import com.example.learnahead_prototyp.databinding.FragmentQuestionDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Das [LearningCategoryListFragment] ist für die Anzeige der Liste der Lernkategorien zuständig und bietet auch die Möglichkeit,
- * diese zu bearbeiten, zu löschen oder detaillierte Informationen zu einer Lernkategorie anzuzeigen. Diese Klasse ist mit
- * [AndroidEntryPoint] annotiert, um die Injection von [ViewModel]s zu ermöglichen.
+ * Das [QuestionDetailFragment] ist für die Anzeige und Bearbeitung einer einzelnen Frage zuständig.
+ * Es bietet Funktionen zum Erstellen, Aktualisieren und Validieren von Fragen und verwaltet die zugehörigen ViewModel-Objekte.
+ * Diese Klasse ist mit [AndroidEntryPoint] annotiert, um die Injection von [ViewModel]s zu ermöglichen.
  */
 @AndroidEntryPoint
 class QuestionDetailFragment : Fragment() {
@@ -39,7 +39,7 @@ class QuestionDetailFragment : Fragment() {
     private var currentUser: User? = null
 
     // Konstante für das Logging-Tag
-    val TAG: String = "LearningCategoryListFragment"
+    val TAG: String = "QuestionDetailFragment"
 
     // Deklaration der benötigten Variablen
     lateinit var binding: FragmentQuestionDetailBinding
@@ -54,10 +54,9 @@ class QuestionDetailFragment : Fragment() {
 
     var list: MutableList<LearningCategory> = arrayListOf()
 
-
-
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
+     *
      * @param inflater Das [LayoutInflater]-Objekt, das verwendet wird, um das Layout aufzublasen.
      * @param container Die übergeordnete [ViewGroup], an die die View angehängt werden soll.
      * @param savedInstanceState Das [Bundle]-Objekt, das den Zustand des Fragments enthält.
@@ -74,28 +73,34 @@ class QuestionDetailFragment : Fragment() {
         return binding.root
     }
 
-
     /**
      * Diese Funktion initialisiert die View und registriert alle Observer, die auf Veränderungen in den ViewModel-Objekten achten.
+     *
      * @param view Die View der Fragment-Klasse
      * @param savedInstanceState Der gespeicherte Zustand des Fragments
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observer()
+        observeViewModels()
         setLocalCurrentUser()
-        setEventListener()
+        setEventListeners()
         populateDropdown()
         updateUI()
     }
 
+    /**
+     * Setzt den aktuellen Benutzer lokal, indem die Sitzung über das AuthViewModel abgerufen wird.
+     */
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
     }
 
-    private fun observer() {
-        // Eine Beobachtung auf viewModel.addLearningCategory ausführen
+    /**
+     * Beobachtet die ViewModel-Objekte und reagiert auf Änderungen, indem entsprechende Aktionen ausgeführt werden.
+     */
+    private fun observeViewModels() {
+        // Eine Beobachtung auf viewModel.addQuestion ausführen
         questionViewModel.addQuestion.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
@@ -110,12 +115,13 @@ class QuestionDetailFragment : Fragment() {
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.progressBar.hide()
-                    if(state.data != null && currentUser != null) {
+                    if (state.data != null && currentUser != null) {
                         learnCategoryViewModel.currentSelectedLearningCategory.value!!.questions.add(state.data)
                         learnCategoryViewModel.updateLearningCategory(learnCategoryViewModel.currentSelectedLearningCategory.value!!)
 
                         // Die neue Lernkategorie dem User hinzufügen
-                        val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value!!.id }
+                        val indexOfCurrentObject =
+                            currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value!!.id }
                         if (indexOfCurrentObject != -1) {
                             currentUser!!.learningCategories[indexOfCurrentObject] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
                         } else {
@@ -125,15 +131,13 @@ class QuestionDetailFragment : Fragment() {
                         authViewModel.updateUserInfo(currentUser!!)
                         findNavController().navigate(R.id.action_questionDetailFragment_to_questionListingFragment)
                         toast("Die Lernkategorie konnte erfolgreich erstellt werden")
-                    }
-                    else {
+                    } else {
                         toast("Die Lernkategorie konnte nicht erstellt werden")
                     }
                 }
             }
         }
 
-        // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
@@ -154,24 +158,31 @@ class QuestionDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Füllt das Dropdown-Menü mit den Dropdown-Elementen.
+     */
     private fun populateDropdown() {
-        val dropdownItems = listOf("Karteikarte - Umdrehen", "Weitere Fragen Arten folgen.") // Replace with your dropdown items
+        val dropdownItems = listOf("Karteikarte - Umdrehen", "Weitere Fragen Arten folgen.") // Mit Ihren Dropdown-Elementen ersetzen
 
         val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItems)
         binding.dropdownElement.adapter = adapter
     }
 
-
-
+    /**
+     * Aktualisiert die Benutzeroberfläche basierend auf den aktuellen Werten im ViewModel.
+     */
     private fun updateUI() {
-        // Retrieve the selected learning category from the shared view model
+        // Die ausgewählte Lernkategorie aus dem Shared ViewModel abrufen
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
 
-        // Set the text of the learning_goal_menu_header_label TextView
+        // Den Text des learning_goal_menu_header_label TextViews setzen
         binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Fragen"
     }
 
-    private fun setEventListener() {
+    /**
+     * Setzt die Event-Listener für verschiedene UI-Elemente.
+     */
+    private fun setEventListeners() {
         // Setzt den Event-Listener für den Home-Button
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(R.id.action_questionDetailFragment_to_homeFragment)
@@ -199,8 +210,8 @@ class QuestionDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.buttonSaveQuestion.setOnClickListener{
-            if(isEdit)
+        binding.buttonSaveQuestion.setOnClickListener {
+            if (isEdit)
                 updateQuestion()
             else
                 createQuestion()
@@ -220,19 +231,28 @@ class QuestionDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Aktualisiert die Frage mit den geänderten Werten.
+     */
     private fun updateQuestion() {
-
+        // TODO: Implementieren Sie die Logik zum Aktualisieren der Frage
     }
 
+    /**
+     * Erstellt eine neue Frage basierend auf den eingegebenen Werten.
+     */
     private fun createQuestion() {
         if (validation()) {
             questionViewModel.addQuestion(getQuestion())
         }
     }
 
+    /**
+     * Gibt eine [Question] mit den eingegebenen Werten zurück.
+     */
     private fun getQuestion(): Question {
         val tagsList = mutableListOf<Tag>()
-        tagsListString.forEach{ tagName ->
+        tagsListString.forEach { tagName ->
             val tag = Tag(
                 name = tagName
             )
@@ -247,10 +267,18 @@ class QuestionDetailFragment : Fragment() {
         )
     }
 
+    /**
+     * Führt die Validierung der eingegebenen Werte durch und gibt `true` zurück, wenn die Validierung erfolgreich ist, andernfalls `false`.
+     */
     private fun validation(): Boolean {
         return true
     }
 
+    /**
+     * Fügt der Liste der Tags einen neuen Tag hinzu.
+     *
+     * @param tag Der hinzuzufügende Tag.
+     */
     private fun addTag(tag: String) {
         if (tagsListString.size >= MAX_TAGS) {
             // Maximum limit reached, show a notification
@@ -286,7 +314,6 @@ class QuestionDetailFragment : Fragment() {
 
             val previousTagParams = previousTag.layoutParams as RelativeLayout.LayoutParams
             val previousTagRight = previousTagParams.leftMargin + previousTag.width
-            val availableSpace = binding.tagsContainer.width - previousTagRight - layoutParams.marginStart
 
             val currentLineWidth = calculateCurrentLineWidth(binding.tagsContainer)
             val containerWidth = binding.tagsContainer.width
@@ -311,6 +338,11 @@ class QuestionDetailFragment : Fragment() {
         binding.tagsContainer.addView(tagView)
     }
 
+    /**
+     * Entfernt den angegebenen Tag aus der Liste der Tags.
+     *
+     * @param tagId Die ID des Tags, der entfernt werden soll.
+     */
     private fun removeTag(tagId: Int) {
         val tagToRemove = binding.tagsContainer.findViewById<View>(tagId)
         val tagText = tagToRemove.findViewById<TextView>(R.id.tag_text)
@@ -341,7 +373,12 @@ class QuestionDetailFragment : Fragment() {
         }
     }
 
-
+    /**
+     * Berechnet die aktuelle Breite der Tags in der TagsContainer-ViewGroup.
+     *
+     * @param tagsContainer Die ViewGroup, die die Tags enthält.
+     * @return Die aktuelle Breite der Tags in Pixeln.
+     */
     private fun calculateCurrentLineWidth(tagsContainer: ViewGroup): Int {
         var currentLineWidth = 0
         var lastLineStartIndex = -1

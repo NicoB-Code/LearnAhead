@@ -20,11 +20,9 @@ import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentSummaryBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 /**
- * A simple [Fragment] subclass.
- * Use the [SummaryFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Ein einfaches [Fragment]-Unterklasse.
+ * Verwenden Sie die [SummaryFragment.newInstance]-Methode, um eine Instanz dieses Fragments zu erstellen.
  */
 @AndroidEntryPoint
 class SummaryFragment : Fragment() {
@@ -32,7 +30,7 @@ class SummaryFragment : Fragment() {
     private lateinit var binding: FragmentSummaryBinding
     private val authViewModel: AuthViewModel by viewModels()
     private val summaryViewModel: SummaryViewModel by viewModels()
-    private var currentLearningCategory: LearningCategory?= null
+    private var currentLearningCategory: LearningCategory? = null
     private var deletePosition: Int = -1
     val TAG: String = "SummaryFragment"
     var list: MutableList<Summary> = arrayListOf()
@@ -40,34 +38,21 @@ class SummaryFragment : Fragment() {
     private val adapter by lazy {
         SummaryAdapter(
             onItemClicked = { pos, item ->
-            findNavController().navigate(
-                R.id.action_summaryFragment_to_innerSummaryFragment,
-                Bundle().apply {
-                    putString("type","view")
-                    putParcelable("summary", item)
-                    putParcelable("learning_category", currentLearningCategory)
-                }
-            )
-        },
+                findNavController().navigate(
+                    R.id.action_summaryFragment_to_innerSummaryFragment,
+                    Bundle().apply {
+                        putString("type", "view")
+                        putParcelable("summary", item)
+                        putParcelable("learning_category", currentLearningCategory)
+                    }
+                )
+            },
             onDeleteClicked = { pos, item ->
                 deletePosition = pos
                 summaryViewModel.deleteSummary(item)
                 updateUserObject(item, true)
             }
         )
-
-    }
-
-    private fun updateUserObject(summary: Summary, deleteSummary: Boolean) {
-        if (deleteSummary && currentUser != null) {
-            currentLearningCategory?.summaries?.remove(summary)
-            val foundIndex =
-                currentUser!!.learningCategories.indexOfFirst { it.id == currentLearningCategory?.id }
-            if (foundIndex != -1) {
-                currentUser!!.learningCategories[foundIndex] = currentLearningCategory!!
-            }
-            currentUser?.let { authViewModel.updateUserInfo(it) }
-        }
     }
 
     /**
@@ -82,7 +67,7 @@ class SummaryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+        // Die Layout-Datei für dieses Fragment aufblasen
         binding = FragmentSummaryBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -95,94 +80,110 @@ class SummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Setzt die Event-Listener, beobachtet die LiveData-Objekte und aktualisiert die UI
+        // Event-Listener einstellen, LiveData-Objekte beobachten und UI aktualisieren
         observer()
         setLocalCurrentUser()
         setEventListener()
         updateUI()
 
-
-        // Setzt den Adapter für das RecyclerView
+        // Adapter für das RecyclerView setzen
         binding.recyclerSummaryView.adapter = adapter
     }
 
+    /**
+     * Aktualisiert das Benutzerobjekt.
+     * @param summary Das Summary-Objekt, das aktualisiert wurde.
+     * @param deleteSummary Gibt an, ob das Summary-Objekt gelöscht wurde.
+     */
+    private fun updateUserObject(summary: Summary, deleteSummary: Boolean) {
+        if (deleteSummary && currentUser != null) {
+            currentLearningCategory?.summaries?.remove(summary)
+            val foundIndex =
+                currentUser!!.learningCategories.indexOfFirst { it.id == currentLearningCategory?.id }
+            if (foundIndex != -1) {
+                currentUser!!.learningCategories[foundIndex] = currentLearningCategory!!
+            }
+            currentUser?.let { authViewModel.updateUserInfo(it) }
+        }
+    }
 
     /**
-     * Aktualisiert die UI des Fragments.
+     * Aktualisiert die Benutzeroberfläche des Fragments.
      */
     private fun updateUI() {
-        // Holt die Lernkategorie aus den Argumenten und setzt den Text des Labels
+        // Lernkategorie aus den Argumenten erhalten und den Text des Labels setzen
         currentLearningCategory = arguments?.getParcelable("learning_category")
         binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
     }
 
     /**
-     * Holt den aktuellen Benutzer aus der Datenbank.
+     * Den aktuellen Benutzer aus der Datenbank abrufen.
      */
     private fun setLocalCurrentUser() {
-        // Holt den aktuellen Benutzer aus der Datenbank und speichert ihn in der Variable currentUser
+        // Aktuellen Benutzer aus der Datenbank abrufen und in der Variable "currentUser" speichern
         authViewModel.getSession()
     }
 
     /**
-     * Setzt die Event-Listener für die Buttons und Views des Fragments.
+     * Event-Listener für Buttons und Views des Fragments einstellen.
      */
     private fun setEventListener() {
-        // Setzt den Event-Listener für den Home-Button
+        // Event-Listener für den Home-Button einstellen
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(R.id.action_summaryFragment_to_homeFragment)
         }
 
         binding.buttonAddSummary.setOnClickListener {
-            findNavController().navigate(R.id.action_summaryFragment_to_createSummaryFragment,
+            findNavController().navigate(
+                R.id.action_summaryFragment_to_createSummaryFragment,
                 Bundle().apply {
-                    putString("type","view")
+                    putString("type", "view")
                     putParcelable("learning_category", currentLearningCategory)
                 })
         }
 
-        // Setzt den Event-Listener für den Learning Goals-Button
+        // Event-Listener für den Learning Goals-Button einstellen
         binding.buttonLearningGoals.setOnClickListener {
             findNavController().navigate(R.id.action_summaryFragment_to_goalListingFragment)
         }
 
-        // Setzt den Event-Listener für den Learning Categories-Button
+        // Event-Listener für den Learning Categories-Button einstellen
         binding.buttonLearningCategories.setOnClickListener {
             findNavController().navigate(R.id.action_summaryFragment_to_learningCategoryListFragment)
         }
 
-        // Setzt den Event-Listener für den Logout-Button
+        // Event-Listener für den Logout-Button einstellen
         binding.logout.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_summaryFragment_to_loginFragment)
             }
         }
 
-        // Setzt den Event-Listener für das Back-Icon
+        // Event-Listener für das Back-Icon einstellen
         binding.backIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_summaryFragment_to_learningCategoryInnerViewFragment,
+            findNavController().navigate(
+                R.id.action_summaryFragment_to_learningCategoryInnerViewFragment,
                 Bundle().apply {
-                    putString("type","view")
+                    putString("type", "view")
                     putParcelable("learning_category", currentLearningCategory)
                 })
         }
-
     }
 
     /**
-     * Beobachtet die LiveData-Objekte der ViewModels und aktualisiert die UI entsprechend.
+     * Beobachtet die LiveData-Objekte der ViewModels und aktualisiert die Benutzeroberfläche entsprechend.
      */
     private fun observer() {
-        // Beobachtet die LiveData-Objekte des SummaryViewModels und aktualisiert die UI entsprechend
+        // Beobachtet die LiveData-Objekte des SummaryViewModels und aktualisiert die Benutzeroberfläche entsprechend
         summaryViewModel.summary.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    // Fortschrittsanzeige anzeigen
+                    // Zeige den Fortschrittsbalken an
                     binding.progressBar.show()
                 }
 
                 is UiState.Failure -> {
-                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    // Verberge den Fortschrittsbalken und zeige die Fehlermeldung an
                     binding.progressBar.hide()
                     toast(state.error)
                 }
@@ -196,16 +197,16 @@ class SummaryFragment : Fragment() {
             }
         }
         summaryViewModel.deleteSummary.observe(viewLifecycleOwner) { state ->
-            when(state) {
+            when (state) {
                 is UiState.Loading -> {
-                    // Fortschrittsanzeige anzeigen
+                    // Zeige den Fortschrittsbalken an
                     binding.progressBar.show()
                 }
 
                 is UiState.Failure -> {
-                // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
-                binding.progressBar.hide()
-                toast(state.error)
+                    // Verberge den Fortschrittsbalken und zeige die Fehlermeldung an
+                    binding.progressBar.hide()
+                    toast(state.error)
                 }
 
                 is UiState.Success -> {
@@ -218,10 +219,10 @@ class SummaryFragment : Fragment() {
                         deletePosition = -1
                     }
                 }
-                }
             }
+        }
 
-        // Beobachtet die LiveData-Objekte des AuthViewModels und aktualisiert die UI entsprechend
+        // Beobachtet die LiveData-Objekte des AuthViewModels und aktualisiert die Benutzeroberfläche entsprechend
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             binding.progressBar.visibility = when (state) {
                 is UiState.Loading -> View.VISIBLE
@@ -230,7 +231,7 @@ class SummaryFragment : Fragment() {
                     View.GONE
                 }
                 is UiState.Success -> {
-                    Log.d(TAG,"Success")
+                    Log.d(TAG, "Success")
                     currentUser = state.data
                     currentLearningCategory?.let { summaryViewModel.getSummaries(currentUser, it) }
                     View.GONE

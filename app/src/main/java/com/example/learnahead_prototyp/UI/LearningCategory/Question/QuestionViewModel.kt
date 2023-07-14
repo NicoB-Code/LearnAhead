@@ -12,8 +12,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
- * HiltViewModel class that represents the ViewModel for the LearningCategories feature.
- * @param repository an implementation of ILearningCategoryRepository for the LearningCategories feature.
+ * HiltViewModel-Klasse, die das ViewModel für die Frage-Funktion repräsentiert.
+ * @param repository Eine Implementierung von IQuestionRepository für die Frage-Funktion.
  */
 @HiltViewModel
 class QuestionViewModel @Inject constructor(
@@ -21,7 +21,7 @@ class QuestionViewModel @Inject constructor(
 ) : ViewModel() {
 
     /**
-     * MutableLiveData that holds the current state of the list of LearningCategories.
+     * MutableLiveData, das den aktuellen Zustand der Liste der Fragen enthält.
      */
     private val _questions = MutableLiveData<UiState<List<Question>>>()
     val question: LiveData<UiState<List<Question>>>
@@ -31,34 +31,40 @@ class QuestionViewModel @Inject constructor(
     val currentQuestion: LiveData<Question?>
         get() = _currentQuestion
 
+    /**
+     * Legt die aktuelle Frage fest.
+     * @param question Die Frage, die festgelegt werden soll.
+     */
     fun setCurrentQuestion(question: Question?) {
         _currentQuestion.value = question
     }
 
     /**
-     * MutableLiveData that holds the current state of adding a new LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand des Hinzufügens einer neuen Frage enthält.
      */
     private val _addQuestion = MutableLiveData<UiState<Question?>>()
     val addQuestion: LiveData<UiState<Question?>>
         get() = _addQuestion
 
     /**
-     * MutableLiveData that holds the current state of updating a LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand der Aktualisierung einer Frage enthält.
      */
     private val _updateQuestion = MutableLiveData<UiState<Question?>>()
     val updateQuestion: LiveData<UiState<Question?>>
         get() = _updateQuestion
 
     /**
-     * MutableLiveData that holds the current state of deleting a LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand des Löschens einer Frage enthält.
      */
     private val _deleteQuestion = MutableLiveData<UiState<String>>()
     val deleteQuestion: LiveData<UiState<String>>
         get() = _deleteQuestion
 
     /**
-     * Calls the repository to get the list of LearningCategories for the given User and updates the _learningCategories MutableLiveData.
-     * @param user the User for which to retrieve the LearningCategories.
+     * Ruft das Repository auf, um die Liste der Fragen für den angegebenen Benutzer abzurufen,
+     * und aktualisiert das _questions MutableLiveData.
+     * @param user Der Benutzer, für den die Fragen abgerufen werden sollen.
+     * @param learningCategory Die Lernkategorie, zu der die Fragen gehören sollen.
      */
     fun getQuestions(user: User?, learningCategory: LearningCategory) {
         _questions.value = UiState.Loading
@@ -66,8 +72,8 @@ class QuestionViewModel @Inject constructor(
     }
 
     /**
-     * Calls the repository to add a new LearningCategory and updates the _addLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to add.
+     * Ruft das Repository auf, um eine neue Frage hinzuzufügen, und aktualisiert das _addQuestion MutableLiveData.
+     * @param question Die Frage, die hinzugefügt werden soll.
      */
     fun addQuestion(question: Question) {
         _addQuestion.value = UiState.Loading
@@ -75,8 +81,8 @@ class QuestionViewModel @Inject constructor(
     }
 
     /**
-     * Calls the repository to update a LearningCategory and updates the _updateLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to update.
+     * Ruft das Repository auf, um eine Frage zu aktualisieren, und aktualisiert das _updateQuestion MutableLiveData.
+     * @param question Die Frage, die aktualisiert werden soll.
      */
     fun updateQuestion(question: Question) {
         _updateQuestion.value = UiState.Loading
@@ -84,8 +90,8 @@ class QuestionViewModel @Inject constructor(
     }
 
     /**
-     * Calls the repository to delete a LearningCategory and updates the _deleteLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to delete.
+     * Ruft das Repository auf, um eine Frage zu löschen, und aktualisiert das _deleteQuestion MutableLiveData.
+     * @param question Die Frage, die gelöscht werden soll.
      */
     fun deleteQuestion(question: Question) {
         _deleteQuestion.value = UiState.Loading

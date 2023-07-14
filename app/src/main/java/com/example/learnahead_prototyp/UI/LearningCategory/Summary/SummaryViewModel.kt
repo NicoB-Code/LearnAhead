@@ -12,16 +12,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
- * HiltViewModel class that represents the ViewModel for the LearningCategories feature.
- * @param repository an implementation of ILearningCategoryRepository for the LearningCategories feature.
+ * ViewModel-Klasse für die Zusammenfassungsansicht.
+ * @param repository Eine Implementierung von ISummaryRepository für die Zusammenfassungsansicht.
  */
 @HiltViewModel
 class SummaryViewModel @Inject constructor(
-    val repository: ISummaryRepository
+    private val repository: ISummaryRepository
 ) : ViewModel() {
 
     /**
-     * MutableLiveData that holds the current state of the list of LearningCategories.
+     * MutableLiveData, das den aktuellen Zustand der Liste der Zusammenfassungen enthält.
      */
     private val _summaries = MutableLiveData<UiState<List<Summary>>>()
     val summary: LiveData<UiState<List<Summary>>>
@@ -32,29 +32,31 @@ class SummaryViewModel @Inject constructor(
         get() = _currentLearningCategory
 
     /**
-     * MutableLiveData that holds the current state of adding a new LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand des Hinzufügens einer neuen Zusammenfassung enthält.
      */
     private val _addSummary = MutableLiveData<UiState<Summary?>>()
     val addSummary: LiveData<UiState<Summary?>>
         get() = _addSummary
 
     /**
-     * MutableLiveData that holds the current state of updating a LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand der Aktualisierung einer Zusammenfassung enthält.
      */
     private val _updateSummary = MutableLiveData<UiState<Summary?>>()
     val updateSummary: LiveData<UiState<Summary?>>
         get() = _updateSummary
 
     /**
-     * MutableLiveData that holds the current state of deleting a LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand des Löschens einer Zusammenfassung enthält.
      */
     private val _deleteSummary = MutableLiveData<UiState<String>>()
     val deleteSummary: LiveData<UiState<String>>
         get() = _deleteSummary
 
     /**
-     * Calls the repository to get the list of LearningCategories for the given User and updates the _learningCategories MutableLiveData.
-     * @param user the User for which to retrieve the LearningCategories.
+     * Ruft das Repository auf, um die Liste der Zusammenfassungen für den gegebenen Benutzer und die gegebene Lernkategorie abzurufen
+     * und aktualisiert das _summaries MutableLiveData.
+     * @param user Der Benutzer, für den die Zusammenfassungen abgerufen werden sollen.
+     * @param learningCategory Die Lernkategorie, für die die Zusammenfassungen abgerufen werden sollen.
      */
     fun getSummaries(user: User?, learningCategory: LearningCategory) {
         _summaries.value = UiState.Loading
@@ -62,8 +64,8 @@ class SummaryViewModel @Inject constructor(
     }
 
     /**
-     * Calls the repository to add a new LearningCategory and updates the _addLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to add.
+     * Ruft das Repository auf, um eine neue Zusammenfassung hinzuzufügen und aktualisiert das _addSummary MutableLiveData.
+     * @param summary Die hinzuzufügende Zusammenfassung.
      */
     fun addSummary(summary: Summary) {
         _addSummary.value = UiState.Loading
@@ -71,13 +73,18 @@ class SummaryViewModel @Inject constructor(
     }
 
     /**
-     * Calls the repository to delete a LearningCategory and updates the _deleteLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to delete.
+     * Ruft das Repository auf, um eine Zusammenfassung zu löschen und aktualisiert das _deleteSummary MutableLiveData.
+     * @param summary Die zu löschende Zusammenfassung.
      */
     fun deleteSummary(summary: Summary) {
         _deleteSummary.value = UiState.Loading
         repository.deleteSummary(summary) { _deleteSummary.value = it }
     }
+
+    /**
+     * Ruft das Repository auf, um eine Zusammenfassung zu aktualisieren und aktualisiert das _updateSummary MutableLiveData.
+     * @param summary Die zu aktualisierende Zusammenfassung.
+     */
     fun updateSummary(summary: Summary){
         _updateSummary.value = UiState.Loading
         repository.updateSummary(summary) { _updateSummary.value = it}

@@ -23,40 +23,40 @@ import com.example.learnahead_prototyp.databinding.FragmentQuestionListingBindin
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Das [LearningCategoryListFragment] ist für die Anzeige der Liste der Lernkategorien zuständig und bietet auch die Möglichkeit,
- * diese zu bearbeiten, zu löschen oder detaillierte Informationen zu einer Lernkategorie anzuzeigen. Diese Klasse ist mit
+ * Das [QuestionListingFragment] ist für die Anzeige der Liste der Fragen zuständig und bietet auch die Möglichkeit,
+ * diese zu bearbeiten, zu löschen oder detaillierte Informationen zu einer Frage anzuzeigen. Diese Klasse ist mit
  * [AndroidEntryPoint] annotiert, um die Injection von [ViewModel]s zu ermöglichen.
  */
 @AndroidEntryPoint
 class QuestionListingFragment : Fragment() {
 
-    private var currentUser: User? = null
-    private var searchQuery: String = ""
-
     // Konstante für das Logging-Tag
-    val TAG: String = "LearningCategoryListFragment"
+    private val TAG: String = "QuestionListingFragment"
 
     // Deklaration der benötigten Variablen
-    lateinit var binding: FragmentQuestionListingBinding
+    private lateinit var binding: FragmentQuestionListingBinding
     private val authViewModel: AuthViewModel by viewModels()
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val questionViewModel: QuestionViewModel by activityViewModels()
     private var deletePosition: Int = -1
-    var list: MutableList<Question> = arrayListOf()
+    private var list: MutableList<Question> = arrayListOf()
+    private var currentUser: User? = null
+    private var searchQuery: String = ""
 
     private val adapter by lazy {
         QuestionListingAdapter(
             onItemClicked = { pos, item ->
-                // Navigation zum Lernkategorie-Detail-Fragment mit Parameter-Übergabe
+                // Navigation zum Frage-Detail-Fragment mit Parameter-Übergabe
                 findNavController().navigate(
                     R.id.action_questionListingFragment_to_questionDetailFragment,
                     Bundle().apply {
                         putString("type", "view")
                         putParcelable("question", item)
-                    })
+                    }
+                )
             },
             onDeleteClicked = { pos, item ->
-                // Speichern der zu löschenden Position und Löschen der Lernkategorie über das ViewModel
+                // Speichern der zu löschenden Position und Löschen der Frage über das ViewModel
                 deletePosition = pos
                 questionViewModel.deleteQuestion(item)
             }
@@ -65,6 +65,7 @@ class QuestionListingFragment : Fragment() {
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
+     *
      * @param inflater Das [LayoutInflater]-Objekt, das verwendet wird, um das Layout aufzublasen.
      * @param container Die übergeordnete [ViewGroup], an die die View angehängt werden soll.
      * @param savedInstanceState Das [Bundle]-Objekt, das den Zustand des Fragments enthält.
@@ -76,7 +77,7 @@ class QuestionListingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Das Binding-Objekt für das Fragment-Layout wird initialisiert.
-        binding = FragmentQuestionListingBinding.inflate(layoutInflater)
+        binding = FragmentQuestionListingBinding.inflate(inflater, container, false)
         // Die erzeugte View-Instanz wird zurückgegeben.
         return binding.root
     }
@@ -84,14 +85,15 @@ class QuestionListingFragment : Fragment() {
 
     /**
      * Diese Funktion initialisiert die View und registriert alle Observer, die auf Veränderungen in den ViewModel-Objekten achten.
+     *
      * @param view Die View der Fragment-Klasse
      * @param savedInstanceState Der gespeicherte Zustand des Fragments
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setEventListener()
-        observer()
+        setEventListeners()
+        observe()
         setLocalCurrentUser()
         updateUI()
 
@@ -99,12 +101,18 @@ class QuestionListingFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
+    /**
+     * Holt den aktuellen Benutzer aus der Datenbank und speichert ihn in der Variable currentUser.
+     */
     private fun setLocalCurrentUser() {
-        // Holt den aktuellen Benutzer aus der Datenbank und speichert ihn in der Variable currentUser
         authViewModel.getSession()
     }
-    private fun observer() {
-        // Observer für "deleteLearningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen beim Löschen von Lernkategorien.
+
+    /**
+     * Registriert die Observer für Datenänderungen in den ViewModels.
+     */
+    private fun observe() {
+        // Observer für das "currentUser"-Objekt im "authViewModel". Dieser überwacht alle Änderungen beim Abrufen des aktuellen Benutzers.
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -119,15 +127,15 @@ class QuestionListingFragment : Fragment() {
                 }
 
                 is UiState.Success -> {
-                    // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
+                    // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Fragen für die ausgewählte Lernkategorie abrufen
                     binding.progressBar.hide()
-                    this.currentUser = state.data
+                    currentUser = state.data
                     questionViewModel.getQuestions(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
                 }
             }
         }
 
-        // Observer für "learningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen in der Liste der Lernkategorien.
+        // Observer für das "question"-Objekt im "questionViewModel". Dieser überwacht alle Änderungen in der Liste der Fragen.
         questionViewModel.question.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -142,7 +150,7 @@ class QuestionListingFragment : Fragment() {
                 }
 
                 is UiState.Success -> {
-                    // Fortschrittsanzeige ausblenden und Liste der Benutzerziele aktualisieren
+                    // Fortschrittsanzeige ausblenden und Liste der Fragen aktualisieren
                     binding.progressBar.hide()
                     list = state.data.toMutableList()
                     adapter.updateList(list)
@@ -151,20 +159,26 @@ class QuestionListingFragment : Fragment() {
         }
     }
 
+    /**
+     * Aktualisiert die UI-Elemente basierend auf den Daten in den ViewModels.
+     */
     private fun updateUI() {
-        // Retrieve the selected learning category from the shared view model
+        // Die ausgewählte Lernkategorie aus dem Shared ViewModel abrufen
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
 
-        // Set the text of the learning_goal_menu_header_label TextView
+        // Den Text des learningGoalMenuHeaderLabel TextViews setzen
         binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Fragen"
     }
 
+    /**
+     * Führt eine Suche in der Frage-Liste basierend auf der eingegebenen Suchanfrage aus und zeigt die entsprechenden Ergebnisse an.
+     */
     private fun performSearch() {
         val filteredList = if (searchQuery.isEmpty()) {
-            // If the search query is empty, show all items
+            // Wenn die Suchanfrage leer ist, werden alle Elemente angezeigt
             list.toMutableList()
         } else {
-            // Filter the list based on the search query
+            // Filtert die Liste basierend auf der Suchanfrage
             list.filter { question ->
                 question.tags.any { tag ->
                     tag.name.contains(searchQuery, ignoreCase = true)
@@ -172,31 +186,34 @@ class QuestionListingFragment : Fragment() {
             }.toMutableList()
         }
 
-        // Update the adapter with the filtered list
+        // Aktualisiert den Adapter mit der gefilterten Liste
         adapter.updateList(filteredList)
     }
 
-    private fun setEventListener() {
-        // Set up the search functionality
+    /**
+     * Setzt die Event-Listener für die UI-Elemente.
+     */
+    private fun setEventListeners() {
+        // Setzt die Suchfunktion auf
         binding.questionSearchBar.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Not needed
+                // Nicht benötigt
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Update the search query
+                // Aktualisiert die Suchanfrage
                 searchQuery = s.toString()
 
-                // Perform the search
+                // Führt die Suche aus
                 performSearch()
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // Not needed
+                // Nicht benötigt
             }
         })
 
-        // Setzt den Event-Listener für den Home-Button
+    // Setzt den Event-Listener für den Home-Button
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(R.id.action_questionListingFragment_to_homeFragment)
         }
@@ -223,8 +240,9 @@ class QuestionListingFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        // Setzt den Event-Listener für den Save Question-Button
         binding.buttonSaveQuestion.setOnClickListener {
-                findNavController().navigate(R.id.action_questionListingFragment_to_questionDetailFragment)
+            findNavController().navigate(R.id.action_questionListingFragment_to_questionDetailFragment)
         }
     }
 }
