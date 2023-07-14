@@ -274,9 +274,41 @@ class TestDetailFragment : Fragment() {
         val tagText = tagView.findViewById<TextView>(R.id.tag_text)
         val tagValue = tagText.text.toString()
 
+        // Entfernt den Tag aus der Liste
         tagsList.remove(tagValue)
+
+        // Entfernt die Tag-Ansicht aus dem Container
         binding.tagsContainer.removeView(tagView)
+
+        // Aktualisiert die Fragenliste, indem die Fragen, die den entfernten Tag enthalten, entfernt werden
+        questionsToAddToTheTest = questionsToAddToTheTest.filterNot { question ->
+            question.tags.any { it.name == tagValue }
+        }.toMutableList()
+
+        // Aktualisiert die RecyclerView-Liste der Fragen
+        adapter.updateList(questionsToAddToTheTest)
+
+        // Aktualisiert die Höhe des Containers basierend auf der Anzahl der verbleibenden Tags und deren Größe
+        val containerHeight = binding.tagsContainer.height - tagView.height - resources.getDimensionPixelSize(R.dimen.tag_margin_top)
+        val tagsContainerLayoutParams = binding.tagsContainer.layoutParams
+        tagsContainerLayoutParams.height = containerHeight
+        binding.tagsContainer.layoutParams = tagsContainerLayoutParams
+
+        // Aktualisiert die Höhe des ScrollViews basierend auf der Anzahl der verbleibenden Tags
+        val scrollViewLayoutParams = binding.tagsScrollView.layoutParams
+        scrollViewLayoutParams.height = if (tagsList.size == 1) {
+            resources.getDimensionPixelSize(R.dimen.tag_scroll_view_height_single_tag)
+        } else {
+            if (tagsList.size == 0) {
+                resources.getDimensionPixelSize(R.dimen.tag_scroll_view_height_no_tag)
+            } else {
+                resources.getDimensionPixelSize(R.dimen.tag_scroll_view_height_multiple_tags)
+            }
+        }
+        binding.tagsScrollView.layoutParams = scrollViewLayoutParams
     }
+
+
 
     /**
      * Aktualisiert die Benutzeroberfläche des Fragments.
