@@ -207,7 +207,7 @@ class QuestionDetailFragment : Fragment() {
 
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(R.id.action_questionDetailFragment_to_questionListingFragment)
         }
 
         binding.buttonSaveQuestion.setOnClickListener {
