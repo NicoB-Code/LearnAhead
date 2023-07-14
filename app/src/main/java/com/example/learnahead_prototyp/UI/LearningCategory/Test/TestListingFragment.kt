@@ -22,27 +22,29 @@ import com.example.learnahead_prototyp.databinding.FragmentTestListingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Das [LearningCategoryListFragment] ist für die Anzeige der Liste der Lernkategorien zuständig und bietet auch die Möglichkeit,
- * diese zu bearbeiten, zu löschen oder detaillierte Informationen zu einer Lernkategorie anzuzeigen. Diese Klasse ist mit
- * [AndroidEntryPoint] annotiert, um die Injection von [ViewModel]s zu ermöglichen.
+ * Das [TestListingFragment] ist für die Anzeige der Liste der Tests zuständig und bietet auch die Möglichkeit,
+ * diese zu bearbeiten, zu löschen oder detaillierte Informationen zu einem Test anzuzeigen.
+ * Diese Klasse ist mit [AndroidEntryPoint] annotiert, um die Injection von [ViewModel]s zu ermöglichen.
  */
 @AndroidEntryPoint
 class TestListingFragment : Fragment() {
 
     private var currentUser: User? = null
 
-    // Konstante für das Logging-Tag
-    val TAG: String = "LearningCategoryListFragment"
+    /**
+     * Konstante für das Logging-Tag.
+     */
+    private val TAG: String = "TestListingFragment"
 
     // Deklaration der benötigten Variablen
-    lateinit var binding: FragmentTestListingBinding
+    private lateinit var binding: FragmentTestListingBinding
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private val testViewModel: TestViewModel by activityViewModels()
     private var deletePosition: Int = -1
-    var list: MutableList<Test> = arrayListOf()
+    private var testList: MutableList<Test> = arrayListOf()
 
-    private val adapter by lazy {
+    private val adapter: TestListingAdapter by lazy {
         TestListingAdapter(
             onItemClicked = { pos, item ->
                 testViewModel.setCurrentTest(item)
@@ -50,10 +52,11 @@ class TestListingFragment : Fragment() {
                     R.id.action_testListingFragment_to_testExecuteFragment,
                     Bundle().apply {
                         putParcelable("test", item)
-                    })
+                    }
+                )
             },
             onDeleteClicked = { pos, item ->
-                // Speichern der zu löschenden Position und Löschen der Lernkategorie über das ViewModel
+                // Speichern der zu löschenden Position und Löschen des Tests über das ViewModel
                 deletePosition = pos
                 testViewModel.deleteTest(item)
             }
@@ -62,6 +65,7 @@ class TestListingFragment : Fragment() {
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
+     *
      * @param inflater Das [LayoutInflater]-Objekt, das verwendet wird, um das Layout aufzublasen.
      * @param container Die übergeordnete [ViewGroup], an die die View angehängt werden soll.
      * @param savedInstanceState Das [Bundle]-Objekt, das den Zustand des Fragments enthält.
@@ -73,30 +77,33 @@ class TestListingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Das Binding-Objekt für das Fragment-Layout wird initialisiert.
-        binding = FragmentTestListingBinding.inflate(layoutInflater)
+        binding = FragmentTestListingBinding.inflate(inflater, container, false)
         // Die erzeugte View-Instanz wird zurückgegeben.
         return binding.root
     }
 
-
     /**
      * Diese Funktion initialisiert die View und registriert alle Observer, die auf Veränderungen in den ViewModel-Objekten achten.
+     *
      * @param view Die View der Fragment-Klasse
      * @param savedInstanceState Der gespeicherte Zustand des Fragments
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         setEventListener()
-        observer()
+        observeViewModels()
         setLocalCurrentUser()
         updateUI()
 
         binding.recyclerView.adapter = adapter
     }
 
-    private fun observer() {
-        // Observer für "deleteLearningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen beim Löschen von Lernkategorien.
+    /**
+     * Diese Funktion beobachtet die Änderungen in den ViewModels.
+     */
+    private fun observeViewModels() {
+        // Observer für das "currentUser"-Objekt im "authViewModel". Überwacht Änderungen am aktuellen Benutzer.
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -111,16 +118,16 @@ class TestListingFragment : Fragment() {
                 }
 
                 is UiState.Success -> {
-                    // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
+                    // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Tests abrufen
                     binding.progressBar.hide()
                     this.currentUser = state.data
-                    testViewModel.getTest(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+                    testViewModel.getTests(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
                 }
             }
         }
 
-        // Observer für "learningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen in der Liste der Lernkategorien.
-        testViewModel.test.observe(viewLifecycleOwner) { state ->
+        // Observer für das "tests"-Objekt im "testViewModel". Überwacht Änderungen in der Liste der Tests.
+        testViewModel.tests.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
                     // Fortschrittsanzeige anzeigen
@@ -134,26 +141,37 @@ class TestListingFragment : Fragment() {
                 }
 
                 is UiState.Success -> {
-                    // Fortschrittsanzeige ausblenden und Liste der Benutzerziele aktualisieren
+                    // Fortschrittsanzeige ausblenden und Testliste aktualisieren
                     binding.progressBar.hide()
-                    list = state.data.toMutableList()
-                    adapter.updateList(list)
+                    testList = state.data.toMutableList()
+                    adapter.updateList(testList)
                 }
             }
         }
     }
+
+    /**
+     * Diese Funktion setzt den aktuellen Benutzer lokal.
+     */
     private fun setLocalCurrentUser() {
         // Holt den aktuellen Benutzer aus der Datenbank und speichert ihn in der Variable currentUser
         authViewModel.getSession()
     }
+
+    /**
+     * Diese Funktion aktualisiert die UI-Komponenten.
+     */
     private fun updateUI() {
-        // Retrieve the selected learning category from the shared view model
+        // Ruft den Namen der ausgewählten Lernkategorie aus dem gemeinsam genutzten ViewModel ab
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
 
-        // Set the text of the learning_goal_menu_header_label TextView
+        // Setzt den Text des TextViews "testListingMenuHeaderLabel"
         binding.testListingMenuHeaderLabel.text = "$selectedLearningCategoryName / Tests"
     }
 
+    /**
+     * Diese Funktion weist den Event-Listenern die entsprechenden Aktionen zu.
+     */
     @SuppressLint("SetTextI18n")
     private fun setEventListener() {
         // Setzt den Event-Listener für den Home-Button
@@ -183,6 +201,7 @@ class TestListingFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        // Setzt den Event-Listener für den "Create Test"-Button
         binding.buttonCreateTest.setOnClickListener {
             findNavController().navigate(R.id.action_testListingFragment_to_testDetailFragment)
         }

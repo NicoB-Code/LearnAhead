@@ -12,8 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
- * HiltViewModel class that represents the ViewModel for the LearningCategories feature.
- * @param repository an implementation of ILearningCategoryRepository for the LearningCategories feature.
+ * HiltViewModel-Klasse, die das ViewModel für die Test-Funktion repräsentiert.
+ *
+ * @param repository Eine Implementierung von ITestRepository für die Test-Funktion.
  */
 @HiltViewModel
 class TestViewModel @Inject constructor(
@@ -21,12 +22,15 @@ class TestViewModel @Inject constructor(
 ) : ViewModel() {
 
     /**
-     * MutableLiveData that holds the current state of the list of LearningCategories.
+     * MutableLiveData, das den aktuellen Zustand der Liste von Tests enthält.
      */
     private val _tests = MutableLiveData<UiState<List<Test>>>()
-    val test: LiveData<UiState<List<Test>>>
+    val tests: LiveData<UiState<List<Test>>>
         get() = _tests
 
+    /**
+     * MutableLiveData, das den aktuellen Test enthält.
+     */
     private val _currentTest = MutableLiveData<Test?>()
     val currentTest: LiveData<Test?>
         get() = _currentTest
@@ -36,38 +40,41 @@ class TestViewModel @Inject constructor(
     }
 
     /**
-     * MutableLiveData that holds the current state of adding a new LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand beim Hinzufügen eines neuen Tests enthält.
      */
     private val _addTest = MutableLiveData<UiState<Test?>>()
     val addTest: LiveData<UiState<Test?>>
         get() = _addTest
 
     /**
-     * MutableLiveData that holds the current state of updating a LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand beim Aktualisieren eines Tests enthält.
      */
     private val _updateTest = MutableLiveData<UiState<Test?>>()
     val updateTest: LiveData<UiState<Test?>>
         get() = _updateTest
 
     /**
-     * MutableLiveData that holds the current state of deleting a LearningCategory.
+     * MutableLiveData, das den aktuellen Zustand beim Löschen eines Tests enthält.
      */
     private val _deleteTest = MutableLiveData<UiState<String>>()
     val deleteTest: LiveData<UiState<String>>
         get() = _deleteTest
 
     /**
-     * Calls the repository to get the list of LearningCategories for the given User and updates the _learningCategories MutableLiveData.
-     * @param user the User for which to retrieve the LearningCategories.
+     * Ruft das Repository auf, um die Liste der Tests für den angegebenen Benutzer und die angegebene Lernkategorie abzurufen, und aktualisiert das _tests MutableLiveData.
+     *
+     * @param user Der Benutzer, für den die Tests abgerufen werden sollen.
+     * @param learningCategory Die Lernkategorie, für die die Tests abgerufen werden sollen.
      */
-    fun getTest(user: User?, learningCategory: LearningCategory) {
+    fun getTests(user: User?, learningCategory: LearningCategory) {
         _tests.value = UiState.Loading
         repository.getTests(user, learningCategory) { _tests.value = it }
     }
 
     /**
-     * Calls the repository to add a new LearningCategory and updates the _addLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to add.
+     * Ruft das Repository auf, um einen neuen Test hinzuzufügen, und aktualisiert das _addTest MutableLiveData.
+     *
+     * @param test Der Test, der hinzugefügt werden soll.
      */
     fun addTest(test: Test) {
         _addTest.value = UiState.Loading
@@ -75,8 +82,9 @@ class TestViewModel @Inject constructor(
     }
 
     /**
-     * Calls the repository to update a LearningCategory and updates the _updateLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to update.
+     * Ruft das Repository auf, um einen Test zu aktualisieren, und aktualisiert das _updateTest MutableLiveData.
+     *
+     * @param test Der Test, der aktualisiert werden soll.
      */
     fun updateTest(test: Test) {
         _updateTest.value = UiState.Loading
@@ -84,8 +92,9 @@ class TestViewModel @Inject constructor(
     }
 
     /**
-     * Calls the repository to delete a LearningCategory and updates the _deleteLearningCategory MutableLiveData.
-     * @param learningCategory the LearningCategory to delete.
+     * Ruft das Repository auf, um einen Test zu löschen, und aktualisiert das _deleteTest MutableLiveData.
+     *
+     * @param test Der Test, der gelöscht werden soll.
      */
     fun deleteTest(test: Test) {
         _deleteTest.value = UiState.Loading

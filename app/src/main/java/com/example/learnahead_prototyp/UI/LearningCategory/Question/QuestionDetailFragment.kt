@@ -130,9 +130,9 @@ class QuestionDetailFragment : Fragment() {
                         // Den User in der DB updaten
                         authViewModel.updateUserInfo(currentUser!!)
                         findNavController().navigate(R.id.action_questionDetailFragment_to_questionListingFragment)
-                        toast("Die Lernkategorie konnte erfolgreich erstellt werden")
+                        toast("Die Frage konnte erfolgreich erstellt werden")
                     } else {
-                        toast("Die Lernkategorie konnte nicht erstellt werden")
+                        toast("Die Frage konnte nicht erstellt werden")
                     }
                 }
             }
@@ -282,13 +282,13 @@ class QuestionDetailFragment : Fragment() {
     private fun addTag(tag: String) {
         if (tagsListString.size >= MAX_TAGS) {
             // Maximum limit reached, show a notification
-            Toast.makeText(context, "Maximum limit of $MAX_TAGS tags reached.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Das Maximum von $MAX_TAGS Tags kann nicht überschritten werden.", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (tagsListString.contains(tag)) {
             // Duplicate tag, show a notification
-            Toast.makeText(context, "Tag '$tag' already exists.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Der Tag '$tag' existiert bereits.", Toast.LENGTH_SHORT).show()
             return
         }
 

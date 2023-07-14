@@ -214,7 +214,7 @@ class TestExecuteFragment : Fragment() {
                     // Verberge den Fortschrittsbalken, zeige eine Erfolgsmeldung an und hole den Test für die Lernkategorie des Benutzers
                     binding.progressBar.hide()
                     this.currentUser = state.data
-                    testViewModel.getTest(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+                    testViewModel.getTests(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
                 }
             }
         }
