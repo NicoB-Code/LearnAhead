@@ -21,6 +21,8 @@ import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 
 /**
  * Ein Fragment für den Home-Bildschirm der App.
@@ -111,54 +113,33 @@ class HomeFragment : Fragment() {
                     learningCategoryList = state.data.toMutableList()
                     val today = LocalDate.now()
 
-                    /**
-                     * Code für die Filterung der Learning Categories basierend auf bestimmten Kriterien
-                     * wurde auskommentiert, da er nicht verwendet wird.
-                     * Du kannst den Code bei Bedarf wieder aktivieren und anpassen.
-                     * */
+                    val filteredList = state.data.filter { learningCategory ->
+                        val goal = learningCategory.relatedLearningGoal
+                        val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())
+                            ?.toLocalDate()
+                        val endDate = goal?.endDate?.toInstant()?.atZone(ZoneId.systemDefault())
+                            ?.toLocalDate()
 
-                    /**
-                    val filteredList = if (list.isNotEmpty()) {
-                    // Filter the learning categories based on the criteria
-                    list.filter { learningCategory ->
-                    val goal = learningCategory.relatedLearningGoal
-                    val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
-                    val endDate = goal?.endDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
+                        if (startDate != null && endDate != null && today >= startDate) {
+                            val daysBetweenDates = ChronoUnit.DAYS.between(startDate, endDate)
+                            val daysSinceStart = ChronoUnit.DAYS.between(startDate, today)
 
-                    if (startDate != null && endDate != null) {
-                    val daysBetweenDates = ChronoUnit.DAYS.between(startDate, endDate)
+                            val interval = if (daysBetweenDates != 0L) {
+                                ((daysBetweenDates.toDouble() + 1) / 10).toInt() // Calculate the interval
+                            } else {
+                                1 // Set a default interval value of 1 if daysBetweenDates is zero
+                            }
 
-                    val interval = if (daysBetweenDates != 0L) {
-                    Math.round(daysBetweenDates.toFloat() / 10).toLong() // Calculate the interval
-                    } else {
-                    1L // Set a default interval value of 1 if daysBetweenDates is zero
-                    }
+                            val learningDayIndex = (daysSinceStart / interval) + 1
+                            val nextLearningDay = startDate.plusDays((learningDayIndex - 1) * interval)
 
-                    // Check if today is within the interval for learning
-                    val daysSinceStart = ChronoUnit.DAYS.between(startDate, today)
-                    val daysRemaining = ChronoUnit.DAYS.between(today, endDate)
-
-                    // Calculate the number of learning days within the interval
-                    val learningDays = if (daysRemaining > 0) {
-                    (daysBetweenDates - daysRemaining) / interval
-                    } else {
-                    (daysBetweenDates - 1) / interval
-                    }
-
-                    val isLearningDay = daysSinceStart % interval <= learningDays
-                    isLearningDay
-                    } else {
-                    false
-                    }
+                            today == nextLearningDay
+                        } else {
+                            false
+                        }
                     }.toMutableList()
-                    } else {
-                    // Empty list, no need to filter
-                    mutableListOf()
-                    }
-
 
                     adapter.updateList(filteredList)
-                     **/
                 }
             }
         }
