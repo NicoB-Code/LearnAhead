@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
     private val adapter by lazy {
         HomeAdapter(this::onItemClicked)
     }
+    var pointsBefore = 0
     private var currentUser: User? = null
     private var learningCategoryList: MutableList<LearningCategory> = mutableListOf()
 
@@ -53,8 +54,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
         setLocalCurrentUser()
-        currentUser?.let { authViewModel.updateUserInfo(it) }
         setupEventListeners()
+        currentUser?.let { authViewModel.updateUserInfo(it) }
     }
 
     /**
@@ -176,6 +177,7 @@ class HomeFragment : Fragment() {
                 is UiState.Success -> {
                     binding.progressBar.hide()
                     currentUser = state.data
+                    pointsBefore = currentUser?.currentPoints!!
                     learningCategoryViewModel.getLearningCategories(currentUser)
                 }
             }
@@ -189,7 +191,11 @@ class HomeFragment : Fragment() {
                     View.GONE
                 }
                 is UiState.Success -> {
-                    toast("Du hast für deinen Login gerade ${state.data} erhalten.")
+                    var pointsNow =currentUser?.currentPoints!!
+                    if(pointsBefore != pointsNow ){
+                        var changedPoints = pointsNow- pointsBefore
+                        toast("Du hast gerade $changedPoints Punkte für deinen Login erhalten!")
+                    }
                     View.GONE
                 }
             }

@@ -118,7 +118,11 @@ class GoalDetailFragment : Fragment() {
         datePicker.show(parentFragmentManager, "datePicker")
     }
     private fun onDateSelected(textLearningGoalDate: TextView, day: Int, month: Int, year: Int) {
-        textLearningGoalDate.text = "$day.0${month + 1}.$year"
+        if(day < 10){
+            textLearningGoalDate.text = "0$day.0${month + 1}.$year"
+        } else {
+            textLearningGoalDate.text = "$day.0${month + 1}.$year"
+        }
     }
 
     /**
@@ -350,12 +354,20 @@ class GoalDetailFragment : Fragment() {
      */
     private fun updateButtonVisibility() {
         val title = binding.textLearningGoalName.text.toString().trim()
-        val startDate = binding.textLearningGoalStartDate.text.toString().trim()
-        val endDate = binding.textLearningGoalEndDate.text.toString().trim()
+        val startDateString = binding.textLearningGoalStartDate.text.toString()
+        val endDateString = binding.textLearningGoalEndDate.text.toString()
         val description = binding.textGoalDescription.text.toString().trim()
 
-        if (isInitialSelection && title.isNotEmpty() && startDate.isNotEmpty() && endDate.isNotEmpty() && description.isNotEmpty()) {
-            binding.saveButton.show()
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        val startDate: Date = dateFormat.parse(startDateString)
+        val endDate: Date = dateFormat.parse(endDateString)
+
+        if (isInitialSelection && title.isNotEmpty() && startDateString.trim().isNotEmpty() && endDateString.trim().isNotEmpty() && description.isNotEmpty()) {
+            if(!startDate.after(endDate) || !endDate.before(startDate)){
+                binding.saveButton.show()
+            } else {
+                binding.saveButton.hide()
+            }
         } else {
             binding.saveButton.hide()
         }

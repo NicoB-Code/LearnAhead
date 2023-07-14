@@ -83,18 +83,21 @@ class AuthRepository(
 
         // Überprüfen, ob ein neuer Tag begonnen hat
         val currentDate = Date()
-        if (user.lastLogin.date == currentDate.date) {
-            // Belohnung vergeben, wenn sich der Benutzer gestern bereits eingeloggt hat
-            user.learningStreak++
-            if (user.learningStreak > 10) {
-                user.currentPoints += 100
-            } else {
-                user.currentPoints += (10 * user.learningStreak)
+        if (user.lastLogin.date != currentDate.date) {
+            // ist seit dem login 1 Tag vergangen?
+            if((user.lastLogin.date + 1) == currentDate.date){
+                user.learningStreak++
+                // lernstreak gecapped bei zehn
+                if (user.learningStreak > 10) {
+                    user.currentPoints += 100
+                } else {
+                    user.currentPoints += (10 * user.learningStreak)
+                }
+            }else {
+                // Mehr als 1 Tag weg: Lernserie zurücksetzen und 10 Punkte vergeben
+                user.learningStreak = 1
+                user.currentPoints += 10
             }
-        } else {
-            // Neuer Tag: Lernserie zurücksetzen und 10 Punkte vergeben
-            user.learningStreak = 1
-            user.currentPoints += 10
         }
         user.lastLogin = currentDate
 
