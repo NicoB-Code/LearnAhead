@@ -23,23 +23,23 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 /**
- * Dies ist das Fragment für die Registrierung eines neuen Benutzers.
- * Es initialisiert das Binding-Objekt für das Layout-File "fragment_register.xml" und nutzt das ViewModel "AuthViewModel", um die Geschäftslogik der Authentifizierung zu nutzen.
+ * Das RegisterFragment ist für die Registrierung eines neuen Benutzers zuständig.
+ * Es initialisiert das Binding-Objekt für das Layout "fragment_register.xml" und nutzt das ViewModel "AuthViewModel", um die Geschäftslogik der Authentifizierung zu verwenden.
  */
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     // Debugging-Tag für das Fragment
-    val TAG: String = "RegisterFragment"
+    private val TAG: String = "RegisterFragment"
 
-    // Binding-Objekt für die Layout-Datei "fragment_register.xml"
-    lateinit var binding: FragmentRegisterBinding
+    // Binding-Objekt für das Layout "fragment_register.xml"
+    private lateinit var binding: FragmentRegisterBinding
 
-    // Viewmodel-Objekt, um die Geschäftslogik von AuthViewModel zu nutzen
-    val viewModel: AuthViewModel by viewModels()
+    // ViewModel-Objekt, um die Geschäftslogik von AuthViewModel zu verwenden
+    private val viewModel: AuthViewModel by viewModels()
 
     /**
-     * Die onCreateView-Methode wird aufgerufen, um das Fragment-Layout aufzubauen und zurückzugeben.
+     * Die onCreateView-Methode wird aufgerufen, um das Fragment-Layout zu erstellen und zurückzugeben.
      * Hier wird das Binding-Objekt für "fragment_register.xml" initialisiert und zurückgegeben.
      */
     @SuppressLint("ClickableViewAccessibility")
@@ -83,52 +83,56 @@ class RegisterFragment : Fragment() {
     }
 
     /**
-     * Die onViewCreated-Methode wird aufgerufen, sobald die View erstellt wurde.
-     * Hier wird der Click-Listener für die Registrieren-Button gesetzt und die "observer"-Funktion aufgerufen, um auf ViewModel-Änderungen zu reagieren.
+     * Die onViewCreated-Methode wird aufgerufen, sobald die View für das Fragment erstellt wurde.
+     * Hier werden die Click-Listener für den Registrieren-Button und die Navigationselemente festgelegt und der Observer für das ViewModel aufgerufen, um auf ViewModel-Änderungen zu reagieren.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Ruft die "observer"-Funktion auf, um auf ViewModel-Änderungen zu reagieren
-        observer()
-        setEventListener()
-    }
-
-    private fun setEventListener() {
-        // Setzt den Click-Listener für die Registrieren-Button
-        binding.buttonSignUp.setOnClickListener {
-            // Überprüft, ob die Eingaben des Benutzers gültig sind
-            if (validation()) {
-                // Ruft die "register"-Funktion des ViewModels auf, um einen neuen Benutzer zu registrieren
-                viewModel.register(email = binding.editTextEmail.text.toString(), password = binding.editTextPassword.text.toString(), user = getUserObj())
-            }
-        }
-
-        // Setzt den Click-Listener für die Registrieren-Label
-        binding.textLogin.setOnClickListener { findNavController().navigate(R.id.action_registerFragment_to_loginFragment) }
+        setEventListeners()
+        observeViewModel()
     }
 
     /**
-     * Beobachtet den AuthViewModel auf Änderungen des Registrierungs-UI-Status und aktualisiert die UI entsprechend.
-     * Zeigt eine Fortschrittsanzeige während des Ladevorgangs an, zeigt eine Toast-Nachricht bei Fehlern an
-     * und navigiert zur Hauptbildschirm-Fragment, wenn die Registrierung erfolgreich abgeschlossen wurde.
+     * Legt die Click-Listener für den Registrieren-Button und die Navigationselemente fest.
      */
-    fun observer() {
-        // Beobachtet den ViewModel-Status auf Änderungen
+    private fun setEventListeners() {
+        // Click-Listener für den Registrieren-Button festlegen
+        binding.buttonSignUp.setOnClickListener {
+            // Überprüfen, ob die Benutzereingaben gültig sind
+            if (validateInput()) {
+                // Das ViewModel aufrufen, um einen neuen Benutzer zu registrieren
+                viewModel.register(
+                    email = binding.editTextEmail.text.toString(),
+                    password = binding.editTextPassword.text.toString(),
+                    user = getUserObj()
+                )
+            }
+        }
+
+        // Click-Listener für die Navigationselemente festlegen
+        binding.textLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+    }
+
+    /**
+     * Beobachtet das ViewModel auf Änderungen des Registrierungs-UI-Status und aktualisiert die UI entsprechend.
+     * Zeigt eine Fortschrittsanzeige während des Ladevorgangs an, zeigt eine Toast-Nachricht bei Fehlern an
+     * und navigiert zum Hauptbildschirm-Fragment, wenn die Registrierung erfolgreich abgeschlossen wurde.
+     */
+    private fun observeViewModel() {
         viewModel.register.observe(viewLifecycleOwner) { state ->
             when (state) {
-                // Zeigt Fortschrittsanzeige während des Ladevorgangs an
                 is UiState.Loading -> {
                     binding.buttonSignUp.setText("")
                     binding.registerProgress.show()
                 }
-                // Zeigt Toast-Nachricht bei Fehlern an
                 is UiState.Failure -> {
                     binding.buttonSignUp.setText(getString(R.string.register_verb))
                     binding.registerProgress.hide()
                     toast(state.error)
                 }
-                // Navigiert zur Hauptbildschirm-Fragment, wenn Registrierung erfolgreich abgeschlossen wurde
                 is UiState.Success -> {
                     binding.buttonSignUp.setText(getString(R.string.register_verb))
                     binding.registerProgress.hide()
@@ -140,7 +144,7 @@ class RegisterFragment : Fragment() {
     }
 
     /**
-     * Erstellt ein neues User-Objekt mit den Eingabedaten des Benutzers aus den Fragment-Views und gibt es zurück.
+     * Erstellt ein neues User-Objekt mit den Benutzereingaben aus den Fragment-Views und gibt es zurück.
      * @return Das neu erstellte User-Objekt
      */
     private fun getUserObj(): User {
@@ -152,13 +156,12 @@ class RegisterFragment : Fragment() {
         )
     }
 
-
     /**
-     * Validiert die Eingabedaten des Benutzers aus den Fragment-Views und gibt zurück, ob alle Eingaben gültig sind.
+     * Überprüft die Benutzereingaben aus den Fragment-Views und gibt zurück, ob alle Eingaben gültig sind.
      * Zeigt Toast-Nachrichten an, wenn eine Eingabe ungültig ist.
-     * @return True, wenn alle Eingaben gültig sind, andernfalls False
+     * @return True, wenn alle Eingaben gültig sind, sonst False
      */
-    private fun validation(): Boolean {
+    private fun validateInput(): Boolean {
         var isValid = true
 
         if (binding.editTextUsername.text.isNullOrEmpty()) {
@@ -179,6 +182,8 @@ class RegisterFragment : Fragment() {
             isValid = false
             toast(getString(R.string.enter_password))
         } else {
+
+
             if (binding.editTextPassword.text.toString().length < 8) {
                 isValid = false
                 toast(getString(R.string.invalid_password))

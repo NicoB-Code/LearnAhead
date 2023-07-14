@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -104,7 +103,7 @@ class GoalDetailFragment : Fragment() {
     }
 
     private fun populateDropdown() {
-        val dropdownItems = learningCategoriesList.map { it.name } // Extract the category names from the list
+        val dropdownItems = learningCategoriesList.map { it.name } // Extrahiere die Kategorienamen aus der Liste
 
         val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItems)
         binding.dropdownElement.adapter = adapter
@@ -212,6 +211,8 @@ class GoalDetailFragment : Fragment() {
     private fun isMakeEnableUI(isDisable: Boolean = false) {
         binding.textLearningGoalName.isEnabled = isDisable
         binding.textLearningGoalStartDate.isEnabled = isDisable
+
+
         binding.textLearningGoalEndDate.isEnabled = isDisable
         binding.textGoalDescription.isEnabled = isDisable
         binding.dropdownElement.isEnabled = isDisable
@@ -432,7 +433,7 @@ class GoalDetailFragment : Fragment() {
         // Überprüfen, ob der Lernzielname leer oder null ist
         if (binding.textLearningGoalName.text.isNullOrEmpty()) {
             // Wenn ja, eine Toast-Meldung ausgeben und false zurückgeben
-            toast("Enter title")
+            toast("Titel eingeben")
             return false
         }
 
@@ -443,7 +444,7 @@ class GoalDetailFragment : Fragment() {
         // Überprüfen, ob die Beschreibung leer oder null ist
         if (binding.textGoalDescription.text.isNullOrEmpty()) {
             // Wenn ja, eine Toast-Meldung ausgeben und false zurückgeben
-            toast("Enter description")
+            toast("Beschreibung eingeben")
             return false
         }
         // Andernfalls true zurückgeben

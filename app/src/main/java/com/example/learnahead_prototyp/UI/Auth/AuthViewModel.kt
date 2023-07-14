@@ -10,10 +10,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
- * Diese Klasse ist ein ViewModel, das für den Authentifizierungsprozess zuständig ist und
- * Daten zwischen dem Repository und der UI-Schicht vermittelt. Diese Klasse wird mithilfe
- * von Hilt injeziert und erhält eine Instanz des IAuthRepository-Interfaces, um auf
- * Authentifizierungsfunktionen zugreifen zu können.
+ * ViewModel-Klasse für den Authentifizierungsprozess.
+ * Verwaltet die Kommunikation zwischen Repository und UI-Schicht.
+ * Wird mithilfe von Hilt injiziert und erhält eine Instanz des IAuthRepository-Interfaces, um auf Authentifizierungsfunktionen zuzugreifen.
  */
 @HiltViewModel
 class AuthViewModel @Inject constructor(
@@ -21,8 +20,7 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
 
     /**
-     * Diese Eigenschaft ist eine LiveData-Instanz, die den aktuellen Status des Registrierungsprozesses
-     * in der UI-Schicht widerspiegelt.
+     * LiveData-Instanz, die den aktuellen Status des Registrierungsprozesses in der UI-Schicht widerspiegelt.
      */
     private val _register = MutableLiveData<UiState<String>>()
     val register: LiveData<UiState<String>>
@@ -33,16 +31,14 @@ class AuthViewModel @Inject constructor(
         get() = _currentUser
 
     /**
-     * Diese Eigenschaft ist eine LiveData-Instanz, die den aktuellen Status des Anmeldevorgangs
-     * in der UI-Schicht widerspiegelt.
+     * LiveData-Instanz, die den aktuellen Status des Anmeldevorgangs in der UI-Schicht widerspiegelt.
      */
     private val _login = MutableLiveData<UiState<String>>()
     val login: LiveData<UiState<String>>
         get() = _login
 
     /**
-     * Diese Eigenschaft ist eine LiveData-Instanz, die den aktuellen Status des Passwort-Wiederherstellungsvorgangs
-     * in der UI-Schicht widerspiegelt.
+     * LiveData-Instanz, die den aktuellen Status des Passwort-Wiederherstellungsvorgangs in der UI-Schicht widerspiegelt.
      */
     private val _forgotPassword = MutableLiveData<UiState<String>>()
     val forgotPassword: LiveData<UiState<String>>
@@ -53,12 +49,11 @@ class AuthViewModel @Inject constructor(
         get() = _updateUserInfo
 
     /**
-     * Diese Methode ruft die registerUser-Funktion im IAuthRepository auf, um einen neuen Benutzer
-     * zu registrieren. Sie aktualisiert den Status der _register-LiveData-Eigenschaft, um den Fortschritt
-     * in der UI-Schicht widerzuspiegeln.
-     * @param email Die E-Mail-Adresse des Benutzers.
-     * @param password Das Passwort des Benutzers.
-     * @param user Ein Objekt, das den Benutzer darstellt.
+     * Registriert einen neuen Benutzer.
+     * Aktualisiert den Status der _register-LiveData-Eigenschaft, um den Fortschritt in der UI-Schicht widerzuspiegeln.
+     * @param email E-Mail-Adresse des Benutzers.
+     * @param password Passwort des Benutzers.
+     * @param user Benutzerobjekt.
      */
     fun register(email: String, password: String, user: User) {
         _register.value = UiState.Loading
@@ -66,11 +61,10 @@ class AuthViewModel @Inject constructor(
     }
 
     /**
-     * Diese Methode ruft die loginUser-Funktion im IAuthRepository auf, um einen Benutzer anzumelden.
-     * Sie aktualisiert den Status der _login-LiveData-Eigenschaft, um den Fortschritt
-     * in der UI-Schicht widerzuspiegeln.
-     * @param email Die E-Mail-Adresse des Benutzers.
-     * @param password Das Passwort des Benutzers.
+     * Meldet einen Benutzer an.
+     * Aktualisiert den Status der _login-LiveData-Eigenschaft, um den Fortschritt in der UI-Schicht widerzuspiegeln.
+     * @param email E-Mail-Adresse des Benutzers.
+     * @param password Passwort des Benutzers.
      */
     fun login(email: String, password: String) {
         _login.value = UiState.Loading
@@ -78,8 +72,9 @@ class AuthViewModel @Inject constructor(
     }
 
     /**
-     * Diese Funktion löst einen Passwort-Wiederherstellungsprozess aus, indem sie eine Email an die angegebene Email-Adresse sendet.
-     * @param email Die Email-Adresse des Benutzers, dessen Passwort wiederhergestellt werden soll.
+     * Löst einen Passwort-Wiederherstellungsprozess aus, indem eine E-Mail an die angegebene E-Mail-Adresse gesendet wird.
+     * Aktualisiert den Status der _forgotPassword-LiveData-Eigenschaft, um den Fortschritt in der UI-Schicht widerzuspiegeln.
+     * @param email E-Mail-Adresse des Benutzers, dessen Passwort wiederhergestellt werden soll.
      */
     fun forgotPassword(email: String) {
         _forgotPassword.value = UiState.Loading
@@ -87,7 +82,7 @@ class AuthViewModel @Inject constructor(
     }
 
     /**
-     * Diese Funktion meldet den aktuellen Benutzer ab.
+     * Meldet den aktuellen Benutzer ab.
      * @param result Callback-Funktion, die aufgerufen wird, wenn der Logout-Prozess abgeschlossen ist.
      */
     fun logout(result: () -> Unit) {
@@ -95,21 +90,30 @@ class AuthViewModel @Inject constructor(
     }
 
     /**
-     * Diese Funktion ruft die aktuelle Benutzersitzung ab.
+     * Ruft die aktuelle Benutzersitzung ab.
      * @param result Callback-Funktion, die aufgerufen wird, wenn die Benutzersitzung abgerufen wurde.
-     * Die zurückgegebene [User] Instanz enthält Informationen über den aktuellen Benutzer oder ist null, wenn kein Benutzer angemeldet ist.
+     * Das zurückgegebene [User]-Objekt enthält Informationen über den aktuellen Benutzer oder ist null, wenn kein Benutzer angemeldet ist.
      */
     fun getSession() {
-        repository.getSession() {_currentUser.value = it }
+        repository.getSession() { _currentUser.value = it }
     }
 
+    /**
+     * Speichert die Benutzersitzung.
+     * @param user Benutzerobjekt.
+     */
     fun storeSession(user: User) {
-        repository.storeSession(user.id) {_currentUser.value = it }
+        repository.storeSession(user.id) { _currentUser.value = it }
     }
 
+    /**
+     * Aktualisiert die Benutzerinformationen.
+     * Aktualisiert den Status der _updateUserInfo-LiveData-Eigenschaft, um den Fortschritt in der UI-Schicht widerzuspiegeln.
+     * @param user Benutzerobjekt.
+     */
     fun updateUserInfo(user: User) {
         _updateUserInfo.value = UiState.Loading
-        repository.updateUserInfo(user) { _updateUserInfo.value = it}
+        repository.updateUserInfo(user) { _updateUserInfo.value = it }
         storeSession(user)
     }
 

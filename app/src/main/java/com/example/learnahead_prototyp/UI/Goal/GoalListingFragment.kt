@@ -29,17 +29,17 @@ class GoalListingFragment : Fragment() {
     private var currentUser: User? = null
 
     // Konstante für das Logging-Tag
-    val TAG: String = "GoalListingFragment"
+    private val TAG: String = "GoalListingFragment"
 
     // Deklaration der benötigten Variablen
-    lateinit var binding: FragmentGoalListingBinding
-    val viewModel: GoalViewModel by viewModels()
-    val authViewModel: AuthViewModel by viewModels()
-    var deletePosition: Int = -1
-    var list: MutableList<Goal> = arrayListOf()
+    private lateinit var binding: FragmentGoalListingBinding
+    private val viewModel: GoalViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
+    private var deletePosition: Int = -1
+    private var goalList: MutableList<Goal> = mutableListOf()
 
     // Initialisierung des Adapters mit den entsprechenden Click-Callbacks
-    val adapter by lazy {
+    private val adapter by lazy {
         GoalListingAdapter(
             onItemClicked = { pos, item ->
                 // Navigation zum Ziel-Detail-Fragment mit Parameter-Übergabe
@@ -47,7 +47,8 @@ class GoalListingFragment : Fragment() {
                     R.id.action_goalListingFragment_to_goalDetailFragment,
                     Bundle().apply {
                         putParcelable("goal", item)
-                    })
+                    }
+                )
             },
             onEditClicked = { pos, item ->
                 // Navigation zum Ziel-Detail-Fragment mit Parameter-Übergabe
@@ -55,7 +56,8 @@ class GoalListingFragment : Fragment() {
                     R.id.action_goalListingFragment_to_goalDetailFragment,
                     Bundle().apply {
                         putParcelable("goal", item)
-                    })
+                    }
+                )
             },
             onDeleteClicked = { pos, item ->
                 // Speichern der zu löschenden Position und Löschen des Ziels über das ViewModel
@@ -66,13 +68,17 @@ class GoalListingFragment : Fragment() {
         )
     }
 
+    /**
+     * Aktualisiert das Benutzerobjekt mit den Zielen, nachdem ein Ziel gelöscht wurde.
+     * @param goal Das gelöschte Ziel.
+     * @param deleteGoal Ein Flag, das angibt, ob das Ziel gelöscht werden soll.
+     */
     private fun updateUserObject(goal: Goal, deleteGoal: Boolean) {
         if (deleteGoal && currentUser != null)
             currentUser!!.goals.remove(goal)
 
         currentUser?.let { authViewModel.updateUserInfo(it) }
     }
-
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
@@ -87,11 +93,10 @@ class GoalListingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Das Binding-Objekt für das Fragment-Layout wird initialisiert.
-        binding = FragmentGoalListingBinding.inflate(layoutInflater)
+        binding = FragmentGoalListingBinding.inflate(inflater, container, false)
         // Die erzeugte View-Instanz wird zurückgegeben.
         return binding.root
     }
-
 
     /**
      * Diese Funktion initialisiert die View und registriert alle Observer, die auf Veränderungen in den ViewModel-Objekten achten.
@@ -100,41 +105,58 @@ class GoalListingFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observer()
+        setupObservers()
         setLocalCurrentUser()
-        setEventListener()
-
+        setEventListeners()
     }
 
+    /**
+     * Ruft den aktuellen Benutzer aus der AuthViewModel ab.
+     */
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
     }
 
-    private fun setEventListener() {
+    /**
+     * Initialisiert die Event-Listener für die Buttons und setzt den Adapter für die RecyclerView.
+     */
+    private fun setEventListeners() {
         // Setzen des Adapters auf die RecyclerView
         binding.recyclerView.adapter = adapter
 
         // Klick-Listener für den "Create"-Button, welcher zur "GoalDetailFragment" navigiert.
-        binding.buttonAddLearningGoal.setOnClickListener { findNavController().navigate(R.id.action_goalListingFragment_to_goalDetailFragment) }
+        binding.buttonAddLearningGoal.setOnClickListener {
+            findNavController().navigate(R.id.action_goalListingFragment_to_goalDetailFragment)
+        }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_goalListingFragment_to_homeFragment) }
+        binding.buttonHome.setOnClickListener {
+            findNavController().navigate(R.id.action_goalListingFragment_to_homeFragment)
+        }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_goalListingFragment_to_learningCategoryListFragment)}
+        binding.buttonLearningCategories.setOnClickListener {
+            findNavController().navigate(R.id.action_goalListingFragment_to_learningCategoryListFragment)
+        }
 
         // Klick-Listener für den "Logout"-Button, welcher den Benutzer ausloggt und zur "LoginFragment" navigiert.
-        binding.logout.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)} }
+        binding.logout.setOnClickListener {
+            authViewModel.logout {
+                findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)
+            }
+        }
 
         // Klick-Listener für den "Profile"-Button
-        binding.profile.setOnClickListener { findNavController().navigate(R.id.action_goalListingFragment_to_profileFragment)}
+        binding.profile.setOnClickListener {
+            findNavController().navigate(R.id.action_goalListingFragment_to_profileFragment)
+        }
     }
 
     /**
-     * Diese Funktion initialisiert alle Observer, welche die ViewModel-Objekte auf Veränderungen überwachen.
+     * Initialisiert alle Observer, welche die ViewModel-Objekte auf Veränderungen überwachen.
      */
-    private fun observer() {
-        // Observer für "goal"-Objekt im "viewModel". Dieser überwacht alle Änderungen in der Liste der Benutzerziele.
+    private fun setupObservers() {
+        // Observer für "goalList"-Objekt im "viewModel". Überwacht Änderungen in der Liste der Benutzerziele.
         viewModel.goal.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -151,13 +173,13 @@ class GoalListingFragment : Fragment() {
                 is UiState.Success -> {
                     // Fortschrittsanzeige ausblenden und Liste der Benutzerziele aktualisieren
                     binding.progressBar.hide()
-                    list = state.data.toMutableList()
-                    adapter.updateList(list)
+                    goalList = state.data.toMutableList()
+                    adapter.updateList(goalList)
                 }
             }
         }
 
-        // Observer für "deleteGoal"-Objekt im "viewModel". Dieser überwacht alle Änderungen beim Löschen von Benutzerzielen.
+        // Observer für "deleteGoalResult"-Objekt im "viewModel". Überwacht Änderungen beim Löschen von Benutzerzielen.
         viewModel.deleteGoal.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -176,8 +198,8 @@ class GoalListingFragment : Fragment() {
                     binding.progressBar.hide()
                     toast(state.data)
                     if (deletePosition != -1) {
-                        list.removeAt(deletePosition)
-                        adapter.updateList(list)
+                        goalList.removeAt(deletePosition)
+                        adapter.updateList(goalList)
                         // Das Lernziel wurde gelöscht, somit deletePosition wieder zurücksetzen
                         deletePosition = -1
                     }
@@ -201,8 +223,8 @@ class GoalListingFragment : Fragment() {
                 is UiState.Success -> {
                     // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
                     binding.progressBar.hide()
-                    this.currentUser = state.data
-                    viewModel.getGoals(this.currentUser)
+                    currentUser = state.data
+                    viewModel.getGoals(currentUser)
                 }
             }
         }

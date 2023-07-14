@@ -18,8 +18,6 @@ import java.time.temporal.ChronoUnit
  * Ein Adapter zur Darstellung von Zielen in einer RecyclerView.
  *
  * @param onItemClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf ein Ziel geklickt wird. Der Index des Ziels in der Liste und das Ziel selbst werden übergeben.
- * @param onEditClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf die Schaltfläche "Bearbeiten" eines Ziels geklickt wird. Der Index des Ziels in der Liste und das Ziel selbst werden übergeben.
- * @param onDeleteClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf die Schaltfläche "Löschen" eines Ziels geklickt wird. Der Index des Ziels in der Liste und das Ziel selbst werden übergeben.
  */
 class HomeAdapter(
     val onItemClicked: (Int, LearningCategory) -> Unit,
@@ -28,7 +26,7 @@ class HomeAdapter(
     /**
      * Eine Liste von Zielen, die in der RecyclerView angezeigt werden soll.
      */
-    private var list: MutableList<LearningCategory> = arrayListOf()
+    private var list: MutableList<LearningCategory> = mutableListOf()
 
     /**
      * Erstellt eine neue View für jedes Ziel in der Liste.
@@ -57,6 +55,7 @@ class HomeAdapter(
      * Aktualisiert die Liste von Zielen und benachrichtigt den Adapter, dass sich die Daten geändert haben.
      * @param list Die neue Liste von Zielen.
      */
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(list: MutableList<LearningCategory>) {
         this.list = list
         notifyDataSetChanged()
@@ -93,7 +92,7 @@ class HomeAdapter(
         @SuppressLint("SetTextI18n")
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(learningCategory: LearningCategory) {
-            if (learningCategory != null && learningCategory.relatedLearningGoal != null) {
+            if (learningCategory.relatedLearningGoal != null) {
                 val goal = learningCategory.relatedLearningGoal
 
                 binding.cardViewTextGoalName.text = learningCategory?.name
@@ -104,13 +103,13 @@ class HomeAdapter(
                 if (endDate != null) {
                     binding.cardViewGoalDate.text = "Ziel Datum: " + dateFormat.format(endDate)
 
-                    // Get the current date (today)
+                    // Das aktuelle Datum (heute) abrufen
                     val currentDate = LocalDate.now()
-                    // Parse the formatted endDate string back to a LocalDate object
+                    // Die formatierte endDate-Zeichenkette zurück in ein LocalDate-Objekt umwandeln
                     val newEndDate = dateFormat.parse(dateFormat.format(endDate))
                     val endDateLocalDate = newEndDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
                     if (endDateLocalDate != null) {
-                        // Calculate the number of days between the current date and the endDate
+                        // Die Anzahl der Tage zwischen dem aktuellen Datum und dem endDate berechnen
                         val daysBetweenDates = ChronoUnit.DAYS.between(currentDate, endDateLocalDate).toInt()
 
                         if (daysBetweenDates == 1)
