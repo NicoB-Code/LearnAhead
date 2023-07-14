@@ -21,8 +21,6 @@ import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
-import java.time.ZoneId
-import java.time.temporal.ChronoUnit
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -110,6 +108,7 @@ class HomeFragment : Fragment() {
                     list = state.data.toMutableList()
                     val today = LocalDate.now()
 
+                    /**
                     val filteredList = if (list.isNotEmpty()) {
                         // Filter the learning categories based on the criteria
                         list.filter { learningCategory ->
@@ -150,6 +149,7 @@ class HomeFragment : Fragment() {
 
 
                     adapter.updateList(filteredList)
+                    **/
                 }
             }
         }

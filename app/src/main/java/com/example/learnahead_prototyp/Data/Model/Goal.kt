@@ -8,17 +8,17 @@ import java.util.Date
 
 /**
  * Eine Datenklasse, die ein Lernziel in der App darstellt.
+ *
  * @property id Die eindeutige ID des Lernziels.
- * @property user_id Die ID des Benutzers, dem das Lernziel gehört.
+ * @property name Der Name des Lernziels.
  * @property description Die Beschreibung des Lernziels.
- * @property date Das Datum, an dem das Lernziel erstellt oder aktualisiert wurde. Es wird automatisch
- * vom Server generiert und mit dem "@ServerTimestamp" Annotation markiert.
- */
-
-/** Bzgl. Parcelize:
- * ist eine Annotation von kotlinx.android.parcel, die automatisch die Implementierung der Parcelable-Schnittstelle
- * für die annotierte Klasse generiert. Parcelable ist eine Schnittstelle, die dazu dient, Daten zwischen verschiedenen
- * Komponenten innerhalb der Android-App zu übertragen. Die Verwendung von Parcelable kann eine bessere Leistung bieten als Serializable.
+ * @property startDate Das Datum, an dem das Lernziel erstellt oder aktualisiert wurde. Es wird automatisch
+ * vom Server generiert und mit der Annotation "@ServerTimestamp" markiert.
+ * @property endDate Das Enddatum des Lernziels. Es wird automatisch vom Server generiert und mit der Annotation
+ * "@ServerTimestamp" markiert.
+ * @property lastLearned Das Datum, an dem das Lernziel zuletzt bearbeitet wurde. Es kann null sein, falls das Lernziel
+ * noch nicht bearbeitet wurde.
+ * @property status Der Status des Lernziels (ToDo, InProgress, Completed).
  */
 @Parcelize
 data class Goal(
@@ -26,7 +26,6 @@ data class Goal(
     val name: String = "",
     val description: String = "",
     @ServerTimestamp
-    // WICHTIG DATE WIRD NOCH GEÄNDERT WEGEN INDEX
     val startDate: Date = Date(),
     @ServerTimestamp
     val endDate: Date = Date(),

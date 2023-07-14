@@ -7,126 +7,117 @@ import com.example.learnahead_prototyp.Util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
- * Klasse, die die Schnittstelle IGoalRepository implementiert und Methoden enthält, um Ziele aus der Datenbank zu holen.
- * @param database Die Firebase Firestore-Datenbank-Instanz, auf die zugegriffen werden soll.
+ * Eine Klasse, die das ILearnCategoryRepository-Interface implementiert und Methoden enthält, um Lernkategorien aus der Datenbank abzurufen.
+ *
+ * @param database Die Firebase Firestore-Datenbankinstanz, auf die zugegriffen werden soll.
  */
 class LearningCategoryRepository(
     val database: FirebaseFirestore
 ) : ILearnCategoryRepository {
 
     /**
-     * Funktion, um Ziele aus der Datenbank zu holen.
-     * @param user Der Benutzer, dessen Lernkategorie abgerufen werden sollen.
-     * @param result Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
+     * Ruft die Lernkategorien für einen bestimmten Benutzer aus der Datenbank ab.
+     *
+     * @param user Der Benutzer, dessen Lernkategorien abgerufen werden sollen.
+     * @param result Eine Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Liste von Lernkategorien oder eine Fehlermeldung, je nach Ergebnis der Operation.
-     * Der Status kann entweder Success oder Failure sein, abhängig davon, ob es erfolgreich war oder nicht.
+     * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Lernkategorien erfolgreich abgerufen wurden oder nicht.
      */
     override fun getLearningCategories(user: User?, result: (UiState<List<LearningCategory>>) -> Unit) {
         if (user == null) {
-            result.invoke(UiState.Failure("User is null"))
+            result.invoke(UiState.Failure("Benutzer ist null"))
             return
         }
-        // Get the user document reference
+        // Dokumentreferenz des Benutzers abrufen
         val userDocument = database.collection(FireStoreCollection.USER).document(user.id)
-        // Fetch the user document to get the learningCategories collection reference
+        // Das Benutzerdokument abrufen, um die Sammlungsreferenz der Lernkategorien zu erhalten
         userDocument.get()
             .addOnSuccessListener { userDocument ->
                 val learningCategories = userDocument.toObject(User::class.java)?.learningCategories?.toMutableList() ?: mutableListOf()
-                // Update the user object with the retrieved goals
+                // Das Benutzerobjekt mit den abgerufenen Lernkategorien aktualisieren
                 result.invoke(UiState.Success(learningCategories))
             }
-
             .addOnFailureListener { exception ->
                 result.invoke(UiState.Failure(exception.localizedMessage))
             }
     }
 
-
     /**
-     * Funktion, um ein Ziel in der Datenbank zu erstellen.
-     * @param learningCategory Die Lernkategorie, die erstellt werden soll.
-     * @param result Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
+     * Fügt eine neue Lernkategorie zur Datenbank hinzu.
+     *
+     * @param learningCategory Die Lernkategorie, die hinzugefügt werden soll.
+     * @param result Eine Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
-     * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Lernkategorie erfolgreich erstellt wurde oder nicht.
+     * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Lernkategorie erfolgreich hinzugefügt wurde oder nicht.
      */
     override fun addLearningCategory(learningCategory: LearningCategory, result: (UiState<LearningCategory?>) -> Unit) {
-        // Erstellung eines neuen Dokuments in der GOAL-Sammlung der Datenbank
+        // Dokument in der LERNKATEGORIE-Sammlung der Datenbank erstellen
         val document = database.collection(FireStoreCollection.LEARNING_CATEGORY).document()
-        // Festlegen der ID des Ziels als ID des erstellten Dokuments in der Datenbank
+        // Die ID der Lernkategorie auf die ID des erstellten Dokuments in der Datenbank festlegen
         learningCategory.id = document.id
-        // Hinzufügen des Ziels als Dokument zur Datenbank
+        // Die Lernkategorie als Dokument zur Datenbank hinzufügen
         document
             .set(learningCategory)
             .addOnSuccessListener {
-                // Bei Erfolg wird eine Erfolgsmeldung an den Aufrufer zurückgegeben
-                result.invoke(
-                    UiState.Success(learningCategory)
-                )
+                // Bei Erfolg eine Erfolgsmeldung an den Aufrufer zurückgeben
+                result.invoke(UiState.Success(learningCategory))
             }
             .addOnFailureListener {
-                // Bei Fehlern wird eine Fehlermeldung an den Aufrufer zurückgegeben
-                result.invoke(
-                    UiState.Failure(
-                        it.localizedMessage
-                    )
-                )
+                // Bei Fehlern eine Fehlermeldung an den Aufrufer zurückgeben
+                result.invoke(UiState.Failure(
+                    "Fehler beim Hinzufügen der Lernkategorie: ${it.localizedMessage}"
+                ))
             }
     }
 
     /**
-     * Funktion zum Aktualisieren einer Lernkategorie in der Datenbank.
-     * @param learningCategory Die Lernkategorie, das aktualisiert werden soll.
-     * @param result Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
-     * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Meldung, ob die Lernkategorie erfolgreich aktualisiert wurde oder nicht.
-     * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Aktualisierung erfolgreich war oder nicht.
+     * Aktualisiert eine vorhandene Lernkategorie in der Datenbank.
+     *
+     * @param learningCategory Die Lernkategorie, die aktualisiert werden soll.
+     * @param result Eine Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
+     * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
+     * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Lernkategorie erfolgreich aktualisiert wurde oder nicht.
      */
     override fun updateLearningCategory(learningCategory: LearningCategory, result: (UiState<LearningCategory?>) -> Unit) {
-        // Dokument der Lernkategorie in der Datenbank wird geholt
+        // Dokument der Lernkategorie in der Datenbank abrufen
         val document = database.collection(FireStoreCollection.LEARNING_CATEGORY).document(learningCategory.id)
         document
-            // Lernkategorie wird in der Datenbank aktualisiert
+            // Die Lernkategorie in der Datenbank aktualisieren
             .set(learningCategory)
             .addOnSuccessListener {
-                result.invoke(
-                    UiState.Success(learningCategory)
-                )
+                result.invoke(UiState.Success(learningCategory))
             }
             .addOnFailureListener {
-                // Fehlermeldung wird an den Aufrufer zurückgegeben
-                result.invoke(
-                    UiState.Failure(
-                        it.localizedMessage
-                    )
-                )
+                // Fehlermeldung an den Aufrufer zurückgeben
+                result.invoke(UiState.Failure(
+                    "Fehler beim Aktualisieren der Lernkategorie: ${it.localizedMessage}"
+                ))
             }
     }
 
     /**
-     * Funktion, um eine Lernkategorie aus der Datenbank zu löschen.
+     * Löscht eine vorhandene Lernkategorie aus der Datenbank.
+     *
      * @param learningCategory Die Lernkategorie, die gelöscht werden soll.
-     * @param result Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
+     * @param result Eine Funktion zur Rückgabe des Ergebnisses an den Aufrufer.
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation enthält sowie eine Erfolgsmeldung oder eine Fehlermeldung, je nach Ergebnis der Operation.
      * Der Status kann entweder Success oder Failure sein, abhängig davon, ob die Lernkategorie erfolgreich gelöscht wurde oder nicht.
      */
     override fun deleteLearningCategory(learningCategory: LearningCategory, result: (UiState<String>) -> Unit) {
-        // Zugriff auf das Lernkategorie-Dokument in der Datenbank basierend auf der Lernkategorie-ID
+        // Zugriff auf das Lernkategorie-Dokument in der Datenbank anhand der Lernkategorie-ID
         val document = database.collection(FireStoreCollection.LEARNING_CATEGORY).document(learningCategory.id)
-        // Löschen des Lernkategorie-Dokuments aus der Datenbank
+        // Das Lernkategorie-Dokument aus der Datenbank löschen
         document
             .delete()
             .addOnSuccessListener {
-                // Rückgabe einer Erfolgsmeldung an den Aufrufer
-                result.invoke(
-                    UiState.Success("Learning Category has been deleted successfully")
-                )
+                // Eine Erfolgsmeldung an den Aufrufer zurückgeben
+                result.invoke(UiState.Success("Die Lernkategorie wurde erfolgreich gelöscht"))
             }
             .addOnFailureListener {
-                // Rückgabe einer Fehlermeldung an den Aufrufer
-                result.invoke(
-                    UiState.Failure(
-                        it.localizedMessage
-                    )
-                )
+                // Eine Fehlermeldung an den Aufrufer zurückgeben
+                result.invoke(UiState.Failure(
+                    "Fehler beim Löschen der Lernkategorie: ${it.localizedMessage}"
+                ))
             }
     }
 }

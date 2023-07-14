@@ -3,86 +3,131 @@ package com.example.learnahead_prototyp.Data.Repository
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.Question
 import com.example.learnahead_prototyp.Data.Model.User
+import com.example.learnahead_prototyp.Data.Repository.IQuestionRepository
 import com.example.learnahead_prototyp.Util.FireStoreCollection
 import com.example.learnahead_prototyp.Util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
- * Klasse, die die Schnittstelle IGoalRepository implementiert und Methoden enthält, um Ziele aus der Datenbank zu holen.
- * @param database Die Firebase Firestore-Datenbank-Instanz, auf die zugegriffen werden soll.
+ * Eine Klasse, die das IQuestionRepository-Interface implementiert und Methoden enthält, um Fragen aus der Datenbank abzurufen, hinzuzufügen, zu aktualisieren und zu löschen.
+ *
+ * @param database Die Firebase Firestore-Datenbankinstanz, auf die zugegriffen werden soll.
  */
 class QuestionRepository(
-    val database: FirebaseFirestore
+    private val database: FirebaseFirestore
 ) : IQuestionRepository {
 
-    override fun getQuestions(user: User?, learningCategory: LearningCategory?, result: (UiState<List<Question>>) -> Unit) {
+    /**
+     * Funktion zum Abrufen der Fragen aus der Datenbank für einen bestimmten Benutzer und eine bestimmte Lernkategorie.
+     *
+     * @param user Der Benutzer, für den die Fragen abgerufen werden sollen.
+     * @param learningCategory Die Lernkategorie, für die die Fragen abgerufen werden sollen.
+     * @param result Eine Funktion, die das Ergebnis an den Aufrufer zurückgibt.
+     * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Liste von Fragen oder eine Fehlermeldung enthält.
+     */
+    override fun getQuestions(
+        user: User?,
+        learningCategory: LearningCategory?,
+        result: (UiState<List<Question>>) -> Unit
+    ) {
         // Überprüfen, ob learningCategory null ist
         if (learningCategory == null) {
-            result(UiState.Failure("learningCategory is null"))
+            result(UiState.Failure("learningCategory ist null"))
             return
         }
 
         // Überprüfen, ob user null ist
         if (user == null) {
-            result(UiState.Failure("user is null"))
+            result(UiState.Failure("user ist null"))
             return
         }
 
-        // Dokumentreferenz des Benutzers holen
+        // Dokumentreferenz des Benutzers abrufen
         val userDocumentRef = database.collection(FireStoreCollection.USER).document(user.id)
 
         // Benutzerdokument abrufen
-        val learningCategoriesTask = userDocumentRef.get().continueWith { task ->
-            task.result?.toObject(User::class.java)?.learningCategories
-        }
+        userDocumentRef.get()
+            .addOnSuccessListener { userDocument ->
+                val userObject = userDocument.toObject(User::class.java)
+                val learningCategories = userObject?.learningCategories
 
-        // Zusammenfassungen für die Ziel-Lernkategorie holen
-        val questionTask = learningCategoriesTask.continueWith { task ->
-            val learningCategories = task.result
-            if (learningCategories.isNullOrEmpty()) {
-                throw Exception("Learning categories are null or empty")
+                if (learningCategories.isNullOrEmpty()) {
+                    result(UiState.Failure("Lernkategorien sind null oder leer"))
+                    return@addOnSuccessListener
+                }
+
+                val targetLearningCategory =
+                    learningCategories.find { it.id == learningCategory.id }
+
+                if (targetLearningCategory == null) {
+                    result(UiState.Failure("Lernkategorie nicht gefunden"))
+                    return@addOnSuccessListener
+                }
+
+                result(UiState.Success(targetLearningCategory.questions))
             }
-            val targetLearningCategory = learningCategories.find { it.id == learningCategory.id }
-                ?: throw Exception("Learning category not found")
-            targetLearningCategory.questions
-        }
-
-        // Ergebnis zurückgeben
-        questionTask.addOnSuccessListener { questions ->
-            result(UiState.Success(questions))
-        }.addOnFailureListener { exception ->
-            result(UiState.Failure(exception.localizedMessage))
-        }
+            .addOnFailureListener { exception ->
+                result(UiState.Failure(exception.localizedMessage))
+            }
     }
 
+    /**
+     * Funktion zum Hinzufügen einer neuen Frage in die Datenbank.
+     *
+     * @param question Die Frage, die hinzugefügt werden soll.
+     * @param result Eine Funktion, die das Ergebnis an den Aufrufer zurückgibt.
+     * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie die hinzugefügte Frage oder eine Fehlermeldung enthält.
+     */
     override fun addQuestion(question: Question, result: (UiState<Question?>) -> Unit) {
-        // Save the tags to the database
+        // Tags in die Datenbank speichern
         val tagsCollection = database.collection(FireStoreCollection.TAG)
         val batch = database.batch()
+
         question.tags.forEach { tag ->
             val tagRef = tagsCollection.document()
             tag.id = tagRef.id
             batch.set(tagRef, tag)
         }
-        batch.commit().addOnSuccessListener {
-            // Add the question to the database
-            val document = database.collection(FireStoreCollection.QUESTION).document()
-            question.id = document.id
-            document.set(question).addOnSuccessListener {
-                result(UiState.Success(question))
-            }.addOnFailureListener {
-                result(UiState.Failure(it.localizedMessage))
+
+        batch.commit()
+            .addOnSuccessListener {
+                // Frage in die Datenbank hinzufügen
+                val document = database.collection(FireStoreCollection.QUESTION).document()
+                question.id = document.id
+                document.set(question)
+                    .addOnSuccessListener {
+                        result(UiState.Success(question))
+                    }
+                    .addOnFailureListener { exception ->
+                        result(UiState.Failure(exception.localizedMessage))
+                    }
             }
-        }.addOnFailureListener {
-            result(UiState.Failure(it.localizedMessage))
-        }
+            .addOnFailureListener { exception ->
+                result(UiState.Failure(exception.localizedMessage))
+            }
     }
 
+    /**
+     * Funktion zum Aktualisieren einer vorhandenen Frage in der Datenbank.
+     *
+     * @param question Die Frage, die aktualisiert werden soll.
+     * @param result Eine Funktion, die das Ergebnis an den Aufrufer zurückgibt.
+     * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie die aktualisierte Frage oder eine Fehlermeldung enthält.
+     */
     override fun updateQuestion(question: Question, result: (UiState<Question?>) -> Unit) {
-        TODO("Not yet implemented")
+        // Noch nicht implementiert
+        result(UiState.Failure("Funktion updateQuestion ist noch nicht implementiert"))
     }
 
+    /**
+     * Funktion zum Löschen einer Frage aus der Datenbank.
+     *
+     * @param question Die Frage, die gelöscht werden soll.
+     * @param result Eine Funktion, die das Ergebnis an den Aufrufer zurückgibt.
+     * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Erfolgsmeldung oder eine Fehlermeldung enthält.
+     */
     override fun deleteQuestion(question: Question, result: (UiState<String>) -> Unit) {
-        TODO("Not yet implemented")
+        // Noch nicht implementiert
+        result(UiState.Failure("Funktion deleteQuestion ist noch nicht implementiert"))
     }
 }

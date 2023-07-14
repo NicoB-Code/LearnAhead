@@ -37,6 +37,7 @@ object RepositoryModule {
 
     /**
      * Funktion zur Bereitstellung eines IGoalRepository-Objekts, das Zugriff auf die Ziele in der Firebase-Datenbank bietet.
+     *
      * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
      * @return Das IGoalRepository-Objekt, das für den Zugriff auf die Ziele in der Datenbank verwendet werden soll.
      * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
@@ -50,9 +51,10 @@ object RepositoryModule {
     }
 
     /**
-     * Funktion zur Bereitstellung eines IGoalRepository-Objekts, das Zugriff auf die Ziele in der Firebase-Datenbank bietet.
+     * Funktion zur Bereitstellung eines ISummaryRepository-Objekts, das Zugriff auf die Zusammenfassungen in der Firebase-Datenbank bietet.
+     *
      * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
-     * @return Das IGoalRepository-Objekt, das für den Zugriff auf die Ziele in der Datenbank verwendet werden soll.
+     * @return Das ISummaryRepository-Objekt, das für den Zugriff auf die Zusammenfassungen in der Datenbank verwendet werden soll.
      * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
      */
     @Provides
@@ -64,9 +66,10 @@ object RepositoryModule {
     }
 
     /**
-     * Funktion zur Bereitstellung eines ILearningCategoryRepository-Objekts, das Zugriff auf die Lernkategorien in der Firebase-Datenbank bietet.
+     * Funktion zur Bereitstellung eines ILearnCategoryRepository-Objekts, das Zugriff auf die Lernkategorien in der Firebase-Datenbank bietet.
+     *
      * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
-     * @return Das ILearningCategoryRepository-Objekt, das für den Zugriff auf die Lernkategorien in der Datenbank verwendet werden soll.
+     * @return Das ILearnCategoryRepository-Objekt, das für den Zugriff auf die Lernkategorien in der Datenbank verwendet werden soll.
      * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
      */
     @Provides
@@ -79,6 +82,7 @@ object RepositoryModule {
 
     /**
      * Funktion zur Bereitstellung eines IAuthRepository-Objekts, das Zugriff auf die Firebase-Authentifizierung und die Benutzerdaten in der Firebase-Datenbank bietet.
+     *
      * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
      * @param auth Die Instanz der Firebase Authentifizierung, auf die zugegriffen werden soll.
      * @param appPreferences Das SharedPreferences-Objekt, das für die lokale Datenspeicherung verwendet werden soll.
@@ -97,6 +101,14 @@ object RepositoryModule {
         return AuthRepository(auth, database, appPreferences, gson)
     }
 
+    /**
+     * Funktion zur Bereitstellung eines IProfileRepository-Objekts, das Zugriff auf das Benutzerprofil und die Profilbilder in der Firebase-Datenbank bietet.
+     *
+     * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
+     * @param storageReference Die StorageReference für den Firebase Storage.
+     * @return Das IProfileRepository-Objekt, das für den Zugriff auf das Benutzerprofil und die Profilbilder in der Datenbank verwendet werden soll.
+     * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
+     */
     @Provides
     @Singleton
     fun provideProfileRepository(
@@ -106,18 +118,32 @@ object RepositoryModule {
         return ProfileRepository(database, storageReference)
     }
 
+    /**
+     * Funktion zur Bereitstellung eines IQuestionRepository-Objekts, das Zugriff auf die Fragen in der Firebase-Datenbank bietet.
+     *
+     * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
+     * @return Das IQuestionRepository-Objekt, das für den Zugriff auf die Fragen in der Datenbank verwendet werden soll.
+     * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
+     */
     @Provides
     @Singleton
     fun provideQuestionRepository(
-        database: FirebaseFirestore,
+        database: FirebaseFirestore
     ): IQuestionRepository {
         return QuestionRepository(database)
     }
 
+    /**
+     * Funktion zur Bereitstellung eines ITestRepository-Objekts, das Zugriff auf die Tests in der Firebase-Datenbank bietet.
+     *
+     * @param database Die Instanz der Firebase Firestore-Datenbank, auf die zugegriffen werden soll.
+     * @return Das ITestRepository-Objekt, das für den Zugriff auf die Tests in der Datenbank verwendet werden soll.
+     * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
+     */
     @Provides
     @Singleton
     fun provideTestRepository(
-        database: FirebaseFirestore,
+        database: FirebaseFirestore
     ): ITestRepository {
         return TestRepository(database)
     }

@@ -25,6 +25,7 @@ object AppModule {
 
     /**
      * Funktion zur Bereitstellung eines SharedPreferences-Objekts für die lokale Datenspeicherung.
+     *
      * @param context Der Anwendungscontext.
      * @return Das SharedPreferences-Objekt, das für die lokale Datenspeicherung verwendet werden soll.
      * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
@@ -38,14 +39,21 @@ object AppModule {
         )
     }
 
+    /**
+     * Funktion zur Bereitstellung eines StorageReference-Objekts für die Firebase Storage-Referenz.
+     *
+     * @return Das StorageReference-Objekt für den Firebase Storage.
+     */
     @Provides
+    @Singleton
     fun provideStorageReference(): StorageReference {
-        // Return an instance of the StorageReference
+        // Ein Instanz des StorageReference-Objekts zurückgeben
         return FirebaseStorage.getInstance().reference
     }
 
     /**
      * Funktion zur Bereitstellung eines Gson-Objekts für die Serialisierung und Deserialisierung von JSON-Daten.
+     *
      * @return Das Gson-Objekt.
      * Das Objekt wird als Singleton mit @Singleton annotiert, um sicherzustellen, dass nur eine Instanz davon erstellt wird.
      */
