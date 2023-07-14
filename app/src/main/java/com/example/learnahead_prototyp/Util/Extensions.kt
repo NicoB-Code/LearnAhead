@@ -12,14 +12,14 @@ import java.util.Calendar
 import kotlin.random.Random
 
 /**
- * Versteckt die View, indem die visibility auf View.GONE gesetzt wird.
+ * Versteckt die View, indem die Sichtbarkeit auf View.GONE gesetzt wird.
  */
 fun View.hide() {
     visibility = View.GONE
 }
 
 /**
- * Zeigt die View, indem die visibility auf View.VISIBLE gesetzt wird.
+ * Zeigt die View, indem die Sichtbarkeit auf View.VISIBLE gesetzt wird.
  */
 fun View.show() {
     visibility = View.VISIBLE
@@ -28,6 +28,7 @@ fun View.show() {
 /**
  * Zeigt einen Toast mit einer Nachricht [msg] für die Dauer Toast.LENGTH_LONG an.
  * Erfordert ein Fragment und greift auf dessen Context zu.
+ * @param msg Die anzuzeigende Nachricht.
  */
 fun Fragment.toast(msg: String?) {
     Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
@@ -40,10 +41,18 @@ fun Fragment.toast(msg: String?) {
 fun String.isValidEmail() =
     isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
+/**
+ * Gibt einen zufälligen Lerntipp aus der Liste der Lerntipps zurück.
+ * @return Ein zufälliger Lerntipp.
+ */
 fun getRandomLerntipp(): String {
     return Lerntipps.LERNTIPPS_LISTE[Random.nextInt(Lerntipps.LERNTIPPS_LISTE.size)]
 }
 
+/**
+ * Ein Dialogfragment für den DatePicker.
+ * @param listener Ein Lambda-Ausdruck, der aufgerufen wird, wenn ein Datum ausgewählt wurde.
+ */
 class DatePickerFragment(val listener: (day: Int, month: Int, year: Int) -> Unit) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -59,4 +68,3 @@ class DatePickerFragment(val listener: (day: Int, month: Int, year: Int) -> Unit
         listener(day, month, year)
     }
 }
-

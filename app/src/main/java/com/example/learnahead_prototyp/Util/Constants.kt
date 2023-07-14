@@ -1,18 +1,52 @@
 package com.example.learnahead_prototyp.Util
 
 /**
- * Das sind Tabellen in Firebase
+ * Enthält die Namen der Tabellen in Firebase.
  */
 object FireStoreCollection {
+    /**
+     * Tabelle "test"
+     */
     val TEST = "test"
+
+    /**
+     * Tabelle "tag"
+     */
     val TAG = "tag"
+
+    /**
+     * Tabelle "question"
+     */
     val QUESTION = "question"
+
+    /**
+     * Tabelle "summary"
+     */
     val SUMMARY = "summary"
+
+    /**
+     * Tabelle "goal"
+     */
     val GOAL = "goal"
+
+    /**
+     * Tabelle "learning_category"
+     */
     val LEARNING_CATEGORY = "learning_category"
+
+    /**
+     * Tabelle "user"
+     */
     val USER = "user"
 }
+
+/**
+ * Enthält eine Liste von Lerntipps.
+ */
 object Lerntipps {
+    /**
+     * Liste von Lerntipps.
+     */
     val LERNTIPPS_LISTE = listOf(
         "Verteiltes Lernen: Anstatt sich intensiv auf ein Thema zu konzentrieren, ist es oft effektiver, das Lernen über einen längeren Zeitraum zu verteilen. Diese Methode hilft, das Erinnern von Informationen zu verbessern.",
         "Interleaved Practice: Abwechselndes Üben verschiedener Fähigkeiten oder Themen innerhalb einer Lerneinheit kann dazu beitragen, das Verständnis und die Erinnerung zu verbessern.",
@@ -28,19 +62,36 @@ object Lerntipps {
 }
 
 /**
- * Das sind bestimmte Tabellenfelder in Firebase
+ * Enthält die Namen bestimmter Felder in Firebase-Dokumenten.
  */
 object FireStoreDocumentField {
-    // WICHTIG DATE WIRD NOCH ABGEÄNDERT WEGEN INDEX
+    /**
+     * Das Feld "endDate" in Firebase-Dokumenten.
+     */
     val END_DATE = "endDate"
+
+    /**
+     * Das Feld "name" in Firebase-Dokumenten.
+     */
     val NAME = "name"
+
+    /**
+     * Das Feld "user_id" in Firebase-Dokumenten.
+     */
     val USER_ID = "user_id"
 }
 
 /**
- * Das ist für Session Handling
+ * Enthält Konstanten für das Session Handling.
  */
 object SharedPrefConstants {
+    /**
+     * Der Name des Shared Preferences.
+     */
     val LOCAL_SHARED_PREF = "local_shared_pref"
+
+    /**
+     * Der Key für die Benutzersitzung in den Shared Preferences.
+     */
     val USER_SESSION = "user_session"
 }

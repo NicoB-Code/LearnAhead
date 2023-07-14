@@ -11,9 +11,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
- * Diese Klasse sorgt für den Informationsaustausch zwischen
- * Repository und der UI. Diese Klasse wird mithilfe
- * von Hilt injeziert und erhält eine Instanz des IProfileRepository-Interfaces, um auf
+ * Das [ProfileViewModel] sorgt für den Informationsaustausch zwischen
+ * dem Repository und der UI. Diese Klasse wird mithilfe
+ * von Hilt injiziert und erhält eine Instanz des IProfileRepository-Interfaces, um auf
  * Profil-Funktionen zugreifen zu können.
  */
 @HiltViewModel
@@ -24,16 +24,16 @@ class ProfileViewModel @Inject constructor(
     val TAG: String = "ProfileViewModel"
 
     /**
-     * MutableLiveData that holds the current state of the fileUri of an user Profile.
+     * MutableLiveData, das den aktuellen Zustand der Datei-URI des Benutzerprofils enthält.
      */
     private val _fileUris = MutableLiveData<UiState<String>>()
     val fileUris: LiveData<UiState<String>>
         get() = _fileUris
 
     /**
-     * Calls the repository to upload an new profile Image for the given User and updates the _fileUris MutableLiveData.
-     * @param fileUris the new Image Uri
-     * @param user the User for which to retrieve the Goals.
+     * Ruft das Repository auf, um ein neues Profilbild für den angegebenen Benutzer hochzuladen, und aktualisiert das _fileUris MutableLiveData.
+     * @param fileUris Die URI des neuen Bildes.
+     * @param user Der Benutzer, für den die Dateien abgerufen werden sollen.
      */
     fun onUploadSingleFile(fileUris: Uri, user: User){
         _fileUris.value = UiState.Loading

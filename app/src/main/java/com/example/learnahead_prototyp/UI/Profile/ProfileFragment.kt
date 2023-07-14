@@ -15,15 +15,14 @@ import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.Util.UiState
-import com.example.learnahead_prototyp.Util.hide
-import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Das Profilfragment zeigt das Profil des aktuellen Benutzers an.
+ * Das [ProfileFragment] zeigt das Profil des aktuellen Benutzers an.
  * Hier kann der Benutzer sein Profilbild ändern und seine Lernfortschritte anzeigen.
+ * Diese Klasse ist mit [AndroidEntryPoint] annotiert, um die Injection von [ViewModel]s zu ermöglichen.
  */
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -39,7 +38,7 @@ class ProfileFragment : Fragment() {
     private val viewModelProfile: ProfileViewModel by viewModels()
 
     /**
-     * Der GalleryLauncher wird verwendet, um ein Bild aus der Galerie auszuwählen.
+     * Der [ActivityResultContracts.GetContent] wird verwendet, um ein Bild aus der Galerie auszuwählen.
      * Wenn ein Bild ausgewählt wurde, wird es an die Funktion [viewModelProfile.onUploadSingleFile] übergeben.
      */
     private val galleryLauncher =
@@ -52,8 +51,16 @@ class ProfileFragment : Fragment() {
             }
         }
 
+    /**
+     * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
+     * @param inflater Das [LayoutInflater]-Objekt, das verwendet wird, um das Layout aufzublasen.
+     * @param container Die übergeordnete [ViewGroup], an die die View angehängt werden soll.
+     * @param savedInstanceState Das [Bundle]-Objekt, das den Zustand des Fragments enthält.
+     * @return Die erzeugte [View]-Instanz.
+     */
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Das Layout aufblasen und das Binding-Objekt initialisieren
@@ -61,6 +68,12 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Wird aufgerufen, nachdem die View hierarchie aufgebaut wurde.
+     * Hier werden die Beobachter und Funktionen zur Aktualisierung der Benutzeroberfläche initialisiert.
+     * @param view Die View der Fragment-Klasse.
+     * @param savedInstanceState Das [Bundle]-Objekt, das den Zustand des Fragments enthält.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -137,10 +150,9 @@ class ProfileFragment : Fragment() {
                 is UiState.Success -> {
                     // Der aktuelle Benutzer wird aus dem ViewModel geladen
                     currentUser = state.data
-                    var currentLevel = (currentUser.currentPoints / 100) + 1
-                    var progressBarValue = currentUser.currentPoints % 100
+                    val currentLevel = (currentUser.currentPoints / 100) + 1
+                    val progressBarValue = currentUser.currentPoints % 100
                     binding.progressBar.progress = progressBarValue
-                    //binding.progressBar.progress = 5
                     binding.apply {
                         // Die Benutzerdaten werden in die Benutzeroberfläche eingefügt
                         usernameDisplay.text = currentUser.username
