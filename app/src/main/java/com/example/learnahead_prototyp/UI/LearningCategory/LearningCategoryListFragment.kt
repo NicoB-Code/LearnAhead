@@ -29,14 +29,14 @@ class LearningCategoryListFragment : Fragment() {
     private var currentUser: User? = null
 
     // Konstante für das Logging-Tag
-    val TAG: String = "LearningCategoryListFragment"
+    private val TAG: String = "LearningCategoryListFragment"
 
     // Deklaration der benötigten Variablen
     lateinit var binding: FragmentLearningCategoryListBinding
     private val learnCategoryViewModel: LearnCategoryViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private var deletePosition: Int = -1
-    var list: MutableList<LearningCategory> = arrayListOf()
+    private var list: MutableList<LearningCategory> = arrayListOf()
 
     // Initialisierung des Adapters mit den entsprechenden Click-Callbacks
     private val adapter by lazy {
@@ -59,12 +59,20 @@ class LearningCategoryListFragment : Fragment() {
         )
     }
 
+    /**
+     * Aktualisiert das Benutzerobjekt, indem eine Lernkategorie hinzugefügt oder entfernt wird.
+     *
+     * @param learningCategory Die Lernkategorie, die hinzugefügt oder entfernt werden soll.
+     * @param deleteLearningCategory Gibt an, ob die Lernkategorie gelöscht werden soll.
+     */
     private fun updateUserObject(learningCategory: LearningCategory, deleteLearningCategory: Boolean) {
-        if (deleteLearningCategory && currentUser != null)
+        if (deleteLearningCategory && currentUser != null) {
             currentUser!!.learningCategories.remove(learningCategory)
+        }
 
         currentUser?.let { authViewModel.updateUserInfo(it) }
     }
+
 
     /**
      * Erzeugt die View-Hierarchie für das Fragment, indem das entsprechende Binding Layout aufgeblasen wird.
@@ -101,6 +109,9 @@ class LearningCategoryListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
+    /**
+     * Holt den aktuellen Benutzer aus der Datenbank.
+     */
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
     }
@@ -128,7 +139,7 @@ class LearningCategoryListFragment : Fragment() {
      */
     private fun observer() {
         // Observer für "learningCategory"-Objekt im "viewModel". Dieser überwacht alle Änderungen in der Liste der Lernkategorien.
-        learnCategoryViewModel.learningCategory.observe(viewLifecycleOwner) { state ->
+        learnCategoryViewModel.learningCategories.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
                     // Fortschrittsanzeige anzeigen

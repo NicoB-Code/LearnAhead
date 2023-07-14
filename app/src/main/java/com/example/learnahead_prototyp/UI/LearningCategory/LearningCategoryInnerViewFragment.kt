@@ -48,7 +48,6 @@ class LearningCategoryInnerViewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentLearningCategoryInnerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -72,7 +71,6 @@ class LearningCategoryInnerViewFragment : Fragment() {
      * Aktualisiert die UI des Fragments.
      */
     private fun updateUI() {
-        // Holt die Lernkategorie aus den Argumenten und setzt den Text des Labels
         currentLearningCategory = arguments?.getParcelable("learning_category")
         binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
         binding.learningTipOfTheDay.text = getRandomLerntipp()
@@ -82,7 +80,6 @@ class LearningCategoryInnerViewFragment : Fragment() {
      * Holt den aktuellen Benutzer aus der Datenbank.
      */
     private fun setLocalCurrentUser() {
-        // Holt den aktuellen Benutzer aus der Datenbank und speichert ihn in der Variable currentUser
         authViewModel.getSession()
     }
 
@@ -90,30 +87,24 @@ class LearningCategoryInnerViewFragment : Fragment() {
      * Setzt die Event-Listener für die Buttons und Views des Fragments.
      */
     private fun setEventListener() {
-        // Setzt den Event-Listener für den Home-Button
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_homeFragment)
         }
 
-        // Setzt den Event-Listener für den Learning Goals-Button
         binding.buttonLearningGoals.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
-
         }
 
-        // Setzt den Event-Listener für den Learning Categories-Button
         binding.buttonLearningCategories.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
 
-        // Setzt den Event-Listener für den Logout-Button
         binding.logout.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_loginFragment)
             }
         }
 
-        // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
@@ -147,9 +138,9 @@ class LearningCategoryInnerViewFragment : Fragment() {
         binding.buttonSummaries.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment,
                 Bundle().apply {
-                putString("type","view")
-                putParcelable("learning_category", currentLearningCategory)
-                 })
+                    putString("type", "view")
+                    putParcelable("learning_category", currentLearningCategory)
+                })
         }
     }
 
@@ -157,7 +148,6 @@ class LearningCategoryInnerViewFragment : Fragment() {
      * Beobachtet die LiveData-Objekte der ViewModels und aktualisiert die UI entsprechend.
      */
     private fun observer() {
-        // Beobachtet die LiveData-Objekte des AuthViewModels und aktualisiert die UI entsprechend
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             binding.progressBar.visibility = when (state) {
                 is UiState.Loading -> View.VISIBLE
@@ -165,7 +155,6 @@ class LearningCategoryInnerViewFragment : Fragment() {
                     toast(state.error)
                     View.GONE
                 }
-
                 is UiState.Success -> {
                     currentUser = state.data
                     currentLearningCategory?.let {
@@ -175,7 +164,5 @@ class LearningCategoryInnerViewFragment : Fragment() {
                 }
             }
         }
-
-
     }
 }

@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupObservers() {
-        learningCategoryViewModel.learningCategory.observe(viewLifecycleOwner) { state ->
+        learningCategoryViewModel.learningCategories.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
                     binding.progressBar.show()

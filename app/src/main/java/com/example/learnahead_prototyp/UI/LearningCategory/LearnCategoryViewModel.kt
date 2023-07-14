@@ -16,23 +16,26 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class LearnCategoryViewModel @Inject constructor(
-    val repository: ILearnCategoryRepository
+    private val repository: ILearnCategoryRepository
 ) : ViewModel() {
 
     private val _currentSelectedLearningCategory = MutableLiveData<LearningCategory?>()
     val currentSelectedLearningCategory: LiveData<LearningCategory?>
         get() = _currentSelectedLearningCategory
 
+    /**
+     * Sets the current selected learning category.
+     * @param learningCategory The LearningCategory to set as the current selected learning category.
+     */
     fun setCurrentSelectedLearningCategory(learningCategory: LearningCategory?) {
         _currentSelectedLearningCategory.value = learningCategory
     }
-
 
     /**
      * MutableLiveData that holds the current state of the list of LearningCategories.
      */
     private val _learningCategories = MutableLiveData<UiState<List<LearningCategory>>>()
-    val learningCategory: LiveData<UiState<List<LearningCategory>>>
+    val learningCategories: LiveData<UiState<List<LearningCategory>>>
         get() = _learningCategories
 
     /**
@@ -62,7 +65,9 @@ class LearnCategoryViewModel @Inject constructor(
      */
     fun getLearningCategories(user: User?) {
         _learningCategories.value = UiState.Loading
-        repository.getLearningCategories(user) { _learningCategories.value = it }
+        repository.getLearningCategories(user) { result ->
+            _learningCategories.value = result
+        }
     }
 
     /**
@@ -71,7 +76,9 @@ class LearnCategoryViewModel @Inject constructor(
      */
     fun addLearningCategory(learningCategory: LearningCategory) {
         _addLearningCategory.value = UiState.Loading
-        repository.addLearningCategory(learningCategory) { _addLearningCategory.value = it }
+        repository.addLearningCategory(learningCategory) { result ->
+            _addLearningCategory.value = result
+        }
     }
 
     /**
@@ -80,7 +87,9 @@ class LearnCategoryViewModel @Inject constructor(
      */
     fun updateLearningCategory(learningCategory: LearningCategory) {
         _updateLearningCategory.value = UiState.Loading
-        repository.updateLearningCategory(learningCategory) { _updateLearningCategory.value = it }
+        repository.updateLearningCategory(learningCategory) { result ->
+            _updateLearningCategory.value = result
+        }
     }
 
     /**
@@ -89,6 +98,8 @@ class LearnCategoryViewModel @Inject constructor(
      */
     fun deleteLearningCategory(learningCategory: LearningCategory) {
         _deleteLearningCategory.value = UiState.Loading
-        repository.deleteLearningCategory(learningCategory) { _deleteLearningCategory.value = it }
+        repository.deleteLearningCategory(learningCategory) { result ->
+            _deleteLearningCategory.value = result
+        }
     }
 }

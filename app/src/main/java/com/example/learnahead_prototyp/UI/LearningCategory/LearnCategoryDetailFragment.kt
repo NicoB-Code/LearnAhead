@@ -20,11 +20,11 @@ import com.example.learnahead_prototyp.databinding.FragmentLearnCategoryDetailBi
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Dies ist die Detailansicht einer Lernkategorie auf der App. Es zeigt Informationen wie Lernkategorie-Name.
- * Diese Klasse ist verantwortlich für die Erstellung
- * einer neuen Lernkategorie oder die Aktualisierung einer vorhandenen Lernkategorie . Die Entscheidung zwischen Erstellung und Aktualisierung
- * erfolgt anhand des Wertes der Variable isEdit. Wenn isEdit true ist, wird die Lernkategorie aktualisiert, andernfalls wird
- * eine neue Lernkategorie erstellt.
+ * Dies ist die Detailansicht einer Lernkategorie in der App. Sie zeigt Informationen wie den Lernkategorie-Namen.
+ * Diese Klasse ist verantwortlich für die Erstellung einer neuen Lernkategorie oder die Aktualisierung einer vorhandenen Lernkategorie.
+ * Die Entscheidung zwischen Erstellung und Aktualisierung erfolgt anhand des Werts der Variable isEdit.
+ * Wenn isEdit true ist, wird die Lernkategorie aktualisiert, andernfalls wird eine neue Lernkategorie erstellt.
+ *
  * @constructor Erstellt eine neue Instanz des LearningCategoryDetailFragment.
  */
 @AndroidEntryPoint
@@ -33,10 +33,10 @@ class LearnCategoryDetailFragment : Fragment() {
     private var currentUser: User? = null
 
     // Ein Tag zur Identifizierung des Lernkategorie-Detail-Fragments für Logging-Zwecke.
-    val TAG: String = "LearningCategoryDetailFragment"
+    private val TAG: String = "LearningCategoryDetailFragment"
 
     // Das FragmentLearnCategoryDetailBinding-Objekt, das die View-Bindings enthält.
-    lateinit var binding: FragmentLearnCategoryDetailBinding
+    private lateinit var binding: FragmentLearnCategoryDetailBinding
 
     // Das LearnCategoryViewModel-Objekt, das die Geschäftslogik enthält und die Daten für die Lernkategorie liefert.
     private val learnCategoryViewModel: LearnCategoryViewModel by viewModels()
@@ -44,15 +44,15 @@ class LearnCategoryDetailFragment : Fragment() {
     // Das AuthViewModel-Objekt, das für die Authentifizierung des Benutzers verantwortlich ist.
     private val authViewModel: AuthViewModel by viewModels()
 
-    // Eine Flagge, die angibt, ob die Lernkategorie bearbeitet wird (true) oder ob es neu erstellt wird (false).
+    // Eine Flagge, die angibt, ob die Lernkategorie bearbeitet wird (true) oder ob sie neu erstellt wird (false).
     private var isEdit = false
 
     // Die Lernkategorie, die bearbeitet wird.
     private var objLearningCategory: LearningCategory? = null
 
-
     /**
      * Erstellt die View und gibt sie zurück.
+     *
      * @param inflater Der LayoutInflater, der verwendet wird, um die View zu erstellen.
      * @param container Der ViewGroup-Container, der die View enthält.
      * @param savedInstanceState Das Bundle-Objekt, das den zuletzt gespeicherten Zustand enthält.
@@ -62,13 +62,14 @@ class LearnCategoryDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLearnCategoryDetailBinding.inflate(layoutInflater)
+        binding = FragmentLearnCategoryDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     /**
-     * Initialisiert die View und setzt die Listener auf die Schaltflächen. Ruft die UpdateUI()-Methode auf,
+     * Initialisiert die View und setzt die Listener auf die Schaltflächen. Ruft die updateUI()-Methode auf,
      * um die View mit den vorhandenen Daten zu aktualisieren.
+     *
      * @param view Die erstellte View.
      * @param savedInstanceState Das Bundle-Objekt, das den zuletzt gespeicherten Zustand enthält.
      */
@@ -80,12 +81,15 @@ class LearnCategoryDetailFragment : Fragment() {
         setEventListener()
     }
 
+    /**
+     * Diese Funktion setzt den aktuellen Benutzer lokal.
+     */
     private fun setLocalCurrentUser() {
         authViewModel.getSession()
     }
 
     /**
-     * Erstellt alle notwendigen EventListener für das Fragment
+     * Erstellt alle notwendigen EventListener für das Fragment.
      */
     private fun setEventListener() {
         binding.saveButton.setOnClickListener {
@@ -111,7 +115,7 @@ class LearnCategoryDetailFragment : Fragment() {
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
         binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_goalListingFragment) }
 
-        // Klick Listener zum Weiterleiten auf den Lernzielen Screen
+        // Klick Listener zum Zurücknavigieren
         binding.backIcon.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -122,11 +126,11 @@ class LearnCategoryDetailFragment : Fragment() {
         }
     }
 
-
     /**
      * Aktiviert oder deaktiviert die Benutzeroberfläche der Lernkategorien, indem die `isEnabled`-Eigenschaften
-     * der betreffenden Ansichtselemente auf den übergebenen Wert festgelegt werden. Wenn `isDisable` auf
-     * `true` gesetzt ist, wird die Benutzeroberfläche deaktiviert, andernfalls wird sie aktiviert.
+     * der betreffenden Ansichtselemente auf den übergebenen Wert festgelegt werden.
+     * Wenn `isDisable` auf `true` gesetzt ist, wird die Benutzeroberfläche deaktiviert, andernfalls wird sie aktiviert.
+     *
      * @param isDisable Ein boolescher Wert, der angibt, ob die Benutzeroberfläche deaktiviert werden soll
      *                  (`true`) oder nicht (`false`). Der Standardwert ist `false`.
      */
@@ -136,87 +140,69 @@ class LearnCategoryDetailFragment : Fragment() {
 
     /**
      * Beobachtet die LiveData-Variablen `addLearningCategory` und `updateLearningCategory` des [ViewModel]-Objekts und reagiert
-     * entsprechend, wenn sich der Wert der Variablen ändert. Zeigt eine Fortschrittsanzeige an, zeigt
-     * Fehlermeldungen an oder zeigt Erfolgsmeldungen an.
+     * entsprechend, wenn sich der Wert der Variablen ändert.
+     * Zeigt eine Fortschrittsanzeige an, zeigt Fehlermeldungen an oder zeigt Erfolgsmeldungen an.
      */
     private fun observer() {
-        // Eine Beobachtung auf viewModel.addLearningCategory ausführen
         learnCategoryViewModel.addLearningCategory.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
                     binding.btnProgressAr.show()
                 }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
                     binding.btnProgressAr.hide()
                     toast(state.error)
                 }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    if(state.data != null && currentUser != null) {
-                        // Die neue Lernkategorie dem User hinzufügen
+                    if (state.data != null && currentUser != null) {
                         currentUser!!.learningCategories.add(state.data)
-                        // Den User in der DB updaten
                         authViewModel.updateUserInfo(currentUser!!)
                         findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment)
                         toast("Die Lernkategorie konnte erfolgreich erstellt werden")
-                    }
-                    else {
+                    } else {
                         toast("Die Lernkategorie konnte nicht erstellt werden")
                     }
                 }
             }
         }
 
-        // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
         learnCategoryViewModel.updateLearningCategory.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
                     binding.btnProgressAr.show()
                 }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
                     binding.btnProgressAr.hide()
                     toast(state.error)
                 }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
-                    if(state.data != null && currentUser != null) {
+                    if (state.data != null && currentUser != null) {
                         val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == state.data.id }
                         if (indexOfCurrentObject != -1) {
                             currentUser!!.learningCategories[indexOfCurrentObject] = state.data
                         } else {
                             currentUser!!.learningCategories.add(state.data)
                         }
-
-                        // Den User in der DB updaten
                         authViewModel.updateUserInfo(currentUser!!)
-                        toast("Die Lernkategorie konnte erfolgreich geupdated werden")
-                    }
-                    else {
-                        toast("Die Lernkategorie konnte nicht geupdated werden")
+                        toast("Die Lernkategorie konnte erfolgreich aktualisiert werden")
+                    } else {
+                        toast("Die Lernkategorie konnte nicht aktualisiert werden")
                     }
                 }
             }
         }
 
-        // Eine Beobachtung auf viewModel.updateLearningCategory ausführen
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
-            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
                 is UiState.Loading -> {
                     binding.btnProgressAr.show()
                 }
-                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
                 is UiState.Failure -> {
                     binding.btnProgressAr.hide()
                     toast(state.error)
                 }
-                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.btnProgressAr.hide()
                     currentUser = state.data
@@ -226,9 +212,8 @@ class LearnCategoryDetailFragment : Fragment() {
     }
 
     /**
-     * Überprüft ob der Name ausgefüllt ist.
-     * Wenn das Feld ausgefüllt ist, dann soll der Button zum Speichern sichtbar sein.
-     * Ist das Feld nicht ausgefüllt, dann soll der Speichern Button nicht sichtbar sein.
+     * Aktualisiert die Sichtbarkeit des Speichern-Buttons basierend auf dem Inhalt des Namensfelds.
+     * Wenn das Feld ausgefüllt ist, wird der Speichern-Button sichtbar, ansonsten wird er ausgeblendet.
      */
     private fun updateButtonVisibility() {
         val title = binding.textLearningCategoryName.text.toString().trim()
@@ -240,77 +225,71 @@ class LearnCategoryDetailFragment : Fragment() {
     }
 
     /**
-     * Erstellt eine Lernkategorie, indem es eine Beobachtung auf viewModel.addLearningCategory ausführt und je nach Zustand der Beobachtung
-     * verschiedene Aktionen durchführt, wie z.B. Anzeigen oder Ausblenden des Fortschrittsindikators und Anzeigen einer Toast-Nachricht
-     * in Abhängigkeit vom Zustand. Wenn die Eingabevalidierung erfolgreich ist, wird die Lernkategorie an viewModel.addLearningCategory übergeben.
+     * Erstellt eine Lernkategorie, indem eine Beobachtung auf viewModel.addLearningCategory ausgeführt wird.
+     * Zeigt je nach Zustand der Beobachtung verschiedene Aktionen an, z. B. Fortschrittsanzeige,
+     * Fehlermeldung oder Erfolgsmeldung. Wenn die Eingabevalidierung erfolgreich ist,
+     * wird die Lernkategorie an viewModel.addLearningCategory übergeben.
      */
     private fun createLearningCategory() {
-        // Wenn die Eingabevalidierung erfolgreich ist, die Lernkategorie an viewModel.addLearningCategory übergeben
         if (validation()) {
             learnCategoryViewModel.addLearningCategory(getLearningCategory())
         }
     }
 
     /**
-     * Aktualisiert eine Lernkategorie, indem es eine Beobachtung auf viewModel.updateLearningCategory ausführt und je nach Zustand der Beobachtung
-     * verschiedene Aktionen durchführt, wie z.B. Anzeigen oder Ausblenden des Fortschrittsindikators und Anzeigen einer Toast-Nachricht
-     * in Abhängigkeit vom Zustand. Wenn die Eingabevalidierung erfolgreich ist, wird die Lernkategorie an viewModel.updateLearningCategory übergeben.
+     * Aktualisiert eine Lernkategorie, indem eine Beobachtung auf viewModel.updateLearningCategory ausgeführt wird.
+     * Zeigt je nach Zustand der Beobachtung verschiedene Aktionen an, z. B. Fortschrittsanzeige,
+     * Fehlermeldung oder Erfolgsmeldung. Wenn die Eingabevalidierung erfolgreich ist,
+     * wird die Lernkategorie an viewModel.updateLearningCategory übergeben.
      */
     private fun updateLearningCategory() {
-        // Wenn die Eingabevalidierung erfolgreich ist, die Lernkategorie an viewModel.updateLearningCategory übergeben
         if (validation()) {
             learnCategoryViewModel.updateLearningCategory(getLearningCategory())
         }
     }
 
     /**
-     * Methode zum Aktualisieren der Benutzeroberfläche basierend auf dem Typ des übergebenen Arguments.
-     * @return Nothing
+     * Aktualisiert die Benutzeroberfläche basierend auf dem übergebenen Argumenttyp.
      */
     private fun updateUI() {
         objLearningCategory = arguments?.getParcelable("learning_category")
-        // Wenn eine Lernkategorie existiert z.B. wenn es editiert wird, dann werden die Daten der Lernkategorie geladen
+
         objLearningCategory?.let { learningCategory ->
             binding.textLearningCategoryName.setText(learningCategory.name)
             binding.saveButton.hide()
             binding.editButton.show()
-            //binding.delete.show()
             isMakeEnableUI()
         } ?: run {
-            // Standardmaske für Lernkategorie erstellen
             binding.textLearningCategoryName.setText("")
             binding.saveButton.hide()
             binding.editButton.hide()
-            //binding.delete.hide()
             isMakeEnableUI(true)
             binding.textLearningCategoryName.requestFocus()
         }
     }
 
     /**
-     * Methode zur Überprüfung, ob die Lernkategorie korrekt eingegeben wurde oder nicht.
-     * @return Boolean
+     * Überprüft, ob die Eingabevalidierung für die Lernkategorie erfolgreich ist.
+     *
+     * @return Gibt true zurück, wenn die Eingabevalidierung erfolgreich ist, sonst false.
      */
     private fun validation(): Boolean {
-        // Überprüfen, ob der Lernkategorie Name leer oder null ist
         if (binding.textLearningCategoryName.text.isNullOrEmpty()) {
-            // Wenn ja, eine Toast-Meldung ausgeben und false zurückgeben
-            toast("Enter name")
+            toast("Geben Sie einen Namen ein")
             return false
         }
-        // Andernfalls true zurückgeben
         return true
     }
 
     /**
-     * Methode zum Erstellen einer neuen Lernkategorie oder Aktualisieren einer vorhandenen Lernkategorie.
-     * @return Nothing
+     * Erstellt eine Lernkategorie oder aktualisiert eine vorhandene Lernkategorie.
+     *
+     * @return Das erstellte Lernkategorie-Objekt.
      */
     private fun getLearningCategory(): LearningCategory {
-        // Lernkategorie-Objekt wird erstellt
         return LearningCategory(
             id = objLearningCategory?.id ?: "",
-            name = binding.textLearningCategoryName.text.toString(),
+            name = binding.textLearningCategoryName.text.toString()
         )
     }
 }
