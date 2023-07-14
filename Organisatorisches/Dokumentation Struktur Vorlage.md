@@ -13,14 +13,14 @@
 
 ## Definition
 - Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
-  - Lernen ist nicht gleich Verstehen Phillipp **Done ggbf. nochmal drüber lesen**
-  - Synapsen Nico **ToDo**
-  - Neuronen & Neuronales Netz Nico **ToDo**
-  - Optimierter Lernplan Phillipp **Done ggbf. nochmal drüber lesen**
-  - Tagging Phillipp **Done ggbf. nochmal drüber lesen**
-  - Lernkategorien & Lernziele Nico **ToDo**
-  - Fragen Typen **ToDo** Phillipp
-  - Gamification Nico **ToDo**
+  - Lernen ist nicht gleich Verstehen Phillipp
+  - Synapsen Nico
+  - Neuronen & Neuronales Netz Nico
+  - Optimierter Lernplan Phillipp
+  - Tagging Phillipp
+  - Lernkategorien & Lernziele Nico
+  - Fragen Typen **ToDo** Nico
+  - Gamification Nico
 - Pflichtenheft Done
 - Use-Case-Diagramme (Nico) Done
 - Use-Case-Beschreibungen (Nico) Done
@@ -33,19 +33,19 @@
 - Benutzerhandbuch (optional)
 
 ## Entwurf
-- Prototyp (optional) **ToDo**
+- Prototyp (optional) **In Progress** Nico
 - BPMN **ToDo** Phillipp
-- Begründung des Datenbankkonzepts **Done ggbf. nochmal drüber lesen** Phillipp
-- Auswahl der Klassenbibliotheken/Frameworks **ToDo** Nico
-- Design Patterns für relevante Problemstellungen **ToDo** Nico
+- Begründung des Datenbankkonzepts Phillipp
+- Auswahl der Klassenbibliotheken/Frameworks Nico
+- Design Patterns für relevante Problemstellungen Nico
 - Software-Komponenten Done Phillipp
 - Gesamtkomposition Done Phillipp
 - Frontend Done Phillipp
 - Backend Done Phillipp
-- Deployment Diagramm **ToDo** Nico
-- Klassen Diagramm **ToDo** Nico
+- Deployment Diagramm  Nico
+- Klassen Diagramm Nico
 - Aktivitätsdiagramm **ToDo** Phillipp
-- Sequenzdiagramme **ToDo** Nico
+- Sequenzdiagramme **Nico
 
 ## Implementierung
 - Deployment **ToDo** Nico
