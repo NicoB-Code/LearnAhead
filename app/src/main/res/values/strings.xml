@@ -117,6 +117,11 @@
     <string name="please_enter_here_your_answer">Bitte geben Sie hier ihre Antwort ein:</string>
     <string name="search">Suche</string>
     <string name="edit">Bearbeiten</string>
+    <string name="related_tags">Zugehörige Tags</string>
+    <string name="shown_question">Angezeigte Frage</string>
+    <string name="learning_goal_name">Lernziel Name:</string>
+    <string name="continue_learning_goal">Weiter machen</string>
+    <string name="start_learning_goal">Beginnen</string>
 
 
 </resources>

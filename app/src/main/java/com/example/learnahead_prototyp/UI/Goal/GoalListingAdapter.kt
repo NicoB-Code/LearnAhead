@@ -95,10 +95,10 @@ class GoalListingAdapter(
         @SuppressLint("SetTextI18n")
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(goal: Goal) {
-            binding.cardViewTextGoalName.text = goal.name
+            binding.textLearningGoalName.text = goal.name
 
             val dateFormat = SimpleDateFormat("dd.MM.yyyy")
-            binding.cardViewGoalDate.text =
+            binding.textLearningGoalDateInterval.text =
                 "${dateFormat.format(goal.startDate)} - ${dateFormat.format(goal.endDate)}"
 
             // Get the current date (today)
@@ -112,11 +112,11 @@ class GoalListingAdapter(
             val daysText = if (daysBetweenDates == 1) "Tag" else "Tage"
 
             if (daysBetweenDates > 0)
-                binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates $daysText"
+                binding.textLearningGoalLeftDaysCalculated.text = "endet in $daysBetweenDates $daysText"
             else
-                binding.cardViewDateDaysCalculated.text = "Lernziel abgelaufen"
+                binding.textLearningGoalLeftDaysCalculated.text = "Lernziel abgelaufen"
 
-            binding.delete.setOnClickListener {
+            binding.deleteIcon.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onDeleteClicked.invoke(position, goal)
