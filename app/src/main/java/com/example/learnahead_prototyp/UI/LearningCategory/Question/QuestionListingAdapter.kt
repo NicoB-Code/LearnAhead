@@ -15,7 +15,8 @@ import com.example.learnahead_prototyp.databinding.ItemQuestionLayoutBinding
  */
 class QuestionListingAdapter(
     val onItemClicked: (Int, Question) -> Unit,
-    val onDeleteClicked: (Int, Question) -> Unit
+    val onDeleteClicked: (Int, Question) -> Unit,
+    val onEditClicked: (Int, Question) -> Unit
 ) : RecyclerView.Adapter<QuestionListingAdapter.MyViewHolder>() {
 
     /**
@@ -94,6 +95,12 @@ class QuestionListingAdapter(
             binding.textShownQuestion.text = item.question
             binding.deleteIcon.setOnClickListener {
                 onDeleteClicked.invoke(
+                    bindingAdapterPosition,
+                    item
+                )
+            }
+            binding.edit.setOnClickListener {
+                onEditClicked.invoke(
                     bindingAdapterPosition,
                     item
                 )

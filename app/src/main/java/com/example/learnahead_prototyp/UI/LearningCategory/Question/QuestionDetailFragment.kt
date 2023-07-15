@@ -45,7 +45,7 @@ class QuestionDetailFragment : Fragment() {
     lateinit var binding: FragmentQuestionDetailBinding
     private val authViewModel: AuthViewModel by viewModels()
     private val MAX_TAGS = 2
-    private val isEdit: Boolean = false
+    private var isEdit: Boolean = false
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val questionViewModel: QuestionViewModel by activityViewModels()
     private var deletePosition: Int = -1
@@ -137,7 +137,39 @@ class QuestionDetailFragment : Fragment() {
                 }
             }
         }
+        questionViewModel.updateQuestion.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.progressBar.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.progressBar.hide()
+                    if(state.data != null && currentUser != null) {
 
+                        val foundTestIndex = learnCategoryViewModel.currentSelectedLearningCategory.value?.questions?.indexOfFirst { it.id == state.data.id }
+                        learnCategoryViewModel.currentSelectedLearningCategory.value?.questions?.set(foundTestIndex!!, state.data)
+                        val foundIndex =
+                            currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value?.id }
+                        if (foundIndex != -1) {
+                            currentUser!!.learningCategories[foundIndex] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
+                        }
+                        currentUser?.let { authViewModel.updateUserInfo(it) }
+                        findNavController().navigate(R.id.action_questionDetailFragment_to_questionListingFragment)
+                        toast("Die Frage konnte erfolgreich geupdated werden")
+                    }
+                    else {
+                        toast("Die Frage konnte nicht geupdated werden")
+                    }
+                }
+            }
+        }
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
             when (state) {
@@ -172,11 +204,21 @@ class QuestionDetailFragment : Fragment() {
      * Aktualisiert die Benutzeroberfläche basierend auf den aktuellen Werten im ViewModel.
      */
     private fun updateUI() {
-        // Die ausgewählte Lernkategorie aus dem Shared ViewModel abrufen
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
-
-        // Den Text des learning_goal_menu_header_label TextViews setzen
         binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
+
+        binding.textQuestion.setText(questionViewModel.currentQuestion.value?.question)
+        binding.textAnswer.setText(questionViewModel.currentQuestion.value?.answer)
+        if(questionViewModel.currentQuestion.value?.tags != null){
+            for(tag in questionViewModel.currentQuestion.value?.tags!!){
+                addTag(tag.name)
+                binding.addTags.text.clear()
+            }
+        }
+
+        if(binding.textQuestion.text.isNotEmpty()){
+            isEdit = true
+        }
     }
 
     /**
@@ -235,7 +277,7 @@ class QuestionDetailFragment : Fragment() {
      * Aktualisiert die Frage mit den geänderten Werten.
      */
     private fun updateQuestion() {
-        // TODO: Implementieren Sie die Logik zum Aktualisieren der Frage
+        questionViewModel.updateQuestion(getQuestion())
     }
 
     /**

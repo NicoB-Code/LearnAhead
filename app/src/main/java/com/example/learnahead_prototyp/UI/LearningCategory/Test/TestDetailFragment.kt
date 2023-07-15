@@ -64,7 +64,8 @@ class TestDetailFragment : Fragment() {
                 questionsToAddToTheTest = questionsToAddToTheTest.filterNot { it.id == item.id }.toMutableList()
                 updateList()
                 toast("Frage wurde aus Test entfernt.")
-            }
+            },
+            onEditClicked = {pos, item ->}
         )
     }
 
@@ -169,7 +170,7 @@ class TestDetailFragment : Fragment() {
                             currentUser!!.learningCategories[foundIndex] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
                         }
                         currentUser?.let { authViewModel.updateUserInfo(it) }
-                        findNavController().navigate(R.id.action_goalDetailFragment_to_goalListingFragment)
+                        findNavController().navigate(R.id.action_testDetailFragment_to_testListingFragment)
                         toast("Das Lernziel konnte erfolgreich geupdated werden")
                     }
                     else {

@@ -115,8 +115,18 @@ class QuestionRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie die aktualisierte Frage oder eine Fehlermeldung enthält.
      */
     override fun updateQuestion(question: Question, result: (UiState<Question?>) -> Unit) {
-        // Noch nicht implementiert
-        result(UiState.Failure("Funktion updateQuestion ist noch nicht implementiert"))
+        // Dokument des Tests in der Datenbank abrufen
+        val document = database.collection(FireStoreCollection.TEST).document(question.id)
+
+        // Test in der Datenbank aktualisieren
+        document.set(question)
+            .addOnSuccessListener {
+                result(UiState.Success(question))
+            }
+            .addOnFailureListener { exception ->
+                // Fehlermeldung an den Aufrufer zurückgeben
+                result(UiState.Failure(exception.localizedMessage))
+            }
     }
 
     /**
@@ -127,7 +137,18 @@ class QuestionRepository(
      * Das Ergebnis ist ein UiState-Objekt, das den Status der Operation sowie eine Erfolgsmeldung oder eine Fehlermeldung enthält.
      */
     override fun deleteQuestion(question: Question, result: (UiState<String>) -> Unit) {
-        // Noch nicht implementiert
-        result(UiState.Failure("Funktion deleteQuestion ist noch nicht implementiert"))
+        // Zugriff auf das Test-Dokument in der Datenbank basierend auf der Test-ID
+        val document = database.collection(FireStoreCollection.TEST).document(question.id)
+
+        // Test-Dokument aus der Datenbank löschen
+        document.delete()
+            .addOnSuccessListener {
+                // Erfolgsmeldung an den Aufrufer zurückgeben
+                result(UiState.Success("Question wurde erfolgreich gelöscht"))
+            }
+            .addOnFailureListener { exception ->
+                // Fehlermeldung an den Aufrufer zurückgeben
+                result(UiState.Failure(exception.localizedMessage))
+            }
     }
 }

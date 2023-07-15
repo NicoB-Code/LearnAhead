@@ -59,6 +59,12 @@ class QuestionListingFragment : Fragment() {
                 // Speichern der zu löschenden Position und Löschen der Frage über das ViewModel
                 deletePosition = pos
                 questionViewModel.deleteQuestion(item)
+            },
+            onEditClicked = { pos, item ->
+                questionViewModel.setCurrentQuestion(item)
+                findNavController().navigate(
+                    R.id.action_questionListingFragment_to_questionDetailFragment
+                )
             }
         )
     }
