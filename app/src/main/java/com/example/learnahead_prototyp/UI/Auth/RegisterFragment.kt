@@ -165,7 +165,7 @@ class RegisterFragment : Fragment() {
 
         if (binding.textUsername.text.isNullOrEmpty()) {
             isValid = false
-            toast(getString(R.string.enter_first_name))
+            toast(getString(R.string.enterUsername))
         }
 
         if (binding.editTextEmail.text.isNullOrEmpty()) {
