@@ -106,7 +106,7 @@ class LearningCategoryListFragment : Fragment() {
         setEventListener()
 
         // Setzen des Adapters auf die RecyclerView
-        binding.recyclerView.adapter = adapter
+        binding.learningCategoriesRecyclerView.adapter = adapter
     }
 
     /**
@@ -119,19 +119,19 @@ class LearningCategoryListFragment : Fragment() {
     // Alle Event-Listener aufsetzen
     private fun setEventListener() {
         // Klick-Listener für den "Create"-Button, welcher zur "LearningCategoryDetailFragment" navigiert.
-        binding.buttonAdd.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_learnCategoryDetailFragment) }
+        binding.addLearningCategoryButton.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_learnCategoryDetailFragment) }
 
         // Klick-Listener für den "LearningCategory"-Button, welcher den Benutzer zum "HomeFragment" navigiert.
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_homeFragment)}
+        binding.homeButton.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_homeFragment)}
 
         // Klick-Listener für den "LearningCategory"-Button, welcher den Benutzer zur "LearningCategoryListFragment" navigiert.
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_goalListingFragment) }
+        binding.learningGoalsButton.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_goalListingFragment) }
 
         // Klick-Listener für den "Logout"-Button, welcher den Benutzer ausloggt und zur "LoginFragment" navigiert.
-        binding.logout.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_learningCategoryListFragment_to_loginFragment) } }
+        binding.logoutIcon.setOnClickListener { authViewModel.logout { findNavController().navigate(R.id.action_learningCategoryListFragment_to_loginFragment) } }
 
         // Klick-Listener für den "Profil"-Button
-        binding.profile.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_profileFragment)}
+        binding.profileIcon.setOnClickListener { findNavController().navigate(R.id.action_learningCategoryListFragment_to_profileFragment)}
     }
 
     /**
