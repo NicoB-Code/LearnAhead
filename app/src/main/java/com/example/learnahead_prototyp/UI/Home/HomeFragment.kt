@@ -145,16 +145,15 @@ class HomeFragment : Fragment() {
                             false
                         }
                     }.toMutableList()
-                    filteredList.addAll(todaysLearningGoal)
-
-                    val sortedList = filteredList.sortedBy { it.relatedLearningGoal?.endDate }.toMutableList()
-
                     val todaysLearningGoal = state.data.filter { learningCategory ->
                         val goal = learningCategory.relatedLearningGoal
                         val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
 
                         startDate == today
                     }.toMutableList()
+                    filteredList.addAll(todaysLearningGoal)
+
+                    val sortedList = filteredList.sortedBy { it.relatedLearningGoal?.endDate }.toMutableList()
 
                     adapter.updateList(sortedList)
                 }
