@@ -77,16 +77,16 @@ class ForgotPasswordFragment : Fragment() {
             when (state) {
                 is UiState.Loading -> {
                     binding.forgotPasswordButton.setText("")
-                    binding.forgotPasswordProgress.show()
+                    binding.progressBar.show()
                 }
                 is UiState.Failure -> {
                     binding.forgotPasswordButton.setText("Send")
-                    binding.forgotPasswordProgress.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 is UiState.Success -> {
                     binding.forgotPasswordButton.setText("Send")
-                    binding.forgotPasswordProgress.hide()
+                    binding.progressBar.hide()
                     toast(state.data)
                 }
             }

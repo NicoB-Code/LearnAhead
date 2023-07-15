@@ -122,32 +122,32 @@ class GoalListingFragment : Fragment() {
      */
     private fun setEventListeners() {
         // Setzen des Adapters auf die RecyclerView
-        binding.recyclerView.adapter = adapter
+        binding.learningGoalsRecyclerView.adapter = adapter
 
         // Klick-Listener für den "Create"-Button, welcher zur "GoalDetailFragment" navigiert.
-        binding.buttonAddLearningGoal.setOnClickListener {
+        binding.addLearningGoalButton.setOnClickListener {
             findNavController().navigate(R.id.action_goalListingFragment_to_goalDetailFragment)
         }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_goalListingFragment_to_homeFragment)
         }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_goalListingFragment_to_learningCategoryListFragment)
         }
 
         // Klick-Listener für den "Logout"-Button, welcher den Benutzer ausloggt und zur "LoginFragment" navigiert.
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_goalListingFragment_to_loginFragment)
             }
         }
 
         // Klick-Listener für den "Profile"-Button
-        binding.profile.setOnClickListener {
+        binding.profileIcon.setOnClickListener {
             findNavController().navigate(R.id.action_goalListingFragment_to_profileFragment)
         }
     }
