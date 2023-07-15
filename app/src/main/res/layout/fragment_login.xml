@@ -39,7 +39,7 @@
 
     <!-- Label Login Header -->
     <TextView
-        android:id="@+id/registerLabelHeader"
+        android:id="@+id/loginLabelHeader"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
@@ -56,7 +56,7 @@
         android:layout_height="444dp"
         android:background="@drawable/rectangle_register_login_content_box"
         android:elevation="2dp"
-        android:layout_below="@id/registerLabelHeader"
+        android:layout_below="@id/loginLabelHeader"
         android:layout_centerHorizontal="true"
         />
 

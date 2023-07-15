@@ -9,16 +9,16 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Black Background -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/register_black_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/greenBackground"
         android:layout_alignTop="@id/greenBackground"
         android:background="@drawable/rectangle_black_background" />
 
-    <!-- Green Background -->
+    <!-- Grüner Hintergrund für oberen Teil -->
     <View
         android:id="@+id/greenBackground"
         android:layout_width="match_parent"
@@ -26,9 +26,9 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_green_background" />
 
-    <!-- Placeholder Logo -->
+    <!-- Logo -->
     <View
-        android:id="@+id/placeholder_logo"
+        android:id="@+id/appLogo"
         android:layout_width="126dp"
         android:layout_height="108dp"
         android:layout_alignParentTop="true"
@@ -38,10 +38,10 @@
 
     <!-- Label Register Header -->
     <TextView
-        android:id="@+id/register_label_header"
+        android:id="@+id/registerLabelHeader"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_below="@id/placeholder_logo"
+        android:layout_below="@id/appLogo"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/register_subject"
@@ -49,21 +49,21 @@
 
     <!-- Registrierungs Box -->
     <View
-        android:id="@+id/question_and_answer_box"
+        android:id="@+id/registerBox"
         android:layout_width="266dp"
         android:layout_height="444dp"
-        android:layout_below="@id/register_label_header"
+        android:layout_below="@id/registerLabelHeader"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rectangle_register_login_content_box"
         android:elevation="2dp" />
 
     <!-- Username -->
     <EditText
-        android:id="@+id/editText_username"
+        android:id="@+id/textUsername"
         android:layout_width="214dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@id/question_and_answer_box"
+        android:layout_alignTop="@id/registerBox"
         android:layout_marginTop="34dp"
         android:background="@drawable/rectangle_register_or_login_content"
         android:drawableStart="@drawable/user_icon"
@@ -79,13 +79,12 @@
         android:maxLines="1"
         tools:ignore="RtlSymmetry" />
 
-
     <!-- E-Mail -->
     <EditText
         android:id="@+id/editText_email"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText_username"
+        android:layout_below="@id/textUsername"
         android:background="@drawable/rectangle_register_or_login_content"
         android:drawableStart="@drawable/email_icon"
         android:layout_centerHorizontal="true"
@@ -105,7 +104,7 @@
 
     <!-- Password -->
     <EditText
-        android:id="@+id/editText_password"
+        android:id="@+id/textPassword"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/editText_email"
@@ -130,10 +129,10 @@
 
     <!-- Registrieren -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_sign_up"
+        android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText_password"
+        android:layout_below="@id/textPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
         android:background="@drawable/rectangle_login_register"
@@ -143,7 +142,7 @@
         app:backgroundTint="@null" />
 
     <ProgressBar
-        android:id="@+id/register_progress"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -155,11 +154,11 @@
 
     <!-- Du hast schon ein Konto -->
     <TextView
-        android:id="@+id/got_already_an_account"
+        android:id="@+id/gotAlreadyAnAccountLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_sign_up"
-        android:layout_alignStart="@id/button_sign_up"
+        android:layout_below="@id/signUpButton"
+        android:layout_alignStart="@id/signUpButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:elevation="8dp"
@@ -168,11 +167,11 @@
 
     <!-- Login -->
     <TextView
-        android:id="@+id/text_login"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_sign_up"
-        android:layout_alignEnd="@id/button_sign_up"
+        android:layout_below="@id/signUpButton"
+        android:layout_alignEnd="@id/signUpButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:elevation="8dp"
