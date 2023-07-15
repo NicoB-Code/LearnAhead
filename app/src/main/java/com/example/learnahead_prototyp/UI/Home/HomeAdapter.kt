@@ -121,7 +121,7 @@ class HomeAdapter(
                     }
                 }
 
-                binding.itemLayout.setOnClickListener {
+                binding.continueOrStartLearningGoalButton.setOnClickListener {
                     onItemClicked.invoke(
                         bindingAdapterPosition,
                         learningCategory

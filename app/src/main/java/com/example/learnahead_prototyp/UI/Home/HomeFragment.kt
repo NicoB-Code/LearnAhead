@@ -193,9 +193,10 @@ class HomeFragment : Fragment() {
      */
     private fun onItemClicked(position: Int, item: LearningCategory) {
         findNavController().navigate(
-            R.id.action_goalListingFragment_to_goalDetailFragment,
+            R.id.action_homeFragment_to_learningCategoryInnerViewFragment,
             Bundle().apply {
-                putParcelable("goal", item)
+                learningCategoryViewModel.setCurrentSelectedLearningCategory(item)
+                putParcelable("learning_category", item)
             }
         )
     }
