@@ -106,16 +106,15 @@
         android:layout_height="wrap_content"
         android:elevation="2dp"
         android:orientation="vertical"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:gravity="center">
 
             <!-- Add Questions by Tags Label -->
             <TextView
                 android:id="@+id/add_questions_by_tags_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="9dp"
-                android:layout_marginStart="23dp"
                 android:elevation="8dp"
                 android:text="Fragen mithilfe von Tags hinzufügen"
                 android:textAppearance="@style/fourteen_sp_bold_black"
@@ -124,11 +123,9 @@
             <!-- Tag Container which contains every added tag -->
             <ScrollView
                 android:id="@+id/tagsScrollView"
-                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="18dp"
                 android:layout_marginTop="9dp"
                 android:elevation="8dp">
 
@@ -136,18 +133,19 @@
                     android:id="@+id/tagsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-
+                    android:orientation="horizontal" />
             </ScrollView>
+
 
             <!-- Control to add Tags which will get created inside the container -->
             <EditText
                 android:id="@+id/add_tags"
-                android:layout_width="270dp"
+                android:layout_width="match_parent"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/add_tags"
                 android:paddingStart="8dp"
-                android:layout_marginStart="18dp"
                 android:layout_marginTop="6dp"
                 android:drawablePadding="8dp"
                 android:elevation="8dp"
@@ -164,22 +162,43 @@
                 android:layout_height="wrap_content"
                 android:text="Fragen manuell hinzufügen"
                 android:textAppearance="@style/fourteen_sp_regular_black"
-                android:layout_marginStart="18dp"
-
                 android:elevation="8dp"
+                android:layout_gravity="left"
+                android:layout_marginStart="16dp"
                 />
 
             <!-- Dropdown Element -->
             <Spinner
                 android:id="@+id/dropdown_element_manual_question"
-                android:layout_width="270dp"
+                android:layout_width="match_parent"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_height="wrap_content"
                 android:elevation="8dp"
-                android:layout_marginStart="18dp"
                 android:background="@drawable/small_rectangle_for_create_question_and_tests"
                 android:visibility="gone"
                 android:spinnerMode="dropdown"
                 android:layout_marginBottom="8dp"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_add_manual_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/background_bottom_menu"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="6dp"
+
+                android:layout_marginBottom="19dp"
+                android:visibility="gone"
+                android:background="@drawable/add_question_rectangle"
+                android:elevation="8dp"
+                android:drawablePadding="8dp"
+                android:text="Frage hinzufügen"
+                android:drawableLeft="@drawable/add_circle_black"
+                android:textAppearance="@style/fourteen_sp_bold_black"
+                android:textColor="@null"
+                app:backgroundTint="@null"
+                tools:ignore="RtlSymmetry"
                 />
         </LinearLayout>
     </ScrollView>

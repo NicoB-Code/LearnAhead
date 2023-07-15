@@ -4,13 +4,18 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -25,6 +30,7 @@ import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
 import com.example.learnahead_prototyp.Util.toast
 import com.example.learnahead_prototyp.databinding.FragmentTestExecuteBinding
+import com.example.learnahead_prototyp.databinding.GreenToastBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -48,6 +54,7 @@ class TestExecuteFragment : Fragment() {
     private lateinit var linearLayout: LinearLayout
     private lateinit var flipAnimation: AnimatorSet
     lateinit var binding: FragmentTestExecuteBinding
+    lateinit var toastBinding : GreenToastBinding
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by activityViewModels()
     private val testViewModel: TestViewModel by activityViewModels()
@@ -72,6 +79,7 @@ class TestExecuteFragment : Fragment() {
     ): View {
         // Das Binding-Objekt für das Fragment-Layout wird initialisiert.
         binding = FragmentTestExecuteBinding.inflate(layoutInflater)
+        toastBinding = GreenToastBinding.inflate(layoutInflater)
         // Die erzeugte View-Instanz wird zurückgegeben.
         return binding.root
     }
@@ -152,7 +160,15 @@ class TestExecuteFragment : Fragment() {
             authViewModel.updateUserInfo(currentUser!!)
 
             binding.addQuestionsByTagsLabel.text = "Test beendet"
-            toast("Test beendet")
+            currentUser!!.currentPoints += 20
+            authViewModel.updateUserInfo(currentUser!!)
+
+            toastBinding.toastText.text = "Test beendet! Du hast 20 Punkte erhalten!"
+
+            val toast = Toast(context)
+            toast.duration = Toast.LENGTH_LONG
+            toast.view = toastBinding.root // Hier die Änderung
+            toast.show()
             findNavController().navigate(R.id.action_testExecuteFragment_to_homeFragment)
         }
     }
@@ -262,6 +278,18 @@ class TestExecuteFragment : Fragment() {
         // Event-Listener für den "Richtig"-Button
         binding.buttonCorrect.setOnClickListener {
             questionViewModel.currentQuestion.value!!.lastTest = true
+            currentUser!!.currentPoints += (5*(questionViewModel.currentQuestion.value!!.wrongCounter + 1))
+
+
+
+            toastBinding.toastText.text = "Gut gemacht! Du hast für diese richtige Frage ${(5*(questionViewModel.currentQuestion.value!!.wrongCounter + 1))} Punkte erhalten!"
+
+            val toast = Toast(context)
+            toast.duration = Toast.LENGTH_LONG
+            toast.view = toastBinding.root // Hier die Änderung
+            toast.show()
+
+            authViewModel.updateUserInfo(currentUser!!)
             questionViewModel.currentQuestion.value!!.wrongCounter = 0
             questionViewModel.currentQuestion.value?.let { currentQuestion ->
                 questionsAfterAnswering.add(currentQuestion)
@@ -280,7 +308,15 @@ class TestExecuteFragment : Fragment() {
                 questionsAfterAnswering.add(currentQuestion)
                 questionsToAnswer.remove(currentQuestion)
             }
+            toastBinding.toastText.text = "Diese Frage hast du leider nicht richtig beantwortet. Versuche es im nächsten Test nochmal!"
 
+            val toast = Toast(context)
+            toast.duration = Toast.LENGTH_LONG
+            context?.let { it1 -> ContextCompat.getColor(it1, android.R.color.holo_red_light) }
+                ?.let { it2 -> toastBinding.root.setBackgroundColor(it2) }
+            toast.view = toastBinding.root
+            toast.show()
+            findNavController().navigate(R.id.action_testExecuteFragment_to_homeFragment)
             // Setze eine neue zufällige Frage
             setRandomQuestion()
         }
