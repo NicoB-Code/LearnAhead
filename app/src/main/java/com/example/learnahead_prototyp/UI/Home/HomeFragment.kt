@@ -115,10 +115,8 @@ class HomeFragment : Fragment() {
 
                     val filteredList = state.data.filter { learningCategory ->
                         val goal = learningCategory.relatedLearningGoal
-                        val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())
-                            ?.toLocalDate()
-                        val endDate = goal?.endDate?.toInstant()?.atZone(ZoneId.systemDefault())
-                            ?.toLocalDate()
+                        val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
+                        val endDate = goal?.endDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
 
                         if (startDate != null && endDate != null && today >= startDate) {
                             val daysBetweenDates = ChronoUnit.DAYS.between(startDate, endDate)
@@ -138,12 +136,25 @@ class HomeFragment : Fragment() {
 
                             val nextLearningDay = startDate.plusDays((learningDayIndex - 1) * interval)
 
-                            today == nextLearningDay && today != startDate
+                            if (today == nextLearningDay && today != startDate) {
+                                true
+                            } else {
+                                false
+                            }
                         } else {
                             false
                         }
                     }.toMutableList()
+                    filteredList.addAll(todaysLearningGoal)
+
                     val sortedList = filteredList.sortedBy { it.relatedLearningGoal?.endDate }.toMutableList()
+
+                    val todaysLearningGoal = state.data.filter { learningCategory ->
+                        val goal = learningCategory.relatedLearningGoal
+                        val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
+
+                        startDate == today
+                    }.toMutableList()
 
                     adapter.updateList(sortedList)
                 }
@@ -194,9 +205,10 @@ class HomeFragment : Fragment() {
      */
     private fun onItemClicked(position: Int, item: LearningCategory) {
         findNavController().navigate(
-            R.id.action_goalListingFragment_to_goalDetailFragment,
+            R.id.action_homeFragment_to_learningCategoryInnerViewFragment,
             Bundle().apply {
-                putParcelable("goal", item)
+                learningCategoryViewModel.setCurrentSelectedLearningCategory(item)
+                putParcelable("learning_category", item)
             }
         )
     }
