@@ -233,22 +233,22 @@ class TestExecuteFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setEventListener() {
         // Event-Listener für den Home-Button
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_testExecuteFragment_to_homeFragment)
         }
 
         // Event-Listener für den Learning Goals-Button
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_testExecuteFragment_to_goalListingFragment)
         }
 
         // Event-Listener für den Learning Categories-Button
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_testExecuteFragment_to_learningCategoryListFragment)
         }
 
         // Event-Listener für den Logout-Button
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_testExecuteFragment_to_loginFragment)
             }

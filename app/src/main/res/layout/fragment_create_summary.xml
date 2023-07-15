@@ -10,7 +10,7 @@
 
     <!-- Dark Background Full Screen -->
     <View
-        android:id="@+id/dark_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dark_full_screen"
@@ -24,12 +24,12 @@
         android:layout_height="70dp"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@id/dark_background"
+        app:layout_constraintBottom_toBottomOf="@id/darkBackground"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Header Line -->
     <View
-        android:id="@+id/header_line"
+        android:id="@+id/headerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="50dp"
@@ -39,14 +39,14 @@
 
     <!-- Back Icon -->
     <ImageView
-        android:id="@+id/back_icon"
+        android:id="@+id/backIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
         android:background="@drawable/back_button"
         android:elevation="7dp"
         android:rotation="-90"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -57,9 +57,9 @@
         android:layout_height="wrap_content"
         android:text="@string/summary_label"
         android:textAppearance="@style/twenty_two_sp_bold_white"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/back_icon"
+        app:layout_constraintLeft_toRightOf="@id/backIcon"
         />
 
     <!-- Edit Icon -->
@@ -71,7 +71,7 @@
         android:elevation="7dp"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintRight_toLeftOf="@id/save_button" />
 
     <!-- Save Icon -->
@@ -82,7 +82,7 @@
         android:background="@drawable/check_button"
         android:elevation="7dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -97,7 +97,7 @@
         android:text="@string/summary_name"
         android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_line"
+        app:layout_constraintTop_toBottomOf="@id/headerLine"
         app:drawableBottomCompat="@drawable/green_line" />
 
     <!-- Summary Name EditText -->
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@id/summary_name_label" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_height="36dp"
         android:layout_centerHorizontal="true"

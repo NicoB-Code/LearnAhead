@@ -113,7 +113,7 @@ class SummaryFragment : Fragment() {
     private fun updateUI() {
         // Lernkategorie aus den Argumenten erhalten und den Text des Labels setzen
         currentLearningCategory = arguments?.getParcelable("learning_category")
-        binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
+        binding.headerLabel.text = currentLearningCategory?.name
     }
 
     /**
@@ -129,7 +129,7 @@ class SummaryFragment : Fragment() {
      */
     private fun setEventListener() {
         // Event-Listener für den Home-Button einstellen
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_summaryFragment_to_homeFragment)
         }
 
@@ -143,17 +143,17 @@ class SummaryFragment : Fragment() {
         }
 
         // Event-Listener für den Learning Goals-Button einstellen
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_summaryFragment_to_goalListingFragment)
         }
 
         // Event-Listener für den Learning Categories-Button einstellen
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_summaryFragment_to_learningCategoryListFragment)
         }
 
         // Event-Listener für den Logout-Button einstellen
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_summaryFragment_to_loginFragment)
             }

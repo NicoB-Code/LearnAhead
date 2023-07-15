@@ -98,7 +98,7 @@ class QuestionListingFragment : Fragment() {
         updateUI()
 
         // Setzen des Adapters auf die RecyclerView
-        binding.recyclerView.adapter = adapter
+        binding.questionsRecyclerView.adapter = adapter
     }
 
     /**
@@ -167,7 +167,7 @@ class QuestionListingFragment : Fragment() {
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
 
         // Den Text des learningGoalMenuHeaderLabel TextViews setzen
-        binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Fragen"
+        binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
     }
 
     /**
@@ -195,7 +195,7 @@ class QuestionListingFragment : Fragment() {
      */
     private fun setEventListeners() {
         // Setzt die Suchfunktion auf
-        binding.questionSearchBar.addTextChangedListener(object : TextWatcher {
+        binding.searchBarQuestion.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Nicht benötigt
             }
@@ -214,22 +214,22 @@ class QuestionListingFragment : Fragment() {
         })
 
     // Setzt den Event-Listener für den Home-Button
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_questionListingFragment_to_homeFragment)
         }
 
         // Setzt den Event-Listener für den Learning Goals-Button
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_questionListingFragment_to_goalListingFragment)
         }
 
         // Setzt den Event-Listener für den Learning Categories-Button
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_questionListingFragment_to_learningCategoryListFragment)
         }
 
         // Setzt den Event-Listener für den Logout-Button
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_questionListingFragment_to_loginFragment)
             }
@@ -241,7 +241,7 @@ class QuestionListingFragment : Fragment() {
         }
 
         // Setzt den Event-Listener für den Save Question-Button
-        binding.buttonSaveQuestion.setOnClickListener {
+        binding.addQuestionButton.setOnClickListener {
             findNavController().navigate(R.id.action_questionListingFragment_to_questionDetailFragment)
         }
     }

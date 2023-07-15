@@ -175,22 +175,22 @@ class TestListingFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setEventListener() {
         // Setzt den Event-Listener für den Home-Button
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_testListingFragment_to_homeFragment)
         }
 
         // Setzt den Event-Listener für den Learning Goals-Button
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_testListingFragment_to_goalListingFragment)
         }
 
         // Setzt den Event-Listener für den Learning Categories-Button
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_testListingFragment_to_learningCategoryListFragment)
         }
 
         // Setzt den Event-Listener für den Logout-Button
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_testListingFragment_to_loginFragment)
             }

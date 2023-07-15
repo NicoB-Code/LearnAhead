@@ -81,7 +81,7 @@ class SummaryPreviewFragment : Fragment() {
      */
     private fun updateUI() {
         currentLearningCategory = arguments?.getParcelable("learning_category")
-        binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
+        binding.headerLabel.text = currentLearningCategory?.name
     }
 
     /**
@@ -132,11 +132,11 @@ class SummaryPreviewFragment : Fragment() {
      * Setzt die Event-Listener für die Buttons und Views des Fragments.
      */
     private fun setEventListener() {
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_homeFragment) }
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_learningCategoryListFragment) }
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_goalListingFragment) }
+        binding.homeButton.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_homeFragment) }
+        binding.learningCategoriesButton.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_learningCategoryListFragment) }
+        binding.learningGoalsButton.setOnClickListener { findNavController().navigate(R.id.action_summaryPreviewFragment_to_goalListingFragment) }
 
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_summaryPreviewFragment_to_loginFragment)
             }
