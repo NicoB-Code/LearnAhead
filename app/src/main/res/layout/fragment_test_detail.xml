@@ -184,7 +184,7 @@
                 android:id="@+id/button_add_manual_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/background_bottom_menu"
+                android:layout_above="@id/bottomMenuBackground"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
 
