@@ -35,7 +35,9 @@ class GoalRepository(
         userDocument.get()
             .addOnSuccessListener { document ->
                 val goalsList = document.toObject(User::class.java)?.goals?.toMutableList() ?: mutableListOf()
-                result.invoke(UiState.Success(goalsList))
+
+                val sortedList = goalsList.sortedBy { it.endDate }
+                result.invoke(UiState.Success(sortedList))
             }
             .addOnFailureListener { exception ->
                 result.invoke(UiState.Failure(exception.localizedMessage))
