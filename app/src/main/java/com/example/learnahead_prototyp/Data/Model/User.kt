@@ -24,7 +24,6 @@ import java.util.Date
 data class User(
     var id: String = "",
     val username: String = "",
-    val password: String = "",
     var currentPoints: Int = 0,
     var learningStreak: Int = 0,
     var achievedGoals: Int = 0,
