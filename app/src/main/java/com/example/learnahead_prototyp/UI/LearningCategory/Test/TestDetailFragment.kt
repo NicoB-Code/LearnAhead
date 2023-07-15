@@ -48,7 +48,7 @@ class TestDetailFragment : Fragment() {
     // Deklaration der benötigten Variablen
     private lateinit var binding: FragmentTestDetailBinding
     private val authViewModel: AuthViewModel by viewModels()
-    private val isEdit: Boolean = false
+    private var isEdit: Boolean = false
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val testViewModel: TestViewModel by activityViewModels()
     private val questionViewModel: QuestionViewModel by activityViewModels()
@@ -58,11 +58,18 @@ class TestDetailFragment : Fragment() {
     private val tagsList: MutableList<String> = mutableListOf()
     private val adapter by lazy {
         QuestionListingAdapter(
-            onItemClicked = { pos, item -> toast("Frage wurde hinzugefügt/entfernt")
+            onItemClicked = { pos, item ->
             },
             onDeleteClicked = { pos, item ->
+                questionsToAddToTheTest = questionsToAddToTheTest.filterNot { it.id == item.id }.toMutableList()
+                updateList()
+                toast("Frage wurde aus Test entfernt.")
             }
         )
+    }
+
+    private fun updateList() {
+        adapter.updateList(questionsToAddToTheTest)
     }
 
     /**
@@ -92,9 +99,8 @@ class TestDetailFragment : Fragment() {
         observer()
         setLocalCurrentUser()
         setEventListener()
-        populateDropdown()
         updateUI()
-
+        populateDropdown()
         binding.recyclerView.adapter = adapter
     }
 
@@ -139,6 +145,39 @@ class TestDetailFragment : Fragment() {
                 }
             }
         }
+        testViewModel.updateTest.observe(viewLifecycleOwner) { state ->
+            // Zustand des Ladevorgangs - Fortschrittsanzeige anzeigen
+            when (state) {
+                is UiState.Loading -> {
+                    binding.progressBar.show()
+                }
+                // Fehlerzustand - Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                is UiState.Failure -> {
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+                // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
+                is UiState.Success -> {
+                    binding.progressBar.hide()
+                    if(state.data != null && currentUser != null) {
+
+                        val foundTestIndex = learnCategoryViewModel.currentSelectedLearningCategory.value?.tests?.indexOfFirst { it.id == state.data.id }
+                        learnCategoryViewModel.currentSelectedLearningCategory.value?.tests?.set(foundTestIndex!!, state.data)
+                        val foundIndex =
+                            currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value?.id }
+                        if (foundIndex != -1) {
+                            currentUser!!.learningCategories[foundIndex] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
+                        }
+                        currentUser?.let { authViewModel.updateUserInfo(it) }
+                        findNavController().navigate(R.id.action_goalDetailFragment_to_goalListingFragment)
+                        toast("Das Lernziel konnte erfolgreich geupdated werden")
+                    }
+                    else {
+                        toast("Das Lernziel konnte nicht geupdated werden")
+                    }
+                }
+            }
+        }
 
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -157,6 +196,13 @@ class TestDetailFragment : Fragment() {
         }
     }
 
+    // Erweiterung für MutableList
+    fun <T> MutableList<T>.replace(oldItem: T, newItem: T) {
+        val index = this.indexOf(oldItem)
+        if (index >= 0) {
+            this[index] = newItem
+        }
+    }
     private fun getQuestionDropdownItems(): MutableList<Question> {
         val currentLearningCategory = learnCategoryViewModel.currentSelectedLearningCategory.value
 
@@ -164,17 +210,25 @@ class TestDetailFragment : Fragment() {
         val allTags = tagsList.toSet()
 
         // Filtert die Fragen der Lernkategorie basierend auf den ausgewählten Tags
-        return currentLearningCategory?.questions?.filterNot { question ->
+        var foundQuestions = currentLearningCategory?.questions?.filterNot { question ->
             question.tags.any { questionTag ->
                 allTags.contains(questionTag.name)
             }
+        }?.toMutableList()!!
+
+        // Da wir hier auch andere Objekte haben können, müssen wir auf die ID vergleichen
+        val idsToAddToTheTest = questionsToAddToTheTest.map {it.id}
+        return foundQuestions.filterNot { question ->
+            idsToAddToTheTest.contains(question.id)
         }?.toMutableList()!!
     }
 
     private fun addCurrentManualQuestion() {
         var selectedQuestion = binding.dropdownElementManualQuestion.selectedItemPosition
         questionsToAddToTheTest.add(dropdownItems[selectedQuestion])
+        adapter.updateList(questionsToAddToTheTest)
         toast("Frage manuell hinzugefügt")
+        populateDropdown()
     }
 
     /**
@@ -183,8 +237,6 @@ class TestDetailFragment : Fragment() {
     private fun populateDropdown() {
         dropdownItems = getQuestionDropdownItems()
         val dropdownItemsStrings = dropdownItems.map { it.question }
-
-        //val dropdownItems = listOf("Karteikarte - Umdrehen", "Weitere Fragen Arten folgen.")
         val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItemsStrings)
         binding.dropdownElementManualQuestion.adapter = adapter
     }
@@ -223,11 +275,12 @@ class TestDetailFragment : Fragment() {
         val allTags = tagsList.toSet()
 
         // Filtert die Fragen der Lernkategorie basierend auf den ausgewählten Tags
-        questionsToAddToTheTest = currentLearningCategory?.questions?.filter { question ->
+        questionsToAddToTheTest.addAll(currentLearningCategory?.questions?.filter { question ->
             question.tags.any { questionTag ->
                 allTags.contains(questionTag.name)
             }
-        }?.toMutableList()!!
+        }?.toMutableList()!!)
+
 
         // Aktualisiert die RecyclerView-Liste der Fragen
         adapter.updateList(questionsToAddToTheTest)
@@ -305,9 +358,9 @@ class TestDetailFragment : Fragment() {
         binding.tagsContainer.removeView(tagView)
 
         // Aktualisiert die Fragenliste, indem die Fragen, die den entfernten Tag enthalten, entfernt werden
-        questionsToAddToTheTest = questionsToAddToTheTest.filterNot { question ->
+        questionsToAddToTheTest.removeAll(questionsToAddToTheTest.filterNot { question ->
             question.tags.any { it.name == tagValue }
-        }.toMutableList()
+        }.toMutableList()!!)
 
         // Aktualisiert die RecyclerView-Liste der Fragen
         adapter.updateList(questionsToAddToTheTest)
@@ -330,8 +383,8 @@ class TestDetailFragment : Fragment() {
             }
         }
         binding.tagsScrollView.layoutParams = scrollViewLayoutParams
+        populateDropdown()
     }
-
 
 
     /**
@@ -340,6 +393,13 @@ class TestDetailFragment : Fragment() {
     private fun updateUI() {
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
         binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
+
+        binding.testTitle.setText(testViewModel.currentTest.value?.name!!)
+        questionsToAddToTheTest = testViewModel.currentTest.value?.questions!!
+        adapter.updateList(questionsToAddToTheTest)
+        if(binding.testTitle.text.isNotEmpty()){
+            isEdit = true
+        }
     }
 
     /**
@@ -392,9 +452,25 @@ class TestDetailFragment : Fragment() {
 
         binding.buttonSaveTest.setOnClickListener {
             if (isEdit)
-                updateTest()
+                if(binding.testTitle.text.toString().isNotEmpty()){
+                    if(questionsToAddToTheTest.isEmpty()){
+                        toast("Bitte füge dem Test fragen zu bevor du ihn erstellst!")
+                    } else {
+                        updateTest()
+                    }
+                } else {
+                    toast("Bitte gib einen Titel für den Test an!")
+                }
             else
-                createTest()
+                if(binding.testTitle.text.toString().isNotEmpty()){
+                    if(questionsToAddToTheTest.isEmpty()){
+                        toast("Bitte füge dem Test fragen zu bevor du ihn erstellst!")
+                    } else {
+                        createTest()
+                    }
+                } else {
+                    toast("Bitte gib einen Titel für den Test an!")
+                }
         }
     }
 
@@ -402,7 +478,7 @@ class TestDetailFragment : Fragment() {
      * Aktualisiert den Test.
      */
     private fun updateTest() {
-        // Implement updateTest functionality
+        testViewModel.updateTest(getTest())
     }
 
     /**

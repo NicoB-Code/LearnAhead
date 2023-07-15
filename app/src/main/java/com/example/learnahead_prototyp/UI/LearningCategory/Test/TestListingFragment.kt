@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.Test
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
@@ -41,8 +42,8 @@ class TestListingFragment : Fragment() {
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private val testViewModel: TestViewModel by activityViewModels()
-    private var deletePosition: Int = -1
     private var testList: MutableList<Test> = arrayListOf()
+    private var deletePosition: Int = -1
 
     private val adapter: TestListingAdapter by lazy {
         TestListingAdapter(
@@ -59,8 +60,29 @@ class TestListingFragment : Fragment() {
                 // Speichern der zu löschenden Position und Löschen des Tests über das ViewModel
                 deletePosition = pos
                 testViewModel.deleteTest(item)
+                updateUserObject(item, true)
+
+            },
+            onEditClicked = { pos, item ->
+                testViewModel.setCurrentTest(item)
+                findNavController().navigate(
+                    R.id.action_testListingFragment_to_testDetailFragment
+                )
             }
         )
+    }
+
+    private fun updateUserObject(test: Test, deleteTest: Boolean) {
+        if (deleteTest && currentUser != null) {
+            learnCategoryViewModel.currentSelectedLearningCategory.value?.tests?.remove(test)
+            val foundIndex =
+                currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value?.id }
+            if (foundIndex != -1) {
+                currentUser!!.learningCategories[foundIndex] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
+            }
+            currentUser?.let { authViewModel.updateUserInfo(it) }
+            toast("Test erfolgreich gelöscht")
+        }
     }
 
     /**
@@ -120,8 +142,33 @@ class TestListingFragment : Fragment() {
                 is UiState.Success -> {
                     // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Tests abrufen
                     binding.progressBar.hide()
-                    this.currentUser = state.data
+                    currentUser = state.data
                     testViewModel.getTests(currentUser, learnCategoryViewModel.currentSelectedLearningCategory.value!!)
+                }
+            }
+        }
+
+
+        testViewModel.deleteTest.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Zeige den Fortschrittsbalken an
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Verberge den Fortschrittsbalken und zeige die Fehlermeldung an
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    binding.progressBar.hide()
+                    if (deletePosition != -1) {
+                        testList.removeAt(deletePosition)
+                        adapter.updateList(testList)
+                        deletePosition = -1
+                    }
                 }
             }
         }

@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit
  */
 class TestListingAdapter(
     val onItemClicked: (Int, Test) -> Unit,
-    val onDeleteClicked: (Int, Test) -> Unit
+    val onDeleteClicked: (Int, Test) -> Unit,
+    val onEditClicked:(Int, Test) -> Unit
 ) : RecyclerView.Adapter<TestListingAdapter.MyViewHolder>() {
 
     /**
@@ -108,6 +109,10 @@ class TestListingAdapter(
 
             binding.delete.setOnClickListener {
                 onDeleteClicked.invoke(bindingAdapterPosition, test)
+            }
+
+            binding.edit.setOnClickListener{
+                onEditClicked.invoke(bindingAdapterPosition, test)
             }
 
             binding.itemLayout.setOnClickListener {
