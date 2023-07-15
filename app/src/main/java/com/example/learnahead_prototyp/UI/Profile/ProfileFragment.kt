@@ -98,15 +98,15 @@ class ProfileFragment : Fragment() {
     private fun updateUI() {
         binding.apply {
             // Klick-Listener für die Schaltflächen festlegen
-            buttonHome.setOnClickListener {
+            homeButton.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
 
-            buttonLearningCategories.setOnClickListener {
+            learningCategoriesButton.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_learningCategoryListFragment)
             }
 
-            buttonLearningGoals.setOnClickListener {
+            learningGoalsButton.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_goalListingFragment)
             }
 
@@ -115,7 +115,7 @@ class ProfileFragment : Fragment() {
             }
 
             // Klick-Listener für das Profilbild festlegen
-            profilePic.setOnClickListener {
+            profilePicture.setOnClickListener {
                 galleryLauncher.launch("image/*")
             }
         }
@@ -127,7 +127,7 @@ class ProfileFragment : Fragment() {
      */
     private fun observer() {
         viewModelProfile.fileUris.observe(viewLifecycleOwner) { state ->
-            binding.btnProgressAr.visibility = when (state) {
+            binding.progessBar.visibility = when (state) {
                 is UiState.Loading -> View.VISIBLE
                 is UiState.Success -> {
                     // Die aktuelle Sitzung wird im AuthViewModel gespeichert
@@ -145,21 +145,21 @@ class ProfileFragment : Fragment() {
         }
 
         viewModelAuth.currentUser.observe(viewLifecycleOwner) { state ->
-            binding.btnProgressAr.visibility = when (state) {
+            binding.progessBar.visibility = when (state) {
                 is UiState.Loading -> View.VISIBLE
                 is UiState.Success -> {
                     // Der aktuelle Benutzer wird aus dem ViewModel geladen
                     currentUser = state.data
                     val currentLevel = (currentUser.currentPoints / 100) + 1
                     val progressBarValue = currentUser.currentPoints % 100
-                    binding.progressBar.progress = progressBarValue
+                    binding.levelProgressBar.progress = progressBarValue
                     binding.apply {
                         // Die Benutzerdaten werden in die Benutzeroberfläche eingefügt
-                        usernameDisplay.text = currentUser.username
+                        textUsername.text = currentUser.username
                         levelDisplay.text = currentLevel.toString()
-                        emailDisplay.text = currentUser.email
-                        learningStreakDisplay.text = currentUser.learningStreak.toString()
-                        achievedGoalsDisplay.text = currentUser.achievedGoals.toString()
+                        textEmail.text = currentUser.email
+                        textLearningStreak.text = currentUser.learningStreak.toString()
+                        textAchievedGoals.text = currentUser.achievedGoals.toString()
                     }
                     // Das Profilbild wird aus der URL des Benutzers geladen
                     loadImageFromUrl(currentUser.profileImageUrl)
@@ -185,7 +185,7 @@ class ProfileFragment : Fragment() {
             Glide.with(it)
                 .load(imageUrl)
                 .apply(RequestOptions().override(300, 300).placeholder(R.drawable.profile_image_placeholder).centerCrop())
-                .into(binding.profilePic)
+                .into(binding.profilePicture)
         }
     }
 

@@ -266,4 +266,10 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_regular</item>
     </style>
+
+    <style name="twenty_sp_regular_white">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
 </resources>

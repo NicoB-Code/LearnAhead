@@ -112,6 +112,7 @@
     <string name="relate_learning_goal_to_learning_category">Das Ziel eine Lernkategorie zuordnen:</string>
     <string name="preview">Vorschau</string>
     <string name="randomLearningTip">Zufälliger Lerntipp:</string>
+    <string name="level">Level</string>
 
 
 </resources>
