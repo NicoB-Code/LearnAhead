@@ -113,6 +113,8 @@
     <string name="preview">Vorschau</string>
     <string name="randomLearningTip">Zufälliger Lerntipp:</string>
     <string name="level">Level</string>
+    <string name="please_enter_your_question">Bitte geben Sie hier ihre Frage ein:</string>
+    <string name="please_enter_here_your_answer">Bitte geben Sie hier ihre Antwort ein:</string>
 
 
 </resources>

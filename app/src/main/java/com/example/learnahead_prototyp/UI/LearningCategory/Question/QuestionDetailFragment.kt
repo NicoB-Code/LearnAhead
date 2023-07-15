@@ -165,7 +165,7 @@ class QuestionDetailFragment : Fragment() {
         val dropdownItems = listOf("Karteikarte - Umdrehen", "Weitere Fragen Arten folgen.") // Mit Ihren Dropdown-Elementen ersetzen
 
         val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItems)
-        binding.dropdownElement.adapter = adapter
+        binding.questionTypeDropdown.adapter = adapter
     }
 
     /**
@@ -176,7 +176,7 @@ class QuestionDetailFragment : Fragment() {
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
 
         // Den Text des learning_goal_menu_header_label TextViews setzen
-        binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Fragen"
+        binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
     }
 
     /**
@@ -184,22 +184,22 @@ class QuestionDetailFragment : Fragment() {
      */
     private fun setEventListeners() {
         // Setzt den Event-Listener für den Home-Button
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_questionDetailFragment_to_homeFragment)
         }
 
         // Setzt den Event-Listener für den Learning Goals-Button
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_questionDetailFragment_to_goalListingFragment)
         }
 
         // Setzt den Event-Listener für den Learning Categories-Button
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_questionDetailFragment_to_learningCategoryListFragment)
         }
 
         // Setzt den Event-Listener für den Logout-Button
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_questionDetailFragment_to_loginFragment)
             }
@@ -210,7 +210,7 @@ class QuestionDetailFragment : Fragment() {
             findNavController().navigate(R.id.action_questionDetailFragment_to_questionListingFragment)
         }
 
-        binding.buttonSaveQuestion.setOnClickListener {
+        binding.saveQuestionButton.setOnClickListener {
             if (isEdit)
                 updateQuestion()
             else
@@ -261,8 +261,8 @@ class QuestionDetailFragment : Fragment() {
         // Bei Erweiterung muss type noch hinzugefügt werden, da aktuell nur ein Fragen Typ existiert
         return Question(
             id = questionViewModel.currentQuestion.value?.id ?: "",
-            question = binding.questionContent.text.toString(),
-            answer = binding.answerContent.text.toString(),
+            question = binding.textQuestion.text.toString(),
+            answer = binding.textAnswer.text.toString(),
             tags = tagsList
         )
     }
