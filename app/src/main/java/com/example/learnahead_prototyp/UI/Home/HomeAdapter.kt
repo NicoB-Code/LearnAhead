@@ -85,39 +85,53 @@ class HomeAdapter(
     inner class MyViewHolder(val binding: ItemTodaysGoalLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        /**
-         * Bindet die Daten des übergebenen Goal-Objekts an die Ansichtselemente des ViewHolders.
-         * @param goal Das Goal-Objekt, das an die Ansichtselemente gebunden werden soll.
-         */
         @SuppressLint("SetTextI18n")
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(learningCategory: LearningCategory) {
             if (learningCategory.relatedLearningGoal != null) {
                 val goal = learningCategory.relatedLearningGoal
 
-                binding.textTodaysGoalsName.text = learningCategory?.name
+                binding.textTodaysGoalsName.text = learningCategory.name
 
                 val dateFormat = SimpleDateFormat("dd.MM.yyyy")
+                val startDate = goal?.startDate
                 val endDate = goal?.endDate
 
                 if (endDate != null) {
                     binding.textLearningGoalEndDate.text = "Ziel Datum: " + dateFormat.format(endDate)
 
-                    // Das aktuelle Datum (heute) abrufen
                     val currentDate = LocalDate.now()
-                    // Die formatierte endDate-Zeichenkette zurück in ein LocalDate-Objekt umwandeln
                     val newEndDate = dateFormat.parse(dateFormat.format(endDate))
-                    val endDateLocalDate = newEndDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
-                    if (endDateLocalDate != null) {
-                        // Die Anzahl der Tage zwischen dem aktuellen Datum und dem endDate berechnen
-                        val daysBetweenDates = ChronoUnit.DAYS.between(currentDate, endDateLocalDate).toInt()
+                    val endDateLocalDate =
+                        newEndDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
 
-                        if (daysBetweenDates == 1)
-                            binding.textLearningGoalLeftDaysCalculated.text = "endet in $daysBetweenDates Tag"
-                        else if (daysBetweenDates > 1)
-                            binding.textLearningGoalLeftDaysCalculated.text = "endet in $daysBetweenDates Tagen"
-                        else
+                    if (endDateLocalDate != null) {
+                        val daysBetweenDates =
+                            ChronoUnit.DAYS.between(currentDate, endDateLocalDate).toInt()
+
+                        if (daysBetweenDates == 0) {
+                            binding.textLearningGoalLeftDaysCalculated.text = "endet heute"
+                            binding.continueOrStartLearningGoalButton.text = "Beginnen"
+                        } else if (daysBetweenDates < 0) {
                             binding.textLearningGoalLeftDaysCalculated.text = "Lernziel abgelaufen"
+                            binding.continueOrStartLearningGoalButton.text = "Weiter machen"
+                        } else {
+                            binding.textLearningGoalLeftDaysCalculated.text =
+                                "endet in $daysBetweenDates Tag(en)"
+
+                            if (startDate != null) {
+                                val startLocalDate = startDate.toInstant()
+                                    .atZone(ZoneId.systemDefault()).toLocalDate()
+
+                                if (startLocalDate == currentDate) {
+                                    binding.continueOrStartLearningGoalButton.text = "Beginnen"
+                                } else {
+                                    binding.continueOrStartLearningGoalButton.text = "Weiter machen"
+                                }
+                            } else {
+                                binding.continueOrStartLearningGoalButton.text = "Weiter machen"
+                            }
+                        }
                     }
                 }
 

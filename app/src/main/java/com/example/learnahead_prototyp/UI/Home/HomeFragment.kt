@@ -115,10 +115,8 @@ class HomeFragment : Fragment() {
 
                     val filteredList = state.data.filter { learningCategory ->
                         val goal = learningCategory.relatedLearningGoal
-                        val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())
-                            ?.toLocalDate()
-                        val endDate = goal?.endDate?.toInstant()?.atZone(ZoneId.systemDefault())
-                            ?.toLocalDate()
+                        val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
+                        val endDate = goal?.endDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
 
                         if (startDate != null && endDate != null && today >= startDate) {
                             val daysBetweenDates = ChronoUnit.DAYS.between(startDate, endDate)
@@ -138,12 +136,24 @@ class HomeFragment : Fragment() {
 
                             val nextLearningDay = startDate.plusDays((learningDayIndex - 1) * interval)
 
-                            today == nextLearningDay && today != startDate
+                            if (today == nextLearningDay && today != startDate) {
+                                true
+                            } else {
+                                false
+                            }
                         } else {
                             false
                         }
                     }.toMutableList()
 
+                    val todaysLearningGoal = state.data.filter { learningCategory ->
+                        val goal = learningCategory.relatedLearningGoal
+                        val startDate = goal?.startDate?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate()
+
+                        startDate == today
+                    }.toMutableList()
+
+                    filteredList.addAll(todaysLearningGoal)
                     adapter.updateList(filteredList)
                 }
             }
