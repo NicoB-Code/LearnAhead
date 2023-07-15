@@ -71,9 +71,12 @@ class LearningCategoryInnerViewFragment : Fragment() {
      * Aktualisiert die UI des Fragments.
      */
     private fun updateUI() {
-        currentLearningCategory = arguments?.getParcelable("learning_category")
-        binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
-        binding.learningTipOfTheDay.text = getRandomLerntipp()
+        if(learnCategoryViewModel.currentSelectedLearningCategory.value == null)
+            currentLearningCategory = arguments?.getParcelable("learning_category")
+        else
+            currentLearningCategory = learnCategoryViewModel.currentSelectedLearningCategory.value
+        binding.headerLabel.text = currentLearningCategory?.name
+        binding.textLearningTipOfTheDay.text = getRandomLerntipp()
     }
 
     /**
@@ -87,19 +90,19 @@ class LearningCategoryInnerViewFragment : Fragment() {
      * Setzt die Event-Listener für die Buttons und Views des Fragments.
      */
     private fun setEventListener() {
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_homeFragment)
         }
 
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_goalListingFragment)
         }
 
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
 
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_loginFragment)
             }
@@ -109,33 +112,33 @@ class LearningCategoryInnerViewFragment : Fragment() {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_learningCategoryListFragment)
         }
 
-        binding.buttonTestsAndQuestions.setOnClickListener {
-            if (binding.buttonQuestions.visibility != View.VISIBLE && binding.buttonTests.visibility != View.VISIBLE) {
-                binding.buttonSummaries.visibility = View.GONE
-                binding.buttonTestsAndQuestions.visibility = View.GONE
-                binding.buttonQuestions.visibility = View.VISIBLE
-                binding.buttonTests.visibility = View.VISIBLE
+        binding.testsAndQuestionsButton.setOnClickListener {
+            if (binding.questionsButton.visibility != View.VISIBLE && binding.testsButton.visibility != View.VISIBLE) {
+                binding.summariesButton.visibility = View.GONE
+                binding.testsAndQuestionsButton.visibility = View.GONE
+                binding.questionsButton.visibility = View.VISIBLE
+                binding.testsButton.visibility = View.VISIBLE
 
                 val layoutParams =
-                    binding.rectangleLearningTipBox.layoutParams as RelativeLayout.LayoutParams
-                layoutParams.addRule(RelativeLayout.BELOW, binding.buttonTests.id)
-                binding.rectangleLearningTipBox.layoutParams = layoutParams
+                    binding.learningTipBox.layoutParams as RelativeLayout.LayoutParams
+                layoutParams.addRule(RelativeLayout.BELOW, binding.testsButton.id)
+                binding.learningTipBox.layoutParams = layoutParams
             }
         }
 
-        binding.buttonTests.setOnClickListener {
+        binding.testsButton.setOnClickListener {
             val selectedLearningCategory = currentLearningCategory
             learnCategoryViewModel.setCurrentSelectedLearningCategory(selectedLearningCategory)
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_testListingFragment)
         }
 
-        binding.buttonQuestions.setOnClickListener {
+        binding.questionsButton.setOnClickListener {
             val selectedLearningCategory = currentLearningCategory
             learnCategoryViewModel.setCurrentSelectedLearningCategory(selectedLearningCategory)
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_questionListingFragment)
         }
 
-        binding.buttonSummaries.setOnClickListener {
+        binding.summariesButton.setOnClickListener {
             findNavController().navigate(R.id.action_learningCategoryInnerViewFragment_to_summaryFragment,
                 Bundle().apply {
                     putString("type", "view")

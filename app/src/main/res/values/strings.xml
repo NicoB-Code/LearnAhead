@@ -111,6 +111,7 @@
     <string name="please_enter_here_your_description">Bitte gebe hier deine Beschreibung ein</string>
     <string name="relate_learning_goal_to_learning_category">Das Ziel eine Lernkategorie zuordnen:</string>
     <string name="preview">Vorschau</string>
+    <string name="randomLearningTip">Zufälliger Lerntipp:</string>
 
 
 </resources>
