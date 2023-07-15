@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profile"
-        android:textAppearance="@style/top_menu_header"
+        android:textAppearance="@style/twenty_two_sp_bold_white"
         android:layout_toEndOf="@id/back_icon"
         android:layout_above="@id/header_line"
         android:layout_marginBottom="5dp"/>
@@ -79,7 +79,7 @@
         android:background="@drawable/level_display"
         android:layout_below="@id/profilePic"
         app:backgroundTint="@null"
-        android:textAppearance="@style/button_add_learning_category_or_goal"/>
+        android:textAppearance="@style/twenty_sp_bold_black"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

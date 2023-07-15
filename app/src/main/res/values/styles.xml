@@ -173,19 +173,6 @@
         <item name="fontFamily">@font/hanuman_regular</item>
     </style>
 
-    <!-- Button Design für Lernkategorie/Lernziel erstellen -->
-    <style name="button_add_learning_category_or_goal">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#000000</item>
-        <item name="fontFamily">@font/hanuman_bold</item>
-    </style>
-
-    <style name="top_menu_header">
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily">@font/hanuman_bold</item>
-    </style>
-
     <style name="learning_category_or_goal_label">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFFFF</item>
@@ -296,6 +283,18 @@
 
     <style name="sixteen_sp_bold_black">
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="twenty_two_sp_bold_white">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="twenty_sp_bold_black">
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">#000000</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>

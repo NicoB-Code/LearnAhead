@@ -86,7 +86,7 @@ class InnerSummaryFragment : Fragment() {
      */
     private fun updateUI() {
         currentLearningCategory = arguments?.getParcelable("learning_category")
-        binding.learningGoalMenuHeaderLabel.text = currentLearningCategory?.name
+        binding.headerLabel.text = currentLearningCategory?.name
         if (currentSummary?.content != null) {
             binding.markdownEditText.setText(currentSummary?.content)
         } else {
@@ -181,23 +181,23 @@ class InnerSummaryFragment : Fragment() {
      */
     private fun setEventListener() {
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_homeFragment) }
+        binding.homeButton.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_homeFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_learningCategoryListFragment) }
+        binding.learningCategoriesButton.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_learningCategoryListFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_goalListingFragment) }
+        binding.learningGoalsButton.setOnClickListener { findNavController().navigate(R.id.action_innerSummaryFragment_to_goalListingFragment) }
 
         // Klick Listener zum Ausloggen des Benutzers
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_innerSummaryFragment_to_loginFragment)
             }
         }
 
         // Klick Listener zum Speichern der Zusammenfassung
-        binding.buttonPreview.setOnClickListener {
+        binding.previewButton.setOnClickListener {
             currentSummary?.content = binding.markdownEditText.text.toString()
             currentSummary?.let { summary -> summaryViewModel.updateSummary(summary) }
         }

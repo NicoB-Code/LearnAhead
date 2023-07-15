@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_learning_goal"
-        android:textAppearance="@style/top_menu_header"
+        android:textAppearance="@style/twenty_two_sp_bold_white"
         android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"

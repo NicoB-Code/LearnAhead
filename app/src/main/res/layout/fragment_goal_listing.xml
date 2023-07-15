@@ -1,6 +1,7 @@
 <!-- Android Large - Login -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -85,9 +86,10 @@
         android:elevation="8dp"
         android:paddingStart="35dp"
         android:text="@string/add_learning_goal"
-        android:textAppearance="@style/button_add_learning_category_or_goal"
+        android:textAppearance="@style/twenty_sp_bold_black"
         android:textColor="@null"
-        app:backgroundTint="@null" />
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry" />
 
     <!-- Home-Button -->
     <com.google.android.material.button.MaterialButton
@@ -97,7 +99,7 @@
         android:layout_alignTop="@id/bottomMenuBackground"
         android:layout_alignBottom="@id/bottomMenuBackground"
         android:drawableTop="@drawable/home_button"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         app:iconPadding="-5dp"
         android:text="@string/home"
         android:textAppearance="@style/twelve_sp_bold_white"

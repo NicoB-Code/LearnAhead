@@ -132,7 +132,7 @@
         app:iconPadding="5dp"
         android:paddingStart="10dp"
         android:text="@string/add_learning_category"
-        android:textAppearance="@style/button_add_learning_category_or_goal"
+        android:textAppearance="@style/twenty_sp_bold_black"
         android:textColor="@null"
         app:backgroundTint="@null"
         tools:ignore="RtlSymmetry" />
