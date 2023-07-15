@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Question
+import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.databinding.ItemQuestionLayoutBinding
 
 /**

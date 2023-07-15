@@ -54,11 +54,11 @@ class TestDetailFragment : Fragment() {
     private val questionViewModel: QuestionViewModel by activityViewModels()
     private val tagsListString: MutableList<String> = mutableListOf()
     private var questionsToAddToTheTest: MutableList<Question> = mutableListOf()
+    private var dropdownItems: MutableList<Question> = mutableListOf()
     private val tagsList: MutableList<String> = mutableListOf()
     private val adapter by lazy {
         QuestionListingAdapter(
-            onItemClicked = { pos, item ->
-
+            onItemClicked = { pos, item -> toast("Frage wurde hinzugefügt/entfernt")
             },
             onDeleteClicked = { pos, item ->
             }
@@ -157,12 +157,35 @@ class TestDetailFragment : Fragment() {
         }
     }
 
+    private fun getQuestionDropdownItems(): MutableList<Question> {
+        val currentLearningCategory = learnCategoryViewModel.currentSelectedLearningCategory.value
+
+        // Erstellt eine Set-Version der Tags-Liste, um Duplikate zu entfernen
+        val allTags = tagsList.toSet()
+
+        // Filtert die Fragen der Lernkategorie basierend auf den ausgewählten Tags
+        return currentLearningCategory?.questions?.filterNot { question ->
+            question.tags.any { questionTag ->
+                allTags.contains(questionTag.name)
+            }
+        }?.toMutableList()!!
+    }
+
+    private fun addCurrentManualQuestion() {
+        var selectedQuestion = binding.dropdownElementManualQuestion.selectedItemPosition
+        questionsToAddToTheTest.add(dropdownItems[selectedQuestion])
+        toast("Frage manuell hinzugefügt")
+    }
+
     /**
      * Füllt das Dropdown-Menü mit Elementen.
      */
     private fun populateDropdown() {
-        val dropdownItems = listOf("Karteikarte - Umdrehen", "Weitere Fragen Arten folgen.")
-        val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItems)
+        dropdownItems = getQuestionDropdownItems()
+        val dropdownItemsStrings = dropdownItems.map { it.question }
+
+        //val dropdownItems = listOf("Karteikarte - Umdrehen", "Weitere Fragen Arten folgen.")
+        val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItemsStrings)
         binding.dropdownElementManualQuestion.adapter = adapter
     }
 
@@ -264,6 +287,7 @@ class TestDetailFragment : Fragment() {
             resources.getDimensionPixelSize(R.dimen.tag_scroll_view_height_multiple_tags)
         }
         binding.tagsScrollView.layoutParams = scrollViewLayoutParams
+        populateDropdown()
     }
 
     /**
@@ -337,6 +361,7 @@ class TestDetailFragment : Fragment() {
 
         binding.checkboxManuallyAddQuestions.setOnCheckedChangeListener { _, isChecked ->
             binding.dropdownElementManualQuestion.visibility = if (isChecked) View.VISIBLE else View.GONE
+            binding.buttonAddManualQuestion.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
 
         binding.homeButton.setOnClickListener {
@@ -359,6 +384,10 @@ class TestDetailFragment : Fragment() {
 
         binding.backIcon.setOnClickListener {
             findNavController().navigate(R.id.action_testDetailFragment_to_testListingFragment)
+        }
+
+        binding.buttonAddManualQuestion.setOnClickListener{
+            addCurrentManualQuestion()
         }
 
         binding.buttonSaveTest.setOnClickListener {

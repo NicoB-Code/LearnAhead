@@ -198,7 +198,7 @@ class TestListingFragment : Fragment() {
 
         // Setzt den Event-Listener für das Back-Icon
         binding.backIcon.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(R.id.action_testListingFragment_to_learningCategoryInnerViewFragment)
         }
 
         // Setzt den Event-Listener für den "Create Test"-Button
