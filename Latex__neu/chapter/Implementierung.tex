@@ -1,0 +1,95 @@
+\section{Implementierung}
+In diesem Kapitel wird die komplette Implementierung von LearnAhead erläutert. Es wird beispielsweise explizit darauf eingegangen wie die App im Google Play Store deployed wurde und wie, aus Sicht eines Users sowie eines Entwicklers zu installieren ist.\newline
+
+\subsection{Deployment der LearnAhead App im Google Play Store}
+Die Veröffentlichung der LearnAhead App im Google Play Store bestand aus mehreren Schritten, die im Folgenden detailliert beschrieben werden. \newline
+\subsubsection{Vorbereitung der App für die Veröffentlichung}
+Bevor die App im Google Play Store veröffentlicht werden konnte, musste sie für die Veröffentlichung vorbereitet werden. Dies beinhaltete die Überprüfung und Anpassung der App-Manifest-Datei, das Bereinigen von Debug-Code und Log-Ausgaben, das Aktualisieren der App-Ressourcen und das Testen der App in verschiedenen Gerätekonfigurationen.\newline
+\subsubsection{Erstellen einer signierten APK oder AAB}
+Nach der Vorbereitung der App wurde eine signierte APK (Android Package) oder AAB (Android App Bundle) erstellt. Dies ist die Datei, die im Google Play Store hochgeladen wurde. Ein privates Schlüsselpaar wurde erstellt, um die App zu signieren. \newline
+\subsubsection{Erstellen eines Google Play Entwicklerkontos}
+Um die App im Google Play Store veröffentlichen zu können, wurde ein Google Play Entwicklerkonto erstellt. Es wurde eine einmalige Anmeldegebühr von 25 USD gezahlt. \newline
+\subsubsection{Erstellen einer neuen App im Play Console}
+Nach der Erstellung des Entwicklerkontos wurde eine neue App in der Google Play Console erstellt. Informationen wie der Name der App, die Beschreibung, die Kategorie und die Altersfreigabe wurden angegeben.\newline
+\subsubsection{Hochladen der APK und Bereitstellung von Store-Listing-Informationen}
+Nach der Erstellung der App wurde die APK hochgeladen und weitere Informationen für das Store-Listing bereitgestellt, wie Screenshots, App-Symbole, Werbetexte und Kontaktinformationen.\newline
+\subsubsection{Festlegen der Preisgestaltung und Verteilung}
+Es wurde entschieden, dass die App kostenlos ist und in welchen Ländern sie verfügbar sein soll.\newline
+\subsubsection{Veröffentlichung der App}
+Nachdem alle erforderlichen Informationen bereitgestellt wurden, wurde die App zur Überprüfung eingereicht. Nach der Genehmigung durch Google wird die LearnAhead App im Google Play Store veröffentlicht.
+
+\subsection{Installationsanleitung}
+In diesem Kapitel wird erläutert, wie die LearnAhead App sowohl von Endbenutzern als auch von Entwicklern installiert werden kann.
+\subsubsection{Anleitung für User}
+Um die LearnAhead App auf einem Android-Gerät zu installieren, befolgen Sie bitte die folgenden Schritte: \newline
+\begin{enumerate}
+    \item Öffnen Sie die Google Play Store App auf Ihrem Android-Gerät.
+    \item Tippen Sie in der Suchleiste \gqq{LearnAhead} ein und drücken Sie auf die Suchtaste.
+    \item Wählen Sie die LearnAhead App aus der Liste der Suchergebnisse aus.
+    \item Tippen Sie auf die Schaltfläche \gqq{Installieren}, um den Download und die Installation der App zu starten.
+    \item Nach Abschluss der Installation können Sie die App öffnen und verwenden, indem Sie auf die Schaltfläche \gqq{Öffnen} tippen oder das App-Symbol auf Ihrem Gerät suchen und auswählen.
+\end{enumerate}
+\subsubsection{Anleitung für Developer}
+Um die LearnAhead App für Entwicklungs- und Testzwecke zu installieren, befolgen Sie bitte die folgenden Schritte:\newline
+\begin{enumerate}
+    \item Laden Sie und installieren Sie Android Studio auf Ihrem Computer, falls Sie dies noch nicht getan haben. Sie können Android Studio von der offiziellen Website herunterladen.
+    \item Beantragen Sie die Berechtigung, auf das Github-Repository der LearnAhead App zuzugreifen, indem Sie eine E-Mail an bayernico@web.de senden.
+    \item Nach Erhalt der Berechtigung, öffnen Sie Android Studio und wählen Sie \gqq{Get from Version Control} aus dem \gqq{File} Menü.
+    \item Geben Sie die URL des Github-Repositorys (https://github.com/NicoB-Code/LearnAhead) in das Feld \gqq{URL} ein und klicken Sie auf \gqq{Clone}.
+    \item Nachdem das Repository erfolgreich geklont wurde, können Sie die App in Android Studio öffnen, bearbeiten und testen.
+\end{enumerate}
+
+\subsubsection{Verwendung des Android-Emulators}
+Der Android-Emulator ist ein Tool, das von Android Studio bereitgestellt wird und es Entwicklern ermöglicht, ihre Apps auf einem virtuellen Android-Gerät zu testen. Bitte beachten Sie, dass ihr virtuelles Gerät mindestens Tiramisu (Android 13) benötigt. Um den Android-Emulator zu verwenden, befolgen Sie bitte die folgenden Schritte:\newline
+\begin{enumerate}
+    \item Starten Sie Android Studio und öffnen Sie Ihr Projekt.
+    \item Wählen Sie \gqq{AVD Manager} aus dem \gqq{Tools} Menü.
+    \item Klicken Sie auf \gqq{Create Virtual Device}, um ein neues virtuelles Gerät zu erstellen.
+    \item Wählen Sie einen Gerätetyp aus der Liste aus und klicken Sie auf \gqq{Next}.
+    \item Wählen Sie ein System-Image aus, das Sie auf dem virtuellen Gerät installieren möchten, und klicken Sie auf \gqq{Next}. Wenn Sie noch kein System-Image heruntergeladen haben, können Sie dies tun, indem Sie auf \gqq{Download} neben dem gewünschten Image klicken.
+    \item Überprüfen Sie die Konfiguration des virtuellen Geräts und klicken Sie auf \gqq{Finish}, um das virtuelle Gerät zu erstellen.
+    \item Um das virtuelle Gerät zu starten, klicken Sie auf das grüne Dreieckssymbol neben dem Gerät in der Liste der verfügbaren virtuellen Geräte im AVD Manager.
+    \item Sobald das virtuelle Gerät gestartet ist, können Sie Ihre App darauf ausführen, indem Sie \gqq{Run} aus dem \gqq{Run} Menü wählen und das laufende virtuelle Gerät aus der Liste der verfügbaren Geräte auswählen.
+\end{enumerate}
+
+\subsubsection{Übertragen der App zu Entwicklungszwecken ohne Play Store}
+Um die App auf einem tatsächlichen Android Gerät nutzen zu können, ohne sie jedes mal in den Google Play Store deployen zu müssen, können gewisse Entwicklertools genutzt werden, welche im nachfolgenden erklärt werden.
+\paragraph{Übertragung per USB}
+\begin{enumerate}
+    \item Verbinden Sie Ihr Android-Gerät über ein USB-Kabel mit Ihrem Computer.
+    \item Aktivieren Sie auf Ihrem Android-Gerät die Option \gqq{USB-Debugging} in den Entwicklereinstellungen.
+    \item In Android Studio, wählen Sie \gqq{Run} aus dem \gqq{Run} Menü und wählen Sie Ihr angeschlossenes Gerät aus der Liste der verfügbaren Geräte.
+    \item Android Studio installiert die App auf Ihrem Gerät und startet sie.
+\end{enumerate}
+
+\paragraph{Übertragung per Wi-Fi-Pairing}
+\begin{enumerate}
+    \item Stellen Sie sicher, dass Ihr Android-Gerät und Ihr Computer mit demselben Wi-Fi-Netzwerk verbunden sind.
+    \item Aktivieren Sie auf Ihrem Android-Gerät die Option \gqq{Wireless Debugging} in den Entwicklereinstellungen (hierfür müssen Sie den Entwicklermodus aktiviert haben - siehe https://blog.deinhandy.de/android-entwickleroptionen-aktivieren-so-funktionierts)
+    \item In Android Studio, wählen Sie \gqq{Pair Device with QR Code} aus dem \gqq{Run} Menü und scannen Sie den angezeigten QR-Code mit Ihrem Android-Gerät.
+    \item Nachdem das Gerät erfolgreich gepaart wurde, können Sie \gqq{Run} aus dem \gqq{Run} Menü wählen und Ihr gepaartes Gerät aus der Liste der verfügbaren Geräte auswählen.
+    \item Android Studio installiert die App auf Ihrem Gerät und startet sie.
+\end{enumerate}
+
+\subsection{IT-Sicherheit in LearnAhead}
+Ein wichtiger Aspekt bei der Entwicklung der LearnAhead App war die Gewährleistung der IT-Sicherheit. Dies wurde durch die Verwendung von Firebase für die Authentifizierung und Datenspeicherung erreicht \cite{firebase_overview}.\newline
+\subsubsection{Firebase Authentifizierung}
+Firebase Authentifizierung bietet eine sichere und zuverlässige Authentifizierungslösung. Es unterstützt eine Vielzahl von Authentifizierungsmethoden, einschließlich E-Mail und Passwort, und es integriert sich nahtlos mit anderen Firebase-Diensten \cite{firebase_auth}.\newline
+Firebase Authentifizierung bietet auch eine Reihe von Sicherheitsfunktionen, um die Konten der Benutzer zu schützen. Dazu gehören unter anderem:
+\begin{itemize}
+    \item \textbf{Passwortschutz:} Firebase speichert Passwörter sicher und ermöglicht es den Benutzern, ihre Passwörter zurückzusetzen, wenn sie diese vergessen haben \cite{firebase_auth}.
+    \item \textbf{Kontosicherheit:} Firebase bietet Schutzmaßnahmen gegen Brute-Force- und DDoS-Angriffe \cite{firebase_security}.
+    \item \textbf{Datenschutz:} Firebase hält sich an die Datenschutzbestimmungen und -standards, einschließlich der DSGVO \cite{firebase_privacy}.
+\end{itemize}
+\subsubsection{Firebase Datenspeicherung}
+Die Benutzerdaten der LearnAhead App werden sicher in Firebase gespeichert. Firebase bietet eine Reihe von Funktionen, die die Sicherheit der gespeicherten Daten gewährleisten \cite{firebase_storage}:
+\begin{itemize}
+    \item \textbf{Datenverschlüsselung:} Firebase speichert Daten in einer verschlüsselten Form, sowohl während der Übertragung als auch im Ruhezustand \cite{firebase_encryption}.
+    \item \textbf{Zugriffskontrolle:} Firebase ermöglicht es, detaillierte Sicherheitsregeln festzulegen, um den Zugriff auf die gespeicherten Daten zu kontrollieren \cite{firebase_access_control}.
+    \item \textbf{Compliance:} Firebase hält sich an wichtige Compliance-Standards und -Vorschriften, um die Sicherheit und den Schutz der gespeicherten Daten zu gewährleisten \cite{firebase_compliance}.
+\end{itemize}
+Durch die Verwendung von Firebase konnte die LearnAhead App eine robuste und sichere Lösung für die Authentifizierung und Datenspeicherung implementieren \cite{firebase_overview}.
+
+
+
+
