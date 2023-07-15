@@ -63,11 +63,11 @@ class LoginFragment : Fragment() {
      * Initialisiert die Klicklistener für den Login-Button, das Passwort-Sichtbarkeits-Icon und die Navigations-Labels.
      */
     private fun setEventListeners() {
-        binding.buttonLogin.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             if (validateInput()) {
                 viewModel.login(
-                    email = binding.editTextEmail.text.toString(),
-                    password = binding.editTextPassword.text.toString()
+                    email = binding.textEmail.text.toString(),
+                    password = binding.textPassword.text.toString()
                 )
             }
         }
@@ -76,14 +76,14 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
 
-        binding.textRegistrieren.setOnClickListener {
+        binding.textRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-        binding.editTextPassword.setOnTouchListener { _, event ->
+        binding.textPassword.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
-                val drawable = binding.editTextPassword.compoundDrawablesRelative[2]
-                if (event.rawX >= binding.editTextPassword.right - drawable.bounds.width()) {
+                val drawable = binding.textPassword.compoundDrawablesRelative[2]
+                if (event.rawX >= binding.textPassword.right - drawable.bounds.width()) {
                     togglePasswordVisibility()
                     true
                 } else {
@@ -99,16 +99,16 @@ class LoginFragment : Fragment() {
      * Schaltet die Sichtbarkeit des Passwortfeldes um.
      */
     private fun togglePasswordVisibility() {
-        val passwordEditText = binding.editTextPassword
+        val passwordEditText = binding.textPassword
 
         if (passwordEditText.transformationMethod == PasswordTransformationMethod.getInstance()) {
             passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            binding.editTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            binding.textPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 R.drawable.password_icon, 0, R.drawable.show_password_icon, 0
             )
         } else {
             passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-            binding.editTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            binding.textPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 R.drawable.password_icon, 0, R.drawable.show_password_icon, 0
             )
         }
@@ -121,17 +121,17 @@ class LoginFragment : Fragment() {
         viewModel.login.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    binding.buttonLogin.setText("")
-                    binding.loginProgress.show()
+                    binding.loginButton.setText("")
+                    binding.progressBar.show()
                 }
                 is UiState.Failure -> {
-                    binding.buttonLogin.setText("Login")
-                    binding.loginProgress.hide()
+                    binding.loginButton.setText("Login")
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 is UiState.Success -> {
-                    binding.buttonLogin.setText("Login")
-                    binding.loginProgress.hide()
+                    binding.loginButton.setText("Login")
+                    binding.progressBar.hide()
                     toast(state.data)
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
@@ -156,8 +156,8 @@ class LoginFragment : Fragment() {
      * Gibt True zurück, wenn die Eingaben gültig sind, sonst False.
      */
     private fun validateInput(): Boolean {
-        val email = binding.editTextEmail.text.toString().trim()
-        val password = binding.editTextPassword.text.toString()
+        val email = binding.textEmail.text.toString().trim()
+        val password = binding.textPassword.text.toString()
 
         if (email.isEmpty()) {
             toast(getString(R.string.enter_email))

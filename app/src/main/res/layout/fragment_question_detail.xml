@@ -8,27 +8,27 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/dark_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dark_full_screen"
         />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
-        android:id="@+id/background_bottom_menu"
+        android:id="@+id/bottomMenuBackground"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_alignBottom="@id/dark_background"
+        android:layout_alignBottom="@id/darkBackground"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
         />
 
     <!-- Back Icon -->
     <ImageView
-        android:id="@+id/back_icon"
+        android:id="@+id/backIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
@@ -38,43 +38,43 @@
 
     <!-- Profil Header Label -->
     <TextView
-        android:id="@+id/learning_goal_menu_header_label"
+        android:id="@+id/headerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_question"
         android:textAppearance="@style/twenty_two_sp_bold_white"
-        android:layout_toEndOf="@id/back_icon"
-        android:layout_above="@id/header_line"
+        android:layout_toEndOf="@id/backIcon"
+        android:layout_above="@id/headerLine"
         android:layout_marginBottom="5dp"
         />
 
-    <!-- Header Line -->
+    <!-- Horizontale Linie als Header -->
     <View
-        android:id="@+id/header_line"
+        android:id="@+id/headerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/back_icon"
+        android:layout_below="@id/backIcon"
         android:background="@drawable/header_line"
         />
 
     <!-- Logout Icon -->
     <ImageView
-        android:id="@+id/logout"
+        android:id="@+id/logoutIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_alignEnd="@id/dark_background"
+        android:layout_alignEnd="@id/darkBackground"
         android:layout_marginEnd="5dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/logout"
         android:elevation="7dp"
         />
 
-    <!-- Choose a type of test -->
+    <!-- chooseTypeOfTestLabel -->
     <TextView
-        android:id="@+id/label_choose_a_type_of_test"
+        android:id="@+id/chooseTypeOfTestLabel"
         android:layout_width="213dp"
         android:layout_height="16dp"
-        android:layout_below="@id/header_line"
+        android:layout_below="@id/headerLine"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
         android:text="@string/choose_a_type_of_test"
@@ -84,10 +84,10 @@
 
     <!-- Dropdown Element -->
     <Spinner
-        android:id="@+id/dropdown_element"
+        android:id="@+id/questionTypeDropdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/label_choose_a_type_of_test"
+        android:layout_below="@id/chooseTypeOfTestLabel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:background="@drawable/small_rectangle_for_create_question_and_tests"
@@ -95,10 +95,10 @@
         />
 
     <EditText
-        android:id="@+id/add_tags"
+        android:id="@+id/addTags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dropdown_element"
+        android:layout_below="@id/questionTypeDropdown"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp"
         android:hint="@string/add_tags"
@@ -112,11 +112,11 @@
 
     <!-- Question and Answer Box -->
     <View
-        android:id="@+id/question_and_answer_box"
+        android:id="@+id/questionAndAnswerBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/background_bottom_menu"
-        android:layout_below="@id/add_tags"
+        android:layout_above="@id/bottomMenuBackground"
+        android:layout_below="@id/addTags"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="34dp"
         android:layout_marginTop="14dp"
@@ -128,12 +128,12 @@
 
     <!-- Label Frage -->
     <TextView
-        android:id="@+id/question_label"
+        android:id="@+id/questionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@id/question_and_answer_box"
-        android:layout_alignStart="@id/question_and_answer_box"
+        android:layout_alignTop="@id/questionAndAnswerBox"
+        android:layout_alignStart="@id/questionAndAnswerBox"
         android:layout_marginTop="12dp"
         android:layout_marginStart="18dp"
         android:elevation="8dp"
@@ -143,12 +143,12 @@
 
     <!-- Question and Answer Box -->
     <View
-        android:id="@+id/question_box"
+        android:id="@+id/questionBox"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@id/question_label"
-        android:layout_alignStart="@id/question_and_answer_box"
-        android:layout_alignEnd="@id/question_and_answer_box"
+        android:layout_below="@id/questionLabel"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_alignEnd="@id/questionAndAnswerBox"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -161,9 +161,9 @@
         android:id="@+id/tagsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/question_box"
-        android:layout_alignEnd="@id/question_box"
-        android:layout_alignTop="@id/question_box"
+        android:layout_alignStart="@id/questionBox"
+        android:layout_alignEnd="@id/questionBox"
+        android:layout_alignTop="@id/questionBox"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="9dp"
@@ -172,32 +172,32 @@
 
     <!-- Label Antwort -->
     <EditText
-        android:id="@+id/question_content"
+        android:id="@+id/textQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tagsContainer"
-        android:layout_alignStart="@id/question_box"
-        android:layout_alignEnd="@id/question_box"
-        android:layout_alignBottom="@id/question_box"
+        android:layout_alignStart="@id/questionBox"
+        android:layout_alignEnd="@id/questionBox"
+        android:layout_alignBottom="@id/questionBox"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:elevation="8dp"
-        android:hint="Bitte geben Sie hier ihre Frage ein:"
-        android:textAppearance="@style/thirteen_sp_bold_blue"
+        android:hint="@string/please_enter_your_question"
+        android:textAppearance="@style/fourteen_sp_regular_black"
         android:gravity="top|left"
         android:background="@null"
         android:backgroundTint="@null"
-        />
+        tools:ignore="RtlHardcoded" />
 
     <!-- Label Antwort -->
     <TextView
-        android:id="@+id/answer_label"
+        android:id="@+id/answerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/question_box"
-        android:layout_alignStart="@id/question_and_answer_box"
+        android:layout_below="@id/questionBox"
+        android:layout_alignStart="@id/questionAndAnswerBox"
         android:layout_marginStart="18dp"
         android:layout_marginTop="-15dp"
         android:elevation="8dp"
@@ -206,15 +206,13 @@
         />
 
     <!-- Generelle Antwort -->
-
-    <!-- Frage erstellen -->
     <EditText
-        android:id="@+id/answer_content"
+        android:id="@+id/textAnswer"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@id/answer_label"
-        android:layout_alignStart="@id/question_and_answer_box"
-        android:layout_alignEnd="@id/question_and_answer_box"
+        android:layout_below="@id/answerLabel"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_alignEnd="@id/questionAndAnswerBox"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -223,7 +221,7 @@
         android:background="@drawable/question_or_answer_rectangle"
         android:elevation="8dp"
         android:gravity="top|left"
-        android:hint="Tatsächliche Antwort wird ausgetauscht durch RecyclerView"
+        android:hint="@string/please_enter_here_your_answer"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:paddingLeft="10dp"
@@ -235,12 +233,12 @@
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_save_question"
+        android:id="@+id/saveQuestionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/answer_content"
-        android:layout_alignStart="@id/question_and_answer_box"
-        android:layout_alignEnd="@id/question_and_answer_box"
+        android:layout_below="@id/textAnswer"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_alignEnd="@id/questionAndAnswerBox"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="19dp"
@@ -260,11 +258,11 @@
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_home"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
         android:drawableTop="@drawable/home_button"
         android:layout_marginStart="4dp"
         app:iconPadding="-5dp"
@@ -276,11 +274,11 @@
 
     <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_categories"
+        android:id="@+id/learningCategoriesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
         android:layout_centerHorizontal="true"
         android:drawableTop="@drawable/learning_category_button"
         app:iconPadding="-5dp"
@@ -292,12 +290,12 @@
 
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_goals"
+        android:id="@+id/learningGoalsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
-        android:layout_alignEnd="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_alignEnd="@id/bottomMenuBackground"
         android:layout_marginEnd="4dp"
         android:drawableTop="@drawable/learning_goal_button"
         app:iconPadding="-5dp"
@@ -308,7 +306,7 @@
         />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/black"

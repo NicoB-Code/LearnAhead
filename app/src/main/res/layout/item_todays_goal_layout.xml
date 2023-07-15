@@ -17,45 +17,45 @@
         android:paddingBottom="8dp">
 
         <TextView
-            android:id="@+id/card_view_text_goal_name"
+            android:id="@+id/textTodaysGoalsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textAppearance="@style/card_view_title"
-            android:hint="Lernkategorie Titel"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textAppearance="@style/thirty_two_sp_regular_black"
+            android:hint="@string/learning_goal_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center_horizontal"/>
 
-
         <TextView
-            android:id="@+id/card_view_goal_date"
+            android:id="@+id/textLearningGoalEndDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:hint="Ziel Datum: 25.04.2023"
-            android:textAppearance="@style/card_view_date_interval"
+            android:hint="@string/learning_goal_end_date"
+            android:textAppearance="@style/fourteen_sp_regular_black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_text_goal_name"
+            app:layout_constraintTop_toBottomOf="@+id/textTodaysGoalsName"
             android:gravity="center_horizontal"/>
 
         <TextView
-            android:id="@+id/card_view_date_days_calculated"
+            android:id="@+id/textLearningGoalLeftDaysCalculated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/card_view_hint_calculated_left_days"
-            android:textAppearance="@style/card_view_calculated_days"
+            android:textAppearance="@style/fourteen_sp_regular_black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_goal_date"
+            app:layout_constraintTop_toBottomOf="@+id/textLearningGoalEndDate"
             android:gravity="center_horizontal"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_add"
+            android:id="@+id/continueOrStartLearningGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -64,13 +64,13 @@
             android:drawableLeft="@drawable/add_circle_black"
             app:iconPadding="5dp"
             android:paddingStart="10dp"
-            android:text="Weiter machen"
+            android:text="@string/start_learning_goal"
             android:textAppearance="@style/twenty_sp_bold_black"
             android:textColor="@null"
             app:backgroundTint="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_date_days_calculated"
+            app:layout_constraintTop_toBottomOf="@+id/textLearningGoalLeftDaysCalculated"
             tools:ignore="RtlSymmetry" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

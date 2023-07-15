@@ -90,10 +90,9 @@ class QuestionListingAdapter(
          * @param item Das [Question]-Objekt, das an die Ansichtselemente gebunden werden soll.
          */
         fun bind(item: Question) {
-            binding.tags.text = item.tags.joinToString(" | ") { it.name }
-            binding.question.text = item.question
-            binding.delete.hide()
-            binding.delete.setOnClickListener {
+            binding.textTags.text = item.tags.joinToString(" | ") { it.name }
+            binding.textShownQuestion.text = item.question
+            binding.deleteIcon.setOnClickListener {
                 onDeleteClicked.invoke(
                     bindingAdapterPosition,
                     item

@@ -50,7 +50,7 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         // Bezugnahme auf die Ansichten
-        val passwordEditText = binding.editTextPassword
+        val passwordEditText = binding.textPassword
 
         // Klicklistener auf dem Passwort-Icon setzen
         passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(
@@ -98,20 +98,20 @@ class RegisterFragment : Fragment() {
      */
     private fun setEventListeners() {
         // Click-Listener für den Registrieren-Button festlegen
-        binding.buttonSignUp.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             // Überprüfen, ob die Benutzereingaben gültig sind
             if (validateInput()) {
                 // Das ViewModel aufrufen, um einen neuen Benutzer zu registrieren
                 viewModel.register(
                     email = binding.editTextEmail.text.toString(),
-                    password = binding.editTextPassword.text.toString(),
+                    password = binding.textPassword.text.toString(),
                     user = getUserObj()
                 )
             }
         }
 
         // Click-Listener für die Navigationselemente festlegen
-        binding.textLogin.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
@@ -125,17 +125,17 @@ class RegisterFragment : Fragment() {
         viewModel.register.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    binding.buttonSignUp.setText("")
-                    binding.registerProgress.show()
+                    binding.signUpButton.setText("")
+                    binding.progressBar.show()
                 }
                 is UiState.Failure -> {
-                    binding.buttonSignUp.setText(getString(R.string.register_verb))
-                    binding.registerProgress.hide()
+                    binding.signUpButton.setText(getString(R.string.register_verb))
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 is UiState.Success -> {
-                    binding.buttonSignUp.setText(getString(R.string.register_verb))
-                    binding.registerProgress.hide()
+                    binding.signUpButton.setText(getString(R.string.register_verb))
+                    binding.progressBar.hide()
                     toast(state.data)
                     findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                 }
@@ -150,8 +150,8 @@ class RegisterFragment : Fragment() {
     private fun getUserObj(): User {
         return User(
             id = "",
-            username = binding.editTextUsername.text.toString(),
-            password = binding.editTextPassword.text.toString(),
+            username = binding.textUsername.text.toString(),
+            password = binding.textPassword.text.toString(),
             email = binding.editTextEmail.text.toString(),
         )
     }
@@ -164,7 +164,7 @@ class RegisterFragment : Fragment() {
     private fun validateInput(): Boolean {
         var isValid = true
 
-        if (binding.editTextUsername.text.isNullOrEmpty()) {
+        if (binding.textUsername.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_first_name))
         }
@@ -178,13 +178,13 @@ class RegisterFragment : Fragment() {
                 toast(getString(R.string.invalid_email))
             }
         }
-        if (binding.editTextPassword.text.isNullOrEmpty()) {
+        if (binding.textPassword.text.isNullOrEmpty()) {
             isValid = false
             toast(getString(R.string.enter_password))
         } else {
 
 
-            if (binding.editTextPassword.text.toString().length < 8) {
+            if (binding.textPassword.text.toString().length < 8) {
                 isValid = false
                 toast(getString(R.string.invalid_password))
             }

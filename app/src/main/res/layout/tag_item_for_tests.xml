@@ -10,7 +10,7 @@
         android:id="@+id/delete_tag"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/delete_icon"
+        android:src="@drawable/remove_icon"
         android:layout_gravity="center_vertical"
         app:tint="@android:color/darker_gray" />
 

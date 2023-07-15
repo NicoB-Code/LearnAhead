@@ -86,7 +86,7 @@ class SummaryAdapter(
          * @param item Das [Summary]-Objekt, das an die View gebunden wird.
          */
         fun bind(item: Summary) {
-            binding.itemListText.text = item.name
+            binding.textSummaryName.text = item.name
 
             // Setzt den Klicklistener für das Layout der inneren Zusammenfassungsansicht
             binding.innerViewSummaryLayout.setOnClickListener {
@@ -94,7 +94,7 @@ class SummaryAdapter(
             }
 
             // Setzt den Klicklistener für die Löschen-Schaltfläche der Zusammenfassung
-            binding.delete.setOnClickListener {
+            binding.deleteIcon.setOnClickListener {
                 onDeleteClicked.invoke(bindingAdapterPosition, item)
             }
         }

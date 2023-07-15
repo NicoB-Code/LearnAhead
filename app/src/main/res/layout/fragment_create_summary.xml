@@ -8,28 +8,28 @@
     android:layout_gravity="center_horizontal"
     android:background="@drawable/android_lar">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/dark_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dark_full_screen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
         android:id="@+id/bottom_menu_background"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@id/dark_background"
+        app:layout_constraintBottom_toBottomOf="@id/darkBackground"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Header Line -->
     <View
-        android:id="@+id/header_line"
+        android:id="@+id/headerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="50dp"
@@ -39,50 +39,50 @@
 
     <!-- Back Icon -->
     <ImageView
-        android:id="@+id/back_icon"
+        android:id="@+id/backIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
         android:background="@drawable/back_button"
         android:elevation="7dp"
         android:rotation="-90"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- Summary Menu Header Label -->
     <TextView
-        android:id="@+id/summary_menu_header_label"
+        android:id="@+id/headerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/summary_label"
         android:textAppearance="@style/twenty_two_sp_bold_white"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/back_icon"
+        app:layout_constraintLeft_toRightOf="@id/backIcon"
         />
 
     <!-- Edit Icon -->
     <ImageView
-        android:id="@+id/edit_button"
+        android:id="@+id/editButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/edit_button"
         android:elevation="7dp"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
-        app:layout_constraintRight_toLeftOf="@id/save_button" />
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
+        app:layout_constraintRight_toLeftOf="@id/saveButton" />
 
     <!-- Save Icon -->
     <ImageView
-        android:id="@+id/save_button"
+        android:id="@+id/saveButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/check_button"
         android:elevation="7dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -97,7 +97,7 @@
         android:text="@string/summary_name"
         android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_line"
+        app:layout_constraintTop_toBottomOf="@id/headerLine"
         app:drawableBottomCompat="@drawable/green_line" />
 
     <!-- Summary Name EditText -->
@@ -110,6 +110,7 @@
         android:hint="@string/enter_summary_name"
         android:textColorHint="@color/white"
         android:textAppearance="@style/eighteen_sp_regular_white"
+        android:textColor="@null"
         android:maxLines="1"
         android:inputType="text|textNoSuggestions"
         android:gravity="start|center_vertical"
@@ -119,8 +120,7 @@
         app:layout_constraintTop_toBottomOf="@id/summary_name_label" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyle"
+        android:id="@+id/progressBar"
         android:layout_height="36dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -136,7 +136,7 @@
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/home_button"
+        android:id="@+id/homeButton"
         android:layout_width="92dp"
         android:layout_height="68dp"
         android:layout_marginStart="4dp"
@@ -151,7 +151,7 @@
 
     <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/learning_categories_button"
+        android:id="@+id/learningCategoriesButton"
         android:layout_width="126dp"
         android:layout_height="68dp"
         android:background="@android:color/transparent"
@@ -166,7 +166,7 @@
 
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/learning_goals_button"
+        android:id="@+id/learningGoalsButton"
         android:layout_width="88dp"
         android:layout_height="68dp"
         android:layout_marginEnd="4dp"

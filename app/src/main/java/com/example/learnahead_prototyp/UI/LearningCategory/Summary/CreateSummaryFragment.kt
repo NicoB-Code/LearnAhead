@@ -130,7 +130,7 @@ class CreateSummaryFragment : Fragment() {
      */
     private fun updateUI() {
         currentLearningCategory = arguments?.getParcelable("learning_category")
-        binding.summaryMenuHeaderLabel.text = currentLearningCategory?.name
+        binding.headerLabel.text = currentLearningCategory?.name
         binding.summaryNameEditText.setText("")
         binding.saveButton.hide()
         binding.editButton.hide()

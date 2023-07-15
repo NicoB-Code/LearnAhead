@@ -339,7 +339,7 @@ class TestDetailFragment : Fragment() {
      */
     private fun updateUI() {
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
-        binding.learningGoalMenuHeaderLabel.text = "$selectedLearningCategoryName / Fragen"
+        binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
     }
 
     /**
@@ -364,19 +364,19 @@ class TestDetailFragment : Fragment() {
             binding.buttonAddManualQuestion.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
 
-        binding.buttonHome.setOnClickListener {
+        binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_testDetailFragment_to_homeFragment)
         }
 
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_testDetailFragment_to_goalListingFragment)
         }
 
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_testDetailFragment_to_learningCategoryListFragment)
         }
 
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_testDetailFragment_to_loginFragment)
             }

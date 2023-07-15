@@ -95,13 +95,13 @@ class HomeAdapter(
             if (learningCategory.relatedLearningGoal != null) {
                 val goal = learningCategory.relatedLearningGoal
 
-                binding.cardViewTextGoalName.text = learningCategory?.name
+                binding.textTodaysGoalsName.text = learningCategory?.name
 
                 val dateFormat = SimpleDateFormat("dd.MM.yyyy")
                 val endDate = goal?.endDate
 
                 if (endDate != null) {
-                    binding.cardViewGoalDate.text = "Ziel Datum: " + dateFormat.format(endDate)
+                    binding.textLearningGoalEndDate.text = "Ziel Datum: " + dateFormat.format(endDate)
 
                     // Das aktuelle Datum (heute) abrufen
                     val currentDate = LocalDate.now()
@@ -113,11 +113,11 @@ class HomeAdapter(
                         val daysBetweenDates = ChronoUnit.DAYS.between(currentDate, endDateLocalDate).toInt()
 
                         if (daysBetweenDates == 1)
-                            binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates Tag"
+                            binding.textLearningGoalLeftDaysCalculated.text = "endet in $daysBetweenDates Tag"
                         else if (daysBetweenDates > 1)
-                            binding.cardViewDateDaysCalculated.text = "endet in $daysBetweenDates Tagen"
+                            binding.textLearningGoalLeftDaysCalculated.text = "endet in $daysBetweenDates Tagen"
                         else
-                            binding.cardViewDateDaysCalculated.text = "Lernziel abgelaufen"
+                            binding.textLearningGoalLeftDaysCalculated.text = "Lernziel abgelaufen"
                     }
                 }
 

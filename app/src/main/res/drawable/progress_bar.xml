@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@android:id/background">
         <shape>
             <corners android:radius="5dp" />
             <solid android:color="#D3D3D3" />
+            <stroke
+                android:color="#000000"
+                android:width="2dp" />
         </shape>
     </item>
 
@@ -12,7 +14,10 @@
         <clip>
             <shape>
                 <corners android:radius="5dp" />
-                <solid android:color="#008000" />  <!-- Hier wird die Farbe der Progress Bar auf Grün gesetzt -->
+                <solid android:color="#008000" />
+                <stroke
+                    android:color="#000000"
+                    android:width="2dp" />
             </shape>
         </clip>
     </item>
