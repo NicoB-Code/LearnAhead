@@ -14,13 +14,13 @@
         android:id="@+id/register_black_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/register_green_background"
-        android:layout_alignTop="@id/register_green_background"
+        android:layout_below="@id/greenBackground"
+        android:layout_alignTop="@id/greenBackground"
         android:background="@drawable/rectangle_black_background" />
 
     <!-- Green Background -->
     <View
-        android:id="@+id/register_green_background"
+        android:id="@+id/greenBackground"
         android:layout_width="match_parent"
         android:layout_height="420dp"
         android:layout_alignParentTop="true"
@@ -45,7 +45,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/register_subject"
-        android:textAppearance="@style/register_label_header" />
+        android:textAppearance="@style/forty_eight_sp_bold_white" />
 
     <!-- Registrierungs Box -->
     <View
@@ -70,14 +70,14 @@
         android:drawablePadding="13dp"
         android:elevation="6dp"
         android:hint="@string/username"
-        android:paddingLeft="13dp"
-        android:textAppearance="@style/register_content_text"
+        android:paddingStart="13dp"
+        android:textAppearance="@style/sixteen_eight_sp_regular_505F73"
         android:textColor="@null"
-        android:textSize="16sp"
         android:scrollHorizontally="true"
         android:inputType="text"
         android:gravity="start|center_vertical"
-        android:maxLines="1" />
+        android:maxLines="1"
+        tools:ignore="RtlSymmetry" />
 
 
     <!-- E-Mail -->
@@ -95,8 +95,7 @@
         android:paddingStart="13dp"
         android:elevation="6dp"
         android:hint="@string/email_address"
-        android:textAppearance="@style/register_content_text"
-        android:textSize="16sp"
+        android:textAppearance="@style/sixteen_eight_sp_regular_505F73"
         android:textColor="@null"
         android:maxLines="1"
         android:ellipsize="end"
@@ -121,9 +120,8 @@
         android:paddingStart="13dp"
         android:paddingEnd="13dp"
         android:hint="@string/password"
-        android:textAppearance="@style/register_content_text"
+        android:textAppearance="@style/sixteen_eight_sp_regular_505F73"
         android:textColor="@null"
-        android:textSize="16sp"
         android:ellipsize="end"
         android:maxLines="1"
         android:scrollHorizontally="true"
@@ -141,7 +139,7 @@
         android:background="@drawable/rectangle_login_register"
         android:elevation="8dp"
         android:text="@string/register_verb"
-        android:textAppearance="@style/register_login_button_text"
+        android:textAppearance="@style/twenty_four_sp_regular_white"
         app:backgroundTint="@null" />
 
     <ProgressBar
@@ -161,12 +159,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_sign_up"
-        android:layout_alignLeft="@id/button_sign_up"
+        android:layout_alignStart="@id/button_sign_up"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:elevation="8dp"
         android:text="@string/got_already_an_account"
-        android:textAppearance="@style/register_got_already_an_account" />
+        android:textAppearance="@style/fourteen_sp_regular_black" />
 
     <!-- Login -->
     <TextView
@@ -174,10 +172,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_sign_up"
-        android:layout_alignRight="@id/button_sign_up"
+        android:layout_alignEnd="@id/button_sign_up"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:elevation="8dp"
         android:text="@string/login"
-        android:textAppearance="@style/register_login_instead" />
+        android:textAppearance="@style/fourteen_sp_regular_106BD5" />
 </RelativeLayout>
