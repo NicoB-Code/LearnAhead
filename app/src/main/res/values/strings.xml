@@ -116,6 +116,7 @@
     <string name="please_enter_your_question">Bitte geben Sie hier ihre Frage ein:</string>
     <string name="please_enter_here_your_answer">Bitte geben Sie hier ihre Antwort ein:</string>
     <string name="search">Suche</string>
+    <string name="edit">Bearbeiten</string>
 
 
 </resources>

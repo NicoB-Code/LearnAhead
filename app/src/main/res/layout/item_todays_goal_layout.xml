@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:textAppearance="@style/card_view_title"
+            android:textAppearance="@style/thirty_two_sp_regular_black"
             android:hint="Lernkategorie Titel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

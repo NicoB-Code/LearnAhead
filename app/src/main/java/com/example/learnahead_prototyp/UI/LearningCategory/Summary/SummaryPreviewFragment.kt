@@ -125,7 +125,7 @@ class SummaryPreviewFragment : Fragment() {
         val markwon = Markwon.builder(requireContext())
             .usePlugin(imagesPlugin)
             .build()
-        currentSummary?.let { markwon.setMarkdown(binding.markdownViewText, it.content) }
+        currentSummary?.let { markwon.setMarkdown(binding.textMarkdown, it.content) }
     }
 
     /**
