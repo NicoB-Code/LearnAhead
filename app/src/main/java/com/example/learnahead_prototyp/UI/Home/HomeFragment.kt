@@ -143,8 +143,9 @@ class HomeFragment : Fragment() {
                             false
                         }
                     }.toMutableList()
+                    val sortedList = filteredList.sortedBy { it.relatedLearningGoal?.endDate }.toMutableList()
 
-                    adapter.updateList(filteredList)
+                    adapter.updateList(sortedList)
                 }
             }
         }
