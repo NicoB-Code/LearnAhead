@@ -191,7 +191,6 @@ class SummaryFragment : Fragment() {
                 is UiState.Success -> {
                     binding.progressBar.hide()
                     list = state.data.toMutableList()
-                    Log.d("SummaryAdapter", "List Size: ${list.size}")
                     adapter.updateList(list)
                 }
             }
@@ -211,10 +210,8 @@ class SummaryFragment : Fragment() {
 
                 is UiState.Success -> {
                     binding.progressBar.hide()
-                    toast(state.data)
                     if (deletePosition != -1) {
                         list.removeAt(deletePosition)
-                        Log.d("SummaryAdapter", "List Size: ${list.size}")
                         adapter.updateList(list)
                         deletePosition = -1
                     }
@@ -231,7 +228,6 @@ class SummaryFragment : Fragment() {
                     View.GONE
                 }
                 is UiState.Success -> {
-                    Log.d(TAG, "Success")
                     currentUser = state.data
                     currentLearningCategory?.let { summaryViewModel.getSummaries(currentUser, it) }
                     View.GONE

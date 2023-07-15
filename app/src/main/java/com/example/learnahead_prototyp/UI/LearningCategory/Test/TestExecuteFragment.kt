@@ -164,7 +164,8 @@ class TestExecuteFragment : Fragment() {
             authViewModel.updateUserInfo(currentUser!!)
 
             toastBinding.toastText.text = "Test beendet! Du hast 20 Punkte erhalten!"
-
+            context?.let { it1 -> ContextCompat.getColor(it1, android.R.color.holo_green_light) }
+                ?.let { it2 -> toastBinding.root.setBackgroundColor(it2) }
             val toast = Toast(context)
             toast.duration = Toast.LENGTH_LONG
             toast.view = toastBinding.root // Hier die Änderung
@@ -283,10 +284,11 @@ class TestExecuteFragment : Fragment() {
 
 
             toastBinding.toastText.text = "Gut gemacht! Du hast für diese richtige Frage ${(5*(questionViewModel.currentQuestion.value!!.wrongCounter + 1))} Punkte erhalten!"
-
+            context?.let { it1 -> ContextCompat.getColor(it1, android.R.color.holo_green_light) }
+                ?.let { it2 -> toastBinding.root.setBackgroundColor(it2) }
             val toast = Toast(context)
             toast.duration = Toast.LENGTH_LONG
-            toast.view = toastBinding.root // Hier die Änderung
+            toast.view = toastBinding.root
             toast.show()
 
             authViewModel.updateUserInfo(currentUser!!)
@@ -316,7 +318,6 @@ class TestExecuteFragment : Fragment() {
                 ?.let { it2 -> toastBinding.root.setBackgroundColor(it2) }
             toast.view = toastBinding.root
             toast.show()
-            findNavController().navigate(R.id.action_testExecuteFragment_to_homeFragment)
             // Setze eine neue zufällige Frage
             setRandomQuestion()
         }
