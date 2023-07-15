@@ -8,7 +8,7 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
         android:id="@+id/darkBackground"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:background="@drawable/dark_full_screen"
         />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
         android:id="@+id/bottomMenuBackground"
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
         android:elevation="7dp"
         android:rotation="-90" />
 
-    <!-- Profil Header Label -->
+    <!-- Header Label -->
     <TextView
         android:id="@+id/headerLabel"
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         android:layout_above="@id/headerLine"
         android:layout_marginBottom="5dp"/>
 
-    <!-- Header Line -->
+    <!-- Horizontale Linie als Header -->
     <View
         android:id="@+id/headerLine"
         android:layout_width="match_parent"
@@ -66,6 +66,38 @@
         android:layout_marginTop="1dp"
         android:background="@drawable/logout"
         android:elevation="7dp" />
+
+    <!-- Zusammenfassung erstellen -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addSummaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomMenuBackground"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/add_button"
+        android:drawableLeft="@drawable/add_circle_black"
+        app:iconPadding="5dp"
+        android:paddingStart="10dp"
+        android:layout_marginBottom="25dp"
+        android:text= "@string/create_summary"
+        android:textAppearance="@style/sixteen_sp_bold_black"
+        android:textColor="@null"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry" />
+
+
+    <!-- Item Layout -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/summariesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/headerLine"
+        android:layout_above="@+id/addSummaryButton"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
@@ -115,39 +147,6 @@
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
-
-    <!-- Zusammenfassung erstellen -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_add_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/bottomMenuBackground"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/add_button"
-        android:drawableLeft="@drawable/add_circle_black"
-        app:iconPadding="5dp"
-        android:paddingStart="10dp"
-        android:layout_marginBottom="25dp"
-        android:text= "@string/create_summary"
-        android:textAppearance="@style/sixteen_sp_bold_black"
-        android:textColor="@null"
-        app:backgroundTint="@null"
-        tools:ignore="RtlSymmetry" />
-
-
-    <!-- Item Layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_summary_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_below="@id/headerLine"
-        android:layout_above="@+id/button_add_summary"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
 
     <ProgressBar
         android:id="@+id/progressBar"
