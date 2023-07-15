@@ -96,7 +96,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:text="@string/learning_goal_title"
-        android:textAppearance="@style/learning_category_or_goal_label"
+        android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerLine"
         app:drawableBottomCompat="@drawable/green_line" />
@@ -126,7 +126,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:text="@string/learning_goal_start_date"
-        android:textAppearance="@style/learning_category_or_goal_label"
+        android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textLearningGoalName"
         app:drawableBottomCompat="@drawable/green_line" />
@@ -150,7 +150,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:text="@string/learning_goal_end_date"
-        android:textAppearance="@style/learning_category_or_goal_label"
+        android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textLearningGoalStartDate"
         app:drawableBottomCompat="@drawable/green_line" />
@@ -175,7 +175,7 @@
         android:layout_marginTop="16dp"
         android:drawableBottom="@drawable/green_line"
         android:text="@string/learning_goal_description"
-        android:textAppearance="@style/learning_category_or_goal_label"
+        android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textLearningGoalEndDate" />
 
@@ -204,7 +204,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:text="@string/relate_learning_goal_to_learning_category"
-        android:textAppearance="@style/learning_category_or_goal_label"
+        android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textGoalDescription"
         app:drawableBottomCompat="@drawable/green_line" />

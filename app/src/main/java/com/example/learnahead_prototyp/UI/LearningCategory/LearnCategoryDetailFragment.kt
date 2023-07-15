@@ -92,28 +92,28 @@ class LearnCategoryDetailFragment : Fragment() {
      * Erstellt alle notwendigen EventListener für das Fragment.
      */
     private fun setEventListener() {
-        binding.saveButton.setOnClickListener {
+        binding.saveIcon.setOnClickListener {
             if (isEdit)
                 updateLearningCategory()
             else
                 createLearningCategory()
         }
 
-        binding.editButton.setOnClickListener {
+        binding.editIcon.setOnClickListener {
             isMakeEnableUI(true)
             isEdit = true
-            binding.editButton.hide()
+            binding.editIcon.hide()
             binding.textLearningCategoryName.requestFocus()
         }
 
         // Klick Listener zum Weiterleiten auf den Home Screen
-        binding.buttonHome.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_homeFragment) }
+        binding.homeButton.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_homeFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernkategorien Screen
-        binding.buttonLearningCategories.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment) }
+        binding.learningCategoriesButton.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_learningCategoryListFragment) }
 
         // Klick Listener zum Weiterleiten auf den Lernzielen Screen
-        binding.buttonLearningGoals.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_goalListingFragment) }
+        binding.learningGoalsButton.setOnClickListener { findNavController().navigate(R.id.action_learnCategoryDetailFragment_to_goalListingFragment) }
 
         // Klick Listener zum Zurücknavigieren
         binding.backIcon.setOnClickListener {
@@ -147,14 +147,14 @@ class LearnCategoryDetailFragment : Fragment() {
         learnCategoryViewModel.addLearningCategory.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     if (state.data != null && currentUser != null) {
                         currentUser!!.learningCategories.add(state.data)
                         authViewModel.updateUserInfo(currentUser!!)
@@ -170,14 +170,14 @@ class LearnCategoryDetailFragment : Fragment() {
         learnCategoryViewModel.updateLearningCategory.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     if (state.data != null && currentUser != null) {
                         val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == state.data.id }
                         if (indexOfCurrentObject != -1) {
@@ -197,14 +197,14 @@ class LearnCategoryDetailFragment : Fragment() {
         authViewModel.currentUser.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    binding.btnProgressAr.show()
+                    binding.progressBar.show()
                 }
                 is UiState.Failure -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     toast(state.error)
                 }
                 is UiState.Success -> {
-                    binding.btnProgressAr.hide()
+                    binding.progressBar.hide()
                     currentUser = state.data
                 }
             }
@@ -219,9 +219,9 @@ class LearnCategoryDetailFragment : Fragment() {
         val title = binding.textLearningCategoryName.text.toString().trim()
 
         if (title.isNotEmpty())
-            binding.saveButton.show()
+            binding.saveIcon.show()
         else
-            binding.saveButton.hide()
+            binding.saveIcon.hide()
     }
 
     /**
@@ -256,13 +256,13 @@ class LearnCategoryDetailFragment : Fragment() {
 
         objLearningCategory?.let { learningCategory ->
             binding.textLearningCategoryName.setText(learningCategory.name)
-            binding.saveButton.hide()
-            binding.editButton.show()
+            binding.saveIcon.hide()
+            binding.editIcon.show()
             isMakeEnableUI()
         } ?: run {
             binding.textLearningCategoryName.setText("")
-            binding.saveButton.hide()
-            binding.editButton.hide()
+            binding.saveIcon.hide()
+            binding.editIcon.hide()
             isMakeEnableUI(true)
             binding.textLearningCategoryName.requestFocus()
         }

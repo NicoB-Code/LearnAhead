@@ -7,28 +7,28 @@
     android:layout_gravity="center_horizontal"
     android:background="@drawable/android_lar">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/dark_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dark_full_screen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
-        android:id="@+id/background_bottom_menu"
+        android:id="@+id/bottomMenuBackground"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@id/dark_background"
+        app:layout_constraintBottom_toBottomOf="@id/darkBackground"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Header Line -->
+    <!-- Horizontale Linie als Header -->
     <View
-        android:id="@+id/header_line"
+        android:id="@+id/headerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="50dp"
@@ -38,85 +38,85 @@
 
     <!-- Back Icon -->
     <ImageView
-        android:id="@+id/back_icon"
+        android:id="@+id/backIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
         android:background="@drawable/back_button"
         android:elevation="7dp"
         android:rotation="-90"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <!-- Lernkategorie erstellen Header Label -->
+    <!-- Header Label -->
     <TextView
-        android:id="@+id/create_learning_category_menu_header_label"
+        android:id="@+id/headerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_learning_category"
         android:textAppearance="@style/twenty_two_sp_bold_white"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/back_icon" />
+        app:layout_constraintLeft_toRightOf="@id/backIcon" />
 
     <!-- Edit Icon -->
     <ImageView
-        android:id="@+id/edit_button"
+        android:id="@+id/editIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/edit_button"
         android:elevation="7dp"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
-        app:layout_constraintRight_toLeftOf="@id/save_button" />
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
+        app:layout_constraintRight_toLeftOf="@id/saveIcon" />
 
     <!-- Create Icon -->
     <ImageView
-        android:id="@+id/save_button"
+        android:id="@+id/saveIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/check_button"
         android:elevation="7dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/header_line"
+        app:layout_constraintBottom_toBottomOf="@id/headerLine"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
 
     <!-- Lernkategorie Name Label -->
     <TextView
-        android:id="@+id/learning_category_name_label"
+        android:id="@+id/learningCategoryNameLabel"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
         android:text="@string/learning_category_name"
-        android:textAppearance="@style/learning_category_or_goal_label"
+        android:textAppearance="@style/twenty_sp_bold_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_line"
+        app:layout_constraintTop_toBottomOf="@id/headerLine"
         app:drawableBottomCompat="@drawable/green_line" />
 
     <!-- Lernziel Name EditText -->
     <EditText
-        android:id="@+id/text_learning_category_name"
+        android:id="@+id/textLearningCategoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="12dp"
         android:hint="@string/hint_learning_category_name"
         android:textColorHint="@color/white"
-        android:textColor="@color/white"
+        android:textAppearance="@style/eighteen_sp_regular_white"
+        android:textColor="@null"
         android:maxLines="1"
         android:inputType="text|textNoSuggestions"
         android:gravity="start|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/learning_category_name_label" />
+        app:layout_constraintTop_toBottomOf="@id/learningCategoryNameLabel" />
 
     <ProgressBar
-        android:id="@+id/btn_progress_ar"
-        style="?android:attr/progressBarStyle"
+        android:id="@+id/progressBar"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_centerHorizontal="true"
@@ -132,7 +132,7 @@
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_home"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -141,13 +141,13 @@
         android:text="@string/home"
         android:textAppearance="@style/twelve_sp_bold_white"
         app:iconPadding="-5dp"
-        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
+        app:layout_constraintBottom_toBottomOf="@id/bottomMenuBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+        app:layout_constraintTop_toTopOf="@id/bottomMenuBackground" />
 
     <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_categories"
+        android:id="@+id/learningCategoriesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -155,14 +155,14 @@
         android:text="@string/learning_categories"
         android:textAppearance="@style/twelve_sp_bold_white"
         app:iconPadding="-5dp"
-        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
+        app:layout_constraintBottom_toBottomOf="@id/bottomMenuBackground"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+        app:layout_constraintTop_toTopOf="@id/bottomMenuBackground" />
 
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_goals"
+        android:id="@+id/learningGoalsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
@@ -171,7 +171,7 @@
         android:text="@string/learning_goals"
         android:textAppearance="@style/twelve_sp_bold_white"
         app:iconPadding="-5dp"
-        app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
-        app:layout_constraintRight_toRightOf="@id/background_bottom_menu"
-        app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
+        app:layout_constraintBottom_toBottomOf="@id/bottomMenuBackground"
+        app:layout_constraintRight_toRightOf="@id/bottomMenuBackground"
+        app:layout_constraintTop_toTopOf="@id/bottomMenuBackground" />
 </androidx.constraintlayout.widget.ConstraintLayout>
