@@ -71,23 +71,23 @@ class HomeFragment : Fragment() {
      * Setzt die Event-Listener für die Buttons und RecyclerView.
      */
     private fun setupEventListeners() {
-        binding.recyclerView.adapter = adapter
+        binding.todaysLearningGoalsRecyclerView.adapter = adapter
 
-        binding.buttonLearningCategories.setOnClickListener {
+        binding.learningCategoriesButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_learningCategoryListFragment)
         }
 
-        binding.buttonLearningGoals.setOnClickListener {
+        binding.learningGoalsButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_goalListingFragment)
         }
 
-        binding.logout.setOnClickListener {
+        binding.logoutIcon.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
             }
         }
 
-        binding.profile.setOnClickListener {
+        binding.profileIcon.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
     }

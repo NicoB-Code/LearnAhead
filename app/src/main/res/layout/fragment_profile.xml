@@ -20,7 +20,7 @@
     <View
         android:id="@+id/background_bottom_menu"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:layout_alignBottom="@id/dark_background"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
@@ -101,7 +101,7 @@
         android:layout_below="@id/progressBar"
         android:layout_centerHorizontal="true"
         android:text="Dein Level"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Benutzer in Lila -->
     <ImageView
@@ -124,7 +124,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginStart="33dp"
         android:text="@string/username"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:gravity="left"/>
 
     <!-- Text wo Username steht -->
@@ -136,7 +136,7 @@
         android:layout_below="@id/username_profile"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_username"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- E-Mail Icon -->
     <ImageView
@@ -160,7 +160,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="33dp"
         android:text="@string/email_address"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Text wo E-Mail steht -->
     <TextView
@@ -171,7 +171,7 @@
         android:layout_below="@id/email_title"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_email"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
 
     <!-- Lernstreak Icon -->
@@ -196,7 +196,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="33dp"
         android:text="@string/biggest_learnstreak"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Text wo Lernstreak steht -->
     <TextView
@@ -207,7 +207,7 @@
         android:layout_below="@id/learning_streak_title"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_learning_streak"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Lernziele Icon -->
     <ImageView
@@ -231,7 +231,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="33dp"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Text wo Lernziele stehen -->
     <TextView
@@ -242,7 +242,7 @@
         android:layout_below="@id/achieved_goals_title"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_achieved_goals"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
@@ -253,9 +253,9 @@
         android:layout_alignBottom="@id/background_bottom_menu"
         android:drawableTop="@drawable/home_button"
         android:layout_marginStart="4dp"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/home"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
@@ -269,9 +269,9 @@
         android:layout_alignBottom="@id/background_bottom_menu"
         android:layout_centerHorizontal="true"
         android:drawableTop="@drawable/learning_category_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_categories"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
@@ -286,9 +286,9 @@
         android:layout_alignEnd="@id/background_bottom_menu"
         android:layout_marginEnd="4dp"
         android:drawableTop="@drawable/learning_goal_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />

@@ -145,14 +145,6 @@
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
-    <!-- LearningGoalsForTodayLabelTop -->
-    <style name="learning_goals_for_today_label_header">
-        <item name="android:textSize">36sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily">@font/hanuman_bold</item>
-    </style>
-
-
     <!-- Register Username -->
     <style name="register_content_text">
         <item name="android:textSize">48sp</item>
@@ -187,13 +179,6 @@
         <item name="android:textColor">#000000</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
-
-    <style name="menu_button_text">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily">@font/hanuman_bold</item>
-    </style>
-
 
     <style name="top_menu_header">
         <item name="android:textSize">22sp</item>
@@ -295,5 +280,23 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="thirty_six_sp_bold_white">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="twelve_sp_bold_white">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="sixteen_sp_bold_black">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 </resources>

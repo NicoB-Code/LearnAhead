@@ -11,15 +11,15 @@
 - Konfigurationsmanagement Maßnahmen (Nico) Done
 - Evaluierung der Plattformen und Programmiersprachen für die App-Entwicklung (Phillipp) Done
 
-## Definition
-- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) **ToDo**
+## Definition Done
+- Definition Begriffe (Lernkonzepte etc.) (Nico, Phillipp) 
   - Lernen ist nicht gleich Verstehen Phillipp Done
   - Synapsen Nico Done 
   - Neuronen & Neuronales Netz Nico Done
   - Optimierter Lernplan Phillipp Done
   - Tagging Phillipp Done
   - Lernkategorien & Lernziele Nico Done
-  - Fragen Typen **ToDo** Nico 
+  - Fragen Typen Nico Done
   - Gamification Nico Done
 - Pflichtenheft Done 
 - Use-Case-Diagramme (Nico) Done
@@ -52,15 +52,15 @@
 - Installationsanleitung Nico Done
 - Code Conventions **ToDo** Phillipp
 - Code Dokumentation **ToDo** Phillipp
-- IT-Security (Firebase Authentifizierung) **In Progress** Nico
+- IT-Security (Firebase Authentifizierung) Nico Done
 
 ## Tests
 - User Tests **ToDo**
 - ggf. Unit Tests **ToDo**
 
 ## Ergebnisse
-- Nutzen der App **ToDo** Phillipp
-- Feedback von Studienpräsentation **ToDo** Phillipp
+- Nutzen der App Nico Done
+- Feedback von Studienpräsentation **ToDo** Nico
 - Zeitliche Dokumentation **ToDo** Phillipp
   
 ## Ausblick

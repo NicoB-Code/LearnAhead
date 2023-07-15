@@ -58,7 +58,7 @@
         android:elevation="7dp"
         android:importantForAccessibility="no" />
 
-    <!-- Label "Lernziele für heute" -->
+    <!-- Label "Lernziele" -->
     <TextView
         android:id="@+id/learningGoalsHeaderLabel"
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
         android:layout_below="@id/headerLine"
         android:layout_marginTop="26dp"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/learning_goals_for_today_label_header"
+        android:textAppearance="@style/thirty_six_sp_bold_white"
         android:gravity="center_horizontal"
         />
 
@@ -100,7 +100,7 @@
         android:layout_marginLeft="4dp"
         app:iconPadding="-5dp"
         android:text="@string/home"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:background="@android:color/transparent"
         />
 
@@ -115,7 +115,7 @@
         android:drawableTop="@drawable/learning_category_button"
         app:iconPadding="-5dp"
         android:text="@string/learning_categories"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:background="@android:color/transparent"
         />
 
@@ -131,7 +131,7 @@
         android:drawableTop="@drawable/learning_goal_button"
         app:iconPadding="-5dp"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:background="@android:color/transparent"
         />
 

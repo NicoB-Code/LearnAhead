@@ -62,7 +62,7 @@
             android:background="@drawable/add_button"
             android:drawableLeft="@drawable/add_circle_black"
             app:iconPadding="5dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:text="Weiter machen"
             android:textAppearance="@style/button_add_learning_category_or_goal"
             android:textColor="@null"

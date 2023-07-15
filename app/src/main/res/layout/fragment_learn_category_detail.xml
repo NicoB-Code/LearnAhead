@@ -20,7 +20,7 @@
     <View
         android:id="@+id/background_bottom_menu"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@id/dark_background"
@@ -133,14 +133,14 @@
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_home"
-        android:layout_width="92dp"
-        android:layout_height="98dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/home_button"
         android:text="@string/home"
-        android:textAppearance="@style/menu_button_text"
-        app:iconPadding="-15dp"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        app:iconPadding="-5dp"
         app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
@@ -148,13 +148,13 @@
     <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_learning_categories"
-        android:layout_width="126dp"
-        android:layout_height="98dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/learning_category_button"
         android:text="@string/learning_categories"
-        android:textAppearance="@style/menu_button_text"
-        app:iconPadding="-15dp"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        app:iconPadding="-5dp"
         app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -163,14 +163,14 @@
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_learning_goals"
-        android:layout_width="88dp"
-        android:layout_height="98dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/learning_goal_button"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/menu_button_text"
-        app:iconPadding="-15dp"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        app:iconPadding="-5dp"
         app:layout_constraintBottom_toBottomOf="@id/background_bottom_menu"
         app:layout_constraintRight_toRightOf="@id/background_bottom_menu"
         app:layout_constraintTop_toTopOf="@id/background_bottom_menu" />
