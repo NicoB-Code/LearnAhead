@@ -151,7 +151,6 @@ class RegisterFragment : Fragment() {
         return User(
             id = "",
             username = binding.textUsername.text.toString(),
-            password = binding.textPassword.text.toString(),
             email = binding.editTextEmail.text.toString(),
         )
     }
