@@ -395,7 +395,7 @@ class TestDetailFragment : Fragment() {
      */
     private fun updateUI() {
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
-        binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
+        binding.headerLabel.text = "$selectedLearningCategoryName / Test"
 
 
         if(testViewModel.currentTest.value != null){
