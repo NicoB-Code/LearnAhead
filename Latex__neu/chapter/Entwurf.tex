@@ -15,34 +15,68 @@ Hierbei gab es die Entscheidung zwischen einer relationalen und einer NoSQL Date
 
 \noindent
 Firebase bietet eine gute Anbindung für Kotlin (siehe \ref*{Auswahl BibliothekenFrameworks}). Zusätzlich ist Firebase kostenlos, solange die Datenbank nicht zu groß wird. Hierbei kann eine monatliche Anzahl von 50.000 Nutzern, 20.000 Schreibvorgängen und 50.000 Lesevorgängen kostenlos genutzt werden. Der Speicherplatz für den Firebase Storage beträgt 1 GB, welcher für die Lern-App ausreichend ist. \cite*{Firebase_Pricing}
+
 \subsection{Auswahl von wichtigen Bibliotheken/Frameworks} \label{Auswahl BibliothekenFrameworks}
 In diesem Abschnitt werden die wichtigsten in LearnAhead verwendeten Bibliotheken und Frameworks erläutert. Es wird kurz darauf eingegangen was genau die/das Bibliothek/Framework tut und wieso sie über andere gewählt wurde.
+
 \subsubsection{DaggerHilt Dependency Injection Framework}
 DaggerHilt ist ein Framework für Dependency Injection (DI), das speziell für Android entwickelt wurde \cite{Dagger2021}. Es basiert auf Dagger, einem weit verbreiteten und mächtigen DI-Framework für Java \cite{AndroidDevelopers2021}. \newline
+
+\noindent
 Dependency Injection ist ein Programmierparadigma, das dabei hilft, Objekte effizient zu erzeugen und zu verwalten. Mit Hilfe von DaggerHilt können Abhängigkeiten zentral verwaltet und bei Bedarf ausgetauscht werden. Das ermöglicht bessere Testbarkeit und modulareren Code, da jede Klasse sich nur auf ihre Aufgaben konzentrieren muss und ihre Abhängigkeiten von außen erhält \cite{Dagger2021}. \newline
+
+\noindent
 Die Wahl von DaggerHilt für diese Arbeit beruht auf seiner tiefen Integration in das Android-Ökosystem. DaggerHilt ist in der Lage, Abhängigkeiten über die Grenzen von Aktivitäten, Fragmenten und Services hinweg zu verwalten und ist dabei eng mit dem Lebenszyklus von Android-Anwendungen verbunden \cite{AndroidDevelopers2021}. \newline
-Darüber hinaus unterstützt DaggerHilt das Konzept der Compile-Time Injection. Das bedeutet, dass Abhängigkeiten zur Kompilierzeit aufgelöst werden, was die Fehlererkennung verbessert und Laufzeitfehler minimiert \cite{Dagger2021}. \newline
+
+\noindent
+Darüber hinaus unterstützt DaggerHilt das Konzept der Compile-Time Injection. Das bedeutet, dass Abhängigkeiten zur Kompilierzeit aufgelöst werden, was die Fehlererkennung verbessert und Laufzeitfehler minimiert \cite{Dagger2021}.
+
 \subsubsection{Markwon: Eine Markdown-Bibliothek für Android}
 Markwon ist eine leistungsfähige Bibliothek, die speziell entwickelt wurde, um die Anzeige und Formatierung von Markdown-Inhalten auf Android zu erleichtern \cite{Markwon2022}. Markdown ist eine leichtgewichtige und benutzerfreundliche Markup-Sprache, die oft für die Formatierung von Text in Softwareentwicklungsprojekten, Dokumentationen und im Web verwendet wird \cite{Gruber2004}. \newline
+
+\noindent
 Bei LearnAhead wird der Input mit einem in Markwon enthaltenen Editor eingegeben und daraufhin in einem Android freundlichen Format in einem TextView angezeigt. \newline
+
+\noindent
 Die Markwon-Bibliothek bietet eine voll funktionsfähige Markdown-Rendering-Engine für Android, die in einer TextView-Komponente arbeitet. Sie unterstützt alle gängigen Markdown-Syntaxelemente und bietet zusätzlich Funktionen wie Syntaxhervorhebung für Codeblöcke, Inline-Latex-Rendering und vieles mehr \cite{Markwon2022}. \newline
-Für diese Arbeit wurde Markwon aufgrund seiner hohen Flexibilität und seiner vielfältigen Funktionen gewählt. Durch die Nutzung der Markwon-Bibliothek können komplexe, formatierte Textinhalte in der Android-Anwendung auf einfache und effiziente Weise angezeigt werden \cite{Markwon2022}. \newline
+
+\noindent
+Für diese Arbeit wurde Markwon aufgrund seiner hohen Flexibilität und seiner vielfältigen Funktionen gewählt. Durch die Nutzung der Markwon-Bibliothek können komplexe, formatierte Textinhalte in der Android-Anwendung auf einfache und effiziente Weise angezeigt werden \cite{Markwon2022}.
+
 \subsubsection{Glide: Ein Framework zum Laden von Bildern in Android}
 Glide ist ein effizientes Open-Source-Framework zur Handhabung und Darstellung von Bildern und Videos in Android-Anwendungen \cite{Glide2022}. Es wurde von Bumptech entwickelt und ist bekannt für seine Leistung, insbesondere bei der Scroll-Leistung in Listen oder Rastern von Bildern. \newline
+
+\noindent
 In LearnAhead wird Glide beispielsweise dafür genutzt, um die Profilbilder der Nutzer zu laden. Eine der Hauptfunktionen von Glide ist das asynchrone Laden und Speichern von Bildern aus verschiedenen Quellen, beispielsweise aus dem Internet, ohne den Haupt-UI-Thread zu blockieren. Dies führt zu einer glatteren Benutzererfahrung \cite{Glide2022}. Zudem bietet Glide auch Funktionen wie das Zuschneiden und Transformieren von Bildern, das Cachen von Bildern für eine schnellere Wiederverwendung und die automatische Verwaltung des Lebenszyklus \cite{GlideGithub2022}. \newline
-Die Wahl von Glide für diese Arbeit basiert auf seinen umfangreichen Funktionen, seiner Leistung und seiner Integration in das Android-Ökosystem. Mit Glide können komplexe Bildverarbeitungsanforderungen erfüllt werden, während gleichzeitig die Performance und die Benutzererfahrung der App optimiert werden \cite{Glide2022}. \newline
+
+\noindent
+Die Wahl von Glide für diese Arbeit basiert auf seinen umfangreichen Funktionen, seiner Leistung und seiner Integration in das Android-Ökosystem. Mit Glide können komplexe Bildverarbeitungsanforderungen erfüllt werden, während gleichzeitig die Performance und die Benutzererfahrung der App optimiert werden \cite{Glide2022}.
+
 \subsubsection{Android Navigation: Ein Framework zur Navigation in Android-Anwendungen}
 Android Navigation ist eine Bibliothek, die von Google entwickelt wurde und das Navigieren zwischen den verschiedenen Bildschirmen einer Android-Anwendung erleichtert \cite{AndroidNav2022}. Es ist Teil der Android Jetpack-Bibliotheken, einer Sammlung von Bibliotheken, Tools und Leitlinien, die robuste und wartungsfreundliche Android-Apps unterstützen \cite{AndroidJetpack2022}. \newline
+
+\noindent
 In LearnAhead wird die Bibliothek für die Navigation zwischen den verschiedenen Fragments (Teil-Bildschirmen) der App genutzt. Mit dem Android Navigation Framework können Entwickler visuell oder programmgesteuert einen Navigationspfad zwischen den verschiedenen Komponenten einer App erstellen, z. B. zwischen verschiedenen Aktivitäten oder Fragmenten. Die Bibliothek sorgt dafür, dass die Benutzeroberfläche in einem konsistenten und vorhersehbaren Zustand bleibt und beinhaltet auch Unterstützung für erweiterte Navigationsszenarien wie tiefe Links und Navigationsleisten \cite{AndroidNav2022}. \newline
-Die Wahl dieses Frameworks für diese Arbeit beruht auf seiner Integration in das Android-Ökosystem und seinen umfangreichen Funktionen zur Handhabung von App-Navigationsszenarien. Die Verwendung des Android Navigation Frameworks erleichtert die Erstellung von strukturierten und benutzerfreundlichen Navigationsflüssen in der App \cite{AndroidNav2022}. \newline
+
+\noindent
+Die Wahl dieses Frameworks für diese Arbeit beruht auf seiner Integration in das Android-Ökosystem und seinen umfangreichen Funktionen zur Handhabung von App-Navigationsszenarien. Die Verwendung des Android Navigation Frameworks erleichtert die Erstellung von strukturierten und benutzerfreundlichen Navigationsflüssen in der App \cite{AndroidNav2022}.
+
 \subsubsection{Firebase Android SDK: Eine Bibliothek zur Integration von Firebase in Android-Anwendungen}
 Firebase Android SDK ist eine Bibliothek, die eine Anbindung an Firebase und dessen verschiedenen Dienste ermöglicht \cite{FirebaseSDK2022}. Firebase, entwickelt von Google, ist eine Plattform, die verschiedene Backend-Services wie Datenbanken, Authentifizierung, Cloud-Funktionen, Hosting und mehr bietet \cite{Firebase2022}. \newline
+
+\noindent
 In LearnAhead wird die Bibliothek genutzt, um die Verbindung zur Firebase-Datenbank herzustellen. Die Firebase Android SDK bietet Funktionen zur nahtlosen Integration dieser Dienste in Android-Anwendungen. Es bietet eine Reihe von APIs und Konfigurationstools, die es Entwicklern ermöglichen, auf leistungsfähige Weise auf Firebase-Dienste zuzugreifen und diese in ihren Apps zu nutzen \cite{FirebaseSDK2022}. \newline
-Die Entscheidung, Firebase Android SDK für diese Arbeit zu nutzen, basiert auf seiner umfangreichen Integration in das Firebase-Ökosystem und seiner Fähigkeit, robuste und skalierbare Backend-Services bereitzustellen. Die Verwendung von Firebase Android SDK erleichtert den Zugriff auf und die Verwaltung von Firebase-Diensten innerhalb der Android-Anwendung \cite{FirebaseSDK2022}. \newline
+
+\noindent
+Die Entscheidung, Firebase Android SDK für diese Arbeit zu nutzen, basiert auf seiner umfangreichen Integration in das Firebase-Ökosystem und seiner Fähigkeit, robuste und skalierbare Backend-Services bereitzustellen. Die Verwendung von Firebase Android SDK erleichtert den Zugriff auf und die Verwaltung von Firebase-Diensten innerhalb der Android-Anwendung \cite{FirebaseSDK2022}.
 
 \subsection{Wahl des Architektur-Patterns: Model-View-ViewModel (MVVM)} \label{Wahl des Architektur-Pattern}
 Bei der Entwicklung von Software ist die Wahl des richtigen Architektur-Patterns von entscheidender Bedeutung. Für diese Arbeit wurde das Model-View-ViewModel (MVVM) Pattern gewählt, welches sich in den letzten Jahren zu einem der Standard-Architektur-Patterns für Android-Entwicklung etabliert hat \cite{AndroidAppArchitecture}. \newline
+
+\noindent
 MVVM teilt die Anwendungslogik in drei miteinander verbundene Komponenten auf: das Model, die View und das ViewModel \cite{MicrosoftMVVM2022}. Das Model repräsentiert die Daten und die Geschäftslogik der Anwendung. Die View ist verantwortlich für die Darstellung der Daten und die Interaktion mit dem Benutzer. Das ViewModel fungiert als Bindeglied zwischen Model und View und stellt die Daten für die View zur Verfügung und reagiert auf Benutzeraktionen \cite{AndroidAppArchitecture}. \newline
+
+\noindent
 MVVM hat mehrere Vorteile, darunter eine klare Trennung von Anliegen, verbesserte Testbarkeit und eine bessere Unterstützung für reaktive Programmierung \cite{AndroidAppArchitecture}. Diese klare Trennung der Anliegen ermöglicht es, dass verschiedene Teile der Anwendung unabhängig voneinander entwickelt und getestet werden können, was zu einer besseren Code-Qualität und Wartbarkeit führt \cite{MicrosoftMVVM2022}. \newline
 \begin{figure}[h]
     \centering
@@ -51,6 +85,7 @@ MVVM hat mehrere Vorteile, darunter eine klare Trennung von Anliegen, verbessert
     \label{fig:mvvm}
 \end{figure}
     
+\noindent
 Das in Abbildung \ref{fig:mvvm} dargestellte Diagramm zeigt das Model-View-ViewModel (MVVM) Designmuster. Dieses Muster wird häufig in der Softwareentwicklung verwendet, insbesondere in Anwendungen mit grafischer Benutzeroberfläche. Es besteht aus drei Hauptkomponenten:
 
 \begin{itemize}
@@ -105,6 +140,8 @@ Das Diagramm \ref*{fig:BackendKomposition} zeigt die Komposition des Backends. H
 \newpage
 \subsection{Deployment Diagramm} \label{Deployment Diagramm}
 Ein Deployment-Diagramm ist eine Art von Diagramm, das in der Unified Modeling Language (UML) verwendet wird. Es bietet eine grafische Darstellung der physischen Verteilung von Artefakten auf Knoten. Ein Artefakt repräsentiert eine konkrete Entität, die in einem System vorhanden ist. Ein Knoten ist in diesem Kontext eine physische Einheit, auf der die Software ausgeführt wird, wie zum Beispiel ein Server oder ein PC.\newline
+
+\noindent
 Im Folgenden wird das Deployment-Diagramm der Android Studio MVVM App "LearnAhead" gezeigt. Es illustriert, wie die Komponenten der App auf einem mobilen Gerät verteilt sind und wie sie mit externen Diensten wie Firebase und dem Google Drive mit der installierbaren APK-Datei interagieren.\newline
 \begin{figure}[H]
     \centering
@@ -115,61 +152,74 @@ Im Folgenden wird das Deployment-Diagramm der Android Studio MVVM App "LearnAhea
 
 \subsection{Klassen Diagramm} \label{Klassen Diagramm}
 Das Klassendiagramm in Abbildung \ref{fig:klassendiagramm} zeigt die Struktur der LearnAhead App, die nach dem Model-View-ViewModel (MVVM) Muster entwickelt wurde. Der Übersicht zu gunsten ist hier in diesem Klassendiagramm nur eine Blaupause ausgestellt, da für jedes Feature ein neues ViewModel, ein neues Fragment und ein neues Model benötigt wurde.\newline
+
+\noindent
 Die Hauptklassen sind \textit{ViewModel}, \textit{Repository} und \textit{Fragment}. \newline
+
+\noindent
 Die \textit{ViewModel}-Klasse enthält LiveData-Objekte für die Methoden \textit{addContent}, \textit{updateContent}, \textit{deleteContent} und \textit{getContent}, sowie für das aktuelle Content-Objekt (\textit{currentContent}). Die LiveData-Objekte sind öffentlich zugänglich, während die zugrunde liegenden Daten private sind.\newline
+
+\noindent
 Die \textit{Repository}-Klasse stellt die Methoden \textit{addContent}, \textit{updateContent}, \textit{deleteContent} und \textit{getContent} zur Verfügung, die jeweils ein UiState-Objekt zurückgeben, das entweder ein Content-Objekt oder einen Fehler enthält.\newline
+
+\noindent
 Die \textit{Fragment}-Klasse hat Methoden zum Aktualisieren der Benutzeroberfläche (\textit{updateUI}) und zur Interaktion mit der Benutzeroberfläche (\textit{interactWithUI}).\newline
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{images/diagramme/Klassendiagramm.png}
 \caption{Klassendiagramm der LearnAhead App}
 \label{fig:klassendiagramm}
-\end{figure} \newpage
-\subsection{Sequenzdiagramme}
+\end{figure} \newline
+
+\newpage
+\clearpage
+\subsection{Sequenzdiagramme} 
 Im nachfolgenden Kapitel werden einige Funktionen von LearnAhead mit Hilfe von Sequenzdiagrammen visualisiert um ihre direkte Art und Weise besser zu verstehen.\\
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_frage.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_frage.png}
     \caption{Sequenzdiagramm - User erstellt eine Frage}
     \label{fig:sequenz_user_erstellt_frage}
 \end{figure} 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_test.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_test.png}
     \caption{Sequenzdiagramm - User erstellt einen Test}
     \label{fig:sequenz_user_erstellt_test}
 \end{figure} 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_zusammenfassung.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_zusammenfassung.png}
     \caption{Sequenzdiagramm - User erstellt eine Zusammenfassung}
     \label{fig:sequenz_user_erstellt_zusammenfassung}
 \end{figure} 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_login_belohnung.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/sequenzdiagramme/user_login_belohnung.png}
     \caption{Sequenzdiagramm - User erhält eine Belohnung für täglichen Login}
     \label{fig:sequenz_user_login_belohnung}
 \end{figure} 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_lernziel.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_lernziel.png}
     \caption{Sequenzdiagramm - User erstellt Lernziel}
     \label{fig:sequenz_user_erstellt_lernziel}
 \end{figure} 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_aendert_profilbild.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/sequenzdiagramme/user_aendert_profilbild.png}
     \caption{Sequenzdiagramm - User ändert sein Profilbild}
     \label{fig:sequenz_user_aendert_profilbild}
 \end{figure} 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_fuehrt_test_aus.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/sequenzdiagramme/user_fuehrt_test_aus.png}
     \caption{Sequenzdiagramm - User führt Test aus}
     \label{fig:sequenz_user_fuehrt_test}
 \end{figure} 
 \newpage
 \subsection{Prototyp von LearnAhead}
 Da LearnAhead einer strukturierte Planung unterlag, war auch ein Prototyp von nöten, um zu überprüfen, ob das Grundkonzept mit MVVM funktioniert und sich unsere getroffenen Technologieentscheidungen bewährten. \newline
+
+\noindent
 In dem Prototyp wurde eine simple Applikation, welche Login, Register und einen Home Screen mit MVVM in Android Studio realisiert, umgesetzt. \newline

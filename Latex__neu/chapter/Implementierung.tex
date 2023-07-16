@@ -5,6 +5,8 @@ In diesem Kapitel wird die komplette Implementierung von LearnAhead erläutert. 
 In diesem Kapitel wird erläutert, wie die LearnAhead App sowohl von Endbenutzern als auch von Entwicklern installiert werden kann.
 \subsubsection{Anleitung für User}
 Um die LearnAhead App auf einem Android-Gerät zu installieren, befolgen Sie bitte die folgenden Schritte: \newline
+
+\noindent
 \begin{enumerate}
     \item Öffnen Sie den bereitgestellten Google Drive-Link in einem Webbrowser auf Ihrem Android-Gerät.
     \item Sie sollten eine Vorschau der Datei "app-debug.apk" sehen. Tippen Sie auf die Schaltfläche "Herunterladen" oder das Download-Symbol, um die Datei herunterzuladen.
@@ -17,6 +19,7 @@ Um die LearnAhead App auf einem Android-Gerät zu installieren, befolgen Sie bit
 
 \subsubsection{Anleitung für Developer}
 Um die LearnAhead App für Entwicklungs- und Testzwecke zu installieren, befolgen Sie bitte die folgenden Schritte:\newline
+\noindent
 \begin{enumerate}
     \item Laden Sie und installieren Sie Android Studio auf Ihrem Computer, falls Sie dies noch nicht getan haben. Sie können Android Studio von der offiziellen Website herunterladen.
     \item Beantragen Sie die Berechtigung, auf das Github-Repository der LearnAhead App zuzugreifen, indem Sie eine E-Mail an bayernico@web.de senden.
@@ -27,6 +30,7 @@ Um die LearnAhead App für Entwicklungs- und Testzwecke zu installieren, befolge
 
 \subsubsection{Verwendung des Android-Emulators}
 Der Android-Emulator ist ein Tool, das von Android Studio bereitgestellt wird und es Entwicklern ermöglicht, ihre Apps auf einem virtuellen Android-Gerät zu testen. Bitte beachten Sie, dass ihr virtuelles Gerät mindestens Nougat (Android 7) benötigt. Um den Android-Emulator zu verwenden, befolgen Sie bitte die folgenden Schritte:\newline
+\noindent
 \begin{enumerate}
     \item Starten Sie Android Studio und öffnen Sie Ihr Projekt.
     \item Wählen Sie \gqq{AVD Manager} aus dem \gqq{Tools} Menü.
@@ -58,9 +62,12 @@ Um die App auf einem tatsächlichen Android Gerät nutzen zu können, ohne sie j
 \end{enumerate}
 
 \subsection{IT-Sicherheit in LearnAhead}
-Ein wichtiger Aspekt bei der Entwicklung der LearnAhead App war die Gewährleistung der IT-Sicherheit. Dies wurde durch die Verwendung von Firebase für die Authentifizierung und Datenspeicherung erreicht \cite{firebase_overview}.\newline
+Ein wichtiger Aspekt bei der Entwicklung der LearnAhead App war die Gewährleistung der IT-Sicherheit. Dies wurde durch die Verwendung von Firebase für die Authentifizierung und Datenspeicherung erreicht \cite{firebase_overview}.
+
 \subsubsection{Firebase Authentifizierung}
 Firebase Authentifizierung bietet eine sichere und zuverlässige Authentifizierungslösung. Es unterstützt eine Vielzahl von Authentifizierungsmethoden, einschließlich E-Mail und Passwort, und es integriert sich nahtlos mit anderen Firebase-Diensten \cite{firebase_auth}.\newline
+
+\noindent
 Firebase Authentifizierung bietet auch eine Reihe von Sicherheitsfunktionen, um die Konten der Benutzer zu schützen. Dazu gehören unter anderem:
 \begin{itemize}
     \item \textbf{Passwortschutz:} Firebase speichert Passwörter sicher und ermöglicht es den Benutzern, ihre Passwörter zurückzusetzen, wenn sie diese vergessen haben \cite{firebase_auth}.
@@ -68,7 +75,7 @@ Firebase Authentifizierung bietet auch eine Reihe von Sicherheitsfunktionen, um 
     \item \textbf{Datenschutz:} Firebase hält sich an die Datenschutzbestimmungen und -standards, einschließlich der DSGVO \cite{firebase_privacy}.
 \end{itemize}
 \subsubsection{Firebase Datenspeicherung}
-Die Benutzerdaten der LearnAhead App werden sicher in Firebase gespeichert. Firebase bietet eine Reihe von Funktionen, die die Sicherheit der gespeicherten Daten gewährleisten \cite{firebase_storage}:
+Die Benutzerdaten der LearnAhead App werden sicher in Firebase gespeichert. Firebase bietet eine Reihe von Funktionen, die die Sicherheit der gespeicherten Daten gewährleisten: \cite{firebase_storage}
 \begin{itemize}
     \item \textbf{Datenverschlüsselung:} Firebase speichert Daten in einer verschlüsselten Form, sowohl während der Übertragung als auch im Ruhezustand \cite{firebase_encryption}.
     \item \textbf{Zugriffskontrolle:} Firebase ermöglicht es, detaillierte Sicherheitsregeln festzulegen, um den Zugriff auf die gespeicherten Daten zu kontrollieren \cite{firebase_access_control}.
