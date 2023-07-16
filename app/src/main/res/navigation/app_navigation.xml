@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/goalDetailFragment"
-        android:name="com.example.learnahead_prototyp.UI.Goal.GoalDetailFragment"
+        android:name="com.example.learnahead.UI.Goal.GoalDetailFragment"
         android:label="fragment_goal_detail"
         tools:layout="@layout/fragment_goal_detail" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.learnahead_prototyp.UI.Auth.RegisterFragment"
+        android:name="com.example.learnahead.UI.Auth.RegisterFragment"
         android:label="RegisterFragment">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.learnahead_prototyp.UI.Auth.LoginFragment"
+        android:name="com.example.learnahead.UI.Auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -48,12 +48,12 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.example.learnahead_prototyp.UI.Auth.ForgotPasswordFragment"
+        android:name="com.example.learnahead.UI.Auth.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.learnahead_prototyp.UI.Home.HomeFragment"
+        android:name="com.example.learnahead.UI.Home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_learningCategoryListFragment"
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/learningCategoryListFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearningCategoryListFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.LearningCategoryListFragment"
         android:label="LearningCategoryListFragment" >
         <action
             android:id="@+id/action_learningCategoryListFragment_to_homeFragment"
@@ -96,7 +96,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalListingFragment"
-        android:name="com.example.learnahead_prototyp.UI.Goal.GoalListingFragment"
+        android:name="com.example.learnahead.UI.Goal.GoalListingFragment"
         android:label="GoalListingFragment" >
         <action
             android:id="@+id/action_goalListingFragment_to_learningCategoryListFragment"
@@ -116,7 +116,7 @@
     </fragment>
     <fragment
         android:id="@+id/learnCategoryDetailFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryDetailFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.LearnCategoryDetailFragment"
         android:label="LearnCategoryDetailFragment" >
         <action
             android:id="@+id/action_learnCategoryDetailFragment_to_learningCategoryListFragment"
@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.learnahead_prototyp.UI.Profile.ProfileFragment"
+        android:name="com.example.learnahead.UI.Profile.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"
@@ -144,7 +144,7 @@
     </fragment>
     <fragment
         android:id="@+id/learningCategoryInnerViewFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.LearningCategoryInnerViewFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.LearningCategoryInnerViewFragment"
         android:label="LearningCategoryInnerViewFragment" >
         <action
             android:id="@+id/action_learningCategoryInnerViewFragment_to_homeFragment"
@@ -170,7 +170,7 @@
     </fragment>
     <fragment
         android:id="@+id/summaryFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.SummaryFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Summary.SummaryFragment"
         android:label="fragment_summary"
         tools:layout="@layout/fragment_summary" >
         <action
@@ -197,7 +197,7 @@
     </fragment>
     <fragment
         android:id="@+id/innerSummaryFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.InnerSummaryFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Summary.InnerSummaryFragment"
         android:label="fragment_inner_summary"
         tools:layout="@layout/fragment_inner_summary" >
         <action
@@ -221,7 +221,7 @@
     </fragment>
     <fragment
         android:id="@+id/createSummaryFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.CreateSummaryFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Summary.CreateSummaryFragment"
         android:label="fragment_create_summary"
         tools:layout="@layout/fragment_create_summary" >
         <action
@@ -239,7 +239,7 @@
     </fragment>
     <fragment
         android:id="@+id/summaryPreviewFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Summary.SummaryPreviewFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Summary.SummaryPreviewFragment"
         android:label="fragment_summary_preview"
         tools:layout="@layout/fragment_summary_preview" >
         <action
@@ -263,7 +263,7 @@
     </fragment>
     <fragment
         android:id="@+id/questionListingFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Question.QuestionListingFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Question.QuestionListingFragment"
         android:label="QuestionListingFragment" >
         <action
             android:id="@+id/action_questionListingFragment_to_learningCategoryListFragment"
@@ -286,7 +286,7 @@
     </fragment>
     <fragment
         android:id="@+id/testListingFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Test.TestListingFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Test.TestListingFragment"
         android:label="TestListingFragment" >
         <action
             android:id="@+id/action_testListingFragment_to_learningCategoryInnerViewFragment"
@@ -312,7 +312,7 @@
     </fragment>
     <fragment
         android:id="@+id/questionDetailFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Question.QuestionDetailFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Question.QuestionDetailFragment"
         android:label="QuestionDetailFragment" >
         <action
             android:id="@+id/action_questionDetailFragment_to_questionListingFragment"
@@ -332,7 +332,7 @@
     </fragment>
     <fragment
         android:id="@+id/testDetailFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Test.TestDetailFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Test.TestDetailFragment"
         android:label="fragment_test_detail"
         tools:layout="@layout/fragment_test_detail" >
         <action
@@ -353,7 +353,7 @@
     </fragment>
     <fragment
         android:id="@+id/testExecuteFragment"
-        android:name="com.example.learnahead_prototyp.UI.LearningCategory.Test.TestExecuteFragment"
+        android:name="com.example.learnahead.UI.LearningCategory.Test.TestExecuteFragment"
         android:label="TestExecuteFragment" >
         <action
             android:id="@+id/action_testExecuteFragment_to_testListingFragment"

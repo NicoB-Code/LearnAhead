@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.learnahead_prototyp'
+    namespace 'com.example.learnahead'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.learnahead_prototyp"
+        applicationId "com.example.learnahead"
         minSdk 24
         targetSdk 33
         versionCode 1
