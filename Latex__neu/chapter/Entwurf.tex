@@ -79,7 +79,7 @@ MVVM teilt die Anwendungslogik in drei miteinander verbundene Komponenten auf: d
 MVVM hat mehrere Vorteile, darunter eine klare Trennung von Anliegen, verbesserte Testbarkeit und eine bessere Unterstützung für reaktive Programmierung \cite{AndroidAppArchitecture}. Diese klare Trennung der Anliegen ermöglicht es, dass verschiedene Teile der Anwendung unabhängig voneinander entwickelt und getestet werden können, was zu einer besseren Code-Qualität und Wartbarkeit führt \cite{MicrosoftMVVM2022}. \newline
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/diagramme/MVVM.png}
+    \includegraphics[width=0.8\textwidth]{images/diagramme/MVVM.png}
     \caption{MVVM Diagramm}
     \label{fig:mvvm}
 \end{figure}
@@ -97,7 +97,7 @@ Das System wird zunächst als Gesamtkomposition dargestellt. Anschließend werde
 \subsubsection{Gesamtkomposition}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/diagramme/Gesamtkomposition.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/Gesamtkomposition.png}
     \caption{Gesamtkomposition}
     \label{fig:Gesamtkomposition}
 \end{figure}
@@ -132,7 +132,7 @@ Das Diagramm \ref*{fig:FrontendUIViewModel} zeigt die Kommunikation zwischen den
 Das Diagramm \ref*{fig:BackendKomposition} zeigt die Komposition des Backends. Hierbei ist zu beachten, dass dieses Diagramm die Komposition des Backends im Allgemeinen zeigt. Jedes Objekt, welches in der Datenbank gespeichert wird, hat ein zugehöriges Repository/Model. Die Kommunikation zwischen den verschiedenen Repositories und Modellen verläuft grundsätzlich immer auf die gleiche Weise. Jedes Repository baut auf einem Interface auf, welches die grundlegenden Funktionen für die Kommunikation mit der Datenbank definiert. Die Kommunikation mit der Datenbank erfolgt über das Repository.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/diagramme/Backend.png}
+    \includegraphics[width=0.\textwidth]{images/diagramme/Backend.png}
     \caption{Backend Komposition}
     \label{fig:BackendKomposition}
 \end{figure}
@@ -162,13 +162,15 @@ Die \textit{ViewModel}-Klasse enthält LiveData-Objekte für die Methoden \texti
 Die \textit{Repository}-Klasse stellt die Methoden \textit{addContent}, \textit{updateContent}, \textit{deleteContent} und \textit{getContent} zur Verfügung, die jeweils ein UiState-Objekt zurückgeben, das entweder ein Content-Objekt oder einen Fehler enthält.\newline
 
 \noindent
-Die \textit{Fragment}-Klasse hat Methoden zum Aktualisieren der Benutzeroberfläche (\textit{updateUI}) und zur Interaktion mit der Benutzeroberfläche (\textit{interactWithUI}).\newline
+Die \textit{Fragment}-Klasse hat Methoden zum Aktualisieren der Benutzeroberfläche (\textit{updateUI}) und zur Interaktion mit der Benutzeroberfläche (\textit{interactWithUI}).
+
+\newpage
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]{images/diagramme/Klassendiagramm.png}
-\caption{Klassendiagramm der LearnAhead App}
+\includegraphics[width=0.6\textwidth]{images/diagramme/Klassendiagramm.png}
+\caption{Allgemeines Klassendiagramm der LearnAhead App}
 \label{fig:klassendiagramm}
-\end{figure} \newline
+\end{figure}
 
 \newpage
 \clearpage
