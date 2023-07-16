@@ -275,7 +275,7 @@ class LearnCategoryDetailFragment : Fragment() {
      */
     private fun validation(): Boolean {
         if (binding.textLearningCategoryName.text.isNullOrEmpty()) {
-            toast("Geben Sie einen Namen ein")
+            binding.textLearningCategoryName.error = "Geben Sie einen Namen ein"
             return false
         }
         return true

@@ -160,18 +160,18 @@ class LoginFragment : Fragment() {
         val password = binding.textPassword.text.toString()
 
         if (email.isEmpty()) {
-            toast(getString(R.string.enter_email))
+            binding.textEmail.error = getString(R.string.enter_email)
             return false
         } else if (!email.isValidEmail()) {
-            toast(getString(R.string.invalid_email))
+            binding.textEmail.error = getString(R.string.invalid_email)
             return false
         }
 
         if (password.isEmpty()) {
-            toast(getString(R.string.enter_password))
+            binding.textPassword.error = getString(R.string.enter_password)
             return false
         } else if (password.length < 8) {
-            toast(getString(R.string.invalid_password))
+            binding.textPassword.error = getString(R.string.invalid_password)
             return false
         }
 

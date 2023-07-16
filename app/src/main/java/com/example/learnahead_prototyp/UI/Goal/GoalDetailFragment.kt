@@ -44,6 +44,7 @@ class GoalDetailFragment : Fragment() {
 
 
     private val currentDate: Calendar = Calendar.getInstance()
+
     private var currentUser: User? = null
 
     // Ein Tag zur Identifizierung des Ziel-Detail-Fragments für Logging-Zwecke.

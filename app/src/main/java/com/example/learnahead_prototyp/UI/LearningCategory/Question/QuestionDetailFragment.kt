@@ -313,6 +313,24 @@ class QuestionDetailFragment : Fragment() {
      * Führt die Validierung der eingegebenen Werte durch und gibt `true` zurück, wenn die Validierung erfolgreich ist, andernfalls `false`.
      */
     private fun validation(): Boolean {
+        val question = binding.textQuestion.text.toString().trim()
+        val answer = binding.textAnswer.text.toString().trim()
+
+        if (question.isEmpty()) {
+            binding.textQuestion.error = "Bitte geben Sie eine Frage ein."
+            return false
+        }
+
+        if (answer.isEmpty()) {
+            binding.textAnswer.error = "Bitte geben Sie eine Antwort ein."
+            return false
+        }
+
+        if (tagsListString.isEmpty()) {
+            Toast.makeText(context, "Bitte fügen Sie mindestens einen Tag hinzu.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         return true
     }
 

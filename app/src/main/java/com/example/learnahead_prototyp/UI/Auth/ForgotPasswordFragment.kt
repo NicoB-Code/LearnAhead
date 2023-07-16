@@ -102,10 +102,10 @@ class ForgotPasswordFragment : Fragment() {
         val email = binding.editTextEmail.text.toString().trim()
 
         return if (email.isEmpty()) {
-            toast(getString(R.string.enter_email))
+            binding.editTextEmail.error = getString(R.string.enter_email)
             false
         } else if (!email.isValidEmail()) {
-            toast(getString(R.string.invalid_email))
+            binding.editTextEmail.error = getString(R.string.invalid_email)
             false
         } else {
             true

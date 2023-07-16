@@ -165,29 +165,29 @@ class RegisterFragment : Fragment() {
 
         if (binding.textUsername.text.isNullOrEmpty()) {
             isValid = false
-            toast(getString(R.string.enterUsername))
+            binding.textUsername.error = getString(R.string.enterUsername)
         }
 
         if (binding.editTextEmail.text.isNullOrEmpty()) {
             isValid = false
-            toast(getString(R.string.enter_email))
+            binding.editTextEmail.error = getString(R.string.enter_email)
         } else {
             if (!binding.editTextEmail.text.toString().isValidEmail()) {
                 isValid = false
-                toast(getString(R.string.invalid_email))
+                binding.editTextEmail.error = getString(R.string.invalid_email)
             }
         }
+
         if (binding.textPassword.text.isNullOrEmpty()) {
             isValid = false
-            toast(getString(R.string.enter_password))
+            binding.textPassword.error = getString(R.string.enter_password)
         } else {
-
-
             if (binding.textPassword.text.toString().length < 8) {
                 isValid = false
-                toast(getString(R.string.invalid_password))
+                binding.textPassword.error = getString(R.string.invalid_password)
             }
         }
+
         return isValid
     }
 }

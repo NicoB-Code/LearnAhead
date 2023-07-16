@@ -54,21 +54,23 @@ class TestDetailFragment : Fragment() {
     private var dropdownItems: MutableList<Question> = mutableListOf()
     private val tagsList: MutableList<String> = mutableListOf()
     private val adapter by lazy {
-            QuestionListingAdapter(
-                onDeleteClicked = { pos, item ->
-                    questionsToAddToTheTest = questionsToAddToTheTest.filterNot { it.id == item.id }.toMutableList()
-                    updateList()
-                    populateDropdown()
-                    toast("Frage wurde aus Test entfernt.")
-                },
-                onEditClicked = { item ->
-                    // Handle the edit functionality for the question
-                    // For example, navigate to a fragment for editing the question
-                }
-            ).apply {
-                isEditMode = false // Set to false for QuestionListingFragment, true for TestListingFragment
+        QuestionListingAdapter(
+            onDeleteClicked = { pos, item ->
+                questionsToAddToTheTest =
+                    questionsToAddToTheTest.filterNot { it.id == item.id }.toMutableList()
+                updateList()
+                populateDropdown()
+                toast("Frage wurde aus Test entfernt.")
+            },
+            onEditClicked = { item ->
+                // Handle the edit functionality for the question
+                // For example, navigate to a fragment for editing the question
             }
+        ).apply {
+            isEditMode =
+                false // Set to false for QuestionListingFragment, true for TestListingFragment
         }
+    }
 
 
     private fun updateList() {
@@ -123,19 +125,25 @@ class TestDetailFragment : Fragment() {
                 is UiState.Loading -> {
                     binding.progressBar.show()
                 }
+
                 is UiState.Failure -> {
                     binding.progressBar.hide()
                     toast(state.error)
                 }
+
                 is UiState.Success -> {
                     binding.progressBar.hide()
                     if (state.data != null && currentUser != null) {
-                        learnCategoryViewModel.currentSelectedLearningCategory.value!!.tests.add(state.data)
+                        learnCategoryViewModel.currentSelectedLearningCategory.value!!.tests.add(
+                            state.data
+                        )
                         learnCategoryViewModel.updateLearningCategory(learnCategoryViewModel.currentSelectedLearningCategory.value!!)
 
-                        val indexOfCurrentObject = currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value!!.id }
+                        val indexOfCurrentObject =
+                            currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value!!.id }
                         if (indexOfCurrentObject != -1) {
-                            currentUser!!.learningCategories[indexOfCurrentObject] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
+                            currentUser!!.learningCategories[indexOfCurrentObject] =
+                                learnCategoryViewModel.currentSelectedLearningCategory.value!!
                         } else {
                             currentUser!!.learningCategories.add(learnCategoryViewModel.currentSelectedLearningCategory.value!!)
                         }
@@ -162,20 +170,24 @@ class TestDetailFragment : Fragment() {
                 // Erfolgszustand - Fortschrittsanzeige ausblenden und Erfolgsmeldung anzeigen
                 is UiState.Success -> {
                     binding.progressBar.hide()
-                    if(state.data != null && currentUser != null) {
+                    if (state.data != null && currentUser != null) {
 
-                        val foundTestIndex = learnCategoryViewModel.currentSelectedLearningCategory.value?.tests?.indexOfFirst { it.id == state.data.id }
-                        learnCategoryViewModel.currentSelectedLearningCategory.value?.tests?.set(foundTestIndex!!, state.data)
+                        val foundTestIndex =
+                            learnCategoryViewModel.currentSelectedLearningCategory.value?.tests?.indexOfFirst { it.id == state.data.id }
+                        learnCategoryViewModel.currentSelectedLearningCategory.value?.tests?.set(
+                            foundTestIndex!!,
+                            state.data
+                        )
                         val foundIndex =
                             currentUser!!.learningCategories.indexOfFirst { it.id == learnCategoryViewModel.currentSelectedLearningCategory.value?.id }
                         if (foundIndex != -1) {
-                            currentUser!!.learningCategories[foundIndex] = learnCategoryViewModel.currentSelectedLearningCategory.value!!
+                            currentUser!!.learningCategories[foundIndex] =
+                                learnCategoryViewModel.currentSelectedLearningCategory.value!!
                         }
                         currentUser?.let { authViewModel.updateUserInfo(it) }
                         findNavController().navigate(R.id.action_testDetailFragment_to_testListingFragment)
                         toast("Das Lernziel konnte erfolgreich geupdated werden")
-                    }
-                    else {
+                    } else {
                         toast("Das Lernziel konnte nicht geupdated werden")
                     }
                 }
@@ -187,10 +199,12 @@ class TestDetailFragment : Fragment() {
                 is UiState.Loading -> {
                     binding.progressBar.show()
                 }
+
                 is UiState.Failure -> {
                     binding.progressBar.hide()
                     toast(state.error)
                 }
+
                 is UiState.Success -> {
                     binding.progressBar.hide()
                     currentUser = state.data
@@ -206,6 +220,7 @@ class TestDetailFragment : Fragment() {
             this[index] = newItem
         }
     }
+
     private fun getQuestionDropdownItems(): MutableList<Question> {
         val currentLearningCategory = learnCategoryViewModel.currentSelectedLearningCategory.value
 
@@ -220,7 +235,7 @@ class TestDetailFragment : Fragment() {
         }?.toMutableList()!!
 
         // Da wir hier auch andere Objekte haben können, müssen wir auf die ID vergleichen
-        val idsToAddToTheTest = questionsToAddToTheTest.map {it.id}
+        val idsToAddToTheTest = questionsToAddToTheTest.map { it.id }
         return foundQuestions.filterNot { question ->
             idsToAddToTheTest.contains(question.id)
         }?.toMutableList()!!
@@ -240,7 +255,11 @@ class TestDetailFragment : Fragment() {
     private fun populateDropdown() {
         dropdownItems = getQuestionDropdownItems()
         val dropdownItemsStrings = dropdownItems.map { it.question }
-        val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItemsStrings)
+        val adapter = CustomSpinnerAdapter(
+            requireContext(),
+            R.layout.spinner_dropdown_item,
+            dropdownItemsStrings
+        )
         binding.dropdownManualQuestion.adapter = adapter
     }
 
@@ -261,13 +280,18 @@ class TestDetailFragment : Fragment() {
 
         // Wenn es keine Frage mit dem Tag gibt, wird eine Meldung angezeigt und die Funktion beendet
         if (!hasQuestionWithTag) {
-            Toast.makeText(context, "Es gibt keine Frage mit dem Tag '$tag'.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Es gibt keine Frage mit dem Tag '$tag'.", Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
         // Überprüft, ob der Tag bereits hinzugefügt wurde
         if (tagsList.contains(tag)) {
-            Toast.makeText(context, "Du hast bereits die Fragen mit dem Tag '$tag' hinzugefügt.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                "Du hast bereits die Fragen mit dem Tag '$tag' hinzugefügt.",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
@@ -324,7 +348,8 @@ class TestDetailFragment : Fragment() {
         binding.tagsContainer.addView(tagView)
 
         // Aktualisiert die Höhe des Containers basierend auf der Anzahl der Tags und deren Größe
-        val containerHeight = binding.tagsContainer.height + tagView.height + resources.getDimensionPixelSize(R.dimen.tag_margin_top)
+        val containerHeight =
+            binding.tagsContainer.height + tagView.height + resources.getDimensionPixelSize(R.dimen.tag_margin_top)
         val maxContainerHeight = resources.getDimensionPixelSize(R.dimen.max_tag_container_height)
         val tagsContainerLayoutParams = binding.tagsContainer.layoutParams
         tagsContainerLayoutParams.height = containerHeight.coerceAtMost(maxContainerHeight)
@@ -369,7 +394,8 @@ class TestDetailFragment : Fragment() {
         adapter.updateList(questionsToAddToTheTest)
 
         // Aktualisiert die Höhe des Containers basierend auf der Anzahl der verbleibenden Tags und deren Größe
-        val containerHeight = binding.tagsContainer.height - tagView.height - resources.getDimensionPixelSize(R.dimen.tag_margin_top)
+        val containerHeight =
+            binding.tagsContainer.height - tagView.height - resources.getDimensionPixelSize(R.dimen.tag_margin_top)
         val tagsContainerLayoutParams = binding.tagsContainer.layoutParams
         tagsContainerLayoutParams.height = containerHeight
         binding.tagsContainer.layoutParams = tagsContainerLayoutParams
@@ -394,16 +420,17 @@ class TestDetailFragment : Fragment() {
      * Aktualisiert die Benutzeroberfläche des Fragments.
      */
     private fun updateUI() {
-        val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
+        val selectedLearningCategoryName =
+            learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
         binding.headerLabel.text = "$selectedLearningCategoryName / Test"
 
 
-        if(testViewModel.currentTest.value != null){
+        if (testViewModel.currentTest.value != null) {
             binding.textTestTitle.setText(testViewModel.currentTest.value?.name!!)
             questionsToAddToTheTest = testViewModel.currentTest.value?.questions!!
             adapter.updateList(questionsToAddToTheTest)
         }
-        if(binding.textTestTitle.text.isNotEmpty()){
+        if (binding.textTestTitle.text.isNotEmpty()) {
             isEdit = true
         }
     }
@@ -452,31 +479,15 @@ class TestDetailFragment : Fragment() {
             findNavController().navigate(R.id.action_testDetailFragment_to_testListingFragment)
         }
 
-        binding.buttonAddManualQuestion.setOnClickListener{
+        binding.buttonAddManualQuestion.setOnClickListener {
             addCurrentManualQuestion()
         }
 
         binding.buttonSaveTest.setOnClickListener {
             if (isEdit)
-                if(binding.textTestTitle.text.toString().isNotEmpty()){
-                    if(questionsToAddToTheTest.isEmpty()){
-                        toast("Bitte füge dem Test fragen zu bevor du ihn erstellst!")
-                    } else {
-                        updateTest()
-                    }
-                } else {
-                    toast("Bitte gib einen Titel für den Test an!")
-                }
+                updateTest()
             else
-                if(binding.textTestTitle.text.toString().isNotEmpty()){
-                    if(questionsToAddToTheTest.isEmpty()){
-                        toast("Bitte füge dem Test fragen zu bevor du ihn erstellst!")
-                    } else {
-                        createTest()
-                    }
-                } else {
-                    toast("Bitte gib einen Titel für den Test an!")
-                }
+                createTest()
         }
     }
 
@@ -484,7 +495,9 @@ class TestDetailFragment : Fragment() {
      * Aktualisiert den Test.
      */
     private fun updateTest() {
-        testViewModel.updateTest(getTest())
+        if (validation()) {
+            testViewModel.updateTest(getTest())
+        }
     }
 
     /**
@@ -513,7 +526,19 @@ class TestDetailFragment : Fragment() {
      * @return [true], wenn der Test gültig ist, ansonsten [false].
      */
     private fun validation(): Boolean {
-        // Implement validation logic
+        val testTitle = binding.textTestTitle.text.toString().trim()
+
+        if (testTitle.isEmpty()) {
+            binding.textTestTitle.error = "Bitte geben Sie einen Titel für den Test ein."
+            return false
+        }
+
+        if (questionsToAddToTheTest.isEmpty()) {
+            Toast.makeText(context, "Bitte fügen Sie Fragen zum Test hinzu.", Toast.LENGTH_SHORT)
+                .show()
+            return false
+        }
+
         return true
     }
 }
