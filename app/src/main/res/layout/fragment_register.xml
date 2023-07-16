@@ -161,8 +161,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/signUpButton"
         android:layout_alignStart="@id/signUpButton"
+        android:layout_toEndOf="@id/loginButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
+        android:layout_marginEnd="10dp"
         android:elevation="8dp"
         android:text="@string/got_already_an_account"
         android:textAppearance="@style/fourteen_sp_regular_black" />
@@ -174,8 +176,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/signUpButton"
         android:layout_alignEnd="@id/signUpButton"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
+        android:layout_marginStart="10dp"
         android:elevation="8dp"
         android:text="@string/login"
         android:textAppearance="@style/fourteen_sp_regular_106BD5" />
