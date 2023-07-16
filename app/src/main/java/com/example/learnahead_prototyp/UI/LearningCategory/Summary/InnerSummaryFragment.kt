@@ -87,10 +87,10 @@ class InnerSummaryFragment : Fragment() {
     private fun updateUI() {
         currentLearningCategory = arguments?.getParcelable("learning_category")
         binding.headerLabel.text = currentLearningCategory?.name
-        if (currentSummary?.content != null) {
+        if (currentSummary?.content?.isNotEmpty() == true) {
             binding.markdownEditText.setText(currentSummary?.content)
         } else {
-            binding.markdownEditText.setText("# Hello Zusammenfassung")
+            binding.markdownEditText.setText("# Hello Zusammenfassung\nDies ist ein Markdown-Editor fuer deine Zusammenfassungen.")
         }
     }
 
