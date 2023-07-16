@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "LearnAhead_Prototyp"
+rootProject.name = "LearnAhead"
 include ':app'
