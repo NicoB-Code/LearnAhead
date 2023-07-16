@@ -49,8 +49,7 @@
 - Installationsanleitung Done
   - Für Developer Done
   - Für User Done
-- Code Conventions **ToDo**
-- Code Dokumentation **ToDo**
+- Code Conventions Done
 - IT-Security (Firebase Authentifizierung) Done
 
 ## Tests
