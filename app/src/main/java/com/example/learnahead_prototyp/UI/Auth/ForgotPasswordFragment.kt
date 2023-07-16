@@ -64,7 +64,7 @@ class ForgotPasswordFragment : Fragment() {
     private fun setEventListener() {
         binding.forgotPasswordButton.setOnClickListener {
             if (validation()) {
-                viewModel.forgotPassword(binding.emailEditText.text.toString())
+                viewModel.forgotPassword(binding.editTextEmail.text.toString())
             }
         }
     }
@@ -99,7 +99,7 @@ class ForgotPasswordFragment : Fragment() {
      * @return True, wenn die E-Mail-Adresse gültig ist, ansonsten False.
      */
     private fun validation(): Boolean {
-        val email = binding.emailEditText.text.toString().trim()
+        val email = binding.editTextEmail.text.toString().trim()
 
         return if (email.isEmpty()) {
             toast(getString(R.string.enter_email))
