@@ -94,7 +94,7 @@ class InnerSummaryFragment : Fragment() {
                     "# Markdown-Anleitung\n" +
                     "\n" +
                     "## Was ist Markdown?\n" +
-                    "Markdown ist eine einfache Auszeichnungssprache, mit der du Text in ein strukturiertes Format umwandeln kannst. Es ist sehr beliebt für das Schreiben von Dokumentationen, README-Dateien und Webseiten. Markdown verwendet eine leicht lesbare Syntax, die in einen HTML-Code konvertiert werden kann.\n" +
+                    "Markdown ist eine einfache Auszeichnungssprache, mit der du Text in ein strukturiertes Format umwandeln kannst. Es ist sehr beliebt für das Schreiben von Dokumentationen, README-Dateien und Webseiten. \n" +
                     "\n" +
                     "## Textformatierung\n" +
                     "### Überschriften\n" +

@@ -83,6 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/preview"
+            android:layout_marginBottom="10dp"
             android:textColor="@null"
             app:backgroundTint="@null"
             android:textAppearance="@style/twenty_sp_bold_black"
@@ -104,7 +105,7 @@
         android:contentDescription="@string/markdown_input_description"
         android:layout_above="@id/bottomMenuBackground"
         android:textColor="@color/white"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="10dp"
         android:textAppearance="@style/fourteen_sp_regular_white"
         android:background="@drawable/summary_edittext_background" />
 
