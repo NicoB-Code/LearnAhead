@@ -103,11 +103,12 @@ Gamification bezeichnet die Anwendung von Spielelementen in nicht-spielerischen 
 Durch die Einbeziehung von Spielelementen wie Punkten, Leveln, Belohnungen, Herausforderungen und Leaderboards wird der Lernprozess in einen Wettbewerbs- und Unterhaltungskontext eingebettet \cite{Kapp2012}. Dies kann dazu beitragen, die Motivation der Lernenden zu erhöhen, was wiederum zu einer höheren Teilnahme und verbesserten Lernergebnissen führen kann \cite{Hanus2015}.\newline
 Ein weiterer Vorteil der Gamification ist, dass sie durch Feedback und Belohnungen eine unmittelbare Rückmeldung zum Lernprozess ermöglicht. Dies kann dazu beitragen, die Selbstwirksamkeit der Lernenden zu erhöhen und ein Gefühl der Leistung und des Fortschritts zu fördern \cite{Landers2014}. \newline
 Trotz der potenziellen Vorteile ist es wichtig, die Gamification sorgfältig zu gestalten und durchzuführen. Eine schlecht durchdachte Gamification kann zu einer Überbetonung von Wettbewerb und Leistung führen, was wiederum zu Stress und Angst bei den Lernenden führen kann \cite{Nicholson2015}. Daher ist es wichtig, ein ausgewogenes Gleichgewicht zwischen Wettbewerb und Zusammenarbeit, Belohnung und Herausforderung zu schaffen, um ein gesundes und effektives Lernumfeld zu gewährleisten \cite{Deterding2011}.\newline
-Bei LearnAhead wird die Gamification mit einem Punktesystem umgesetzt. Beim Lernen bekommt der Benutzer direktes Feedback und erhöht somit seine eigene Punktzahl. Punkte werden auf dem Profil angezeigt und mit folgenden Ereignissen verdient.
+Bei LearnAhead wird die Gamification mit einem Punktesystem umgesetzt. Beim Lernen bekommt der Benutzer direktes Feedback und erhöht somit seine eigene Punktzahl. Für ein Level werden 100 Punkte benötigt, das Level hat kein Limit. Punkte werden auf dem Profil angezeigt und mit folgenden Ereignissen verdient.
 \begin{itemize}
-  \item Abschliessen eines Tests - 10 Punkte
+  \item Abschliessen eines Tests - 20 Punkte
   \item Einloggen an einem neuen Tag - zwischen 10 und 100 Punkte, je nach Anzahl der sequentiell aufeinanderfolgenden Einlogg-Tage
   \item Erreichen eines Lernziels - 20 Punkte
+  \item Richtiges beantworten einer Frage - 5*(Anzahl wie oft man Frage falsch beantwortet hat) Punkte.
 \end{itemize}
 \subsection{Pflichtenheft}
 Das Pflichtenheft ist analog zum
@@ -465,36 +466,6 @@ aufgeführt. Dort kann entweder der Reiter \gqq{Roadmap} oder der Reiter
     \end{tabular}%
   }
 \end{table}
-\underline{\textbf{Level}}
-\begin{table}[H]
-  \centering
-  \resizebox{\columnwidth}{!}{%
-  \begin{tabular}{c|c|c|c|c|c|l}
-  \textbf{Attribut} &
-    \textbf{Datentyp} &
-    \textbf{Länge} &
-    \textbf{Null} &
-    \textbf{Default} &
-    \textbf{Schlüssel} &
-    \textbf{Beschreibung} \\ \hline
-  ID &
-    string &
-    - &
-    Nein &
-    - &
-    P &
-     \\ \hline
-  RequiredPoints & number & - & Nein & - & - & \begin{tabular}[c]{@{}l@{}}Dies gibt die benötigten\\ Punkte für das spezielle\\ Level an\end{tabular} \\ \hline
-  Level &
-    number &
-    - &
-    Nein &
-    - &
-    - &
-    \begin{tabular}[c]{@{}l@{}}Dies gibt das spezielle \\ Level anhand der Punkte an\end{tabular}
-  \end{tabular}%
-  }
-  \end{table}
 \newpage
 \underline{\textbf{Goal}}
 \begin{table}[H]
@@ -665,8 +636,7 @@ aufgeführt. Dort kann entweder der Reiter \gqq{Roadmap} oder der Reiter
   \end{table}
   \newpage
   \underline{\textbf{Test}}
-  % Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
+
 \begin{table}[H]
   \centering
   \resizebox{\columnwidth}{!}{%

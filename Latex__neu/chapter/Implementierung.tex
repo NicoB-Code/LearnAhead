@@ -1,34 +1,20 @@
 \section{Implementierung}
-In diesem Kapitel wird die komplette Implementierung von LearnAhead erläutert. Es wird beispielsweise explizit darauf eingegangen wie die App im Google Play Store deployed wurde und wie, aus Sicht eines Users sowie eines Entwicklers zu installieren ist.\newline
-
-\subsection{Deployment der LearnAhead App im Google Play Store}
-Die Veröffentlichung der LearnAhead App im Google Play Store bestand aus mehreren Schritten, die im Folgenden detailliert beschrieben werden. \newline
-\subsubsection{Vorbereitung der App für die Veröffentlichung}
-Bevor die App im Google Play Store veröffentlicht werden konnte, musste sie für die Veröffentlichung vorbereitet werden. Dies beinhaltete die Überprüfung und Anpassung der App-Manifest-Datei, das Bereinigen von Debug-Code und Log-Ausgaben, das Aktualisieren der App-Ressourcen und das Testen der App in verschiedenen Gerätekonfigurationen.\newline
-\subsubsection{Erstellen einer signierten APK oder AAB}
-Nach der Vorbereitung der App wurde eine signierte APK (Android Package) oder AAB (Android App Bundle) erstellt. Dies ist die Datei, die im Google Play Store hochgeladen wurde. Ein privates Schlüsselpaar wurde erstellt, um die App zu signieren. \newline
-\subsubsection{Erstellen eines Google Play Entwicklerkontos}
-Um die App im Google Play Store veröffentlichen zu können, wurde ein Google Play Entwicklerkonto erstellt. Es wurde eine einmalige Anmeldegebühr von 25 USD gezahlt. \newline
-\subsubsection{Erstellen einer neuen App im Play Console}
-Nach der Erstellung des Entwicklerkontos wurde eine neue App in der Google Play Console erstellt. Informationen wie der Name der App, die Beschreibung, die Kategorie und die Altersfreigabe wurden angegeben.\newline
-\subsubsection{Hochladen der APK und Bereitstellung von Store-Listing-Informationen}
-Nach der Erstellung der App wurde die APK hochgeladen und weitere Informationen für das Store-Listing bereitgestellt, wie Screenshots, App-Symbole, Werbetexte und Kontaktinformationen.\newline
-\subsubsection{Festlegen der Preisgestaltung und Verteilung}
-Es wurde entschieden, dass die App kostenlos ist und in welchen Ländern sie verfügbar sein soll.\newline
-\subsubsection{Veröffentlichung der App}
-Nachdem alle erforderlichen Informationen bereitgestellt wurden, wurde die App zur Überprüfung eingereicht. Nach der Genehmigung durch Google wird die LearnAhead App im Google Play Store veröffentlicht.
+In diesem Kapitel wird die komplette Implementierung von LearnAhead erläutert. Es wird explizit darauf eingegangen wie die App aus Sicht eines Users sowie eines Entwicklers zu installieren ist.\newline
 
 \subsection{Installationsanleitung}
 In diesem Kapitel wird erläutert, wie die LearnAhead App sowohl von Endbenutzern als auch von Entwicklern installiert werden kann.
 \subsubsection{Anleitung für User}
 Um die LearnAhead App auf einem Android-Gerät zu installieren, befolgen Sie bitte die folgenden Schritte: \newline
 \begin{enumerate}
-    \item Öffnen Sie die Google Play Store App auf Ihrem Android-Gerät.
-    \item Tippen Sie in der Suchleiste \gqq{LearnAhead} ein und drücken Sie auf die Suchtaste.
-    \item Wählen Sie die LearnAhead App aus der Liste der Suchergebnisse aus.
-    \item Tippen Sie auf die Schaltfläche \gqq{Installieren}, um den Download und die Installation der App zu starten.
-    \item Nach Abschluss der Installation können Sie die App öffnen und verwenden, indem Sie auf die Schaltfläche \gqq{Öffnen} tippen oder das App-Symbol auf Ihrem Gerät suchen und auswählen.
+    \item Öffnen Sie den bereitgestellten Google Drive-Link in einem Webbrowser auf Ihrem Android-Gerät.
+    \item Sie sollten eine Vorschau der Datei "app-debug.apk" sehen. Tippen Sie auf die Schaltfläche "Herunterladen" oder das Download-Symbol, um die Datei herunterzuladen.
+    \item Sie erhalten möglicherweise eine Warnung, dass diese Art von Datei Ihrem Gerät schaden kann. Da Sie die Quelle der Datei kennen, können Sie auf "OK" oder "Herunterladen" tippen, um fortzufahren.
+    \item Nachdem die Datei heruntergeladen wurde, öffnen Sie Ihre Benachrichtigungen und tippen Sie auf die heruntergeladene .apk-Datei.
+    \item Ihr Gerät fragt Sie möglicherweise, ob Sie die Installation von Apps aus unbekannten Quellen zulassen möchten. Sie müssen diese Option zulassen, um fortzufahren.
+    \item Sie sehen dann einen Bildschirm, der die Berechtigungen anzeigt, die die LearnAhead-App benötigt. Tippen Sie auf "Installieren", um fortzufahren.
+    \item Nach Abschluss der Installation können Sie die App öffnen und verwenden, indem Sie auf die Schaltfläche "Öffnen" tippen oder das App-Symbol auf Ihrem Gerät suchen und auswählen. Bitte beachte, dass bei der Verwendung von LearnAhead der Dark-Mode ausgeschaltet werden sollte, da dies sonst Einschränkungen in der UI zufolge hat.
 \end{enumerate}
+
 \subsubsection{Anleitung für Developer}
 Um die LearnAhead App für Entwicklungs- und Testzwecke zu installieren, befolgen Sie bitte die folgenden Schritte:\newline
 \begin{enumerate}
@@ -52,8 +38,8 @@ Der Android-Emulator ist ein Tool, das von Android Studio bereitgestellt wird un
     \item Sobald das virtuelle Gerät gestartet ist, können Sie Ihre App darauf ausführen, indem Sie \gqq{Run} aus dem \gqq{Run} Menü wählen und das laufende virtuelle Gerät aus der Liste der verfügbaren Geräte auswählen.
 \end{enumerate}
 
-\subsubsection{Übertragen der App zu Entwicklungszwecken ohne Play Store}
-Um die App auf einem tatsächlichen Android Gerät nutzen zu können, ohne sie jedes mal in den Google Play Store deployen zu müssen, können gewisse Entwicklertools genutzt werden, welche im nachfolgenden erklärt werden.
+\subsubsection{Übertragen der App zu Entwicklungszwecken ohne Deployment}
+Um die App auf einem tatsächlichen Android Gerät nutzen zu können, ohne sie jedes mal in den neu deployen zu müssen, können gewisse Entwicklertools genutzt werden, welche im nachfolgenden erklärt werden.
 \paragraph{Übertragung per USB}
 \begin{enumerate}
     \item Verbinden Sie Ihr Android-Gerät über ein USB-Kabel mit Ihrem Computer.

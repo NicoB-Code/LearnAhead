@@ -105,16 +105,16 @@ Das Diagramm \ref*{fig:BackendKomposition} zeigt die Komposition des Backends. H
 \newpage
 \subsection{Deployment Diagramm} \label{Deployment Diagramm}
 Ein Deployment-Diagramm ist eine Art von Diagramm, das in der Unified Modeling Language (UML) verwendet wird. Es bietet eine grafische Darstellung der physischen Verteilung von Artefakten auf Knoten. Ein Artefakt repräsentiert eine konkrete Entität, die in einem System vorhanden ist. Ein Knoten ist in diesem Kontext eine physische Einheit, auf der die Software ausgeführt wird, wie zum Beispiel ein Server oder ein PC.\newline
-Im Folgenden wird das Deployment-Diagramm der Android Studio MVVM App "LearnAhead" gezeigt. Es illustriert, wie die Komponenten der App auf einem mobilen Gerät verteilt sind und wie sie mit externen Diensten wie Firebase und dem Google Play Store interagieren.\newline
+Im Folgenden wird das Deployment-Diagramm der Android Studio MVVM App "LearnAhead" gezeigt. Es illustriert, wie die Komponenten der App auf einem mobilen Gerät verteilt sind und wie sie mit externen Diensten wie Firebase und dem Google Drive mit der installierbaren APK-Datei interagieren.\newline
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/diagramme/DeploymentDiagramm.png}
+    \includegraphics[width=1\textwidth]{images/diagramme/DeploymentDiagramm.png}
     \caption{Das Deployment Diagramm von LearnAhead}
     \label{fig:DeploymentDiagramm}
 \end{figure}
 
 \subsection{Klassen Diagramm} \label{Klassen Diagramm}
-Das Klassendiagramm in Abbildung \ref{fig:klassendiagramm} zeigt die Struktur der LearnAhead App, die nach dem Model-View-ViewModel (MVVM) Muster entwickelt wurde. \newline
+Das Klassendiagramm in Abbildung \ref{fig:klassendiagramm} zeigt die Struktur der LearnAhead App, die nach dem Model-View-ViewModel (MVVM) Muster entwickelt wurde. Der Übersicht zu gunsten ist hier in diesem Klassendiagramm nur eine Blaupause ausgestellt, da für jedes Feature ein neues ViewModel, ein neues Fragment und ein neues Model benötigt wurde.\newline
 Die Hauptklassen sind \textit{ViewModel}, \textit{Repository} und \textit{Fragment}. \newline
 Die \textit{ViewModel}-Klasse enthält LiveData-Objekte für die Methoden \textit{addContent}, \textit{updateContent}, \textit{deleteContent} und \textit{getContent}, sowie für das aktuelle Content-Objekt (\textit{currentContent}). Die LiveData-Objekte sind öffentlich zugänglich, während die zugrunde liegenden Daten private sind.\newline
 Die \textit{Repository}-Klasse stellt die Methoden \textit{addContent}, \textit{updateContent}, \textit{deleteContent} und \textit{getContent} zur Verfügung, die jeweils ein UiState-Objekt zurückgeben, das entweder ein Content-Objekt oder einen Fehler enthält.\newline
@@ -125,44 +125,49 @@ Die \textit{Fragment}-Klasse hat Methoden zum Aktualisieren der Benutzeroberflä
 \caption{Klassendiagramm der LearnAhead App}
 \label{fig:klassendiagramm}
 \end{figure} \newpage
-\subsection{Aktivitätsdiagramm}
 \subsection{Sequenzdiagramme}
 Im nachfolgenden Kapitel werden einige Funktionen von LearnAhead mit Hilfe von Sequenzdiagrammen visualisiert um ihre direkte Art und Weise besser zu verstehen.\\
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_frage.png}
+    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_frage.png}
     \caption{Sequenzdiagramm - User erstellt eine Frage}
     \label{fig:sequenz_user_erstellt_frage}
 \end{figure} 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_test.png}
+    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_test.png}
     \caption{Sequenzdiagramm - User erstellt einen Test}
     \label{fig:sequenz_user_erstellt_test}
 \end{figure} 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_zusammenfassung.png}
+    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_zusammenfassung.png}
     \caption{Sequenzdiagramm - User erstellt eine Zusammenfassung}
     \label{fig:sequenz_user_erstellt_zusammenfassung}
 \end{figure} 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/diagramme/sequenzdiagramme/user_login_belohnung.png}
+    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_login_belohnung.png}
     \caption{Sequenzdiagramm - User erhält eine Belohnung für täglichen Login}
     \label{fig:sequenz_user_login_belohnung}
 \end{figure} 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_lernziel.png}
+    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_erstellt_lernziel.png}
     \caption{Sequenzdiagramm - User erstellt Lernziel}
     \label{fig:sequenz_user_erstellt_lernziel}
 \end{figure} 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/diagramme/sequenzdiagramme/user_aendert_profilbild.png}
+    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_aendert_profilbild.png}
     \caption{Sequenzdiagramm - User ändert sein Profilbild}
     \label{fig:sequenz_user_aendert_profilbild}
+\end{figure} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/diagramme/sequenzdiagramme/user_fuehrt_test_aus.png}
+    \caption{Sequenzdiagramm - User führt Test aus}
+    \label{fig:sequenz_user_fuehrt_test}
 \end{figure} 
 \newpage
 \subsection{Prototyp von LearnAhead}
