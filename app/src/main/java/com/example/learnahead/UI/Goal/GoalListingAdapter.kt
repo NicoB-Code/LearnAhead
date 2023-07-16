@@ -113,6 +113,8 @@ class GoalListingAdapter(
 
             if (daysBetweenDates > 0)
                 binding.textLearningGoalLeftDaysCalculated.text = "endet in $daysBetweenDates $daysText"
+            else if (daysBetweenDates == 0)
+                binding.textLearningGoalLeftDaysCalculated.text = "endet heute"
             else
                 binding.textLearningGoalLeftDaysCalculated.text = "Lernziel abgelaufen"
 
