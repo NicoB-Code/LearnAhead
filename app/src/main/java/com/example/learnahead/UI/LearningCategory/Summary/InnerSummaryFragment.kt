@@ -73,7 +73,7 @@ class InnerSummaryFragment : Fragment() {
         if(arguments?.getBoolean("markdown") == true){
             AlertDialog.Builder(requireContext())
                 .setIcon(android.R.drawable.ic_dialog_info)
-                .setTitle("App schließen")
+                .setTitle("Markdown")
                 .setMessage("Möchtest du ein Markdown Tutorial?")
                 .setPositiveButton("Ja") { _, _ ->
                     if (currentSummary?.content?.isNotEmpty() == true) {
