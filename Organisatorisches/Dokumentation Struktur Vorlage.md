@@ -32,8 +32,7 @@
 - Benutzerhandbuch (optional)
 
 ## Entwurf
-- Prototyp (optional) **ToDo**
-- BPMN **ToDo** Phillipp
+- Prototyp (optional) Done
 - Begründung des Datenbankkonzepts Done Phillipp
 - Auswahl der Klassenbibliotheken/Frameworks Nico Done
 - Design Patterns für relevante Problemstellungen Nico Done
@@ -43,25 +42,24 @@
 - Backend Done Phillipp
 - Deployment Diagramm  Nico Done
 - Klassen Diagramm Nico Done
-- Aktivitätsdiagramm **ToDo** Phillipp
-- Sequenzdiagramme **ToDo** Nico
+- Sequenzdiagramme Done Nico
 
 ## Implementierung
-- Deployment **ToDo**
-- Installationsanleitung **ToDo**
-  - Für Developer
-  - Für User
+- Deployment Done
+- Installationsanleitung Done
+  - Für Developer Done
+  - Für User Done
 - Code Conventions **ToDo**
 - Code Dokumentation **ToDo**
-- IT-Security (Firebase Authentifizierung) **ToDo**
+- IT-Security (Firebase Authentifizierung) Done
 
 ## Tests
-- User Tests **ToDo**
-- ggf. Unit Tests **ToDo**
+- User Tests Done
 
 ## Ergebnisse
-- Nutzen der App **ToDo**
+- Nutzen der App Done
+- Feedback aus den Studienarbeitpräsentation
+- Zeitliche Dokumentation Done
 
 ## Ausblick
-- Features (Kalender, Collaboration, etc.) **ToDo**
-- Zeitliche Dokumentation **ToDo**
+- Features (Kalender, Collaboration, etc.) Done
