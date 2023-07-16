@@ -395,9 +395,12 @@ class TestDetailFragment : Fragment() {
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
         binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
 
-        binding.testTitle.setText(testViewModel.currentTest.value?.name!!)
-        questionsToAddToTheTest = testViewModel.currentTest.value?.questions!!
-        adapter.updateList(questionsToAddToTheTest)
+        if(testViewModel.currentTest != null){
+            binding.testTitle.setText(testViewModel.currentTest.value?.name!!)
+            questionsToAddToTheTest = testViewModel.currentTest.value?.questions!!
+            adapter.updateList(questionsToAddToTheTest)
+        }
+
         if(binding.testTitle.text.isNotEmpty()){
             isEdit = true
         }
