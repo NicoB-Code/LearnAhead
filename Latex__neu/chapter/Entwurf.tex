@@ -19,7 +19,7 @@ Firebase bietet eine gute Anbindung für Kotlin (siehe \ref*{Auswahl Bibliotheke
 In diesem Abschnitt werden die wichtigsten in LearnAhead verwendeten Bibliotheken und Frameworks erläutert. Es wird kurz darauf eingegangen was genau die/das Bibliothek/Framework tut und wieso sie über andere gewählt wurde.
 
 \subsubsection{DaggerHilt Dependency Injection Framework}
-DaggerHilt ist ein Framework für \ac*{DI}, das speziell für Android entwickelt wurde \cite{Dagger2021}. Es basiert auf Dagger, einem weit verbreiteten und mächtigen DI-Framework für Java \cite{AndroidDevelopers2021}. \newline
+DaggerHilt ist ein Framework für \ac{DI}, das speziell für Android entwickelt wurde \cite{Dagger2021}. Es basiert auf Dagger, einem weit verbreiteten und mächtigen DI-Framework für Java \cite{AndroidDevelopers2021}. \newline
 
 \noindent
 Dependency Injection ist ein Programmierparadigma, das dabei hilft, Objekte effizient zu erzeugen und zu verwalten. Mit Hilfe von DaggerHilt können Abhängigkeiten zentral verwaltet und bei Bedarf ausgetauscht werden. Das ermöglicht bessere Testbarkeit und modulareren Code, da jede Klasse sich nur auf ihre Aufgaben konzentrieren muss und ihre Abhängigkeiten von außen erhält \cite{Dagger2021}. \newline
@@ -46,7 +46,7 @@ Für diese Arbeit wurde Markwon aufgrund seiner hohen Flexibilität und seiner v
 Glide ist ein effizientes Open-Source-Framework zur Handhabung und Darstellung von Bildern und Videos in Android-Anwendungen \cite{Glide2022}. Es wurde von Bumptech entwickelt und ist bekannt für seine Leistung, insbesondere bei der Scroll-Leistung in Listen oder Rastern von Bildern. \newline
 
 \noindent
-In LearnAhead wird Glide beispielsweise dafür genutzt, um die Profilbilder der Nutzer zu laden. Eine der Hauptfunktionen von Glide ist das asynchrone Laden und Speichern von Bildern aus verschiedenen Quellen, beispielsweise aus dem Internet, ohne den Haupt-\ac*{UI}-Thread zu blockieren. Dies führt zu einer glatteren Benutzererfahrung \cite{Glide2022}. Zudem bietet Glide auch Funktionen wie das Zuschneiden und Transformieren von Bildern, das Cachen von Bildern für eine schnellere Wiederverwendung und die automatische Verwaltung des Lebenszyklus \cite{GlideGithub2022}. \newline
+In LearnAhead wird Glide beispielsweise dafür genutzt, um die Profilbilder der Nutzer zu laden. Eine der Hauptfunktionen von Glide ist das asynchrone Laden und Speichern von Bildern aus verschiedenen Quellen, beispielsweise aus dem Internet, ohne den Haupt-\ac{UI}-Thread zu blockieren. Dies führt zu einer glatteren Benutzererfahrung \cite{Glide2022}. Zudem bietet Glide auch Funktionen wie das Zuschneiden und Transformieren von Bildern, das Cachen von Bildern für eine schnellere Wiederverwendung und die automatische Verwaltung des Lebenszyklus \cite{GlideGithub2022}. \newline
 
 \noindent
 Die Wahl von Glide für diese Arbeit basiert auf seinen umfangreichen Funktionen, seiner Leistung und seiner Integration in das Android-Ökosystem. Mit Glide können komplexe Bildverarbeitungsanforderungen erfüllt werden, während gleichzeitig die Performance und die Benutzererfahrung der App optimiert werden \cite{Glide2022}.
@@ -61,15 +61,15 @@ In LearnAhead wird die Bibliothek für die Navigation zwischen den verschiedenen
 Die Wahl dieses Frameworks für diese Arbeit beruht auf seiner Integration in das Android-Ökosystem und seinen umfangreichen Funktionen zur Handhabung von App-Navigationsszenarien. Die Verwendung des Android Navigation Frameworks erleichtert die Erstellung von strukturierten und benutzerfreundlichen Navigationsflüssen in der App \cite{AndroidNav2022}.
 
 \subsubsection{Firebase Android SDK: Eine Bibliothek zur Integration von Firebase in Android-Anwendungen}
-Firebase Android SDK ist eine Bibliothek, die eine Anbindung an Firebase und dessen verschiedenen Dienste ermöglicht \cite{FirebaseSDK2022}. Firebase, entwickelt von Google, ist eine Plattform, die verschiedene Backend-Services wie Datenbanken, Authentifizierung, Cloud-Funktionen, Hosting und mehr bietet \cite{Firebase2022}. \newline
+Firebase Android \ac{SDK} ist eine Bibliothek, die eine Anbindung an Firebase und dessen verschiedenen Dienste ermöglicht \cite{FirebaseSDK2022}. Firebase, entwickelt von Google, ist eine Plattform, die verschiedene Backend-Services wie Datenbanken, Authentifizierung, Cloud-Funktionen, Hosting und mehr bietet \cite{Firebase2022}. \newline
 
 \noindent
-In LearnAhead wird die Bibliothek genutzt, um die Verbindung zur Firebase-Datenbank herzustellen. Die Firebase Android SDK bietet Funktionen zur nahtlosen Integration dieser Dienste in Android-Anwendungen. Es bietet eine Reihe von APIs und Konfigurationstools, die es Entwicklern ermöglichen, auf leistungsfähige Weise auf Firebase-Dienste zuzugreifen und diese in ihren Apps zu nutzen \cite{FirebaseSDK2022}. \newline
+In LearnAhead wird die Bibliothek genutzt, um die Verbindung zur Firebase-Datenbank herzustellen. Die Firebase Android SDK bietet Funktionen zur nahtlosen Integration dieser Dienste in Android-Anwendungen. Es bietet eine Reihe von \ac{APIs} und Konfigurationstools, die es Entwicklern ermöglichen, auf leistungsfähige Weise auf Firebase-Dienste zuzugreifen und diese in ihren Apps zu nutzen \cite{FirebaseSDK2022}. \newline
 
 \noindent
 Die Entscheidung, Firebase Android SDK für diese Arbeit zu nutzen, basiert auf seiner umfangreichen Integration in das Firebase-Ökosystem und seiner Fähigkeit, robuste und skalierbare Backend-Services bereitzustellen. Die Verwendung von Firebase Android SDK erleichtert den Zugriff auf und die Verwaltung von Firebase-Diensten innerhalb der Android-Anwendung \cite{FirebaseSDK2022}.
 
-\subsection{Wahl des Architektur-Patterns: Model-View-ViewModel (\ac*{MVVM})} \label{Wahl des Architektur-Pattern}
+\subsection{Wahl des Architektur-Patterns: Model-View-ViewModel (\ac{MVVM})} \label{Wahl des Architektur-Pattern}
 Bei der Entwicklung von Software ist die Wahl des richtigen Architektur-Patterns von entscheidender Bedeutung. Für diese Arbeit wurde das Model-View-ViewModel (MVVM) Pattern gewählt, welches sich in den letzten Jahren zu einem der Standard-Architektur-Patterns für Android-Entwicklung etabliert hat \cite{AndroidAppArchitecture}. \newline
 
 \noindent
@@ -138,10 +138,10 @@ Das Diagramm \ref*{fig:BackendKomposition} zeigt die Komposition des Backends. H
 \end{figure}
 \newpage
 \subsection{Deployment Diagramm} \label{Deployment Diagramm}
-Ein Deployment-Diagramm ist eine Art von Diagramm, das in der Unified Modeling Language (UML) verwendet wird. Es bietet eine grafische Darstellung der physischen Verteilung von Artefakten auf Knoten. Ein Artefakt repräsentiert eine konkrete Entität, die in einem System vorhanden ist. Ein Knoten ist in diesem Kontext eine physische Einheit, auf der die Software ausgeführt wird, wie zum Beispiel ein Server oder ein PC.\newline
+Ein Deployment-Diagramm ist eine Art von Diagramm, das in der \ac{UML} verwendet wird. Es bietet eine grafische Darstellung der physischen Verteilung von Artefakten auf Knoten. Ein Artefakt repräsentiert eine konkrete Entität, die in einem System vorhanden ist. Ein Knoten ist in diesem Kontext eine physische Einheit, auf der die Software ausgeführt wird, wie zum Beispiel ein Server oder ein PC.\newline
 
 \noindent
-Im Folgenden wird das Deployment-Diagramm der Android Studio \ac{MVVM} App "LearnAhead" gezeigt. Es illustriert, wie die Komponenten der App auf einem mobilen Gerät verteilt sind und wie sie mit externen Diensten wie Firebase und dem Google Drive mit der installierbaren APK-Datei interagieren.\newline
+Im Folgenden wird das Deployment-Diagramm der Android Studio \ac{MVVM} App "LearnAhead" gezeigt. Es illustriert, wie die Komponenten der App auf einem mobilen Gerät verteilt sind und wie sie mit externen Diensten wie Firebase und dem Google Drive mit der installierbaren \ac{APK}-Datei interagieren.\newline
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/diagramme/DeploymentDiagramm.png}
