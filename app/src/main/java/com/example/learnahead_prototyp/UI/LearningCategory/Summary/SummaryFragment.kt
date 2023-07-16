@@ -1,7 +1,6 @@
 package com.example.learnahead_prototyp.UI.LearningCategory.Summary
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class SummaryFragment : Fragment() {
 
     private val adapter by lazy {
         SummaryAdapter(
-            onItemClicked = { pos, item ->
+            onItemClicked = { item ->
                 findNavController().navigate(
                     R.id.action_summaryFragment_to_innerSummaryFragment,
                     Bundle().apply {

@@ -136,11 +136,7 @@ class HomeFragment : Fragment() {
 
                             val nextLearningDay = startDate.plusDays((learningDayIndex - 1) * interval)
 
-                            if (today == nextLearningDay && today != startDate) {
-                                true
-                            } else {
-                                false
-                            }
+                            today == nextLearningDay && today != startDate
                         } else {
                             false
                         }
@@ -188,9 +184,9 @@ class HomeFragment : Fragment() {
                     View.GONE
                 }
                 is UiState.Success -> {
-                    var pointsNow =currentUser?.currentPoints!!
+                    val pointsNow =currentUser?.currentPoints!!
                     if(pointsBefore != pointsNow ){
-                        var changedPoints = pointsNow- pointsBefore
+                        val changedPoints = pointsNow- pointsBefore
                         toast("Du hast gerade $changedPoints Punkte für deinen Login erhalten!")
                     }
                     View.GONE
@@ -202,13 +198,10 @@ class HomeFragment : Fragment() {
     /**
      * Handler für den Klick auf ein Item in der RecyclerView.
      */
-    private fun onItemClicked(position: Int, item: LearningCategory) {
+    private fun onItemClicked(item: LearningCategory) {
+        learningCategoryViewModel.setCurrentSelectedLearningCategory(item)
         findNavController().navigate(
             R.id.action_homeFragment_to_learningCategoryInnerViewFragment,
-            Bundle().apply {
-                learningCategoryViewModel.setCurrentSelectedLearningCategory(item)
-                putParcelable("learning_category", item)
-            }
         )
     }
 }

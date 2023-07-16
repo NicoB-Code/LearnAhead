@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.learnahead_prototyp.Data.Model.Summary
 import com.example.learnahead_prototyp.Data.Model.Test
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
@@ -47,13 +46,10 @@ class TestListingFragment : Fragment() {
 
     private val adapter: TestListingAdapter by lazy {
         TestListingAdapter(
-            onItemClicked = { pos, item ->
+            onItemClicked = { item ->
                 testViewModel.setCurrentTest(item)
                 findNavController().navigate(
                     R.id.action_testListingFragment_to_testExecuteFragment,
-                    Bundle().apply {
-                        putParcelable("test", item)
-                    }
                 )
             },
             onDeleteClicked = { pos, item ->
@@ -63,7 +59,7 @@ class TestListingFragment : Fragment() {
                 updateUserObject(item, true)
 
             },
-            onEditClicked = { pos, item ->
+            onEditClicked = { item ->
                 testViewModel.setCurrentTest(item)
                 findNavController().navigate(
                     R.id.action_testListingFragment_to_testDetailFragment
@@ -208,6 +204,7 @@ class TestListingFragment : Fragment() {
     /**
      * Diese Funktion aktualisiert die UI-Komponenten.
      */
+    @SuppressLint("SetTextI18n")
     private fun updateUI() {
         // Ruft den Namen der ausgewählten Lernkategorie aus dem gemeinsam genutzten ViewModel ab
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""

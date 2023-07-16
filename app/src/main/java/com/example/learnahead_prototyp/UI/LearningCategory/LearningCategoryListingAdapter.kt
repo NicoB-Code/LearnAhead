@@ -13,7 +13,7 @@ import com.example.learnahead_prototyp.databinding.ItemCategoryLayoutBinding
  * @param onDeleteClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf die Schaltfläche "Löschen" einer Lernkategorie geklickt wird. Der Index der Lernkategorie in der Liste und die Lernkategorie selbst werden übergeben.
  */
 class LearningCategoryListingAdapter(
-    private val onItemClicked: (Int, LearningCategory) -> Unit,
+    private val onItemClicked: (LearningCategory) -> Unit,
     private val onDeleteClicked: (Int, LearningCategory) -> Unit
 ) : RecyclerView.Adapter<LearningCategoryListingAdapter.MyViewHolder>() {
 
@@ -97,7 +97,7 @@ class LearningCategoryListingAdapter(
                 onDeleteClicked.invoke(bindingAdapterPosition, item)
             }
             binding.itemLayout.setOnClickListener {
-                onItemClicked.invoke(bindingAdapterPosition, item)
+                onItemClicked.invoke(item)
             }
         }
     }

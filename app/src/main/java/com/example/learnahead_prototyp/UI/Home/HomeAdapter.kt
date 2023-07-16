@@ -20,7 +20,7 @@ import java.time.temporal.ChronoUnit
  * @param onItemClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf ein Ziel geklickt wird. Der Index des Ziels in der Liste und das Ziel selbst werden übergeben.
  */
 class HomeAdapter(
-    val onItemClicked: (Int, LearningCategory) -> Unit,
+    val onItemClicked: (LearningCategory) -> Unit,
 ) : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
 
     /**
@@ -137,7 +137,6 @@ class HomeAdapter(
 
                 binding.continueOrStartLearningGoalButton.setOnClickListener {
                     onItemClicked.invoke(
-                        bindingAdapterPosition,
                         learningCategory
                     )
                 }

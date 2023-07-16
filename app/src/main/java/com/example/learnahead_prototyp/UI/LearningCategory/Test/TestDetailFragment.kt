@@ -22,7 +22,6 @@ import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
 import com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryViewModel
 import com.example.learnahead_prototyp.UI.LearningCategory.Question.CustomSpinnerAdapter
 import com.example.learnahead_prototyp.UI.LearningCategory.Question.QuestionListingAdapter
-import com.example.learnahead_prototyp.UI.LearningCategory.Question.QuestionViewModel
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -56,14 +55,15 @@ class TestDetailFragment : Fragment() {
     private val tagsList: MutableList<String> = mutableListOf()
     private val adapter by lazy {
         QuestionListingAdapter(
-            onItemClicked = { pos, item ->
-            },
+
             onDeleteClicked = { pos, item ->
                 questionsToAddToTheTest = questionsToAddToTheTest.filterNot { it.id == item.id }.toMutableList()
                 updateList()
                 toast("Frage wurde aus Test entfernt.")
             },
-            onEditClicked = {pos, item ->}
+            onEditClicked = {item ->
+
+            }
         )
     }
 

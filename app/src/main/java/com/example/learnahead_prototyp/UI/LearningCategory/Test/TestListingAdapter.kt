@@ -15,9 +15,9 @@ import java.util.concurrent.TimeUnit
  * @param onDeleteClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf die Schaltfläche "Löschen" eines Tests geklickt wird. Der Index des Tests in der Liste und der Test selbst werden übergeben.
  */
 class TestListingAdapter(
-    val onItemClicked: (Int, Test) -> Unit,
+    val onItemClicked: (Test) -> Unit,
     val onDeleteClicked: (Int, Test) -> Unit,
-    val onEditClicked:(Int, Test) -> Unit
+    val onEditClicked:(Test) -> Unit
 ) : RecyclerView.Adapter<TestListingAdapter.MyViewHolder>() {
 
     /**
@@ -112,11 +112,11 @@ class TestListingAdapter(
             }
 
             binding.edit.setOnClickListener{
-                onEditClicked.invoke(bindingAdapterPosition, test)
+                onEditClicked.invoke(test)
             }
 
             binding.itemLayout.setOnClickListener {
-                onItemClicked.invoke(bindingAdapterPosition, test)
+                onItemClicked.invoke(test)
             }
         }
     }

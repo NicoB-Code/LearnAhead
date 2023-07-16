@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
@@ -31,8 +30,8 @@ class LearningCategoryInnerViewFragment : Fragment() {
     // Deklaration der Variablen
     private var currentUser: User? = null
     private lateinit var binding: FragmentLearningCategoryInnerViewBinding
-    private val authViewModel: AuthViewModel by viewModels()
-    private val summaryViewModel: SummaryViewModel by viewModels()
+    private val authViewModel: AuthViewModel by activityViewModels()
+    private val summaryViewModel: SummaryViewModel by activityViewModels()
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private var currentLearningCategory: LearningCategory? = null
 

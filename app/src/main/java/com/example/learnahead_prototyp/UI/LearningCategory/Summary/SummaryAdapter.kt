@@ -15,7 +15,7 @@ import com.example.learnahead_prototyp.databinding.InnerViewSummaryBinding
  * @param onDeleteClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf die Löschen-Schaltfläche einer Zusammenfassung geklickt wird.
  */
 class SummaryAdapter(
-    val onItemClicked: (Int, Summary) -> Unit,
+    val onItemClicked: (Summary) -> Unit,
     val onDeleteClicked: (Int, Summary) -> Unit
 ) : RecyclerView.Adapter<SummaryAdapter.MyViewHolder>() {
 
@@ -90,7 +90,7 @@ class SummaryAdapter(
 
             // Setzt den Klicklistener für das Layout der inneren Zusammenfassungsansicht
             binding.innerViewSummaryLayout.setOnClickListener {
-                onItemClicked.invoke(bindingAdapterPosition, item)
+                onItemClicked.invoke(item)
             }
 
             // Setzt den Klicklistener für die Löschen-Schaltfläche der Zusammenfassung

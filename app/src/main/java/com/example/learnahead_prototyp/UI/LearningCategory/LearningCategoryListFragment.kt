@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
@@ -33,22 +33,19 @@ class LearningCategoryListFragment : Fragment() {
 
     // Deklaration der benötigten Variablen
     lateinit var binding: FragmentLearningCategoryListBinding
-    private val learnCategoryViewModel: LearnCategoryViewModel by viewModels()
-    private val authViewModel: AuthViewModel by viewModels()
+    private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
+    private val authViewModel: AuthViewModel by activityViewModels()
     private var deletePosition: Int = -1
     private var list: MutableList<LearningCategory> = arrayListOf()
 
     // Initialisierung des Adapters mit den entsprechenden Click-Callbacks
     private val adapter by lazy {
         LearningCategoryListingAdapter(
-            onItemClicked = { pos, item ->
+            onItemClicked = { item ->
                 // Navigation zum Lernkategorie-Detail-Fragment mit Parameter-Übergabe
+                learnCategoryViewModel.setCurrentSelectedLearningCategory(item)
                 findNavController().navigate(
-                    R.id.action_learningCategoryListFragment_to_learningCategoryInnerViewFragment,
-                    Bundle().apply {
-                        putString("type", "view")
-                        putParcelable("learning_category", item)
-                    })
+                    R.id.action_learningCategoryListFragment_to_learningCategoryInnerViewFragment)
             },
             onDeleteClicked = { pos, item ->
                 // Speichern der zu löschenden Position und Löschen der Lernkategorie über das ViewModel

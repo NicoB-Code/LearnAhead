@@ -45,26 +45,14 @@ class QuestionListingFragment : Fragment() {
 
     private val adapter by lazy {
         QuestionListingAdapter(
-            onItemClicked = { pos, item ->
-                // Navigation zum Frage-Detail-Fragment mit Parameter-Übergabe
-                findNavController().navigate(
-                    R.id.action_questionListingFragment_to_questionDetailFragment,
-                    Bundle().apply {
-                        putString("type", "view")
-                        putParcelable("question", item)
-                    }
-                )
-            },
             onDeleteClicked = { pos, item ->
                 // Speichern der zu löschenden Position und Löschen der Frage über das ViewModel
                 deletePosition = pos
                 questionViewModel.deleteQuestion(item)
             },
-            onEditClicked = { pos, item ->
+            onEditClicked = { item ->
                 questionViewModel.setCurrentQuestion(item)
-                findNavController().navigate(
-                    R.id.action_questionListingFragment_to_questionDetailFragment
-                )
+                findNavController().navigate(R.id.action_questionListingFragment_to_questionDetailFragment)
             }
         )
     }

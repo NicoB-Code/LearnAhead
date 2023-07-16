@@ -70,7 +70,7 @@
         android:id="@+id/levelDisplay"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="80dp"
+        android:layout_alignLeft="@id/username_profile"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:background="@drawable/level_display"

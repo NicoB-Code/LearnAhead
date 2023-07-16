@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Question
-import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.databinding.ItemQuestionLayoutBinding
 
 /**
@@ -14,9 +13,8 @@ import com.example.learnahead_prototyp.databinding.ItemQuestionLayoutBinding
  * @param onDeleteClicked Eine Lambda-Funktion, die aufgerufen wird, wenn auf die Schaltfläche "Löschen" einer Frage geklickt wird. Der Index der Frage in der Liste und die Frage selbst werden übergeben.
  */
 class QuestionListingAdapter(
-    val onItemClicked: (Int, Question) -> Unit,
     val onDeleteClicked: (Int, Question) -> Unit,
-    val onEditClicked: (Int, Question) -> Unit
+    val onEditClicked: (Question) -> Unit
 ) : RecyclerView.Adapter<QuestionListingAdapter.MyViewHolder>() {
 
     /**
@@ -101,13 +99,6 @@ class QuestionListingAdapter(
             }
             binding.edit.setOnClickListener {
                 onEditClicked.invoke(
-                    bindingAdapterPosition,
-                    item
-                )
-            }
-            binding.itemLayout.setOnClickListener {
-                onItemClicked.invoke(
-                    bindingAdapterPosition,
                     item
                 )
             }

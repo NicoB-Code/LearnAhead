@@ -80,10 +80,12 @@
         android:layout_below="@id/headerLine"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
         android:hint="@string/please_enter_here_your_test_title"
         android:textColorHint="@color/white"
         android:textAppearance="@style/fourteen_sp_regular_white"
-        android:gravity="top"
+        android:gravity="center_horizontal"
         android:background="@drawable/no_underline"
         android:textColor="@color/white"
         />
