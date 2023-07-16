@@ -51,8 +51,6 @@ class TestDetailFragment : Fragment() {
     private var isEdit: Boolean = false
     private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private val testViewModel: TestViewModel by activityViewModels()
-    private val questionViewModel: QuestionViewModel by activityViewModels()
-    private val tagsListString: MutableList<String> = mutableListOf()
     private var questionsToAddToTheTest: MutableList<Question> = mutableListOf()
     private var dropdownItems: MutableList<Question> = mutableListOf()
     private val tagsList: MutableList<String> = mutableListOf()
