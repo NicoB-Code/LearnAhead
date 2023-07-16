@@ -34,7 +34,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5pt"
-        android:background="@drawable/logo_prototype" />
+        android:background="@mipmap/app_logo_icon" />
 
     <!-- Label Register Header -->
     <TextView
