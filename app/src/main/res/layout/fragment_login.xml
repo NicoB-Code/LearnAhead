@@ -180,8 +180,6 @@
         android:layout_width="236dp"
         android:layout_below="@id/textRegister"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-
         android:elevation="8dp"
         android:text="@string/user_it_security_info"
         android:textAppearance="@style/ten_sp_bold_black"

@@ -361,7 +361,7 @@ class GoalDetailFragment : Fragment() {
         val startDate: Date = dateFormat.parse(startDateString)
         val endDate: Date = dateFormat.parse(endDateString)
 
-        if (isInitialSelection && title.isNotEmpty() && startDateString.trim().isNotEmpty() && endDateString.trim().isNotEmpty() && description.isNotEmpty()) {
+        if (isInitialSelection && title.isNotEmpty() && description.isNotEmpty()) {
             if(!startDate.after(endDate) || !endDate.before(startDate)){
                 binding.saveButton.show()
             } else {

@@ -166,6 +166,21 @@ class GoalListingFragment : Fragment() {
             }
         }
 
+        // Klick Listener für den Info Knopf
+        binding.infoIcon.setOnClickListener {
+            AlertDialog.Builder(context)
+                .setTitle("Information")
+                .setMessage("Willkommen bei den Lernzielen!\n" +
+                        "Hier kannst du deine Ziele erstellen und verwalten." +
+                        "Wenn du ein Ziel erstellst wird dir mit einem neurowissenschaftlichen Algorithmus ein Lernplan erstellt.\n" +
+                        "Dieser erinnert dich in immer auf der Home-Seite daran, was du lernen solltest! Probier es doch mal aus. ")
+                .setPositiveButton("Danke!") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+
+        }
+
         // Klick-Listener für den "Profile"-Button
         binding.profileIcon.setOnClickListener {
             findNavController().navigate(R.id.action_goalListingFragment_to_profileFragment)
