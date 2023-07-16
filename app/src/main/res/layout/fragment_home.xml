@@ -45,6 +45,16 @@
         android:background="@drawable/user_icon"
         android:elevation="7dp"/>
 
+    <!-- Info Icon -->
+    <ImageView
+        android:id="@+id/infoIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/info_icon"
+        android:layout_centerHorizontal="true"
+        android:elevation="7dp" />
+
     <!-- Logout-Icon -->
     <ImageView
         android:id="@+id/logoutIcon"

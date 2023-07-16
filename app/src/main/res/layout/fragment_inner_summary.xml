@@ -89,6 +89,17 @@
             android:textAppearance="@style/twenty_sp_bold_black"
             android:background="@drawable/markdown_button"
             />
+        <!-- Info Icon -->
+        <ImageView
+            android:id="@+id/infoIcon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/info_icon"
+            android:elevation="7dp" />
+
+
 
     </LinearLayout>
 

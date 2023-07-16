@@ -172,4 +172,32 @@
         android:elevation="10dp"
         android:indeterminateTint="@color/white"
         android:visibility="invisible" />
+
+    <!-- UserInfo -->
+    <TextView
+        android:id="@+id/UserInfo"
+        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_below="@id/textRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+
+        android:elevation="8dp"
+        android:text="@string/user_it_security_info"
+        android:textAppearance="@style/ten_sp_bold_black"
+        android:gravity="center"    />
+
+    <!-- UserInfo -->
+    <TextView
+        android:id="@+id/UserInfoDarkMode"
+        android:layout_below="@id/loginBox"
+        android:layout_height="wrap_content"
+        android:layout_width="266dp"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="8dp"
+        android:text="@string/dont_use_dark_mode"
+        android:textAppearance="@style/eighteen_sp_regular_white"
+        android:gravity="center"    />
+
 </RelativeLayout>

@@ -91,4 +91,6 @@
     <string name="add_questions_manually">Fragen manuell hinzufügen</string>
     <string name="false_answer">Falsch</string>
     <string name="correct_answer">Richtig</string>
+    <string name="user_it_security_info">Wenn du unsere App nutzt, erklärst du dich damit einverstanden, dass deine Daten in Firebase (Google) gespeichert und verarbeitet werden.</string>
+    <string name="dont_use_dark_mode">Bitte nutze keinen Dark Mode.</string>
 </resources>
