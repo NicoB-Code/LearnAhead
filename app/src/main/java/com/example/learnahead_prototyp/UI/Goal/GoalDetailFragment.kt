@@ -44,10 +44,6 @@ class GoalDetailFragment : Fragment() {
 
 
     private val currentDate: Calendar = Calendar.getInstance()
-    private var year = currentDate[Calendar.YEAR]
-    private var month = currentDate[Calendar.MONTH]
-    private var day = currentDate[Calendar.DAY_OF_MONTH]
-
     private var currentUser: User? = null
 
     // Ein Tag zur Identifizierung des Ziel-Detail-Fragments für Logging-Zwecke.

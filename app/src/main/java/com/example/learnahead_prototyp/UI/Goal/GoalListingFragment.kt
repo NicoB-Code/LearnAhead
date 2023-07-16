@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.learnahead_prototyp.Data.Model.Goal
+import com.example.learnahead_prototyp.Data.Model.LearningCategory
 import com.example.learnahead_prototyp.Data.Model.User
 import com.example.learnahead_prototyp.R
 import com.example.learnahead_prototyp.UI.Auth.AuthViewModel
+import com.example.learnahead_prototyp.UI.LearningCategory.LearnCategoryViewModel
 import com.example.learnahead_prototyp.Util.UiState
 import com.example.learnahead_prototyp.Util.hide
 import com.example.learnahead_prototyp.Util.show
@@ -26,6 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class GoalListingFragment : Fragment() {
 
+    private lateinit var relatedCategory: LearningCategory
+    private lateinit var learningCategoriesList: MutableList<LearningCategory>
     private var currentUser: User? = null
 
     // Konstante für das Logging-Tag
@@ -33,8 +37,9 @@ class GoalListingFragment : Fragment() {
 
     // Deklaration der benötigten Variablen
     private lateinit var binding: FragmentGoalListingBinding
-    private val viewModel: GoalViewModel by viewModels()
-    private val authViewModel: AuthViewModel by viewModels()
+    private val viewModel: GoalViewModel by activityViewModels()
+    private val authViewModel: AuthViewModel by activityViewModels()
+    private val learnCategoryViewModel: LearnCategoryViewModel by activityViewModels()
     private var deletePosition: Int = -1
     private var goalList: MutableList<Goal> = mutableListOf()
 
@@ -61,6 +66,12 @@ class GoalListingFragment : Fragment() {
             },
             onDeleteClicked = { pos, item ->
                 // Speichern der zu löschenden Position und Löschen des Ziels über das ViewModel
+
+                // Finde die zugehörige LearningCategory des Ziels
+                relatedCategory = learningCategoriesList.find { it.relatedLearningGoal?.id == item.id }!!
+
+                // Setze das relatedLearningGoal auf null, wenn die LearningCategory gefunden wurde
+                relatedCategory.relatedLearningGoal = null
                 deletePosition = pos
                 viewModel.deleteGoal(item)
                 updateUserObject(item, true)
@@ -156,6 +167,28 @@ class GoalListingFragment : Fragment() {
      * Initialisiert alle Observer, welche die ViewModel-Objekte auf Veränderungen überwachen.
      */
     private fun setupObservers() {
+
+        // Observer für "learningCategoriesList"-Objekt im "learnCategoryViewModel". Überwacht Änderungen in der Liste der Lernkategorien.
+        learnCategoryViewModel.learningCategories.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    // Fortschrittsanzeige anzeigen
+                    binding.progressBar.show()
+                }
+
+                is UiState.Failure -> {
+                    // Fortschrittsanzeige ausblenden und Fehlermeldung anzeigen
+                    binding.progressBar.hide()
+                    toast(state.error)
+                }
+
+                is UiState.Success -> {
+                    // Fortschrittsanzeige ausblenden und Liste der Lernkategorien aktualisieren
+                    binding.progressBar.hide()
+                    learningCategoriesList = state.data.toMutableList()
+                }
+            }
+        }
         // Observer für "goalList"-Objekt im "viewModel". Überwacht Änderungen in der Liste der Benutzerziele.
         viewModel.goal.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -196,13 +229,20 @@ class GoalListingFragment : Fragment() {
                 is UiState.Success -> {
                     // Fortschrittsanzeige ausblenden, Erfolgsmeldung anzeigen und Ziel aus der Liste entfernen
                     binding.progressBar.hide()
-                    toast(state.data)
-                    if (deletePosition != -1) {
+                    //toast(state.data)
+                    if (deletePosition != -1 && deletePosition < goalList.size) {
                         goalList.removeAt(deletePosition)
                         adapter.updateList(goalList)
                         // Das Lernziel wurde gelöscht, somit deletePosition wieder zurücksetzen
                         deletePosition = -1
+
+                        // Den User in der DB updaten
+                        currentUser?.let {
+                            it.learningCategories[learningCategoriesList.indexOf(relatedCategory)] = relatedCategory
+                            authViewModel.updateUserInfo(it)
+                        }
                     }
+
                 }
             }
         }
