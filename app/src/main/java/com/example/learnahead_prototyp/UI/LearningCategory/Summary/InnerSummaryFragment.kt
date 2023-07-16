@@ -90,7 +90,87 @@ class InnerSummaryFragment : Fragment() {
         if (currentSummary?.content?.isNotEmpty() == true) {
             binding.markdownEditText.setText(currentSummary?.content)
         } else {
-            binding.markdownEditText.setText("# Hello Zusammenfassung\nDies ist ein Markdown-Editor fuer deine Zusammenfassungen.")
+            binding.markdownEditText.setText(
+                    "# Markdown-Anleitung\n" +
+                    "\n" +
+                    "## Was ist Markdown?\n" +
+                    "Markdown ist eine einfache Auszeichnungssprache, mit der du Text in ein strukturiertes Format umwandeln kannst. Es ist sehr beliebt für das Schreiben von Dokumentationen, README-Dateien und Webseiten. Markdown verwendet eine leicht lesbare Syntax, die in einen HTML-Code konvertiert werden kann.\n" +
+                    "\n" +
+                    "## Textformatierung\n" +
+                    "### Überschriften\n" +
+                    "Du kannst Überschriften mit einem oder mehreren Hash-Zeichen (`#`) erstellen. Je nach Anzahl der Hash-Zeichen wird die Größe der Überschrift festgelegt. Zum Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "# Überschrift der Ebene 1\n" +
+                    "## Überschrift der Ebene 2\n" +
+                    "### Überschrift der Ebene 3\n" +
+                    "```\n" +
+                    "\n" +
+                    "### Absätze\n" +
+                    "Einen Absatz kannst du einfach durch eine Leerzeile erstellen. Markdown fügt automatisch Absätze ein, wenn du eine Leerzeile zwischen zwei Textblöcken lässt.\n" +
+                    "\n" +
+                    "### Fett und kursiv\n" +
+                    "Um Text fett darzustellen, umgibst du ihn mit zwei Sternchen (`**`) oder zwei Unterstrichen (`__`). Um Text kursiv darzustellen, verwendest du ein Sternchen (`*`) oder einen Unterstrich (`_`). Zum Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "**fetter Text**\n" +
+                    "*kursiver Text*\n" +
+                    "```\n" +
+                    "\n" +
+                    "### Aufzählungslisten\n" +
+                    "Erstelle eine Aufzählungsliste, indem du jede Listenelement mit einem Bindestrich (`-`) oder einem Sternchen (`*`) beginnst. Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "- Erstes Element\n" +
+                    "- Zweites Element\n" +
+                    "- Drittes Element\n" +
+                    "```\n" +
+                    "\n" +
+                    "### Nummerierte Listen\n" +
+                    "Erstelle eine nummerierte Liste, indem du jedes Listenelement mit einer Zahl und einem Punkt beginnst. Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "1. Erstes Element\n" +
+                    "2. Zweites Element\n" +
+                    "3. Drittes Element\n" +
+                    "```\n" +
+                    "\n" +
+                    "### Links\n" +
+                    "Du kannst Links erstellen, indem du den Linktext in eckigen Klammern (`[]`) und die URL in runden Klammern (`()`) angibst. Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "[Linktext](https://www.example.com)\n" +
+                    "```\n" +
+                    "\n" +
+                    "### Bilder\n" +
+                    "Füge Bilder hinzu, indem du den Alternativtext in eckigen Klammern (`[]`) und den Pfad oder die URL des Bildes in runden Klammern (`()`) angibst. Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "![Alternativtext](pfad/zum/bild.jpg)\n" +
+                    "```\n" +
+                    "\n" +
+                    "## Erweiterte Formatierung\n" +
+                    "Markdown unterstützt auch erweiterte Formatierungsmöglichkeiten wie Tabellen und Zitate. Hier ist eine kurze Zusammenfassung:\n" +
+                    "\n" +
+                    "### Tabellen\n" +
+                    "Du kannst Tabellen erstellen, indem du die Zellen und deren Inhalt mit senkrechten Strichen (`|`) trennst. Die erste Zeile wird normalerweise für die Tabellenüberschriften verwendet, und die zweite Zeile enthält Trennlinien. Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "| Spalte 1 | Spalte 2 |\n" +
+                    "|----------|----------|\n" +
+                    "| Inhalt 1 | Inhalt 2 |\n" +
+                    "| Inhalt 3 | Inhalt 4 |\n" +
+                    "```\n" +
+                    "\n" +
+                    "### Zitate\n" +
+                    "Um Zitate zu erstellen, füge den zitierten Text mit einem Größer-als-Zeichen (`>`) am Anfang jeder Zeile ein. Beispiel:\n" +
+                    "\n" +
+                    "```\n" +
+                    "> Das ist ein Zitat.\n" +
+                    "> Es kann über mehrere Zeilen gehen.\n" +
+                    "```\n" +
+                    "\n" +
+                    "Das war eine grundlegende Einführung in Markdown. Es gibt noch viele weitere Funktionen und Möglichkeiten, die du erkunden kannst. Viel Spaß beim Schreiben mit Markdown!")
         }
     }
 
