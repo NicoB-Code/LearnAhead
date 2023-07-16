@@ -72,6 +72,7 @@
         android:layout_marginEnd="12dp"
         android:drawablePadding="13dp"
         android:paddingStart="13dp"
+        android:paddingEnd="13dp"
         android:layout_alignTop="@id/loginBox"
         android:elevation="6dp"
         android:hint="@string/email_address"

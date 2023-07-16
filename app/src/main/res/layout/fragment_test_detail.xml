@@ -8,7 +8,7 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
         android:id="@+id/darkBackground"
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/dark_full_screen" />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
         android:id="@+id/bottomMenuBackground"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:elevation="7dp"
         android:rotation="-90" />
 
-    <!-- Profil Header Label -->
+    <!-- Header Label -->
     <TextView
         android:id="@+id/headerLabel"
         android:layout_width="wrap_content"
@@ -74,13 +74,13 @@
 
     <!-- Test Title to enter -->
     <EditText
-        android:id="@+id/test_title"
+        android:id="@+id/textTestTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/headerLine"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:hint="Gib hier den Titel deines Tests ein:"
+        android:hint="@string/please_enter_here_your_test_title"
         android:textColorHint="@color/white"
         android:textAppearance="@style/fourteen_sp_regular_white"
         android:gravity="top"
@@ -89,10 +89,10 @@
         />
 
     <ScrollView
-        android:id="@+id/scroll_view_container"
+        android:id="@+id/scrollViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/test_title"
+        android:layout_below="@id/textTestTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="14dp"
         android:layout_marginTop="14dp"
@@ -101,7 +101,7 @@
         android:layout_marginBottom="14dp">
 
     <LinearLayout
-        android:id="@+id/add_question_box_small"
+        android:id="@+id/addQuestionBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="2dp"
@@ -111,12 +111,12 @@
 
             <!-- Add Questions by Tags Label -->
             <TextView
-                android:id="@+id/add_questions_by_tags_label"
+                android:id="@+id/addQuestionsByTagsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:elevation="8dp"
-                android:text="Fragen mithilfe von Tags hinzufügen"
+                android:text="@string/add_questions_by_tags"
                 android:textAppearance="@style/fourteen_sp_bold_black"
                 />
 
@@ -140,7 +140,7 @@
 
             <!-- Control to add Tags which will get created inside the container -->
             <EditText
-                android:id="@+id/add_tags"
+                android:id="@+id/textAddTags"
                 android:layout_width="match_parent"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
@@ -158,10 +158,10 @@
 
             <!-- Checkbox to manually add questions -->
             <CheckBox
-                android:id="@+id/checkbox_manually_add_questions"
+                android:id="@+id/checkboxManuallyAddQuestions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fragen manuell hinzufügen"
+                android:text="@string/add_questions_manually"
                 android:textAppearance="@style/fourteen_sp_regular_black"
                 android:elevation="8dp"
                 android:layout_gravity="left"
@@ -170,7 +170,7 @@
 
             <!-- Dropdown Element -->
             <Spinner
-                android:id="@+id/dropdown_element_manual_question"
+                android:id="@+id/dropdownManualQuestion"
                 android:layout_width="match_parent"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
@@ -182,19 +182,16 @@
                 android:layout_marginBottom="8dp"
                 />
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_add_manual_question"
+                android:id="@+id/buttonAddManualQuestion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/bottomMenuBackground"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
-
                 android:layout_marginBottom="19dp"
                 android:visibility="gone"
                 android:background="@drawable/add_question_rectangle"
                 android:elevation="8dp"
                 android:drawablePadding="8dp"
-                android:text="Frage hinzufügen"
+                android:text="@string/add_question"
                 android:drawableLeft="@drawable/add_circle_black"
                 android:textAppearance="@style/fourteen_sp_bold_black"
                 android:textColor="@null"
@@ -207,19 +204,19 @@
 
     <!-- Item Layout -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/addedQuestionsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@id/scroll_view_container"
-        android:layout_above="@id/button_save_test"
+        android:layout_below="@id/scrollViewContainer"
+        android:layout_above="@id/buttonSaveTest"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <!-- Test speichern -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_save_test"
+        android:id="@+id/buttonSaveTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottomMenuBackground"
@@ -233,7 +230,7 @@
         app:iconPadding="-10dp"
         android:elevation="8dp"
         android:paddingStart="10dp"
-        android:text="Test erstellen"
+        android:text="@string/create_test"
         android:textAppearance="@style/sixteen_sp_regular_black"
         android:textColor="@null"
         app:backgroundTint="@null"

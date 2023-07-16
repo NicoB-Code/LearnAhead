@@ -8,7 +8,7 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
         android:id="@+id/darkBackground"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:background="@drawable/dark_full_screen"
         />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
         android:id="@+id/bottomMenuBackground"
         android:layout_width="match_parent"
@@ -67,6 +67,55 @@
         android:background="@drawable/logout"
         android:elevation="7dp" />
 
+    <TextView
+        android:id="@+id/textTestAnnotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_annotation"
+        android:gravity="start|top"
+        android:textAppearance="@style/fourteen_sp_regular_white"
+        android:textColor="@null"
+        android:layout_marginStart="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@id/headerLine"
+        android:elevation="8dp"
+        tools:ignore="RtlSymmetry" />
+
+    <!-- Item Layout -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/testsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/textTestAnnotation"
+        android:layout_above="@id/createTestButton"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    <!-- Test erstellen -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createTestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomMenuBackground"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="34dp"
+        android:background="@drawable/add_button"
+        android:drawableLeft="@drawable/add_circle_black"
+        app:iconPadding="-55dp"
+        android:elevation="8dp"
+        android:paddingStart="55dp"
+        android:text="@string/create_test"
+        android:textAppearance="@style/twenty_sp_bold_black"
+        android:textColor="@null"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry" />
+
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/homeButton"
@@ -115,57 +164,6 @@
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
-
-    <TextView
-        android:id="@+id/test_annotation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test_annotation"
-        android:gravity="start|top"
-        android:textAppearance="@style/fourteen_sp_regular_white"
-        android:textColor="@null"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginTop="11dp"
-        android:layout_below="@id/headerLine"
-        android:elevation="8dp"
-        tools:ignore="RtlSymmetry" />
-
-    <!-- Item Layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_below="@id/test_annotation"
-        android:layout_above="@id/button_create_test"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-
-    <!-- Test erstellen -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_create_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/bottomMenuBackground"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginEnd="34dp"
-        android:background="@drawable/add_button"
-        android:drawableLeft="@drawable/add_circle_black"
-        app:iconPadding="-55dp"
-        android:elevation="8dp"
-        android:paddingStart="55dp"
-        android:text="@string/create_test"
-        android:textAppearance="@style/twenty_sp_bold_black"
-        android:textColor="@null"
-        app:backgroundTint="@null"
-        tools:ignore="RtlSymmetry" />
-
-
 
     <ProgressBar
         android:id="@+id/progressBar"

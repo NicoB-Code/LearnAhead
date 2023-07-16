@@ -109,7 +109,7 @@ class TestExecuteFragment : Fragment() {
     @SuppressLint("ResourceType")
     private fun initAnimation(view: View) {
         // Initialisiere die Views
-        cardView = view.findViewById(R.id.card_view)
+        cardView = view.findViewById(R.id.questionToAnswerCard)
         linearLayout = view.findViewById(R.id.index_card_box)
 
         // Lade die Flip-Animation aus XML
@@ -137,7 +137,7 @@ class TestExecuteFragment : Fragment() {
 
             // Setze den Fragetext im TextView
             questionViewModel.setCurrentQuestion(randomQuestion)
-            binding.addQuestionsByTagsLabel.text = questionViewModel.currentQuestion.value!!.question
+            binding.questionsToAnswer.text = questionViewModel.currentQuestion.value!!.question
         } else {
             // Keine Fragen mehr übrig
             testViewModel.currentTest.value!!.questions = questionsAfterAnswering
@@ -159,7 +159,7 @@ class TestExecuteFragment : Fragment() {
             // Aktualisiere den Benutzer in der Datenbank
             authViewModel.updateUserInfo(currentUser!!)
 
-            binding.addQuestionsByTagsLabel.text = "Test beendet"
+            binding.questionsToAnswer.text = "Test beendet"
             currentUser!!.currentPoints += 20
             authViewModel.updateUserInfo(currentUser!!)
 
@@ -180,10 +180,10 @@ class TestExecuteFragment : Fragment() {
     private fun flipCard() {
         if (isShowingQuestion) {
             // Zeige die Antwort an
-            binding.addQuestionsByTagsLabel.text = questionViewModel.currentQuestion.value!!.answer
+            binding.questionsToAnswer.text = questionViewModel.currentQuestion.value!!.answer
         } else {
             // Zeige die Frage an
-            binding.addQuestionsByTagsLabel.text = questionViewModel.currentQuestion.value!!.question
+            binding.questionsToAnswer.text = questionViewModel.currentQuestion.value!!.question
         }
         // Erzeuge ObjectAnimator für die rotationY-Eigenschaft
         val anim1 = ObjectAnimator.ofFloat(cardView, "rotationY", 0f, 90f)
@@ -277,7 +277,7 @@ class TestExecuteFragment : Fragment() {
         }
 
         // Event-Listener für den "Richtig"-Button
-        binding.buttonCorrect.setOnClickListener {
+        binding.correctButton.setOnClickListener {
             questionViewModel.currentQuestion.value!!.lastTest = true
             currentUser!!.currentPoints += (5*(questionViewModel.currentQuestion.value!!.wrongCounter + 1))
 
@@ -303,7 +303,7 @@ class TestExecuteFragment : Fragment() {
         }
 
         // Event-Listener für den "Falsch"-Button
-        binding.buttonFalse.setOnClickListener {
+        binding.falseButton.setOnClickListener {
             questionViewModel.currentQuestion.value!!.lastTest = false
             questionViewModel.currentQuestion.value!!.wrongCounter += 1
             questionViewModel.currentQuestion.value?.let { currentQuestion ->

@@ -118,7 +118,7 @@ class TestListingFragment : Fragment() {
         setLocalCurrentUser()
         updateUI()
 
-        binding.recyclerView.adapter = adapter
+        binding.testsRecyclerView.adapter = adapter
     }
 
     /**
@@ -249,7 +249,7 @@ class TestListingFragment : Fragment() {
         }
 
         // Setzt den Event-Listener für den "Create Test"-Button
-        binding.buttonCreateTest.setOnClickListener {
+        binding.createTestButton.setOnClickListener {
             findNavController().navigate(R.id.action_testListingFragment_to_testDetailFragment)
         }
     }

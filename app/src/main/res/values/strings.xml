@@ -86,4 +86,9 @@
     <string name="learning_goal_name">Lernziel Name:</string>
     <string name="continue_learning_goal">Weiter machen</string>
     <string name="start_learning_goal">Beginnen</string>
+    <string name="please_enter_here_your_test_title">Bitte geben Sie hier den Titel des Tests ein:</string>
+    <string name="add_questions_by_tags">Fragen mithilfe von Tags hinzufügen</string>
+    <string name="add_questions_manually">Fragen manuell hinzufügen</string>
+    <string name="false_answer">Falsch</string>
+    <string name="correct_answer">Richtig</string>
 </resources>

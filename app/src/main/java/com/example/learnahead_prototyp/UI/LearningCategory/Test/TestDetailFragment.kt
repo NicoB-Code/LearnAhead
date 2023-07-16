@@ -102,7 +102,7 @@ class TestDetailFragment : Fragment() {
         setEventListener()
         updateUI()
         populateDropdown()
-        binding.recyclerView.adapter = adapter
+        binding.addedQuestionsRecyclerView.adapter = adapter
     }
 
     /**
@@ -225,7 +225,7 @@ class TestDetailFragment : Fragment() {
     }
 
     private fun addCurrentManualQuestion() {
-        var selectedQuestion = binding.dropdownElementManualQuestion.selectedItemPosition
+        var selectedQuestion = binding.dropdownManualQuestion.selectedItemPosition
         questionsToAddToTheTest.add(dropdownItems[selectedQuestion])
         adapter.updateList(questionsToAddToTheTest)
         toast("Frage manuell hinzugefügt")
@@ -239,7 +239,7 @@ class TestDetailFragment : Fragment() {
         dropdownItems = getQuestionDropdownItems()
         val dropdownItemsStrings = dropdownItems.map { it.question }
         val adapter = CustomSpinnerAdapter(requireContext(), R.layout.spinner_dropdown_item, dropdownItemsStrings)
-        binding.dropdownElementManualQuestion.adapter = adapter
+        binding.dropdownManualQuestion.adapter = adapter
     }
 
     /**
@@ -395,10 +395,13 @@ class TestDetailFragment : Fragment() {
         val selectedLearningCategoryName = learnCategoryViewModel.currentSelectedLearningCategory.value?.name ?: ""
         binding.headerLabel.text = "$selectedLearningCategoryName / Fragen"
 
-        binding.testTitle.setText(testViewModel.currentTest.value?.name!!)
-        questionsToAddToTheTest = testViewModel.currentTest.value?.questions!!
-        adapter.updateList(questionsToAddToTheTest)
-        if(binding.testTitle.text.isNotEmpty()){
+
+        if(testViewModel.currentTest.value != null){
+            binding.textTestTitle.setText(testViewModel.currentTest.value?.name!!)
+            questionsToAddToTheTest = testViewModel.currentTest.value?.questions!!
+            adapter.updateList(questionsToAddToTheTest)
+        }
+        if(binding.textTestTitle.text.isNotEmpty()){
             isEdit = true
         }
     }
@@ -407,12 +410,12 @@ class TestDetailFragment : Fragment() {
      * Registriert Event-Listener für die verschiedenen UI-Elemente.
      */
     private fun setEventListener() {
-        binding.addTags.setOnEditorActionListener { _, actionId, event ->
+        binding.textAddTags.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
-                val enteredText = binding.addTags.text.toString()
+                val enteredText = binding.textAddTags.text.toString()
                 if (enteredText.isNotBlank()) {
                     addTag(enteredText)
-                    binding.addTags.text.clear()
+                    binding.textAddTags.text.clear()
                 }
                 true
             } else {
@@ -421,7 +424,7 @@ class TestDetailFragment : Fragment() {
         }
 
         binding.checkboxManuallyAddQuestions.setOnCheckedChangeListener { _, isChecked ->
-            binding.dropdownElementManualQuestion.visibility = if (isChecked) View.VISIBLE else View.GONE
+            binding.dropdownManualQuestion.visibility = if (isChecked) View.VISIBLE else View.GONE
             binding.buttonAddManualQuestion.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
 
@@ -453,7 +456,7 @@ class TestDetailFragment : Fragment() {
 
         binding.buttonSaveTest.setOnClickListener {
             if (isEdit)
-                if(binding.testTitle.text.toString().isNotEmpty()){
+                if(binding.textTestTitle.text.toString().isNotEmpty()){
                     if(questionsToAddToTheTest.isEmpty()){
                         toast("Bitte füge dem Test fragen zu bevor du ihn erstellst!")
                     } else {
@@ -463,7 +466,7 @@ class TestDetailFragment : Fragment() {
                     toast("Bitte gib einen Titel für den Test an!")
                 }
             else
-                if(binding.testTitle.text.toString().isNotEmpty()){
+                if(binding.textTestTitle.text.toString().isNotEmpty()){
                     if(questionsToAddToTheTest.isEmpty()){
                         toast("Bitte füge dem Test fragen zu bevor du ihn erstellst!")
                     } else {
@@ -498,7 +501,7 @@ class TestDetailFragment : Fragment() {
     private fun getTest(): Test {
         return Test(
             id = testViewModel.currentTest.value?.id ?: "",
-            name = binding.testTitle.text.toString(),
+            name = binding.textTestTitle.text.toString(),
             questions = questionsToAddToTheTest
         )
     }
