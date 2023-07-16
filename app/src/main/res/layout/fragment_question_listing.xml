@@ -78,11 +78,14 @@
         android:layout_marginEnd="7dp"
         android:drawableLeft="@drawable/search_icon"
         android:hint="@string/search"
+        android:maxLines="1"
         android:textColorHint="@color/black"
-        android:padding="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="13dp"
+        android:scrollHorizontally="true"
         android:background="@drawable/searchbar_rectangle"
-        android:gravity="center_vertical"
-        />
+        android:gravity="start|center_vertical"
+        tools:ignore="RtlSymmetry" />
 
     <!-- Item Layout -->
     <androidx.recyclerview.widget.RecyclerView

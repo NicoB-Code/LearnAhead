@@ -54,18 +54,22 @@ class TestDetailFragment : Fragment() {
     private var dropdownItems: MutableList<Question> = mutableListOf()
     private val tagsList: MutableList<String> = mutableListOf()
     private val adapter by lazy {
-        QuestionListingAdapter(
-
-            onDeleteClicked = { pos, item ->
-                questionsToAddToTheTest = questionsToAddToTheTest.filterNot { it.id == item.id }.toMutableList()
-                updateList()
-                toast("Frage wurde aus Test entfernt.")
-            },
-            onEditClicked = {item ->
-
+            QuestionListingAdapter(
+                onDeleteClicked = { pos, item ->
+                    questionsToAddToTheTest = questionsToAddToTheTest.filterNot { it.id == item.id }.toMutableList()
+                    updateList()
+                    populateDropdown()
+                    toast("Frage wurde aus Test entfernt.")
+                },
+                onEditClicked = { item ->
+                    // Handle the edit functionality for the question
+                    // For example, navigate to a fragment for editing the question
+                }
+            ).apply {
+                isEditMode = false // Set to false for QuestionListingFragment, true for TestListingFragment
             }
-        )
-    }
+        }
+
 
     private fun updateList() {
         adapter.updateList(questionsToAddToTheTest)

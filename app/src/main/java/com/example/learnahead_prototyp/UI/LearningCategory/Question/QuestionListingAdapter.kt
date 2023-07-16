@@ -1,6 +1,7 @@
 package com.example.learnahead_prototyp.UI.LearningCategory.Question
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learnahead_prototyp.Data.Model.Question
@@ -21,6 +22,12 @@ class QuestionListingAdapter(
      * Eine Liste von Fragen, die in der RecyclerView angezeigt werden soll.
      */
     private var list: MutableList<Question> = arrayListOf()
+
+    /**
+     * Indicates whether the adapter is in edit mode or not.
+     */
+    var isEditMode: Boolean = true // Set to true by default, change it based on your requirements
+
 
     /**
      * Erstellt eine neue View für jede Frage in der Liste.
@@ -44,6 +51,13 @@ class QuestionListingAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = list[position]
         holder.bind(item)
+
+        // Control the visibility of the edit icon based on the edit mode
+        if (isEditMode) {
+            holder.binding.edit.visibility = View.VISIBLE
+        } else {
+            holder.binding.edit.visibility = View.GONE
+        }
     }
 
     /**
