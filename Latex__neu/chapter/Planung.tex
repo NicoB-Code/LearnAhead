@@ -14,7 +14,7 @@ Mit diesen Lernzielen wird dem User dann ein empfohlener Lernplan erstellt.
     \item Lerninhalte zusammenfassen
     \item Tests erstellen
     \item Lernkategorien
-    \item Auf Android im Play Store verfügbar
+    \item Auf Android verfügbar
     \item Lernziele und dazugehörigen automatisch erstellten Lernplan
     \item User-Profil mit Benutzername und Kennwort
 \end{itemize}
@@ -25,11 +25,11 @@ Mit diesen Lernzielen wird dem User dann ein empfohlener Lernplan erstellt.
     \item Mobile Lösung
     \item Datenbank
     \item IT-Security
-    \item DSGVO
+    \item \ac{DSGVO}
 \end{itemize}
 
 \subsubsection{Ausblick}
-Bei erfolgreichen Entwicklungsergebnissen soll die Lösung in Betrieb genommen und der Öffentlichkeit, per Play Store, zur Verfügung gestellt werden.
+Bei erfolgreichen Entwicklungsergebnissen soll die Lösung in Betrieb genommen und der Öffentlichkeit, auf Android, zur Verfügung gestellt werden.
 
 \subsubsection{Erweiterungsmöglichkeiten (optional)}
 \begin{itemize}
@@ -39,7 +39,10 @@ Bei erfolgreichen Entwicklungsergebnissen soll die Lösung in Betrieb genommen u
 
 \subsection{Arbeitspaketplan}
 \label{sec:arbeitspaketplan}
-Der Arbeitspaketplan bezeichnet die Aufzählung jedes Arbeitspakets auf Basis des Lastenhefts. \newline Ein Arbeitspaket wird durch folgendes definiert: 
+Der Arbeitspaketplan bezeichnet die Aufzählung jedes Arbeitspakets auf Basis des Lastenhefts. \newline 
+
+\noindent 
+Ein Arbeitspaket wird durch folgendes definiert: 
 \begin{itemize}
     \item Ein definiertes Ergebnis (was soll in diesem Arbeitspaket erreicht werden)
     \item Der zeitliche Aufwand des Arbeitspakets
@@ -54,11 +57,15 @@ Hier wird der Arbeitspaketplan als Unterteilung der einzelnen Epics in User Stor
 Erledigte Epics und User Stories sind dabei unter dem Reiter \gqq{Fertig} einsehbar.
 In den einzelnen User Stories wird ein definiertes Ergebnis aus Sicht des Nutzers beschrieben.
 Der zeitliche Aufwand der einzelnen Arbeitspakete ergibt sich aus der Summe der Dauer der zugewiesenen Tasks. 
+
+\noindent
 In Kombination mit Scrum werden dabei vor Beginn des jeweiligen Sprints die einzelnen Tasks geschätzt und auf einen festen Arbeitsaufwand festgelegt. 
 
+\noindent
 Im Laufe des Sprints werden dann die zugewiesenen Stunden von den zugewiesenen Bearbeitern abgebaut und im jeweiligen Task aktualisiert.
 Ist der Task beendet, so wird er mit \gqq{Done} markiert und besitzt somit keinen Arbeitsaufwand mehr.
 
+\noindent
 Vorbedingungen, sowie die festgelegte Dauer für die Bearbeitung eines Arbeitspaketes werden durch die Sprints definiert. 
 Durch Aufteilen der Tasks in verschiedene, nacheinander ablaufende Sprints, können Vorbedingungen durch Einteilung in einen vorangehenden Sprint gesetzt werden.
 Darüber hinaus können den einzelnen Tasks Prioritäten zwischen eins und vier zugeordnet werden, was eine Hierarchie innerhalb eines Sprints ermöglicht.
@@ -127,7 +134,7 @@ Zu Beginn der Studienarbeit wurde ein vorrausichtlicher Zeitplan erstellt, der d
 
 \newpage
 \subsection{Qualitätsmanagement Maßnahmen}
-Die Qualität der Lern-App wird durch \gqq{Unit-Tests} sowie von externen Probanden durch festgelegte Tests ermittelt. Die Unit-Tests werden von den Entwicklern der App durchgeführt, um die Qualität der einzelnen Komponenten im Backzu gewährleisten. Nach Abschluss der Implementierungsphase wird eine geschlossene Beta durchgeführt, bei der die Tester informiert werden, welche Funktionen getestet werden sollen. Folgende Funktionalitäten sollen überprüft werden:
+Die Qualität der Lern-App wird durch \gqq{Unit-Tests} sowie von externen Probanden durch festgelegte Tests ermittelt. Die Unit-Tests werden von den Entwicklern der App durchgeführt, um die Qualität der einzelnen Komponenten im Backend zu gewährleisten. Nach Abschluss der Implementierungsphase wird eine geschlossene Beta durchgeführt, bei der die Tester informiert werden, welche Funktionen getestet werden sollen. Folgende Funktionalitäten sollen überprüft werden:
 \begin{itemize}
   \item Anmeldung
   \item Registrierung
@@ -141,17 +148,26 @@ Die Qualität der Lern-App wird durch \gqq{Unit-Tests} sowie von externen Proban
   \item Berechnung der optimalen Pausen
 \end{itemize}
 \noindent
-Zu jeder Funktionalität soll der Tester eine kurze textuelle Beschreibung abgeben, welche positiven sowie negativen Aspekte er festgestellt hat. Aufgrund der Rückmeldungen kann die App weiter verbessert und Fehler behoben werden.
+Zu jeder Funktionalität soll der Tester eine kurze textuelle Beschreibung abgeben, welche positiven sowie negativen Aspekte er festgestellt hat. Anhand der Rückmeldungen kann die App weiter verbessert und Fehler behoben werden.
 Zusätzlich sollen die Tests auf unterschiedlichen Android-Geräten durchgeführt werden, um die Kompatibilität der App zu gewährleisten. 
 \subsection{Konfigurationsmanagement Maßnahmen}
-Die agile Planung im erweitertem Scrum erfolgt in Jira, hier ist der Backlog angelegt, in welchem die Sprint-Planung erfolgt. Meetings werden auf Discord durchgeführt. Die Dokumentation wird mit \LaTeX  geschrieben.\newline
-Die Versions- und Releaseverwaltung erfolgt in einem GitHub Repository unter dem Git-Branching-Modell Gitflow. Gitflow sieht zwei Branches vor um den Verlauf des Projekts aufzuzeichnen. Der main-Branch enthält den offiziellen Release-Verlauf und der develop-Branch dient als Integrations-Branch für Features. Der develop-Branch enthält den kompletten Versionsverlauf des Projekts, während der main-Branch eine verkürzte Version enthält.\newline
+Die agile Planung erfolgt im Kanban in Jira, hier ist der Backlog angelegt, in welchem die einzelnen Aufgaben liegen. Meetings werden auf Discord durchgeführt. Die Dokumentation wird mit \LaTeX  geschrieben.\newline
+
+\noindent
+Die Versions- und Releaseverwaltung erfolgt in einem GitHub Repository unter dem Git-Branching-Modell Gitflow. Gitflow sieht zwei Branches vor um den Verlauf des Projekts aufzuzeichnen. Der main-Branch enthält den offiziellen Release-Verlauf und der develop-Branch dient als Integrations-Branch für Features. Der develop-Branch enthält den kompletten Versionsverlauf des Projekts, während der main-Branch eine verkürzte Version enthält.
+
+\newpage
+\noindent
 Jedes neue Feature sollte sich auf seinem eigenen Branch befinden, der zu \\ Sicherungs-/Zusammenarbeitszwecken zum zentralen Repository gepusht werden kann. Ein neuer feature-Branch  wird aus dem develop-branch gemerget. Wenn ein Feature fertig ist, wird es zurück in den develop-Branch gemergt. Features sollten niemals direkt mit dem main-Branch interagieren.\newline
+
+\noindent
 Wenn der develop-Branch genügend Features für ein Release enthält, wird vom develop-Branch ein release-Branch geforkt. Damit beginnt der neue Release-Zyklus. In diesem Branch sollten ab diesem Punkt keine neuen Features mehr hinzugefügt werden, sondern nur Bugfixes und ähnliche Release-orientierte Änderungen. Ist er zur Auslieferung bereit, wird der release-Branch in den main-Branch gemergt und mit einer Versionsnummer getaggt. Zusätzlich wird der release-Branch in den develop-Branch gemerged. \newline
+
+\noindent
 Maintenance- bzw. hotfix-Branches eignen sich für schnelle Patches von Produktions-Releases. Sie werden aus dem main-Branch geforkt. Sobald der Bugfix abgeschlossen ist, wird er sowohl in den main- als auch in den develop-Branch (oder den aktuellen release-Branch) gemergt.
 \subsection{Evaluierung der Plattformen und Programmiersprachen für die App-Entwicklung
 }
-Die Lernapp LearnAhead wird als Android-App umgesetzt, weil die Entwickler selbst nur Android-Geräte zur Verfügung haben. Zusätzlich kommt noch hinzu, dass eine Apple-Entwickler-Lizenz ca. 99\$ pro Jahr kostet \cite{noauthor_registrierung_nodate}. Die Kosten für die Veröffentlichung einer Android-App beträgt hierbei nur einmalig 25\$ \cite {appsoluts_unterschied_2016}. Daraus ergibt sich, dass die Entwicklung einer Android-App deutlich günstiger ist. \\
+Die Lern-App \gqq{LearnAhead} wird als Android-App umgesetzt, weil die Entwickler selbst nur Android-Geräte zur Verfügung haben. Zusätzlich kommt noch hinzu, dass eine Apple-Entwickler-Lizenz ca. 99\$ pro Jahr kostet \cite{noauthor_registrierung_nodate}. Die Kosten für die Veröffentlichung einer Android-App betragen hierbei nur einmalig 25\$ \cite {appsoluts_unterschied_2016}. Daraus ergibt sich, dass die Entwicklung einer Android-App deutlich günstiger ist. \\
 
 \noindent
-Für die Entwicklung der App wird die Programmiersprache Kotlin verwendet. Kotlin ist eine moderne Programmiersprache, die von JetBrains entwickelt wurde. Sie ist eine statisch typisierte Open-Source-Programmiersprache, die auf der Java Virtual Machine (JVM) ausgeführt wird.Kotlin ist eine moderne Programmiersprache, die viele Vorteile gegenüber Java bietet. Kotlin ist kompakter als Java, da es weniger Boilerplate-Code benötigt. Die Stärken liegen hierbei auf der einfachen und kompakten Syntax von Kotlin. Dies reduziert auf der einen Seite den Programmieraufwand, um die gleiche Funktionalität wie in Java zu erreichen. Dies macht den Code leichter lesbar und verständlicher. Zusätzlich existiert das größte Problem der NullPointerExeption in Kotlin nicht. \cite {bollhoff_kotlin_2022}
+Für die Entwicklung der \ac{App} wird die Programmiersprache Kotlin verwendet. Hierbei handelt es sich um eine moderne Programmiersprache, die von JetBrains entwickelt wurde. Sie ist eine statisch typisierte Open-Source-Programmiersprache, die auf der \ac{JVM} ausgeführt wird. Ebenfalls bietet sie viele Vorteile gegenüber Javam darunter als Beispiel die Kompaktheit, da sie weniger Boiplerplate-Code benötigt. Die Stärken liegen hierbei auf der einfachen und kompakten Syntax von Kotlin. Diese reduziert auf der einen Seite den Programmieraufwand, um die gleiche Funktionalität wie in Java zu erreichen, was den Code leichter lesbar und verständlicher macht. Zusätzlich existiert das größte Problem von Java, die NullPointer-Exeption, in Kotlin nicht. \cite {bollhoff_kotlin_2022}
