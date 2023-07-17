@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="tag_margin_start">5dp</dimen>
+    <dimen name="tag_margin_top">8dp</dimen>
+    <dimen name="tag_container_bottom_margin">16dp</dimen>
+    <dimen name="max_tag_container_height">75dp</dimen>
+    <dimen name="tag_scroll_view_height_no_tag">0dp</dimen>
+    <dimen name="tag_scroll_view_height_single_tag">35dp</dimen>
+    <dimen name="tag_scroll_view_height_multiple_tags">70dp</dimen>
+</resources>

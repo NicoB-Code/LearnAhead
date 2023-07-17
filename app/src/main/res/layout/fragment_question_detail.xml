@@ -1,0 +1,320 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
+
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
+    <View
+        android:id="@+id/darkBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dark_full_screen"
+        />
+
+    <!-- Schwarzer Hintergrund für das untere Menü -->
+    <View
+        android:id="@+id/bottomMenuBackground"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@id/darkBackground"
+        android:background="@drawable/black_bottom_menu"
+        android:backgroundTint="@null"
+        />
+
+    <!-- Back Icon -->
+    <ImageView
+        android:id="@+id/backIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/back_button"
+        android:elevation="7dp"
+        android:rotation="-90" />
+
+    <!-- Profil Header Label -->
+    <TextView
+        android:id="@+id/headerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_question"
+        android:textAppearance="@style/twenty_two_sp_bold_white"
+        android:layout_toEndOf="@id/backIcon"
+        android:layout_above="@id/headerLine"
+        android:layout_marginBottom="5dp"
+        />
+
+    <!-- Horizontale Linie als Header -->
+    <View
+        android:id="@+id/headerLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/backIcon"
+        android:background="@drawable/header_line"
+        />
+
+    <!-- Logout Icon -->
+    <ImageView
+        android:id="@+id/logoutIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@id/darkBackground"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/logout"
+        android:elevation="7dp"
+        />
+
+    <!-- chooseTypeOfTestLabel -->
+    <TextView
+        android:id="@+id/chooseTypeOfTestLabel"
+        android:layout_width="213dp"
+        android:layout_height="16dp"
+        android:layout_below="@id/headerLine"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:text="@string/choose_a_type_of_test"
+        android:textAppearance="@style/fourteen_sp_regular_white"
+        android:gravity="top"
+        />
+
+    <!-- Dropdown Element -->
+    <Spinner
+        android:id="@+id/questionTypeDropdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chooseTypeOfTestLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/small_rectangle_for_create_question_and_tests"
+        android:spinnerMode="dropdown"
+        />
+
+    <EditText
+        android:id="@+id/addTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/questionTypeDropdown"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:hint="@string/add_tags"
+        android:paddingStart="8dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/small_rectangle_for_create_question_and_tests"
+        android:textAppearance="@style/fourteen_sp_regular_black"
+        android:gravity="center_vertical"
+        app:drawableLeftCompat="@drawable/add_circle_black"
+        tools:ignore="RtlSymmetry" />
+
+    <!-- Question and Answer Box -->
+    <View
+        android:id="@+id/questionAndAnswerBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomMenuBackground"
+        android:layout_below="@id/addTags"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/rectangle_register_login_content_box"
+        android:elevation="2dp"
+        />
+
+    <!-- Label Frage -->
+    <TextView
+        android:id="@+id/questionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/questionAndAnswerBox"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        android:elevation="8dp"
+        android:text="@string/question_colon"
+        android:textAppearance="@style/fourteen_sp_regular_black"
+        />
+
+    <!-- Question and Answer Box -->
+    <View
+        android:id="@+id/questionBox"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/questionLabel"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_alignEnd="@id/questionAndAnswerBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/question_or_answer_rectangle"
+        android:elevation="2dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/tagsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/questionBox"
+        android:layout_alignEnd="@id/questionBox"
+        android:layout_alignTop="@id/questionBox"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="9dp"
+        android:elevation="8dp"
+        />
+
+    <!-- Label Antwort -->
+    <EditText
+        android:id="@+id/textQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tagsContainer"
+        android:layout_alignStart="@id/questionBox"
+        android:layout_alignEnd="@id/questionBox"
+        android:layout_alignBottom="@id/questionBox"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:elevation="8dp"
+        android:hint="@string/please_enter_your_question"
+        android:textAppearance="@style/fourteen_sp_regular_black"
+        android:gravity="top|left"
+        android:background="@null"
+        android:backgroundTint="@null"
+        tools:ignore="RtlHardcoded" />
+
+    <!-- Label Antwort -->
+    <TextView
+        android:id="@+id/answerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/questionBox"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="-15dp"
+        android:elevation="8dp"
+        android:text="@string/answer_colon"
+        android:textAppearance="@style/fourteen_sp_regular_black"
+        />
+
+    <!-- Generelle Antwort -->
+    <EditText
+        android:id="@+id/textAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/answerLabel"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_alignEnd="@id/questionAndAnswerBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/question_or_answer_rectangle"
+        android:elevation="8dp"
+        android:gravity="top|left"
+        android:hint="@string/please_enter_here_your_answer"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:paddingLeft="10dp"
+        android:paddingTop="18dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="18dp"
+        android:textAppearance="@style/fourteen_sp_regular_black"
+        tools:ignore="RtlHardcoded"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveQuestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textAnswer"
+        android:layout_alignStart="@id/questionAndAnswerBox"
+        android:layout_alignEnd="@id/questionAndAnswerBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/add_question_rectangle"
+        android:drawableLeft="@drawable/add_circle_black"
+        app:iconPadding="-10dp"
+        android:elevation="8dp"
+        android:paddingStart="25dp"
+        android:text="@string/add_question"
+        android:textAppearance="@style/sixteen_sp_regular_black"
+        android:textColor="@null"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry"
+        />
+
+    <!-- Home Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:drawableTop="@drawable/home_button"
+        android:layout_marginStart="4dp"
+        app:iconPadding="-5dp"
+        android:text="@string/home"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Categories Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/learningCategoriesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/learning_category_button"
+        app:iconPadding="-5dp"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Goals Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/learningGoalsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_alignEnd="@id/bottomMenuBackground"
+        android:layout_marginEnd="4dp"
+        android:drawableTop="@drawable/learning_goal_button"
+        app:iconPadding="-5dp"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</RelativeLayout>

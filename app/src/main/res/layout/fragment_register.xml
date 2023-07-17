@@ -1,6 +1,7 @@
 <!-- Android Large - Login -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/android_lar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,132 +9,142 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Black Background -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/register_black_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/register_green_background"
-        android:layout_alignTop="@id/register_green_background"
+        android:layout_below="@id/greenBackground"
+        android:layout_alignTop="@id/greenBackground"
         android:background="@drawable/rectangle_black_background" />
 
-    <!-- Green Background -->
+    <!-- Grüner Hintergrund für oberen Teil -->
     <View
-        android:id="@+id/register_green_background"
+        android:id="@+id/greenBackground"
         android:layout_width="match_parent"
         android:layout_height="420dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_green_background" />
 
-    <!-- Placeholder Logo -->
+    <!-- Logo -->
     <View
-        android:id="@+id/placeholder_logo"
+        android:id="@+id/appLogo"
         android:layout_width="126dp"
         android:layout_height="108dp"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5pt"
-        android:background="@drawable/logo_prototype"
-        />
+        android:background="@mipmap/app_logo_icon" />
 
     <!-- Label Register Header -->
     <TextView
-        android:id="@+id/register_label_header"
+        android:id="@+id/registerLabelHeader"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_below="@id/appLogo"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/placeholder_logo"
-        android:text="@string/register_subject"
-        android:textAppearance="@style/register_label_header"
         android:gravity="center_horizontal|center_vertical"
-        />
+        android:text="@string/register_subject"
+        android:textAppearance="@style/forty_eight_sp_bold_white" />
 
     <!-- Registrierungs Box -->
     <View
-        android:id="@+id/rectangle_register_box"
+        android:id="@+id/registerBox"
         android:layout_width="266dp"
         android:layout_height="444dp"
-        android:background="@drawable/rectangle_register_login_content_box"
-        android:elevation="2dp"
-        android:layout_below="@id/register_label_header"
+        android:layout_below="@id/registerLabelHeader"
         android:layout_centerHorizontal="true"
-        />
+        android:background="@drawable/rectangle_register_login_content_box"
+        android:elevation="2dp" />
 
     <!-- Username -->
     <EditText
-        android:id="@+id/editText_username"
-        android:layout_width="wrap_content"
+        android:id="@+id/textUsername"
+        android:layout_width="214dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/rectangle_register_box"
         android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/registerBox"
         android:layout_marginTop="34dp"
         android:background="@drawable/rectangle_register_or_login_content"
-        android:drawableLeft="@drawable/user_icon"
+        android:drawableStart="@drawable/user_icon"
         android:drawablePadding="13dp"
         android:elevation="6dp"
-        android:paddingLeft="13dp"
         android:hint="@string/username"
-        android:textAppearance="@style/register_content_text"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
+        android:textAppearance="@style/sixteen_eight_sp_regular_505F73"
         android:textColor="@null"
-        android:textSize="16sp" />
+        android:scrollHorizontally="true"
+        android:inputType="text"
+        android:gravity="start|center_vertical"
+        android:maxLines="1"
+        tools:ignore="RtlSymmetry" />
 
     <!-- E-Mail -->
     <EditText
         android:id="@+id/editText_email"
-        android:layout_width="wrap_content"
+        android:layout_width="213dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText_username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
+        android:layout_below="@id/textUsername"
         android:background="@drawable/rectangle_register_or_login_content"
-        android:drawableLeft="@drawable/email_icon"
+        android:drawableStart="@drawable/email_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="12dp"
         android:drawablePadding="13dp"
-        android:paddingLeft="13dp"
+        android:layout_marginTop="18dp"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
         android:elevation="6dp"
-        android:hint="@string/e_mail_address"
-        android:textAppearance="@style/register_content_text"
-        android:textSize="16sp"
+        android:hint="@string/email_address"
+        android:textAppearance="@style/sixteen_eight_sp_regular_505F73"
         android:textColor="@null"
-        />
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:inputType="textEmailAddress"
+        android:gravity="start|center_vertical"
+        tools:ignore="RtlSymmetry" />
 
     <!-- Password -->
     <EditText
-        android:id="@+id/editText_password"
-        android:layout_width="wrap_content"
+        android:id="@+id/textPassword"
+        android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/editText_email"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/rectangle_register_or_login_content"
-        android:drawableLeft="@drawable/password_icon"
-        android:drawableRight="@drawable/show_password_icon"
+        android:drawableStart="@drawable/password_icon"
+        android:drawableEnd="@drawable/show_password_icon"
         android:drawablePadding="13dp"
         android:inputType="textPassword"
         android:elevation="6dp"
-        android:paddingLeft="13dp"
-        android:paddingRight="13dp"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
         android:hint="@string/password"
-        android:textAppearance="@style/register_content_text"
+        android:textAppearance="@style/sixteen_eight_sp_regular_505F73"
         android:textColor="@null"
-        android:textSize="16sp" />
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:gravity="start|center_vertical" />
 
 
     <!-- Registrieren -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_sign_up"
+        android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
-        android:layout_below="@id/editText_password"
         android:background="@drawable/rectangle_login_register"
         android:elevation="8dp"
         android:text="@string/register_verb"
-        android:textAppearance="@style/register_login_button_text"
+        android:textAppearance="@style/twenty_four_sp_regular_white"
         app:backgroundTint="@null" />
 
     <ProgressBar
-        android:id="@+id/register_progress"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -145,29 +156,29 @@
 
     <!-- Du hast schon ein Konto -->
     <TextView
-        android:id="@+id/got_already_an_account"
+        android:id="@+id/gotAlreadyAnAccountLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_sign_up"
-        android:layout_marginTop="18dp"
-        android:layout_alignLeft="@id/button_sign_up"
+        android:layout_below="@id/signUpButton"
+        android:layout_alignStart="@id/signUpButton"
+        android:layout_toEndOf="@id/loginButton"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="10dp"
         android:elevation="8dp"
         android:text="@string/got_already_an_account"
-        android:textAppearance="@style/register_got_already_an_account"
-        />
+        android:textAppearance="@style/fourteen_sp_regular_black" />
 
     <!-- Login -->
     <TextView
-        android:id="@+id/text_login"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_sign_up"
+        android:layout_below="@id/signUpButton"
+        android:layout_alignEnd="@id/signUpButton"
         android:layout_marginTop="18dp"
-        android:layout_alignRight="@id/button_sign_up"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
         android:elevation="8dp"
         android:text="@string/login"
-        android:textAppearance="@style/register_login_instead"
-        />
+        android:textAppearance="@style/fourteen_sp_regular_106BD5" />
 </RelativeLayout>

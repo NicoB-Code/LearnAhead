@@ -1,227 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-
-    <!--
-    Font family: Hanuman
-    Line height: 18sp
-    -->
-    <style name="kein_konto">
-        <item name="android:textSize">
-            14sp
-        </item>
-        <item name="android:textColor">
-            #000000
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-    <!--
-    Font family: Hanuman
-    Line height: 21sp
-    (identical to box height)
-    -->
-    <style name="register">
-        <item name="android:textSize">
-            14sp
-        </item>
-        <item name="android:textColor">
-            #106BD5
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-    <!--
-    Font family: Hanuman
-    Line height: 35sp
-    -->
-    <!-- styles.xml -->
-    <style name="anmelden">
-        <item name="android:textSize">
-            24sp
-        </item>
-        <item name="android:textColor">
-            #FFFFFF
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-    <!--
-    Font family: Hanuman
-    Line height: 21sp
-    -->
-    <!-- styles.xml -->
-    <style name="passwort_ve">
-        <item name="android:textSize">
-            14sp
-        </item>
-        <item name="android:textColor">
-            #106BD5
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-    <!--
-    Font family: Hanuman
-    Line height: 23sp
-    -->
-    <!-- styles.xml -->
-    <style name="passwort">
-        <item name="android:textSize">
-            16sp
-        </item>
-        <item name="android:textColor">
-            #505F73
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-    <!--
-    Font family: Hanuman
-    Line height: 23sp
-    -->
-    <!-- styles.xml -->
-    <style name="benutzer_e_">
-        <item name="android:textSize">
-            16sp
-        </item>
-        <item name="android:textColor">
-            #505F73
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-    <!--
-    Font family: Hanuman
-    Line height: 70sp
-    -->
-    <!-- styles.xml -->
-    <style name="login_top">
-        <item name="android:textSize">
-            48sp
-        </item>
-        <item name="android:textColor">
-            #FFFFFF
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-    <!--
-    Font family: Hanuman
-    Line height: 29sp
-    -->
-    <!-- styles.xml -->
-    <style name="logo">
-        <item name="android:textSize">
-            20sp
-        </item>
-        <item name="android:textColor">
-            #000000
-        </item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- fragment_register_styles begin here -->
-
-    <!-- RegisterLabelTop -->
-    <style name="register_label_header">
-        <item name="android:textSize">48sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily">@font/hanuman_bold</item>
-    </style>
-
-    <!-- ForgotPasswordLabelTop -->
-    <style name="forgot_password_label_header">
-        <item name="android:textSize">36sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily">@font/hanuman_bold</item>
-    </style>
-
-    <!-- LearningGoalsForTodayLabelTop -->
-    <style name="learning_goals_for_today_label_header">
-        <item name="android:textSize">36sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily">@font/hanuman_bold</item>
-    </style>
-
-
-    <!-- Register Username -->
-    <style name="register_content_text">
-        <item name="android:textSize">48sp</item>
-        <item name="android:textColor">#505F73</item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-
-    <!-- Register Login ButtonText -->
-    <style name="register_login_button_text">
-        <item name="android:textSize">24sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-
-    <!-- Register Du hast schon einen Konto? -->
-    <style name="register_got_already_an_account">
-        <item name="android:textSize">14sp</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionBar">false</item>
         <item name="android:textColor">#000000</item>
         <item name="fontFamily">@font/hanuman_regular</item>
     </style>
 
-    <!-- Hyperlink Login -->
-    <style name="register_login_instead">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#106BD5</item>
-        <item name="fontFamily">@font/hanuman_regular</item>
-    </style>
-
-    <!-- Button Design für Lernkategorie/Lernziel erstellen -->
-    <style name="button_add_learning_category_or_goal">
+    <style name="twenty_sp_bold">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#000000</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
-    <style name="menu_button_text">
+    <style name="fourteen_sp_regular_white" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+    <style name="ten_sp_regular_white" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="fourteen_sp_regular_black">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="fourteen_sp_bold_black">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="ten_sp_bold_black">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="sixteen_sp_regular_black">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="thirteen_sp_bold_blue">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#5687E8</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="thirteen_sp_regular_black">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="tweenty_sp_regular_black">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="sixtee_sp_light_black">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_light</item>
+    </style>
+
+    <style name="eighteen_sp_regular_white">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="thirty_six_sp_bold_white">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="twelve_sp_bold_white">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
+    <style name="sixteen_sp_bold_black">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
 
-    <style name="top_menu_header">
+    <style name="twenty_two_sp_bold_white">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
-    <style name="learning_category_or_goal_label">
+    <style name="twenty_sp_bold_black">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="twenty_sp_bold_white">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
-    <style name="card_view_title">
-        <item name="android:textSize">36sp</item>
+    <style name="eighteen_sp_bold_black">
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">#000000</item>
         <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 
-    <style name="card_view_date_interval">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#000000</item>
+    <style name="forty_eight_sp_bold_white">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
+    </style>
+
+    <style name="sixteen_eight_sp_regular_505F73">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#505F73</item>
         <item name="fontFamily">@font/hanuman_regular</item>
     </style>
 
-    <style name="card_view_calculated_days">
+    <style name="fourteen_sp_regular_106BD5">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">#106BD5</item>
         <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="twenty_four_sp_regular_white">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="twenty_sp_regular_white">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/hanuman_regular</item>
+    </style>
+
+    <style name="thirty_two_sp_regular_black">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="fontFamily">@font/hanuman_bold</item>
     </style>
 </resources>

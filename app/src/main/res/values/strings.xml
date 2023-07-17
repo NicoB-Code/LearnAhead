@@ -1,56 +1,22 @@
 <resources>
-    <string name="app_name">LearnAhead_Prototyp</string>
-    <string name="kein_konto">
-    Du hast noch kein Konto?
-    </string>
-
-
-    <string name="anmelden">
-    Anmelden
-    </string>
-
-    <string name="passwort_ve">
-    Passwort vergessen?
-    </string>
-
-    <string name="passwort">
-    Passwort
-    </string>
-
-    <string name="benutzer_e_">
-    Benutzer / E-Mail
-    </string>
-
-    <string name="login_top">
-    Anmeldung
-    </string>
-
-    <string name="logo">
-    Logo
-    </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="note_item_desc_placholder">In this chapter, you’re going to learn about the different types of subjects in RxJava, see how to work with each one and why you might choose one over another based on some common use cases.</string>
-    <string name="note_detail_desc_placeholder">You’ve gotten a handle on what an Observable is, how to create one, how to subscribe to it, and how to dispose of things when you’re done. Observables are a fundamental part of RxJava, but a common need when developing apps is to manually add new values onto an Observable at runtime that will then be emitted to subscribers. What you want is something that can act as both an Observable and as an observer. And that something is called a subject.</string>
-    <string name="error_description">Description missing</string>
-    <string name="error_title">Title missing</string>
-    <string name="error_tag_text">Enter text</string>
-    <string name="enter_first_name">Enter first name</string>
-    <string name="enter_last_name">Enter last name</string>
-    <string name="enter_job_title">Enter job title</string>
-    <string name="enter_email">Enter email address</string>
-    <string name="invalid_email">Invalid email entered</string>
-    <string name="enter_password">Enter password</string>
-    <string name="invalid_password">Your password must be at least 8 characters</string>
-
-
-    <!-- Produktiv Strings -->
+    <string name="default_notification_channel_id">my_channel</string>
+    <string name="app_name">LearnAhead</string>
+    <string name="kein_konto">Du hast noch kein Konto?</string>
+    <string name="anmelden">Anmelden</string>
+    <string name="passwort_ve">Passwort vergessen?</string>
+    <string name="passwort">Passwort</string>
+    <string name="benutzer_e_">Benutzer / E-Mail</string>
+    <string name="login_top">Anmeldung</string>
+    <string name="logo">Logo</string>
+    <string name="error_description">Bitte füllen Sie die Beschreibung aus</string>
+    <string name="enterUsername">Bitte geben Sie einen Benutzernamen ein</string>
+    <string name="enter_email">Bitte geben Sie eine E-Mail ein</string>
+    <string name="invalid_email">Bitte geben Sie eine valide E-Mail ein</string>
+    <string name="enter_password">Bitte geben Sie ein Passwort ein</string>
+    <string name="invalid_password">Das Passwort muss mindestens 8 Zeichen enthalten</string>
     <string name="register_subject">Registrierung</string>
     <string name="username">Benutzername</string>
-    <string name="e_mail_address">E-Mail-Adresse</string>
+    <string name="email_address">E-Mail-Adresse</string>
     <string name="password">Passwort</string>
     <string name="register_verb"> Registrieren</string>
     <string name="got_already_an_account"> Du hast schon ein Konto?</string>
@@ -77,15 +43,54 @@
     <string name="learning_category_name">Lernkategorie Name: </string>
     <string name="hint_learning_category_name">Lernkategorie Name eingeben</string>
     <string name="card_view_hint_learning_category_name">Lernkategorie Name</string>
-    <!-- Section Profile -->
     <string name="profile">Profil</string>
-    <string name="biggest_learnstreak">Höchste Lernstreak</string>
+    <string name="biggest_learnstreak">Aktuelle Lernstreak</string>
     <string name="learning_goals_reached">Lernziele erreicht</string>
     <string name="placeholder_username">Der Benutzername</string>
     <string name="placeholder_email">Die E-Mail</string>
     <string name="placeholder_password">Das Passwort</string>
     <string name="placeholder_learning_streak">Die höchste Learning Streak</string>
     <string name="placeholder_achieved_goals">Die erreichten Ziele</string>
-
-
+    <string name="summary_label">Zusammenfassungen</string>
+    <string name="create_summary">Zusammenfassung erstellen</string>
+    <string name="summary_name">Name der Zusammenfassung</string>
+    <string name="enter_summary_name">Name der Zusammenfassung eingeben...</string>
+    <string name="remaining_summary_items">enthält %1$d weitere Zusammenfassungen</string>
+    <string name="placeholder">Platzhalter</string>
+    <string name="tests_and_questions">Tests / Fragen</string>
+    <string name="learning_tip_of_the_day">Lerntipp des Tages:</string>
+    <string name="learning_tip_of_the_day_placeholder">Wenn wir kurz vor dem Schlafengehen noch einmal das Gelernte durchgehen, wird unser Gehirn erneut stimuliert und die neu gebildeten Verbindungen werden gestärkt. Dies führt dazu, dass die Informationen besser im Langzeitgedächtnis abgespeichert werden und später leichter abgerufen werden können.</string>
+    <string name="questions">Fragen</string>
+    <string name="test_annotation">Anmerkung: Klicke auf einen Test um ihn zu editieren. Wenn du ihn starten möchtest, gehe bitte zurück und klicke auf “Test Starten”</string>
+    <string name="tests">Tests</string>
+    <string name="create_test">Test erstellen</string>
+    <string name="create_question">Frage erstellen</string>
+    <string name="add_question">Frage hinzufügen</string>
+    <string name="choose_a_type_of_test">Wähle eine Art von Test aus:</string>
+    <string name="add_tags">Tags hinzufügen</string>
+    <string name="question_colon">Frage:</string>
+    <string name="answer_colon">Antwort:</string>
+    <string name="markdown_input_description">Bitte schreiben Sie hier ihre Zusammenfassung</string>
+    <string name="please_enter_here_your_learning_goal">Bitte gebe hier dein Lernziel ein</string>
+    <string name="please_enter_here_your_description">Bitte gebe hier deine Beschreibung ein</string>
+    <string name="relate_learning_goal_to_learning_category">Das Ziel eine Lernkategorie zuordnen:</string>
+    <string name="preview">Vorschau</string>
+    <string name="randomLearningTip">Zufälliger Lerntipp:</string>
+    <string name="level">Level</string>
+    <string name="please_enter_your_question">Bitte geben Sie hier ihre Frage ein:</string>
+    <string name="please_enter_here_your_answer">Bitte geben Sie hier ihre Antwort ein:</string>
+    <string name="search">Suche</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="related_tags">Zugehörige Tags</string>
+    <string name="shown_question">Angezeigte Frage</string>
+    <string name="learning_goal_name">Lernziel Name:</string>
+    <string name="continue_learning_goal">Weiter machen</string>
+    <string name="start_learning_goal">Beginnen</string>
+    <string name="please_enter_here_your_test_title">Bitte geben Sie hier den Titel des Tests ein:</string>
+    <string name="add_questions_by_tags">Fragen mithilfe von Tags hinzufügen</string>
+    <string name="add_questions_manually">Fragen manuell hinzufügen</string>
+    <string name="false_answer">Falsch</string>
+    <string name="correct_answer">Richtig</string>
+    <string name="user_it_security_info">Wenn du unsere App nutzt, erklärst du dich damit einverstanden, dass deine Daten in Firebase (Google) gespeichert und verarbeitet werden.</string>
+    <string name="dont_use_dark_mode">Bitte nutze keinen Dark Mode.</string>
 </resources>

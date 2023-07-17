@@ -1,0 +1,303 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
+
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
+    <View
+        android:id="@+id/darkBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/dark_full_screen" />
+
+    <!-- Schwarzer Hintergrund für das untere Menü -->
+    <View
+        android:id="@+id/bottomMenuBackground"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@id/darkBackground"
+        android:background="@drawable/black_bottom_menu"
+        android:backgroundTint="@null"
+        />
+
+    <!-- Back Icon -->
+    <ImageView
+        android:id="@+id/backIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/back_button"
+        android:elevation="7dp"
+        android:rotation="-90" />
+
+    <!-- Header Label -->
+    <TextView
+        android:id="@+id/headerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/headerLine"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toEndOf="@id/backIcon"
+        android:text="Test erstellen"
+        android:textAppearance="@style/twenty_two_sp_bold_white" />
+
+    <!-- Header Line -->
+    <View
+        android:id="@+id/headerLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/backIcon"
+        android:background="@drawable/header_line"
+        />
+
+    <!-- Logout Icon -->
+    <ImageView
+        android:id="@+id/logoutIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@id/darkBackground"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/logout"
+        android:elevation="7dp"
+        />
+
+    <!-- Test Title to enter -->
+    <EditText
+        android:id="@+id/textTestTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerLine"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:hint="@string/please_enter_here_your_test_title"
+        android:textColorHint="@color/white"
+        android:textAppearance="@style/fourteen_sp_regular_white"
+        android:gravity="center_horizontal"
+        android:background="@drawable/no_underline"
+        android:textColor="@color/white"
+        />
+
+    <ScrollView
+        android:id="@+id/scrollViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textTestTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/add_question_to_test_small_rectangle"
+        android:layout_marginBottom="14dp">
+
+    <LinearLayout
+        android:id="@+id/addQuestionBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:gravity="center">
+
+            <!-- Add Questions by Tags Label -->
+            <TextView
+                android:id="@+id/addQuestionsByTagsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:elevation="8dp"
+                android:text="@string/add_questions_by_tags"
+                android:textAppearance="@style/fourteen_sp_bold_black"
+                />
+
+            <!-- Tag Container which contains every added tag -->
+            <ScrollView
+                android:id="@+id/tagsScrollView"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:elevation="8dp"
+                android:layout_gravity="left">
+
+                <LinearLayout
+                    android:id="@+id/tagsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+
+
+            <!-- Control to add Tags which will get created inside the container -->
+            <EditText
+                android:id="@+id/textAddTags"
+                android:layout_width="match_parent"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_tags"
+                android:paddingStart="8dp"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="8dp"
+                android:elevation="8dp"
+                android:background="@drawable/small_rectangle_for_create_question_and_tests"
+                android:textAppearance="@style/fourteen_sp_regular_black"
+                android:gravity="center_vertical"
+                app:drawableLeftCompat="@drawable/add_circle_black"
+                tools:ignore="RtlSymmetry" />
+
+            <!-- Checkbox to manually add questions -->
+            <CheckBox
+                android:id="@+id/checkboxManuallyAddQuestions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_questions_manually"
+                android:textAppearance="@style/fourteen_sp_regular_black"
+                android:elevation="8dp"
+                android:layout_gravity="left"
+                android:layout_marginStart="16dp"
+                />
+
+            <!-- Dropdown Element -->
+            <Spinner
+                android:id="@+id/dropdownManualQuestion"
+                android:layout_width="match_parent"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:background="@drawable/small_rectangle_for_create_question_and_tests"
+                android:visibility="gone"
+                android:spinnerMode="dropdown"
+                android:layout_marginBottom="8dp"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonAddManualQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="19dp"
+                android:visibility="gone"
+                android:background="@drawable/add_question_rectangle"
+                android:elevation="8dp"
+                android:drawablePadding="8dp"
+                android:text="@string/add_question"
+                android:drawableLeft="@drawable/add_circle_black"
+                android:textAppearance="@style/fourteen_sp_bold_black"
+                android:textColor="@null"
+                app:backgroundTint="@null"
+                tools:ignore="RtlSymmetry"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- Item Layout -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addedQuestionsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/scrollViewContainer"
+        android:layout_above="@id/buttonSaveTest"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <!-- Test speichern -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSaveTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomMenuBackground"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/add_question_rectangle"
+        android:drawableLeft="@drawable/add_circle_black"
+        app:iconPadding="-10dp"
+        android:elevation="8dp"
+        android:paddingStart="10dp"
+        android:text="@string/create_test"
+        android:textAppearance="@style/sixteen_sp_regular_black"
+        android:textColor="@null"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry"
+        />
+
+    <!-- Home Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:drawableTop="@drawable/home_button"
+        android:layout_marginStart="4dp"
+        app:iconPadding="-5dp"
+        android:text="@string/home"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Categories Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/learningCategoriesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/learning_category_button"
+        app:iconPadding="-5dp"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Goals Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/learningGoalsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_alignEnd="@id/bottomMenuBackground"
+        android:layout_marginEnd="4dp"
+        android:drawableTop="@drawable/learning_goal_button"
+        app:iconPadding="-5dp"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</RelativeLayout>

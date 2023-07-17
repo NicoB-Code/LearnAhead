@@ -1,0 +1,194 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/android_lar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/android_lar"
+    android:clipToOutline="true">
+
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
+    <View
+        android:id="@+id/darkBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dark_full_screen"
+        />
+
+    <!-- Schwarzer Hintergrund für das untere Menü -->
+    <View
+        android:id="@+id/bottomMenuBackground"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@id/darkBackground"
+        android:background="@drawable/black_bottom_menu"
+        android:backgroundTint="@null"
+        />
+
+    <!-- Back Icon -->
+    <ImageView
+        android:id="@+id/backIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/back_button"
+        android:elevation="7dp"
+        android:rotation="-90" />
+
+    <!-- Header Label -->
+    <TextView
+        android:id="@+id/test_listing_menu_header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:textAppearance="@style/twenty_two_sp_bold_white"
+        android:layout_toEndOf="@id/backIcon"
+        android:layout_above="@id/headerLine"
+        android:layout_marginBottom="5dp"/>
+
+    <!-- Header Line -->
+    <View
+        android:id="@+id/headerLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/backIcon"
+        android:background="@drawable/header_line"
+        />
+
+    <!-- Logout Icon -->
+    <ImageView
+        android:id="@+id/logoutIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@id/darkBackground"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/logout"
+        android:elevation="7dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/questionToAnswerCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="34dp"
+        android:elevation="2dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:id="@+id/index_card_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipToPadding="false"
+            android:gravity="center">
+
+        <TextView
+            android:id="@+id/questionsToAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="top|left"
+            android:layout_marginStart="18dp"
+            android:elevation="8dp"
+            android:textAppearance="@style/fourteen_sp_bold_black" />
+         </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/falseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomMenuBackground"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/add_question_rectangle"
+        android:elevation="8dp"
+        android:text="@string/false_answer"
+        android:textAppearance="@style/sixteen_sp_regular_black"
+        android:textColor="@null"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/correctButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomMenuBackground"
+        android:layout_alignEnd="@id/darkBackground"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/add_question_rectangle"
+        android:elevation="8dp"
+        android:paddingStart="10dp"
+        android:text="@string/correct_answer"
+        android:textAppearance="@style/sixteen_sp_regular_black"
+        android:textColor="@null"
+        app:backgroundTint="@null"
+        tools:ignore="RtlSymmetry"
+        />
+    <!-- Home Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:drawableTop="@drawable/home_button"
+        android:layout_marginStart="4dp"
+        app:iconPadding="-5dp"
+        android:text="@string/home"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Categories Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/learningCategoriesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@drawable/learning_category_button"
+        app:iconPadding="-5dp"
+        android:text="@string/learning_categories"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <!-- Learning Goals Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/learningGoalsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_alignEnd="@id/bottomMenuBackground"
+        android:layout_marginEnd="4dp"
+        android:drawableTop="@drawable/learning_goal_button"
+        app:iconPadding="-5dp"
+        android:text="@string/learning_goals"
+        android:textAppearance="@style/twelve_sp_bold_white"
+        android:textColor="@null"
+        android:background="@android:color/transparent"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</RelativeLayout>

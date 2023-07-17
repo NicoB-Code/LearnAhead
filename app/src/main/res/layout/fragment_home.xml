@@ -8,27 +8,27 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Dark Background Full Screen -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/dark_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dark_full_screen"
         />
 
-    <!-- Black Background for Bottom Menu -->
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
-        android:id="@+id/background_bottom_menu"
+        android:id="@+id/bottomMenuBackground"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@id/dark_background"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@id/darkBackground"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
         />
 
-    <!-- Header Line -->
+    <!-- Horizontale Linie als Header -->
     <View
-        android:id="@+id/header_line"
+        android:id="@+id/headerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="50dp"
@@ -37,71 +37,117 @@
 
     <!-- Profile Icon -->
     <ImageView
-        android:id="@+id/profile"
+        android:id="@+id/profileIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/user_icon"
-        android:elevation="7dp"></ImageView>
+        android:elevation="7dp"/>
 
-    <!-- Add Icon -->
+    <!-- Info Icon -->
     <ImageView
-        android:id="@+id/logout"
+        android:id="@+id/infoIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/info_icon"
+        android:layout_centerHorizontal="true"
+        android:elevation="7dp" />
+
+    <!-- Logout-Icon -->
+    <ImageView
+        android:id="@+id/logoutIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_alignRight="@id/dark_background"
-        android:layout_marginRight="5dp"
+        android:layout_alignEnd="@id/darkBackground"
+        android:layout_marginEnd="5dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/logout"
-        android:elevation="7dp"></ImageView>
+        android:elevation="7dp"/>
+
+    <!-- Label "Lernziele für heute" -->
+    <TextView
+        android:id="@+id/learningGoalsForToday"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/headerLine"
+        android:layout_marginTop="26dp"
+        android:text="@string/learning_goal_for_today"
+        android:textAppearance="@style/thirty_six_sp_bold_white"
+        android:gravity="center_horizontal|center_vertical"
+        />
+
+    <!-- ItemLayout für Heutige Lernziele -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/todaysLearningGoalsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/learningGoalsForToday"
+        android:layout_above="@id/bottomMenuBackground"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_home"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
         android:drawableTop="@drawable/home_button"
-        android:layout_marginLeft="4dp"
-        app:iconPadding="-15dp"
+        android:layout_marginStart="4dp"
+        app:iconPadding="-5dp"
         android:text="@string/home"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
     <!-- Learning Categories Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_categories"
+        android:id="@+id/learningCategoriesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
         android:layout_centerHorizontal="true"
         android:drawableTop="@drawable/learning_category_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_categories"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
     <!-- Learning Goals Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_goals"
+        android:id="@+id/learningGoalsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
-        android:layout_alignRight="@id/background_bottom_menu"
-        android:layout_marginRight="4dp"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_alignEnd="@id/bottomMenuBackground"
+        android:layout_marginEnd="4dp"
         android:drawableTop="@drawable/learning_goal_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </RelativeLayout>

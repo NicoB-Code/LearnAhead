@@ -77,6 +77,8 @@
 \usepackage{rotating}
 \usepackage{tocbibind}	% Inhaltsverzeichnis Eintrag im Inhaltsverzeichnis
 \usepackage{tikz}
+%\usepackage{svg} % Einbinden von Vektorgrafiken in LaTeX
+
 \usetikzlibrary{positioning, shapes, calc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%                      Angaben zur Arbeit                      %%%
@@ -101,10 +103,10 @@
 \def\vBetrieb{}                         %% 
 \def\vBearbeitungsort{}                 %% 
 \def\vAbteilung{}                       %% 
-\def\vBetreuer{Claudia Zinser}                        %% Vorname Nachname
+\def\vBetreuer{Frau Claudia Zinser}                        %% Vorname Nachname
 
-\def\vAbgabedatum{Frau Schmidt Mail nachfragen}               %% DD. MONTH YYYY
-\def\vBearbeitungszeitraum{Nochmal überprüfen}            %% DD.MM.YYYY - DD.MM.YYYY
+\def\vAbgabedatum{17.07}               %% DD. MONTH YYYY
+\def\vBearbeitungszeitraum{03.10.2022 - 17.07.2023 - 42 Wochen}            %% DD.MM.YYYY - DD.MM.YYYY
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Eigene Kommandos %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -175,8 +177,8 @@
   \include{pages/inhaltsverzeichnis}
   \include{pages/abkuerzungsverzeichnis}
   \include{pages/abbildungsverzeichnis}
-  %\include{pages/tabellenverzeichnis}
-  \include{pages/listingsverzeichnis}
+  \include{pages/tabellenverzeichnis}
+  % \include{pages/listingsverzeichnis}
   % \include{pages/vorwort}
 
 
@@ -189,12 +191,13 @@
   %%%%                   EIGENE KAPITEL EINFÜGEN                  %%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \include{chapter/Einleitung}
-  \include{chapter/Aufgabenstellung}
-  \include{chapter/Stand_der_Technik}
-  \include{chapter/Loesungsansatz}
-  \include{chapter/Testen}
+  \include{chapter/Planung}
+  \include{chapter/Definition}
+  \include{chapter/Entwurf}
+  \include{chapter/Implementierung}
+  \include{chapter/Ergebnisse}
+  \include{chapter/Tests}
   \include{chapter/Ausblick}
-
   %%%%%%%%%%%%%%%%%%%%%%% Literaturverzeichnis %%%%%%%%%%%%%%%%%%%%%%%
   \include{pages/literaturverzeichnis}
 
@@ -205,5 +208,5 @@
   \renewcommand{\thelstlisting}{\Alph{section}.\arabic{lstlisting}}
   \pagenumbering{Alph}
 
-  \include{pages/anhang}
+  % \include{pages/anhang}
 \end{document}

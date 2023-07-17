@@ -8,27 +8,26 @@
     android:background="@drawable/android_lar"
     android:clipToOutline="true">
 
-    <!-- Dark Background Full Screen -->
-
-    <!-- Black Background for Bottom Menu -->
+    <!-- Dunkler Hintergrund über den gesamten Bildschirm -->
     <View
-        android:id="@+id/dark_background"
+        android:id="@+id/darkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dark_full_screen" />
 
+    <!-- Schwarzer Hintergrund für das untere Menü -->
     <View
-        android:id="@+id/background_bottom_menu"
+        android:id="@+id/bottomMenuBackground"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@id/dark_background"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@id/darkBackground"
         android:background="@drawable/black_bottom_menu"
         android:backgroundTint="@null"
         />
 
     <!-- Back Icon -->
     <ImageView
-        android:id="@+id/back_icon"
+        android:id="@+id/backIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
@@ -36,49 +35,74 @@
         android:elevation="7dp"
         android:rotation="-90" />
 
-    <!-- Profil Header Label -->
+    <!-- Header Label -->
     <TextView
-        android:id="@+id/create_learning_goal_menu_header_label"
+        android:id="@+id/headerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="@string/profile"
-        android:textAppearance="@style/top_menu_header"
-        android:layout_toEndOf="@id/back_icon"
-        android:layout_alignTop="@id/back_icon"/>
+        android:textAppearance="@style/twenty_two_sp_bold_white"
+        android:layout_toEndOf="@id/backIcon"
+        android:layout_above="@id/headerLine"
+        android:layout_marginBottom="5dp"/>
 
-    <!-- Header Line -->
+    <!-- Horizontale Linie als Header -->
     <View
-        android:id="@+id/header_line"
+        android:id="@+id/headerLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/back_icon"
+        android:layout_below="@id/backIcon"
         android:background="@drawable/header_line"
         />
 
 
     <!-- Profilbild -->
     <ImageView
-        android:id="@+id/profile_pic"
-        android:layout_width="108dp"
-        android:layout_height="94dp"
-        android:layout_below="@id/header_line"
+        android:id="@+id/profilePicture"
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_below="@id/headerLine"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
-        android:background="@drawable/profile_image_placeholder"
         android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/levelDisplay"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@id/username_profile"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:background="@drawable/level_display"
+        android:layout_below="@id/profilePicture"
+        android:elevation="8dp"
+        app:backgroundTint="@null"
+        android:textAppearance="@style/twenty_sp_regular_white" />
+
+    <ProgressBar
+        android:id="@+id/levelProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_height="20dp"
+        android:layout_width="150dp"
+        android:layout_toEndOf="@id/levelDisplay"
+        android:layout_alignTop="@id/levelDisplay"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="-4dp"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/progress_bar"
+        android:max="100"
+        android:layout_centerHorizontal="true" />
 
     <!-- Benutzer in Lila -->
     <ImageView
         android:id="@+id/profile"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_below="@id/levelDisplay"
         android:layout_marginStart="16dp"
-        android:layout_below="@id/profile_pic"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="38dp"
         android:background="@drawable/profile_icon"
-        android:elevation="7dp"
-        />
+        android:elevation="7dp" />
 
     <!-- Text für Benutzer -->
     <TextView
@@ -86,23 +110,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
-        android:layout_below="@id/profile_pic"
-        android:layout_marginTop="33dp"
+        android:layout_below="@id/levelDisplay"
+        android:layout_marginTop="48dp"
         android:layout_marginStart="33dp"
         android:text="@string/username"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:gravity="left"/>
 
     <!-- Text wo Username steht -->
     <TextView
-        android:id="@+id/username_display"
+        android:id="@+id/textUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
         android:layout_below="@id/username_profile"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_username"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- E-Mail Icon -->
     <ImageView
@@ -111,7 +135,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_below="@id/profile"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/email_profile_icon"
         android:elevation="7dp"
         />
@@ -122,57 +146,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
-        android:layout_below="@id/username_display"
-        android:layout_marginTop="55dp"
+        android:layout_below="@id/textUsername"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="33dp"
-        android:text="@string/e_mail_address"
-        android:textAppearance="@style/menu_button_text" />
+        android:text="@string/email_address"
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Text wo E-Mail steht -->
     <TextView
-        android:id="@+id/email_display"
+        android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
         android:layout_below="@id/email_title"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_email"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
-    <!-- Passwort Icon -->
-    <ImageView
-        android:id="@+id/password_icon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_below="@id/email_icon"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/profile_lock_icon"
-        android:elevation="7dp"
-        />
-
-    <!-- Text für Passwort -->
-    <TextView
-        android:id="@+id/password_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/profile"
-        android:layout_below="@id/email_display"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="33dp"
-        android:text="@string/password"
-        android:textAppearance="@style/menu_button_text" />
-
-    <!-- Text wo Passwort steht -->
-    <TextView
-        android:id="@+id/password_display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/profile"
-        android:layout_below="@id/password_title"
-        android:layout_marginStart="33dp"
-        android:text="@string/placeholder_password"
-        android:textAppearance="@style/menu_button_text" />
 
     <!-- Lernstreak Icon -->
     <ImageView
@@ -180,8 +170,8 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_below="@id/password_icon"
-        android:layout_marginTop="45dp"
+        android:layout_below="@id/email_icon"
+        android:layout_marginTop="35dp"
         android:background="@drawable/learning_streak_icon"
         android:elevation="7dp"
         />
@@ -192,22 +182,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
-        android:layout_below="@id/password_display"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/textEmail"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="33dp"
         android:text="@string/biggest_learnstreak"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Text wo Lernstreak steht -->
     <TextView
-        android:id="@+id/learning_streak_display"
+        android:id="@+id/textLearningStreak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
         android:layout_below="@id/learning_streak_title"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_learning_streak"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Lernziele Icon -->
     <ImageView
@@ -216,7 +206,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_below="@id/learning_streak_icon"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/goals_profile_icon"
         android:elevation="7dp"
         />
@@ -227,74 +217,74 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
-        android:layout_below="@id/learning_streak_display"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/textLearningStreak"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="33dp"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Text wo Lernziele stehen -->
     <TextView
-        android:id="@+id/achieved_goals_display"
+        android:id="@+id/textAchievedGoals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile"
         android:layout_below="@id/achieved_goals_title"
         android:layout_marginStart="33dp"
         android:text="@string/placeholder_achieved_goals"
-        android:textAppearance="@style/menu_button_text" />
+        android:textAppearance="@style/twelve_sp_bold_white" />
 
     <!-- Home Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_home"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
         android:drawableTop="@drawable/home_button"
         android:layout_marginStart="4dp"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/home"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
     <!-- Lernkategorien Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_categories"
+        android:id="@+id/learningCategoriesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
         android:layout_centerHorizontal="true"
         android:drawableTop="@drawable/learning_category_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_categories"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
     <!-- Lernziele Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_learning_goals"
+        android:id="@+id/learningGoalsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/background_bottom_menu"
-        android:layout_alignBottom="@id/background_bottom_menu"
-        android:layout_alignEnd="@id/background_bottom_menu"
+        android:layout_alignTop="@id/bottomMenuBackground"
+        android:layout_alignBottom="@id/bottomMenuBackground"
+        android:layout_alignEnd="@id/bottomMenuBackground"
         android:layout_marginEnd="4dp"
         android:drawableTop="@drawable/learning_goal_button"
-        app:iconPadding="-15dp"
+        app:iconPadding="-5dp"
         android:text="@string/learning_goals"
-        android:textAppearance="@style/menu_button_text"
+        android:textAppearance="@style/twelve_sp_bold_white"
         android:textColor="@null"
         android:background="@android:color/transparent"
         />
 
     <ProgressBar
-        android:id="@+id/btn_progress_ar"
+        android:id="@+id/progessBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -308,4 +298,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </RelativeLayout>

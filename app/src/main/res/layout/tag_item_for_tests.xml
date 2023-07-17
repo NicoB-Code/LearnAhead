@@ -1,0 +1,28 @@
+<!-- tag_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/tag_background"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/delete_tag"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/remove_icon"
+        android:layout_gravity="center_vertical"
+        app:tint="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/tag_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="center_vertical" />
+
+</LinearLayout>
